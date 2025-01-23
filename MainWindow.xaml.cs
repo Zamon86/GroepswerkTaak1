@@ -21,7 +21,7 @@ namespace GroepswerkTaak1
 
 
 
-        public void OpenTab_Click(object sender, RoutedEventArgs e)
+        public void btnOpenTab_Click(object sender, RoutedEventArgs e)
         {
             var button = sender as Button;
             if (button == null) return;
@@ -40,9 +40,7 @@ namespace GroepswerkTaak1
 
             TabItem newTab = new TabItem
             {
-                Header = tabName,
-                
-                
+                Header = tabName,   
             };
 
             tcMain.Items.Add(newTab);
