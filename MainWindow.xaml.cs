@@ -14,10 +14,14 @@ namespace GroepswerkTaak1
     
     public partial class MainWindow : Window
     {
+    private clsMenuData menuData  = new clsMenuData();
+
         public MainWindow()
         {
-            InitializeComponent();
+            InitializeComponent();            
         }
+
+    
 
 
 
@@ -48,8 +52,13 @@ namespace GroepswerkTaak1
 
         }
 
+		private void Window_Loaded(object sender, RoutedEventArgs e)
+		{      
+      menuData.ReadDataFromConfigFile();
 
-    }
+      MessageBox.Show("Dupa");
+		}
+	}
 
     
 
