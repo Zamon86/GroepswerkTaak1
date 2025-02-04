@@ -11,9 +11,11 @@ using System.Windows.Shapes;
 
 namespace GroepswerkTaak1
 {
-    
+
     public partial class MainWindow : Window
     {
+        private clsMenuData menuData = new clsMenuData();
+
         public MainWindow()
         {
             InitializeComponent();
@@ -21,7 +23,9 @@ namespace GroepswerkTaak1
 
 
 
-        public void OpenTab_Click(object sender, RoutedEventArgs e)
+
+
+        public void btnOpenTab_Click(object sender, RoutedEventArgs e)
         {
             var button = sender as Button;
             if (button == null) return;
@@ -33,7 +37,7 @@ namespace GroepswerkTaak1
                 .FirstOrDefault(t => t.Header?.ToString() == tabName);
 
             if (existingTab != null)
-            {                
+            {
                 tcMain.SelectedItem = existingTab;
                 return;
             }
@@ -41,8 +45,6 @@ namespace GroepswerkTaak1
             TabItem newTab = new TabItem
             {
                 Header = tabName,
-                
-                
             };
 
             tcMain.Items.Add(newTab);
@@ -50,10 +52,14 @@ namespace GroepswerkTaak1
 
         }
 
-
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            menuData.ReadDataFromConfigFile();
+            mnuMainMenu.ItemsSource = menuData.CreateMenuItems();
+        }
     }
 
-    
+
 
 
 

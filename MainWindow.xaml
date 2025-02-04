@@ -8,71 +8,17 @@
     Title="Greopswerk Taak 1"
     Width="1200"
     Height="800"
+    Loaded="Window_Loaded"
     mc:Ignorable="d">
+    <Window.Resources>
+        <Style BasedOn="{StaticResource CustomMenuItemStyle}" TargetType="MenuItem" />
+    </Window.Resources>
+
     <DockPanel LastChildFill="True">
-        <Menu DockPanel.Dock="Top">
-            <MenuItem Header="BELEID/STRATEGIE">
-                <MenuItem Header="Visie" />
-                <MenuItem Header="Missie" />
-                <MenuItem Header="Strategische Doelstellingen" />
-                <MenuItem Header="KPI's" />
-                <MenuItem Header="Planningscyclus" />
-            </MenuItem>
-
-            <MenuItem Header="ZORG">
-                <MenuItem Header="Cliënten" />
-                <MenuItem Header="Behandelingen" />
-                <MenuItem Header="Zorgplannen" />
-                <MenuItem Header="Rapportages" />
-                <MenuItem Header="Evaluaties" />
-            </MenuItem>
-
-            <MenuItem Header="MEDEWERKERS">
-                <MenuItem Header="HR Overzicht" />
-                <MenuItem Header="Roosters" />
-                <MenuItem Header="Verlofaanvragen" />
-                <MenuItem Header="Opleidingen" />
-                <MenuItem Header="Feedback" />
-            </MenuItem>
-
-            <MenuItem Header="LOGISTIEK">
-                <MenuItem Header="Voorraadbeheer" />
-                <MenuItem Header="Leveranciers" />
-                <MenuItem Header="Transportplanning" />
-                <MenuItem Header="Onderhoud" />
-            </MenuItem>
-
-            <MenuItem Header="FINANCIEEL">
-                <MenuItem Header="Boekhouding" />
-                <MenuItem Header="Facturen" />
-                <MenuItem Header="Budgettering" />
-                <MenuItem Header="Audit" />
-                <MenuItem Header="Belastingen" />
-            </MenuItem>
-
-            <MenuItem Header="COMMUNICATIE">
-                <MenuItem Header="Nieuwsbrieven" />
-                <MenuItem Header="Persberichten" />
-                <MenuItem Header="Interne Communicatie" />
-                <MenuItem Header="Social Media" />
-                <MenuItem Header="Feedback Kanalen" />
-            </MenuItem>
-
-            <MenuItem Header="THAK-DMS">
-                <MenuItem Header="Documentbeheer" />
-                <MenuItem Header="Workflow" />
-                <MenuItem Header="Toegang" />
-                <MenuItem Header="Backups" />
-                <MenuItem Header="Versiebeheer" />
-            </MenuItem>
-
-            <MenuItem Header="HELP">
-                <MenuItem Header="Handleiding" />
-                <MenuItem Header="FAQ" />
-                <MenuItem Header="Contact Support" />
-                <MenuItem Header="Over Ons" />
-            </MenuItem>
-        </Menu>
+        <Menu
+            Name="mnuMainMenu"
+            Background="#FFCDDDDD"
+            DockPanel.Dock="Top" />
 
         <TabControl x:Name="tcMain" DockPanel.Dock="Top" />
 
@@ -80,32 +26,32 @@
         <StackPanel Width="150" Margin="5">
             <Button
                 Margin="5"
-                Click="OpenTab_Click"
+                Click="btnOpenTab_Click"
                 Content="Open Tab 1"
                 Tag="Tab1" />
             <Button
                 Margin="5"
-                Click="OpenTab_Click"
+                Click="btnOpenTab_Click"
                 Content="Open Tab 2"
                 Tag="Tab2" />
             <Button
                 Margin="5"
-                Click="OpenTab_Click"
+                Click="btnOpenTab_Click"
                 Content="Open Tab 3"
                 Tag="Tab3" />
             <Button
                 Margin="5"
-                Click="OpenTab_Click"
+                Click="btnOpenTab_Click"
                 Content="Open Tab 4"
                 Tag="Tab4" />
             <Button
                 Margin="5"
-                Click="OpenTab_Click"
+                Click="btnOpenTab_Click"
                 Content="Open Tab 5"
                 Tag="Tab5" />
             <Button
                 Margin="5"
-                Click="OpenTab_Click"
+                Click="btnOpenTab_Click"
                 Content="Open Tab 6"
                 Tag="Tab6" />
         </StackPanel>
