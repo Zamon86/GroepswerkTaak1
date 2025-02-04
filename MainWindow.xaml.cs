@@ -11,17 +11,17 @@ using System.Windows.Shapes;
 
 namespace GroepswerkTaak1
 {
-    
+
     public partial class MainWindow : Window
     {
-    private clsMenuData menuData  = new clsMenuData();
+        private clsMenuData menuData = new clsMenuData();
 
         public MainWindow()
         {
-            InitializeComponent();            
+            InitializeComponent();
         }
 
-    
+
 
 
 
@@ -37,14 +37,14 @@ namespace GroepswerkTaak1
                 .FirstOrDefault(t => t.Header?.ToString() == tabName);
 
             if (existingTab != null)
-            {                
+            {
                 tcMain.SelectedItem = existingTab;
                 return;
             }
 
             TabItem newTab = new TabItem
             {
-                Header = tabName,   
+                Header = tabName,
             };
 
             tcMain.Items.Add(newTab);
@@ -52,15 +52,13 @@ namespace GroepswerkTaak1
 
         }
 
-		private void Window_Loaded(object sender, RoutedEventArgs e)
-		{      
-      menuData.ReadDataFromConfigFile();
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            menuData.ReadDataFromConfigFile();            
+        }
+    }
 
-      MessageBox.Show("Dupa");
-		}
-	}
 
-    
 
 
 
