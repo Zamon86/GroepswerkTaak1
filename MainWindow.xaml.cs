@@ -54,7 +54,8 @@ namespace GroepswerkTaak1
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            menuData.ReadDataFromConfigFile();            
+            menuData.ReadDataFromConfigFile();
+            mnuMainMenu.ItemsSource = menuData.CreateMenuItems();
         }
     }
 

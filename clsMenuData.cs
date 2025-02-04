@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.IO;
+using System.Windows;
 using System.Windows.Controls;
 using System.Xml.Serialization;
 
 namespace GroepswerkTaak1
 {
-	[XmlRoot("Menu")]
+    [XmlRoot("Menu")]
 	public class clsMenuData
 	{
 		[XmlElement("MenuItem")]
@@ -28,21 +24,57 @@ namespace GroepswerkTaak1
 			}
 		}
 
-		public List<MenuItem> CreateMenuItems() 
-		{			
+        // Functie creëert menu-items
+        public List<MenuItem>? CreateMenuItems() 
+		{	
+			List<MenuItem> menuItems = new List<MenuItem>();
+			if (Items == null) return null;
+
+			// Loop voor hoofdItems in Menu
 			foreach (var item in Items)
 			{
 				MenuItem menuItem = new MenuItem();
-				menuItem.Header = item.Header;
-				if (item.IconResourceName != null) 
+
+                // Creëert speciaal header met Icon
+                if (item.IconResourceName != null)
 				{
+					StackPanel stackPanel = new StackPanel();
+					stackPanel.Orientation = Orientation.Horizontal;
 
-				}
+					ContentPresenter icon = new ContentPresenter();
+					icon.Content = Application.Current.Resources["QuestionMarkRed"];
 
-			}
+					TextBlock textBlock = new TextBlock();
+					textBlock.Text = item.Header;
+					textBlock.VerticalAlignment = VerticalAlignment.Center; 
+                    
+                    stackPanel.Children.Add(icon);
+                    stackPanel.Children.Add(textBlock);
 
+                    menuItem.Header = stackPanel;
+                }
 
-			return null;
+				menuItem.Header = item.Header;			
+
+				if (item.SubItems != null) 
+				{
+                    List<MenuItem> submenuItems = new List<MenuItem>();
+                    // Loop voor subItems in Menu
+                    foreach (var subItem in item.SubItems)
+                    {
+                        MenuItem submenuItem = new MenuItem();
+						submenuItem.Header = subItem.Header;
+						submenuItems.Add(submenuItem);
+                    }
+
+                    menuItem.ItemsSource = submenuItems;
+                }
+
+                menuItems.Add(menuItem);
+
+            }
+
+			return menuItems;
 		}
 	}
 
