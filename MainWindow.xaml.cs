@@ -15,10 +15,14 @@ namespace GroepswerkTaak1
     public partial class MainWindow : Window
     {
         private clsMenuData menuData = new clsMenuData();
-
+        private string strAuthorisatie = string.Empty;  // deze string zal de authorisatie dragen
         public MainWindow()
         {
             InitializeComponent();
+            //hier lezen we de authorisatie in vanuit het loginscherm
+            // TODO
+            // strAuthorisatie = winLogon.strAuthorisatie;
+            // display de machtiging op het scherm dmv  een label of textblock
         }
 
 
