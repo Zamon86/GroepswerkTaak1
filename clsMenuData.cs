@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using System.Windows;
+using System.Windows.Shapes;
 using System.Windows.Controls;
 using System.Xml.Serialization;
 
@@ -42,19 +43,22 @@ namespace GroepswerkTaak1
 					stackPanel.Orientation = Orientation.Horizontal;
 
 					ContentPresenter icon = new ContentPresenter();
-					icon.Content = Application.Current.Resources["QuestionMarkRed"];
+					
+					icon.Content = Application.Current.Resources["QuestionMarkRed"] as System.Windows.Shapes.Path; 
 
-					TextBlock textBlock = new TextBlock();
+                    TextBlock textBlock = new TextBlock();
 					textBlock.Text = item.Header;
-					textBlock.VerticalAlignment = VerticalAlignment.Center; 
+					textBlock.VerticalAlignment = VerticalAlignment.Center;
                     
                     stackPanel.Children.Add(icon);
                     stackPanel.Children.Add(textBlock);
 
                     menuItem.Header = stackPanel;
                 }
-
-				menuItem.Header = item.Header;			
+				else
+				{
+                    menuItem.Header = item.Header;
+                }							
 
 				if (item.SubItems != null) 
 				{
