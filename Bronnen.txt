@@ -1,0 +1,1 @@
+﻿https://blog.sqlauthority.com/2023/10/20/sql-server-best-practices-for-securely-storing-passwords/

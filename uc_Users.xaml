@@ -1,0 +1,269 @@
+﻿<UserControl x:Class="GroepswerkTaak1.uc_Users"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:GroepswerkTaak1"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <TextBlock
+         Grid.Row="0"
+         Grid.Column="0"
+         Grid.ColumnSpan="4"
+         Margin="0,0,0,20"
+         Padding="20"
+         Background="Beige"
+         FontFamily="segoe ui light"
+         FontSize="48"
+         Foreground="SteelBlue"
+         Text="Products" />
+        <Label
+         Name="lblKeuze"
+         Grid.Row="1"
+         Grid.Column="1"
+         Margin="5"
+         Content="Keuze"
+         FontFamily="segoe ui light"
+         Foreground="SteelBlue" />
+
+        <ComboBox
+         Name="cboKeuze"
+         Grid.Row="1"
+         Grid.Column="2"
+         Width="200"
+         Margin="5"
+         FontFamily="segoe ui light"
+         FontSize="16"
+         Foreground="SteelBlue"
+         SelectionChanged="cboKeuze_SelectionChanged" />
+        <Label
+         Name="lblProductName"
+         Grid.Row="2"
+         Grid.Column="1"
+         Margin="5"
+         Content="ProductName"
+         FontFamily="segoe ui light"
+         Foreground="SteelBlue" />
+
+        <TextBox
+         Name="txtProductName"
+         Grid.Row="2"
+         Grid.Column="2"
+         Margin="5"
+         FontFamily="segoe ui light"
+         FontSize="16"
+         Foreground="SteelBlue" />
+        <Label
+         Name="lblSuppliers"
+         Grid.Row="3"
+         Grid.Column="1"
+         Margin="5"
+         Content="Suppliers"
+         FontFamily="segoe ui light"
+         Foreground="SteelBlue" />
+        <ComboBox
+         Name="cboSuppliers"
+         Grid.Row="3"
+         Grid.Column="2"
+         Margin="5"
+         FontFamily="segoe ui light"
+         FontSize="16"
+         Foreground="SteelBlue"
+         SelectionChanged="cboSuppliers_SelectionChanged" />
+
+        <Label
+         Name="lblCategories"
+         Grid.Row="4"
+         Grid.Column="1"
+         Margin="5"
+         Content="Categories :"
+         FontFamily="segoe ui light"
+         Foreground="SteelBlue" />
+        <ComboBox
+         Name="cboCategories"
+         Grid.Row="4"
+         Grid.Column="2"
+         Margin="5"
+         FontFamily="segoe ui light"
+         FontSize="16"
+         Foreground="SteelBlue"
+         SelectionChanged="cboCategories_SelectionChanged" />
+
+        <Label
+         Name="lblQuantity"
+         Grid.Row="5"
+         Grid.Column="1"
+         Margin="5"
+         Content="Quantity per unit :"
+         FontFamily="segoe ui light"
+         Foreground="SteelBlue" />
+        <TextBox
+         Name="txtQuantity"
+         Grid.Row="5"
+         Grid.Column="2"
+         Margin="5"
+         FontFamily="segoe ui light"
+         FontSize="16"
+         Foreground="SteelBlue" />
+
+        <Label
+         Name="lblUnitPrice"
+         Grid.Row="6"
+         Grid.Column="1"
+         Margin="5"
+         Content="Unit Price :"
+         FontFamily="segoe ui light"
+         Foreground="SteelBlue" />
+        <TextBox
+         Name="txtUnitPrice"
+         Grid.Row="6"
+         Grid.Column="2"
+         Margin="5"
+         FontFamily="segoe ui light"
+         FontSize="16"
+         Foreground="SteelBlue" />
+
+        <Label
+         Name="lblUnitsInStock"
+         Grid.Row="7"
+         Grid.Column="1"
+         Margin="5"
+         Content="Units In Stock :"
+         FontFamily="segoe ui light"
+         Foreground="SteelBlue" />
+        <TextBox
+         Name="txtUnitsInStock"
+         Grid.Row="7"
+         Grid.Column="2"
+         Margin="5"
+         FontFamily="segoe ui light"
+         FontSize="16"
+         Foreground="SteelBlue" />
+
+        <Label
+         Name="lblUnitsOnOrder"
+         Grid.Row="8"
+         Grid.Column="1"
+         Margin="5"
+         Content="Units On Order :"
+         FontFamily="segoe ui light"
+         Foreground="SteelBlue" />
+        <TextBox
+         Name="txtUnitsOnOrder"
+         Grid.Row="8"
+         Grid.Column="2"
+         Margin="5"
+         FontFamily="segoe ui light"
+         FontSize="16"
+         Foreground="SteelBlue" />
+
+        <Label
+         Name="lblReorderLevel"
+         Grid.Row="9"
+         Grid.Column="1"
+         Margin="5"
+         Content="Reorder Level :"
+         FontFamily="segoe ui light"
+         Foreground="SteelBlue" />
+        <TextBox
+         Name="txtReorderLevel"
+         Grid.Row="9"
+         Grid.Column="2"
+         Margin="5"
+         FontFamily="segoe ui light"
+         FontSize="16"
+         Foreground="SteelBlue" />
+
+        <Label
+         Name="lblDiscontinued"
+         Grid.Row="10"
+         Grid.Column="1"
+         Margin="5"
+         Content="Discontinued :"
+         FontFamily="segoe ui light"
+         Foreground="SteelBlue" />
+        <CheckBox
+         Name="chkDiscontinued"
+         Grid.Row="10"
+         Grid.Column="2"
+         Margin="5"
+         FontFamily="segoe ui light"
+         FontSize="16"
+         Foreground="SteelBlue" />
+
+        <StackPanel
+         Grid.Row="11"
+         Grid.Column="1"
+         Grid.ColumnSpan="2"
+         HorizontalAlignment="Center"
+         Orientation="Horizontal">
+            <Button
+             Name="btnNieuw"
+             Margin="5"
+             Padding="5"
+             Background="Beige"
+             Click="btnNieuw_Click"
+             Content="Nieuw"
+             FontFamily="segoe ui light"
+             Foreground="SteelBlue" />
+            <Button
+             Name="btnOpslaan"
+             Margin="5"
+             Padding="5"
+             Background="Beige"
+             Click="btnOpslaan_Click"
+             Content="Opslaan"
+             FontFamily="segoe ui light"
+             Foreground="SteelBlue" />
+            <Button
+             Name="btnVerwijderen"
+             Margin="5"
+             Padding="5"
+             Background="Beige"
+             Click="btnVerwijderen_Click"
+             Content="Verwijderen"
+             FontFamily="segoe ui light"
+             Foreground="SteelBlue" />
+            <Button
+             Name="btnAnnuleren"
+             Margin="5"
+             Padding="5"
+             Background="Beige"
+             Click="btnAnnuleren_Click"
+             Content="Annuleren"
+             FontFamily="segoe ui light"
+             Foreground="SteelBlue" />
+            <Button
+             Name="btnSluiten"
+             Margin="5"
+             Padding="5"
+             Background="Beige"
+             Click="btnSluiten_Click"
+             Content="Sluiten"
+             FontFamily="segoe ui light"
+             Foreground="SteelBlue" />
+        </StackPanel>
+    </Grid>
+</UserControl>
