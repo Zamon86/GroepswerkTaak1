@@ -21,10 +21,6 @@ namespace GroepswerkTaak1
             InitializeComponent();
         }
 
-
-
-
-
         public void btnOpenTab_Click(object sender, RoutedEventArgs e)
         {
             var button = sender as Button;
@@ -39,18 +35,18 @@ namespace GroepswerkTaak1
             if (existingTab != null)
             {
                 tcMain.SelectedItem = existingTab;
-                return;
-            }
+                return;                
+            }            
 
             TabItem newTab = new TabItem
             {
-                Header = tabName,
-            };
-
+                Style = (Style)FindResource("TabItemStyle"),
+                Header = tabName                
+            };     
+            
             tcMain.Items.Add(newTab);
-            tcMain.SelectedItem = newTab;
-
-        }
+            tcMain.SelectedItem = newTab;            
+        }     
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
