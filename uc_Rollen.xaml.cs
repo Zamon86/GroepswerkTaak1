@@ -24,5 +24,35 @@ namespace GroepswerkTaak1
         {
             InitializeComponent();
         }
+
+        private void cboKeuze_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void btnNieuw_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnOpslaan_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnVerwijderen_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnAnnuleren_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnSluiten_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

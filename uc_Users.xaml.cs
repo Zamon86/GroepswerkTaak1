@@ -35,6 +35,8 @@ namespace GroepswerkTaak1
         public uc_Users()
         {
             InitializeComponent();
+            cboKeuze_Opvullen();
+            cboRollen_Opvullen();
         }
 
 
@@ -46,28 +48,66 @@ namespace GroepswerkTaak1
                 this.Cursor = Cursors.Wait;
                 using (SqlConnection CN = new SqlConnection(Properties.Settings.Default.strCN))
                 {
-                    using (SqlCommand CMD = new SqlCommand(Properties., CN))
+                    using (SqlCommand CMD = new SqlCommand(Properties.Resources.S_Users, CN))
                     {
                         using (SqlDataAdapter DA = new SqlDataAdapter(CMD))
                         {
                             try
                             {
                                 CMD.CommandType = CommandType.StoredProcedure;
-                                DT = new DataTable();
-                                DA.Fill(DT);
+                                DTUsers = new DataTable();
+                                DA.Fill(DTUsers);
                             }
                             catch (Exception ex)
                             {
                                 MessageBox.Show(ex.ToString());
                             }
-
                         }
                     }
                 }
-                cboKeuze.ItemsSource = DT.DefaultView;
-                cboKeuze.SelectedValuePath = "ProductID";
-                cboKeuze.DisplayMemberPath = "ProductName";
+                cboKeuze.ItemsSource = DTUsers.DefaultView;
+                cboKeuze.SelectedValuePath = "ID";
+                cboKeuze.DisplayMemberPath = "loginNaam";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Er heeft zich een fout voorgedaan bij het opvullen van de lijst" + ex.ToString(), "opvul fout", MessageBoxButton.OK);
+            }
+            finally
+            {
+                this.Cursor = null;
+            }
+            Loading = false;
+        }
 
+        private void cboRollen_Opvullen()
+        {
+            Loading = true;
+            try
+            {
+                this.Cursor = Cursors.Wait;
+                using (SqlConnection CN = new SqlConnection(Properties.Settings.Default.strCN))
+                {
+                    using (SqlCommand CMD = new SqlCommand(Properties.Resources.S_Rollen, CN))
+                    {
+                        using (SqlDataAdapter DA = new SqlDataAdapter(CMD))
+                        {
+                            try
+                            {
+                                CMD.CommandType = CommandType.StoredProcedure;
+                                DTRollen = new DataTable();
+                                DA.Fill(DTRollen);
+                            }
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show(ex.ToString());
+                            }
+                        }
+                    }
+                }
+                cboMachteging.ItemsSource = DTRollen.DefaultView;
+                cboMachteging.SelectedValuePath = "ID";
+                cboMachteging.DisplayMemberPath = "rol";
             }
             catch (Exception ex)
             {
@@ -81,12 +121,57 @@ namespace GroepswerkTaak1
         }
 
 
+        public void GetUsersByID(int ID)
+        {
+            DTUsers.PrimaryKey = new DataColumn[] { DTUsers.Columns["ID"] };
+            DR = DTUsers.Rows.Find(ID);
+            if (DR == null)
+            {
+                ControlsLeegmaken();
+            }
+            else
+            {
+                cboMachteging.SelectedIndex = (int)DR["ID"];
+                txtNaam.Text = DR[2].ToString();
+                txtVoornaam.Text = DR[3].ToString();
+                txtEmail.Text = DR[4].ToString();
+                txtTelefoon.Text = DR[5].ToString();
+                cboMachteging.SelectedIndex = (int)DR[6]-1;// selected index start aan 0 , onze tabel start aan 1
+                chkActief.IsChecked = (bool)DR[7];
+                ControlField = DR[8];
+            }
+        }
+        private void ControlsLeegmaken()
+        {
+            lblLogin.Visibility = Visibility.Visible;
+            cboKeuze.Visibility = Visibility.Visible;
+            cboKeuze.SelectedIndex = -1;
+            cboMachteging.SelectedIndex = -1;
+            txtNaam.Text = string.Empty;
+            txtVoornaam.Text = string.Empty;
+            txtEmail.Text = string.Empty;
+            txtTelefoon.Text = string.Empty;
+            chkActief.IsChecked = false;
+        }
+
+
         #endregion
 
         #region EVENTS
         private void cboKeuze_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            if (Loading == false)
+            {
+                if (cboKeuze.SelectedIndex >= 0)
+                {
+                    GetUsersByID((int)cboKeuze.SelectedValue);
+                }
+                else
+                {
+                    ControlsLeegmaken();
+                    cboKeuze.Focus();
+                }
+            }
         }
 
         private void cboMachteging_SelectionChanged(object sender, SelectionChangedEventArgs e)

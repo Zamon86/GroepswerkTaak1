@@ -25,8 +25,20 @@ namespace GroepswerkTaak1
             // display de machtiging op het scherm dmv  een label of textblock
         }
 
+        #region METHODES
 
+        private void OpenUserControl(UserControl myUS)
+        {
+            if (grdMain.Children.Count > 1)
+            {
+                grdMain.Children.RemoveAt(1);
+            }
+            Grid.SetColumn(myUS, 1);
+            Grid.SetRow(myUS, 0);
+            grdMain.Children.Add(myUS);
+        }
 
+        #endregion
 
 
         public void btnOpenTab_Click(object sender, RoutedEventArgs e)
@@ -60,6 +72,12 @@ namespace GroepswerkTaak1
         {
             menuData.ReadDataFromConfigFile();
             mnuMainMenu.ItemsSource = menuData.CreateMenuItems();
+        }
+
+        private void btnDannyTest_Click(object sender, RoutedEventArgs e)
+        {
+            uc_Users _uc_Users = new uc_Users();
+            OpenUserControl(_uc_Users);
         }
     }
 
