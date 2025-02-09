@@ -7,6 +7,18 @@
 
     <Application.Resources>
 
+        <!--  Kleur van achtergrond  -->
+        <SolidColorBrush x:Key="MainBackgroundColor" Color="#FFCDDDDD" />
+
+        <!--  Kleur van tabbladen  -->
+        <SolidColorBrush x:Key="TabColor" Color="#FF3BBCBD" />
+
+        <!--  Kleur van active tabblad  -->
+        <SolidColorBrush x:Key="ActiveTabColor" Color="#FFD75563" />
+
+        <!--  Kleur van menupictogrammen  -->
+        <SolidColorBrush x:Key="IconColor" Color="#FFE84848" />
+
         <!--  Menu-item stijl  -->
         <Style x:Key="CustomMenuItemStyle" TargetType="MenuItem">
             <Setter Property="HorizontalContentAlignment" Value="Center" />
@@ -14,14 +26,233 @@
             <Setter Property="FontSize" Value="14" />
         </Style>
 
-        <!--  vraagteken  uit Metro Studio 5 gehaald  -->
+        <!--  Sluitknop stijl  -->
+        <Style x:Key="CloseTabButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="{StaticResource TabColor}" />
+            <Setter Property="Margin" Value="10,0,0,0" />
+            <Setter Property="Width" Value="14" />
+            <Setter Property="Height" Value="14" />
+            <Setter Property="FontSize" Value="11" />
+            <Setter Property="FontWeight" Value="ExtraBold" />
+            <Setter Property="RenderTransformOrigin" Value="0.5,0.5" />
+            <Setter Property="RenderTransform">
+                <Setter.Value>
+                    <TranslateTransform X="0" Y="0" />
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect
+                        BlurRadius="3"
+                        Opacity="0.3"
+                        ShadowDepth="0"
+                        Color="Black" />
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="Gray"
+                            BorderThickness="1"
+                            CornerRadius="3">
+                            <ContentPresenter
+                                Margin="0,-2,0,0"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <EventSetter Event="Click" Handler="btnCloseTab_Click" />
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="RenderTransform">
+                        <Setter.Value>
+                            <ScaleTransform ScaleX="1.05" ScaleY="1.05" />
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="Effect">
+                        <Setter.Value>
+                            <DropShadowEffect
+                                BlurRadius="6"
+                                Opacity="0.6"
+                                ShadowDepth="3"
+                                Color="Black" />
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+
+        <!--  Stijl van tabbladen  -->
+        <!--
+            Ik heb hier multitriggers gebruikt omdat ik een probleem had met het regelen
+            van de zichtbaarheid van de x-knop vanwege de hiërarchie van gewone triggers.
+        -->
+        <Style x:Key="TabItemStyle" TargetType="TabItem">
+            <Setter Property="Background" Value="{StaticResource TabColor}" />
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="Padding" Value="8,0,5,5" />
+            <Setter Property="Margin" Value="0" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="MinHeight" Value="18" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TabItem">
+                        <Border
+                            Name="Border"
+                            Padding="{TemplateBinding Padding}"
+                            Background="{TemplateBinding Background}"
+                            CornerRadius="2,10,0,0">
+                            <StackPanel
+                                Margin="3"
+                                HorizontalAlignment="Right"
+                                Orientation="Horizontal">
+                                <ContentPresenter
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    ContentSource="Header" />
+                                <Button
+                                    x:Name="btnCloseTab"
+                                    Content="X"
+                                    Style="{StaticResource CloseTabButtonStyle}"
+                                    Visibility="Hidden" />
+                            </StackPanel>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsSelected" Value="True" />
+                                    <Condition Property="Border.IsMouseOver" Value="False" />
+                                </MultiTrigger.Conditions>
+                                <Setter TargetName="Border" Property="Background" Value="{StaticResource ActiveTabColor}" />
+                                <Setter TargetName="btnCloseTab" Property="Visibility" Value="Visible" />
+                            </MultiTrigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsSelected" Value="True" />
+                                    <Condition Property="Border.IsMouseOver" Value="True" />
+                                </MultiTrigger.Conditions>
+                                <Setter TargetName="Border" Property="Background" Value="{StaticResource ActiveTabColor}" />
+                                <Setter TargetName="btnCloseTab" Property="Visibility" Value="Visible" />
+                            </MultiTrigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsSelected" Value="False" />
+                                    <Condition Property="Border.IsMouseOver" Value="False" />
+                                </MultiTrigger.Conditions>
+                                <Setter TargetName="Border" Property="Background" Value="{StaticResource TabColor}" />
+                                <Setter TargetName="btnCloseTab" Property="Visibility" Value="Hidden" />
+                            </MultiTrigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsSelected" Value="False" />
+                                    <Condition Property="Border.IsMouseOver" Value="True" />
+                                </MultiTrigger.Conditions>
+                                <Setter TargetName="Border" Property="Background" Value="{StaticResource TabColor}" />
+                                <Setter TargetName="btnCloseTab" Property="Visibility" Value="Visible" />
+                            </MultiTrigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+
+
+        <!--  Vraagteken icon uit Metro Studio 5 gehaald  -->
         <Path
             x:Key="QuestionMarkRed"
             Width="14"
             Height="14"
             Margin="2"
             Data="M6.1720122,26.640015L12.506012,26.640015 12.506012,31.999023 6.1720122,31.999023z M6.169998,22.900024L6.1737445,22.900024 6.1720122,23.064941z M10.068994,0C13.318025,0 15.754005,0.81201172 17.703046,2.4359741 19.490037,4.0609741 20.463,6.335022 20.463,9.0949707 20.463,10.882019 19.976001,12.669006 18.839034,14.130005 17.701032,15.591003 16.402993,17.052979 14.777989,18.028015 13.967013,18.677002 13.316011,19.328003 12.992036,20.139038 12.667023,20.78894 12.505035,21.764038 12.505035,22.900024L6.1737445,22.900024 6.1758092,22.703424C6.2137826,20.916021 6.5366138,19.440285 7.1460131,18.680054 7.7950018,17.705994 8.9320286,16.567993 10.71902,15.268982 11.693022,14.45697 12.506012,13.481995 13.155,12.507996 13.805026,11.533997 14.129001,10.395996 14.129001,9.2589722 14.129001,7.9589844 13.805026,6.822998 13.155,6.1740112 12.506012,5.3619995 11.531033,5.0360107 10.232019,5.0360107 9.0949925,5.0360107 8.2829788,5.3610229 7.4720028,6.0100098 6.6599892,6.6589966 6.3339995,7.6339722 6.3339995,8.7709961L0,8.7709961 0,8.6079712C1.7478305E-07,5.8480225 0.81097621,3.7360229 2.7600165,2.2739868 4.7099722,0.81201172 6.9829882,0 10.068994,0z"
-            Fill="#FFE84848"
+            Fill="{StaticResource IconColor}"
+            RenderTransformOrigin="0.5,0.5"
+            Stretch="Uniform" />
+
+        <!--  Iconpictogrammen uit Metro Studio 5 gehaald  -->
+        <Path
+            x:Key="Vision"
+            Width="14"
+            Height="14"
+            Margin="0"
+            Data="M16,4.9000015C17.899994,4.9000015 19.5,6.4999918 19.5,8.4000015 19.5,10.299994 17.899994,11.900001 16,11.900001 14.100006,11.900001 12.5,10.299994 12.5,8.4000015 12.5,6.400001 14.100006,4.9000015 16,4.9000015z M16,2.5999984C10.700012,2.5999984 5.8000183,6.1999888 3.1000061,8.6999893 5.8000183,11.199988 10.600006,14.799994 16,14.799994 21.300018,14.799994 26.200012,11.199988 28.899994,8.6999893 26.200012,6.1999888 21.300018,2.5999984 16,2.5999984z M16,0C24.800018,5.2249334E-08 32,8.6999893 32,8.6999893 32,8.6999893 24.800018,17.400001 16,17.400001 7.2000122,17.400001 0,8.6999893 0,8.6999893 0,8.6999893 7.2000122,5.2249334E-08 16,0z"
+            Fill="{StaticResource IconColor}"
+            RenderTransformOrigin="0.5,0.5"
+            Stretch="Uniform" />
+
+
+        <Path
+            x:Key="Mission"
+            Width="14"
+            Height="14"
+            Margin="0"
+            Data="M10.702359,21.916019L7.7683921,22.85902 10.497361,25.163021z M11.846346,19.446018L12.355341,19.785019C12.641337,20.00602,12.800336,20.354019,12.780335,20.716019L12.38234,27.073023C12.35834,27.488022 12.103343,27.850021 11.718348,28.015022 11.578349,28.076023 11.429351,28.105022 11.283353,28.105022 11.029355,28.105022 10.778358,28.016022 10.576361,27.845022L8.5420561,26.128271 4.1700563,31.36503C3.972049,31.602024 3.6880379,31.72402 3.4010267,31.72402 3.1750181,31.72402 2.9480093,31.648022 2.7610016,31.492027 2.3379855,31.138035 2.2799833,30.507051 2.633997,30.083061L7.0135226,24.838341 5.2404203,23.34202C4.9324241,23.084021 4.7894254,22.67902 4.8684244,22.285021 4.9464235,21.89102 5.2324204,21.57202 5.615416,21.452021z M15.999992,14.000031C14.896993,14.000031 13.999992,14.89703 13.999992,16.000031 13.999992,17.103029 14.896993,18.000031 15.999992,18.000031 17.102993,18.000031 17.999992,17.103029 17.999992,16.000031 17.999992,14.89703 17.102993,14.000031 15.999992,14.000031z M15.999992,12.000031C18.205994,12.000031 19.999992,13.79403 19.999992,16.000031 19.999992,18.20603 18.205994,20.000031 15.999992,20.000031 13.793993,20.000031 11.999992,18.20603 11.999992,16.000031 11.999992,13.79403 13.793993,12.000031 15.999992,12.000031z M15.999992,6.00003C21.513992,6.00003 25.999992,10.48603 25.999992,16.000031 25.999992,21.51403 21.513992,26.000031 15.999992,26.000031 15.509993,26.000031 15.015993,25.964029 14.530993,25.89303 13.983993,25.81303 13.606993,25.305031 13.686993,24.75803 13.767993,24.21203 14.265993,23.825029 14.821993,23.91403 15.210993,23.971029 15.605992,24.000031 15.999992,24.000031 20.410994,24.000031 23.999992,20.41103 23.999992,16.000031 23.999992,11.58903 20.410994,8.0000305 15.999992,8.0000305 11.588993,8.0000305 7.9999928,11.58903 7.9999928,16.000031 7.9999928,16.808029 8.1199932,17.604031 8.3559923,18.36903 8.5199928,18.89703 8.2249928,19.457029 7.6969929,19.620029 7.1679926,19.784031 6.6089926,19.488029 6.4459929,18.961031 6.1499929,18.00403 5.9999928,17.00803 5.9999928,16.000031 5.9999928,10.48603 10.485992,6.00003 15.999992,6.00003z M16,0C24.821991,0 32,7.1780396 32,16 32,24.822021 24.821991,32 16,32 13.320007,32 10.669983,31.325012 8.3339844,30.047058 7.848999,29.782043 7.67099,29.175049 7.9369812,28.690002 8.2009888,28.204041 8.8089905,28.025024 9.2929993,28.29303 11.335999,29.409058 13.654999,30 16,30 23.720001,30 30,23.720032 30,16 30,8.2800293 23.720001,2 16,2 8.2799988,2 2,8.2800293 2,16 2,19.057007 2.96698,21.960022 4.7969971,24.396057 5.1279907,24.838013 5.0390015,25.465027 4.5979919,25.797058 4.1569824,26.129028 3.5279846,26.040039 3.196991,25.598022 1.1049805,22.812012 0,19.493042 0,16 0,7.1780396 7.1779785,0 16,0z"
+            Fill="{StaticResource IconColor}"
+            RenderTransformOrigin="0.5,0.5"
+            Stretch="Uniform" />
+
+        <Path
+            x:Key="Strategy"
+            Width="14"
+            Height="14"
+            Margin="0"
+            Data="M28,28L32,28 32,32 28,32z M20,28L24,28 24,32 20,32z M12,28L16,28 16,32 12,32z M4,28L8,28 8,32 4,32z M24,24L28,24 28,28 24,28z M16,24L20,24 20,28 16,28z M8,24L12,24 12,28 8,28z M0,24L4,24 4,28 0,28z M28,20L32,20 32,24 28,24z M20,20L24,20 24,24 20,24z M12,20L16,20 16,24 12,24z M4,20L8,20 8,24 4,24z M24,16L28,16 28,20 24,20z M16,16L20,16 20,20 16,20z M8,16L12,16 12,20 8,20z M0,16L4,16 4,20 0,20z M28,12L32,12 32,16 28,16z M20,12L24,12 24,16 20,16z M12,12L16,12 16,16 12,16z M4,12L8,12 8,16 4,16z M24,8L28,8 28,12 24,12z M16,8L20,8 20,12 16,12z M8,8L12,8 12,12 8,12z M0,8L4,8 4,12 0,12z M28,4L32,4 32,8 28,8z M20,4L24,4 24,8 20,8z M12,4L16,4 16,8 12,8z M4,4L8,4 8,8 4,8z M24,0L28,0 28,4 24,4z M16,0L20,0 20,4 16,4z M8,0L12,0 12,4 8,4z M0,0L4,0 4,4 0,4z"
+            Fill="{StaticResource IconColor}"
+            RenderTransformOrigin="0.5,0.5"
+            Stretch="Uniform" />
+
+        <Path
+            x:Key="KPI"
+            Width="14"
+            Height="14"
+            Margin="0"
+            Data="M21.7,10.699813L17.2,16.799706 17,16.999703C16.5,17.599692 15.8,17.999685 15,17.899687 13.8,17.699691 12.9,16.59971 13.099999,15.399731 13.2,14.599745 13.7,13.999755 14.4,13.69976z M16,0C24.8,4.7683716E-07,32,7.1998746,32,15.999721L26.9,15.999721C25.7,9.4998343 20.8,4.59992 13.9,4.59992 7,4.59992 1.2999992,9.4998343 0.10000038,15.999721L0,15.999721C0,7.1998746,7.2000008,4.7683716E-07,16,0z"
+            Fill="{StaticResource IconColor}"
+            RenderTransformOrigin="0.5,0.5"
+            Stretch="Uniform" />
+
+        <Path
+            x:Key="Planning"
+            Width="14"
+            Height="14"
+            Margin="0,0,0,0"
+            Data="M22.994,14.967017C25.703004,14.967017,28.115007,16.435016,29.404008,18.675014L30.02801,16.601016 32.000012,17.194016 30.347011,22.684013 29.46301,22.418013 25.092004,21.247013 25.625003,19.260014 27.668006,19.807014C26.754005,18.134016 24.990003,17.025016 22.994,17.025016 20.050996,17.025016 17.655994,19.419014 17.655994,22.362013 17.655994,25.305012 20.050996,27.699009 22.994,27.699009 23.492002,27.699009 23.986001,27.63101 24.460002,27.49601L25.023004,29.475008C24.367002,29.663008 23.683002,29.757008 22.994,29.757008 18.915994,29.757008 15.59799,26.44001 15.59799,22.362013 15.59799,18.284016 18.915994,14.967017 22.994,14.967017z M2.0960091,4.1920178L2.0960091,8.3839974 25.15199,8.3839974 25.15199,4.1920178 20.959991,4.1920178 20.959991,6.2880058 18.863999,6.2880058 18.863999,4.1920178 8.3840399,4.1920178 8.3840399,6.2880058 6.2879878,6.2880058 6.2879878,4.1920178z M6.2879878,0L8.3840399,0 8.3840399,2.0960101 18.863999,2.0960101 18.863999,0 20.959991,0 20.959991,2.0960101 27.247998,2.0960101 27.247998,13.886013C26.586011,13.553006,25.87898,13.321012,25.15199,13.150022L25.15199,10.48002 2.0960091,10.48002 2.0960091,26.200003 14.320014,26.200003C14.656013,26.956015,15.086006,27.659018,15.597969,28.296011L0,28.296011 0,2.0960101 6.2879878,2.0960101z"
+            Fill="{StaticResource IconColor}"
+            RenderTransformOrigin="0.5,0.5"
+            Stretch="Uniform" />
+
+        <Path
+            x:Key="Clients"
+            Width="14"
+            Height="14"
+            Margin="0,0,0,0"
+            Data="M22.134003,13.192995C27.583008,13.192995,32,17.610019,32,23.06L12.267029,23.06C12.267029,17.610019,16.685028,13.192995,22.134003,13.192995z M9.8650208,12.192995C11.811005,12.192995 13.622009,12.765016 15.150024,13.738008 12.440002,15.645998 10.548004,18.627017 10.085022,22.06L0,22.06C0,16.610019,4.4170227,12.192995,9.8650208,12.192995z M22.134003,1.6340032C25,1.634003 27.323029,3.9570013 27.323029,6.8229989 27.323029,9.6879891 25,12.011995 22.134003,12.011995 19.267029,12.011995 16.945007,9.6879891 16.945007,6.8229989 16.945007,3.9570013 19.267029,1.634003 22.134003,1.6340032z M9.8660278,0C12.731018,1.156568E-07 15.054016,2.3229984 15.054016,5.1879891 15.054016,8.0549935 12.731018,10.377993 9.8660278,10.377993 7,10.377993 4.677002,8.0549935 4.677002,5.1879891 4.677002,2.3229984 7,1.156568E-07 9.8660278,0z"
+            Fill="{StaticResource IconColor}"
+            RenderTransformOrigin="0.5,0.5"
+            Stretch="Uniform" />
+
+        <Path
+            x:Key="Treatment"
+            Width="14"
+            Height="14"
+            Margin="0,0,0,0"
+            Data="M16.076581,12.585802L10.476777,18.15596 8.760746,23.277972 13.919826,21.566972 19.51238,16.003167z M23.357965,5.3429654L17.49478,11.175111 20.930117,14.59272 26.793018,8.759959z M22.399002,0C24.426,4.0940033,27.543996,7.197006,31.667993,9.2210076L30.786993,11.016009C30.079338,10.668665,29.398635,10.29239,28.745245,9.8875473L28.592542,9.7907884 15.163803,23.150958C15.053816,23.259967,14.919841,23.342974,14.772806,23.391009L7.7152517,25.731835 1.4099965,32.003966 0,30.585971 6.3040384,24.315049 8.6557031,17.29695C8.7056913,17.149001,8.7887003,17.013991,8.8987484,16.904982L22.219957,3.6536758 21.984422,3.3015404C21.483245,2.5354318,21.023567,1.7303765,20.606004,0.8870008z"
+            Fill="{StaticResource IconColor}"
+            RenderTransformOrigin="0.5,0.5"
+            Stretch="Uniform" />
+
+        <Path
+            x:Key="Care"
+            Width="14"
+            Height="14"
+            Margin="0,0,0,0"
+            Data="M19.909995,14.009048C16.308007,17.311064 9.3050192,18.411068 7.4040187,18.71207 7.303006,19.412071 7.2029999,20.012071 7.2029999,20.713079 7.2029999,25.915096 10.505,30.217117 14.607018,30.217117 18.709006,30.217117 22.011006,26.015102 22.011006,20.713079 22.111012,18.111063 21.210988,15.71006 19.909995,14.009048z M7.303006,7.2060225L8.3040121,8.6060264 8.8040121,8.4060247C8.8040121,8.4060247 11.406001,7.3060214 14.807,7.3060214 16.808007,7.3060214 18.609,7.7060244 20.309989,8.4060247L20.909993,8.7060287 21.810994,7.2060225C22.210988,7.5060227 22.611012,7.8060233 23.111989,8.1060235 23.111989,8.1060235 26.313006,10.707033 25.413012,21.813081 25.413012,21.813081 25.512988,25.5151 29.015,28.11611 29.015,28.11611 16.308007,36.921148 0,28.016111 1.8363426E-07,28.016111 3.2010179,25.615099 3.6020186,22.614088 3.6020186,22.614088 2.8010242,9.5070302 7.303006,7.2060225z M13.807001,1.3029979L13.807001,2.5029995 12.606012,2.5029995 12.606012,4.0040095 13.807001,4.0040095 13.807001,5.2050106 15.308007,5.2050106 15.308007,4.1040084 16.508019,4.1040084 16.508019,2.5029995 15.308007,2.5029995 15.308007,1.3029979z M14.45432,5.8624448E-05C19.621684,0.016775248,23.111989,3.6040063,23.111989,3.6040065L20.610007,7.7060244C14.607018,5.1050117,8.4040182,7.7060244,8.4040182,7.7060244L5.4020055,3.6040065C8.704006,1.0029936 11.606013,0.0019899762 14.206994,0.0019898148 14.289853,0.00042749352 14.372297,-0.00020676306 14.45432,5.8624448E-05z"
+            Fill="{StaticResource IconColor}"
             RenderTransformOrigin="0.5,0.5"
             Stretch="Uniform" />
 

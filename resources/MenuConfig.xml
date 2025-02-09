@@ -2,21 +2,19 @@
 <Menu>
 	<MenuItem Header="BELEID/STRATEGIE">
 		
-			<MenuItem Header="Visie" />
-			<MenuItem Header="Missie" />
-			<MenuItem Header="Strategische Doelstellingen" />
-			<MenuItem Header="KPI's" />
-			<MenuItem Header="Planningscyclus" />
+			<MenuItem Header="Visie" IconResourceName="Vision" />
+			<MenuItem Header="Missie" IconResourceName="Mission" />
+			<MenuItem Header="Strategische Doelstellingen" IconResourceName="Strategy" />
+			<MenuItem Header="KPI's" IconResourceName="KPI" />
+			<MenuItem Header="Planningscyclus" IconResourceName="Planning"/>
 		
 	</MenuItem>
 
 	<MenuItem Header="ZORG">
 		
-			<MenuItem Header="Cliënten" />
-			<MenuItem Header="Behandelingen" />
-			<MenuItem Header="Zorgplannen" />
-			<MenuItem Header="Rapportages" />
-			<MenuItem Header="Evaluaties" />
+			<MenuItem Header="Cliënten" IconResourceName="Clients"/>
+			<MenuItem Header="Behandelingen" IconResourceName="Treatment"/>
+			<MenuItem Header="Zorgplannen" IconResourceName="Care"/>			
 		
 	</MenuItem>
 
@@ -55,7 +53,7 @@
 			<MenuItem Header="Persberichten" />
 			<MenuItem Header="Interne Communicatie" />
 			<MenuItem Header="Social Media" />
-			<MenuItem Header="Feedback Kanalen" />
+			
 		
 	</MenuItem>
 

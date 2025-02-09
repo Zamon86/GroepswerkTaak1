@@ -14,13 +14,22 @@
         <Style BasedOn="{StaticResource CustomMenuItemStyle}" TargetType="MenuItem" />
     </Window.Resources>
 
-    <DockPanel LastChildFill="True">
+    <DockPanel Background="{StaticResource MainBackgroundColor}" LastChildFill="True">
+
         <Menu
             Name="mnuMainMenu"
-            Background="#FFCDDDDD"
+            Background="{StaticResource MainBackgroundColor}"
             DockPanel.Dock="Top" />
 
-        <TabControl x:Name="tcMain" DockPanel.Dock="Top" />
+        <Border
+            Height="25"
+            Background="White"
+            DockPanel.Dock="Top">
+            <TabControl
+                x:Name="tcMain"
+                Height="25"
+                BorderThickness="0" />
+        </Border>
 
         <!--  Test buttons for tabs  -->
         <StackPanel Width="150" Margin="5">
@@ -28,32 +37,32 @@
                 Margin="5"
                 Click="btnOpenTab_Click"
                 Content="Open Tab 1"
-                Tag="Tab1" />
+                Tag="Tab Tab1" />
             <Button
                 Margin="5"
                 Click="btnOpenTab_Click"
                 Content="Open Tab 2"
-                Tag="Tab2" />
+                Tag="Tab Tab2" />
             <Button
                 Margin="5"
                 Click="btnOpenTab_Click"
                 Content="Open Tab 3"
-                Tag="Tab3" />
+                Tag="Tab Tab3" />
             <Button
                 Margin="5"
                 Click="btnOpenTab_Click"
                 Content="Open Tab 4"
-                Tag="Tab4" />
+                Tag="Tab Tab4" />
             <Button
                 Margin="5"
                 Click="btnOpenTab_Click"
                 Content="Open Tab 5"
-                Tag="Tab5" />
+                Tag="Tab Tab5" />
             <Button
                 Margin="5"
                 Click="btnOpenTab_Click"
                 Content="Open Tab 6"
-                Tag="Tab6" />
+                Tag="Tab Tab6" />
         </StackPanel>
     </DockPanel>
 </Window>
