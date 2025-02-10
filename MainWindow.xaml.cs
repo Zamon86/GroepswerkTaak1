@@ -8,6 +8,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace GroepswerkTaak1
 {
@@ -15,11 +16,13 @@ namespace GroepswerkTaak1
     public partial class MainWindow : Window
     {
         private clsMenuData menuData = new clsMenuData();
+        private DispatcherTimer timer = new();
 
         public MainWindow()
         {
             InitializeComponent();
         }
+
 
         public void btnOpenTab_Click(object sender, RoutedEventArgs e)
         {
@@ -46,12 +49,25 @@ namespace GroepswerkTaak1
             
             tcMain.Items.Add(newTab);
             tcMain.SelectedItem = newTab;            
-        }     
+        }        
+
+        private void StartTimer()
+        {
+            timer.Interval = TimeSpan.FromSeconds(1);                  
+            timer.Tick += (s, e) => txtDateAndTime.Text = DateTime.Now.ToString();
+            timer.Start();
+        }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             menuData.ReadDataFromConfigFile();
             mnuMainMenu.ItemsSource = menuData.CreateMenuItems();
+            this.StartTimer();
+        }
+
+        private void btnAfmelden_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Not implemeted");
         }
     }
 
