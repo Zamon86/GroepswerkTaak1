@@ -16,12 +16,31 @@ namespace GroepswerkTaak1
     public partial class MainWindow : Window
     {
         private clsMenuData menuData = new clsMenuData();
+        private string strAuthorisatie = string.Empty;  // deze string zal de authorisatie dragen
         private DispatcherTimer timer = new();
+
 
         public MainWindow()
         {
             InitializeComponent();
+            //hier lezen we de authorisatie in vanuit het loginscherm
+            // TODO
+            // strAuthorisatie = winLogon.strAuthorisatie;
+            // display de machtiging op het scherm dmv  een label of textblock
         }
+
+        #region METHODES
+        private void OpenUserControl(UserControl myUS)
+        {
+            if (grdMain.Children.Count > 1)
+            {
+                grdMain.Children.RemoveAt(1);
+            }
+            Grid.SetColumn(myUS, 1);
+            Grid.SetRow(myUS, 0);
+            grdMain.Children.Add(myUS);
+        }
+        #endregion
 
 
         public void btnOpenTab_Click(object sender, RoutedEventArgs e)
@@ -69,11 +88,12 @@ namespace GroepswerkTaak1
         {
             MessageBox.Show("Not implemeted");
         }
+
+        private void btnDannyTest_Click(object sender, RoutedEventArgs e)
+        {
+            uc_Users _uc_Users = new uc_Users();
+            OpenUserControl(_uc_Users);
+        }
     }
-
-
-
-
-
 
 }
