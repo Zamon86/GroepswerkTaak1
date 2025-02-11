@@ -110,6 +110,11 @@
                 Click="btnOpenTab_Click"
                 Content="Open Tab 6"
                 Tag="Tab Tab6" />
+          
+            <Button Name="btnDannyTest" Content="Danny Test" Click="btnDannyTest_Click"/>
+
+                
         </StackPanel>
+        <Grid Name="grdMain"/>
     </DockPanel>
 </Window>
