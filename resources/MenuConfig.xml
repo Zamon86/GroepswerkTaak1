@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Menu>
+	<MenuItem Header="BELEID/STRATEGIE">
+		
+			<MenuItem Header="Visie" IconResourceName="Vision" />
+			<MenuItem Header="Missie" IconResourceName="Mission" />
+			<MenuItem Header="Strategische Doelstellingen" IconResourceName="Strategy" />
+			<MenuItem Header="KPI's" IconResourceName="KPI" />
+			<MenuItem Header="Planningscyclus" IconResourceName="Planning"/>
+		
+	</MenuItem>
+
+	<MenuItem Header="ZORG">
+		
+			<MenuItem Header="Cliënten" IconResourceName="Clients"/>
+			<MenuItem Header="Behandelingen" IconResourceName="Treatment"/>
+			<MenuItem Header="Zorgplannen" IconResourceName="Care"/>			
+		
+	</MenuItem>
+
+	<MenuItem Header="MEDEWERKERS">
+		
+			<MenuItem Header="HR Overzicht" />
+			<MenuItem Header="Roosters" />
+			<MenuItem Header="Verlofaanvragen" />
+			<MenuItem Header="Opleidingen" />
+			<MenuItem Header="Feedback" />
+		
+	</MenuItem>
+
+	<MenuItem Header="LOGISTIEK">
+		
+			<MenuItem Header="Voorraadbeheer" />
+			<MenuItem Header="Leveranciers" />
+			<MenuItem Header="Transportplanning" />
+			<MenuItem Header="Onderhoud" />
+		
+	</MenuItem>
+
+	<MenuItem Header="FINANCIEEL">
+		
+			<MenuItem Header="Boekhouding" />
+			<MenuItem Header="Facturen" />
+			<MenuItem Header="Budgettering" />
+			<MenuItem Header="Audit" />
+			<MenuItem Header="Belastingen" />
+		
+	</MenuItem>
+
+	<MenuItem Header="COMMUNICATIE">
+		
+			<MenuItem Header="Nieuwsbrieven" />
+			<MenuItem Header="Persberichten" />
+			<MenuItem Header="Interne Communicatie" />
+			<MenuItem Header="Social Media" />
+			
+		
+	</MenuItem>
+
+	<MenuItem Header="THAK-DMS">
+		
+			<MenuItem Header="Documentbeheer" />
+			<MenuItem Header="Workflow" />
+			<MenuItem Header="Toegang" />
+			<MenuItem Header="Backups" />
+			<MenuItem Header="Versiebeheer" />
+		
+	</MenuItem>
+
+	<MenuItem Header="HELP" IconResourceName="QuestionMarkRed">
+		
+			<MenuItem Header="Handleiding" />
+			<MenuItem Header="FAQ" />
+			<MenuItem Header="Contact Support" />
+			<MenuItem Header="Over Ons" />
+		
+	</MenuItem>
+</Menu>

@@ -8,17 +8,39 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace GroepswerkTaak1
 {
-    
+
     public partial class MainWindow : Window
     {
+        private clsMenuData menuData = new clsMenuData();
+        private string strAuthorisatie = string.Empty;  // deze string zal de authorisatie dragen
+        private DispatcherTimer timer = new();
+
+
         public MainWindow()
         {
             InitializeComponent();
+            //hier lezen we de authorisatie in vanuit het loginscherm
+            // TODO
+            // strAuthorisatie = winLogon.strAuthorisatie;
+            // display de machtiging op het scherm dmv  een label of textblock
         }
 
+        #region METHODES
+        private void OpenUserControl(UserControl myUS)
+        {
+            if (grdMain.Children.Count > 1)
+            {
+                grdMain.Children.RemoveAt(1);
+            }
+            Grid.SetColumn(myUS, 1);
+            Grid.SetRow(myUS, 0);
+            grdMain.Children.Add(myUS);
+        }
+        #endregion
 
 
         public void btnOpenTab_Click(object sender, RoutedEventArgs e)
@@ -33,27 +55,45 @@ namespace GroepswerkTaak1
                 .FirstOrDefault(t => t.Header?.ToString() == tabName);
 
             if (existingTab != null)
-            {                
+            {
                 tcMain.SelectedItem = existingTab;
-                return;
-            }
+                return;                
+            }            
 
             TabItem newTab = new TabItem
             {
-                Header = tabName,   
-            };
-
+                Style = (Style)FindResource("TabItemStyle"),
+                Header = tabName                
+            };     
+            
             tcMain.Items.Add(newTab);
-            tcMain.SelectedItem = newTab;
+            tcMain.SelectedItem = newTab;            
+        }        
 
+        private void StartTimer()
+        {
+            timer.Interval = TimeSpan.FromSeconds(1);                  
+            timer.Tick += (s, e) => txtDateAndTime.Text = DateTime.Now.ToString();
+            timer.Start();
         }
 
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            menuData.ReadDataFromConfigFile();
+            mnuMainMenu.ItemsSource = menuData.CreateMenuItems();
+            this.StartTimer();
+        }
 
+        private void btnAfmelden_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Not implemeted");
+        }
+
+        private void btnDannyTest_Click(object sender, RoutedEventArgs e)
+        {
+            uc_Users _uc_Users = new uc_Users();
+            OpenUserControl(_uc_Users);
+        }
     }
-
-    
-
-
-
 
 }

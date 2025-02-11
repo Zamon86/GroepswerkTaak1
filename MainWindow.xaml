@@ -5,109 +5,116 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:GroepswerkTaak1"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Title="Greopswerk Taak 1"
+    Title="Groepswerk Taak 1"
     Width="1200"
-    Height="800"
+    Height="700"
+    Loaded="Window_Loaded"
     mc:Ignorable="d">
+    <Window.Resources>
+        <Style BasedOn="{StaticResource CustomMenuItemStyle}" TargetType="MenuItem" />
+    </Window.Resources>
+
     <DockPanel LastChildFill="True">
-        <Menu DockPanel.Dock="Top">
-            <MenuItem Header="BELEID/STRATEGIE">
-                <MenuItem Header="Visie" />
-                <MenuItem Header="Missie" />
-                <MenuItem Header="Strategische Doelstellingen" />
-                <MenuItem Header="KPI's" />
-                <MenuItem Header="Planningscyclus" />
-            </MenuItem>
+        <Menu
+            Name="mnuMainMenu"
+            Background="{StaticResource MainBackgroundColor}"
+            DockPanel.Dock="Top" />
+        <Grid
+            Height="25"
+            Margin="3,0"
+            Background="White"
+            DockPanel.Dock="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="auto" />
+            </Grid.ColumnDefinitions>
+            <TabControl
+                x:Name="tcMain"
+                Height="25"
+                BorderThickness="0" />
+            <Button
+                Name="btnAfmelden"
+                Grid.Column="1"
+                Click="btnAfmelden_Click"
+                Content="Afmelden"
+                Style="{StaticResource AfmeldenButtonStyle}" />
+        </Grid>
 
-            <MenuItem Header="ZORG">
-                <MenuItem Header="Cliënten" />
-                <MenuItem Header="Behandelingen" />
-                <MenuItem Header="Zorgplannen" />
-                <MenuItem Header="Rapportages" />
-                <MenuItem Header="Evaluaties" />
-            </MenuItem>
+        <Grid
+            Name="grdFooter"
+            Height="20"
+            Margin="3"
+            Background="{StaticResource MainBackgroundColor}"
+            DockPanel.Dock="Bottom">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="auto" />
+            </Grid.ColumnDefinitions>
+            <TextBlock
+                x:Name="txtDateAndTime"
+                Margin="10,0,0,0"
+                Padding="2"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                FontSize="12"
+                FontWeight="Bold" />
 
-            <MenuItem Header="MEDEWERKERS">
-                <MenuItem Header="HR Overzicht" />
-                <MenuItem Header="Roosters" />
-                <MenuItem Header="Verlofaanvragen" />
-                <MenuItem Header="Opleidingen" />
-                <MenuItem Header="Feedback" />
-            </MenuItem>
+            <Label
+                Name="lblUser"
+                Grid.Column="1"
+                Margin="0,0,10,0"
+                Padding="2"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+                Content="GebruikersNaam"
+                FontSize="12"
+                FontWeight="Bold" />
+        </Grid>
 
-            <MenuItem Header="LOGISTIEK">
-                <MenuItem Header="Voorraadbeheer" />
-                <MenuItem Header="Leveranciers" />
-                <MenuItem Header="Transportplanning" />
-                <MenuItem Header="Onderhoud" />
-            </MenuItem>
-
-            <MenuItem Header="FINANCIEEL">
-                <MenuItem Header="Boekhouding" />
-                <MenuItem Header="Facturen" />
-                <MenuItem Header="Budgettering" />
-                <MenuItem Header="Audit" />
-                <MenuItem Header="Belastingen" />
-            </MenuItem>
-
-            <MenuItem Header="COMMUNICATIE">
-                <MenuItem Header="Nieuwsbrieven" />
-                <MenuItem Header="Persberichten" />
-                <MenuItem Header="Interne Communicatie" />
-                <MenuItem Header="Social Media" />
-                <MenuItem Header="Feedback Kanalen" />
-            </MenuItem>
-
-            <MenuItem Header="THAK-DMS">
-                <MenuItem Header="Documentbeheer" />
-                <MenuItem Header="Workflow" />
-                <MenuItem Header="Toegang" />
-                <MenuItem Header="Backups" />
-                <MenuItem Header="Versiebeheer" />
-            </MenuItem>
-
-            <MenuItem Header="HELP">
-                <MenuItem Header="Handleiding" />
-                <MenuItem Header="FAQ" />
-                <MenuItem Header="Contact Support" />
-                <MenuItem Header="Over Ons" />
-            </MenuItem>
-        </Menu>
-
-        <TabControl x:Name="tcMain" DockPanel.Dock="Top" />
 
         <!--  Test buttons for tabs  -->
-        <StackPanel Width="150" Margin="5">
+        <StackPanel Margin="3,0,3,3" Background="{StaticResource MainBackgroundColor}">
             <Button
+                Width="100"
                 Margin="5"
                 Click="btnOpenTab_Click"
                 Content="Open Tab 1"
-                Tag="Tab1" />
+                Tag="Tab Tab1" />
             <Button
+                Width="100"
                 Margin="5"
                 Click="btnOpenTab_Click"
                 Content="Open Tab 2"
-                Tag="Tab2" />
+                Tag="Tab Tab2" />
             <Button
+                Width="100"
                 Margin="5"
                 Click="btnOpenTab_Click"
                 Content="Open Tab 3"
-                Tag="Tab3" />
+                Tag="Tab Tab3" />
             <Button
+                Width="100"
                 Margin="5"
                 Click="btnOpenTab_Click"
                 Content="Open Tab 4"
-                Tag="Tab4" />
+                Tag="Tab Tab4" />
             <Button
+                Width="100"
                 Margin="5"
                 Click="btnOpenTab_Click"
                 Content="Open Tab 5"
-                Tag="Tab5" />
+                Tag="Tab Tab5" />
             <Button
+                Width="100"
                 Margin="5"
                 Click="btnOpenTab_Click"
                 Content="Open Tab 6"
-                Tag="Tab6" />
+                Tag="Tab Tab6" />
+          
+            <Button Name="btnDannyTest" Content="Danny Test" Click="btnDannyTest_Click"/>
+
+                
         </StackPanel>
+        <Grid Name="grdMain"/>
     </DockPanel>
 </Window>
