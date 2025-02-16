@@ -1,8 +1,6 @@
 ﻿using System.IO;
 using System.Windows;
-using System.Windows.Shapes;
 using System.Windows.Controls;
-using System.Windows.Shapes;
 using System.Xml.Serialization;
 
 namespace GroepswerkTaak1
