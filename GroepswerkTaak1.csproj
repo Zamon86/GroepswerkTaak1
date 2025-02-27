@@ -33,6 +33,12 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Update="uc_01_MijnPortal - Copy %283%29.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="uc_01_MijnPortal - Copy %285%29.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>

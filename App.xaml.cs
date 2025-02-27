@@ -1,11 +1,8 @@
-﻿using System.Configuration;
-using System.Data;
-using System.DirectoryServices.ActiveDirectory;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 
 namespace GroepswerkTaak1
-{    
+{
     public partial class App : Application
     {
         private void btnCloseTab_Click(object sender, RoutedEventArgs e)
