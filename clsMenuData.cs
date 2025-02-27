@@ -91,15 +91,5 @@ namespace GroepswerkTaak1
         }
     }
 
-    public class clsMenuItemData
-    {
-        [XmlAttribute("Header")]
-        public required string Header { get; set; }
-
-        [XmlAttribute("IconResourceName")]
-        public string? IconResourceName { get; set; }
-
-        [XmlElement("MenuItem")]
-        public List<clsMenuItemData>? SubItems { get; set; }
-    }
+   
 }
