@@ -19,7 +19,65 @@
 		<Menu
 			Name="mnuMainMenu"
 			Background="{StaticResource MainBackgroundColor}"
-			DockPanel.Dock="Top" />
+			DockPanel.Dock="Top">
+			<MenuItem Header="BELEID/STRATEGIE">
+				<MenuItem Header="Visie" Icon="{StaticResource Vision}" />
+				<MenuItem Header="Missie" Icon="{StaticResource Mission}" />
+				<MenuItem Header="Strategische Doelstellingen" Icon="{StaticResource Strategy}" />
+				<MenuItem Header="KPI's" Icon="{StaticResource KPI}" />
+				<MenuItem Header="Planningscyclus" Icon="{StaticResource Planning}" />
+			</MenuItem>
+			<MenuItem Header="ZORG">
+				<MenuItem Header="Cliënten" Icon="{StaticResource Clients}" />
+				<MenuItem Header="Behandelingen" Icon="{StaticResource Treatment}" />
+				<MenuItem Header="Zorgplannen" Icon="{StaticResource Care}" />
+			</MenuItem>
+			<MenuItem Header="MEDEWERKERS">
+				<MenuItem Header="HR Overzicht" />
+				<MenuItem Header="Roosters" />
+				<MenuItem Header="Verlofaanvragen" />
+				<MenuItem Header="Opleidingen" />
+				<MenuItem Header="Feedback" />
+			</MenuItem>
+			<MenuItem Header="LOGISTIEK">
+				<MenuItem Header="Voorraadbeheer" />
+				<MenuItem Header="Leveranciers" />
+				<MenuItem Header="Transportplanning" />
+				<MenuItem Header="Onderhoud" />
+			</MenuItem>
+			<MenuItem Header="FINANCIEEL">
+				<MenuItem Header="Boekhouding" />
+				<MenuItem Header="Facturen" />
+				<MenuItem Header="Budgettering" />
+				<MenuItem Header="Audit" />
+				<MenuItem Header="Belastingen" />
+			</MenuItem>
+			<MenuItem Header="COMMUNICATIE">
+				<MenuItem Header="Nieuwsbrieven" />
+				<MenuItem Header="Persberichten" />
+				<MenuItem Header="Interne Communicatie" />
+				<MenuItem Header="Social Media" />
+			</MenuItem>
+			<MenuItem Header="THAK-DMS">
+				<MenuItem Header="Documentbeheer" />
+				<MenuItem Header="Workflow" />
+				<MenuItem Header="Toegang" />
+				<MenuItem Header="Backups" />
+				<MenuItem Header="Versiebeheer" />
+			</MenuItem>
+			<MenuItem>
+				<MenuItem.Header>
+					<StackPanel Orientation="Horizontal">
+						<ContentPresenter Content="{StaticResource QuestionMarkRed}" />
+						<TextBlock Text="HELP" />
+					</StackPanel>
+				</MenuItem.Header>
+				<MenuItem Header="Handleiding" />
+				<MenuItem Header="FAQ" />
+				<MenuItem Header="Contact Support" />
+				<MenuItem Header="Over Ons" />
+			</MenuItem>
+		</Menu>
 		<Grid
 			Margin="3,0"
 			Background="White"
