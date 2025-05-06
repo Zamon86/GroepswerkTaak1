@@ -61,6 +61,42 @@ namespace GroepswerkTaak1.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to D_Image.
+        /// </summary>
+        internal static string D_Image {
+            get {
+                return ResourceManager.GetString("D_Image", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to I_Image.
+        /// </summary>
+        internal static string I_Image {
+            get {
+                return ResourceManager.GetString("I_Image", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to S_ImageByID.
+        /// </summary>
+        internal static string S_ImageByID {
+            get {
+                return ResourceManager.GetString("S_ImageByID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to S_Images.
+        /// </summary>
+        internal static string S_Images {
+            get {
+                return ResourceManager.GetString("S_Images", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to S_Rollen.
         /// </summary>
         internal static string S_Rollen {
@@ -75,6 +111,15 @@ namespace GroepswerkTaak1.Properties {
         internal static string S_Users {
             get {
                 return ResourceManager.GetString("S_Users", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to U_Image.
+        /// </summary>
+        internal static string U_Image {
+            get {
+                return ResourceManager.GetString("U_Image", resourceCulture);
             }
         }
     }

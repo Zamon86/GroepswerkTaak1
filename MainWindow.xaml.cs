@@ -9,6 +9,7 @@ namespace GroepswerkTaak1
 	{
 		#region VARIABLES		
 		private string strAuthorisatie = string.Empty;  // deze string zal de authorisatie dragen
+
 		private DispatcherTimer timer = new();
 
 		private Dictionary<string, Type> _ucMapping = new()
@@ -26,7 +27,9 @@ namespace GroepswerkTaak1
 
 		public MainWindow()
 		{
-			InitializeComponent();
+
+			InitializeComponent();	
+
 			//hier lezen we de authorisatie in vanuit het loginscherm
 			// TODO
 			// strAuthorisatie = winLogon.strAuthorisatie;

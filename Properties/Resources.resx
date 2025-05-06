@@ -123,4 +123,19 @@
   <data name="S_Rollen" xml:space="preserve">
     <value>S_Rollen</value>
   </data>
+  <data name="S_Images" xml:space="preserve">
+    <value>S_Images</value>
+  </data>
+  <data name="S_ImageByID" xml:space="preserve">
+    <value>S_ImageByID</value>
+  </data>
+  <data name="U_Image" xml:space="preserve">
+    <value>U_Image</value>
+  </data>
+  <data name="I_Image" xml:space="preserve">
+    <value>I_Image</value>
+  </data>
+  <data name="D_Image" xml:space="preserve">
+    <value>D_Image</value>
+  </data>
 </root>

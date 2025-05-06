@@ -9,7 +9,9 @@
 	d:DesignWidth="800"
 	Background="{StaticResource MainBackgroundColor}"
 	mc:Ignorable="d">
-	<UserControl.Resources />
+	<UserControl.Resources>
+		<local:clsByteArrayToImageConverter x:Key="ByteArrayToImageConverter" />
+	</UserControl.Resources>
 	<ScrollViewer VerticalScrollBarVisibility="auto">
 		<ScrollViewer.Resources>
 			<Style BasedOn="{StaticResource CustomVerticalScrollBar}" TargetType="ScrollBar" />
@@ -21,7 +23,26 @@
 				<ColumnDefinition Width="auto" />
 				<ColumnDefinition Width="*" />
 			</Grid.ColumnDefinitions>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="*" />
+				<RowDefinition Height="auto" />
+			</Grid.RowDefinitions>
+			<Grid Grid.Row="0" Grid.Column="1">
+				<Image
+					x:Name="PhotoFlipperImage"
+					MaxHeight="350"
+					Margin="30"
+					HorizontalAlignment="Center"
+					VerticalAlignment="Center"
+					RenderTransformOrigin="0.5,0.5"
+					Source="{Binding PhotoFlipper.ActiveImageBytes, Converter={StaticResource ByteArrayToImageConverter}, NotifyOnSourceUpdated=True}">
+					<Image.RenderTransform>
+						<ScaleTransform x:Name="ImageHorizontalScaleTransform" ScaleX="1" />
+					</Image.RenderTransform>
+				</Image>
+			</Grid>
 			<Grid
+				Grid.Row="1"
 				Grid.Column="1"
 				Margin="5"
 				VerticalAlignment="Bottom">
