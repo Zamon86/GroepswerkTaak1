@@ -9,78 +9,105 @@
 	d:DesignWidth="800"
 	Background="{StaticResource MainBackgroundColor}"
 	mc:Ignorable="d">
-	<UserControl.Resources />
-	<Grid>
-		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="*" />
-			<ColumnDefinition Width="auto" />
-			<ColumnDefinition Width="*" />
-		</Grid.ColumnDefinitions>
-		<Grid
-			Grid.Column="1"
-			Margin="5"
-			VerticalAlignment="Bottom">
+	<UserControl.Resources>
+		<local:clsByteArrayToImageConverter x:Key="ByteArrayToImageConverter" />
+	</UserControl.Resources>
+	<ScrollViewer VerticalScrollBarVisibility="auto">
+		<ScrollViewer.Resources>
+			<Style BasedOn="{StaticResource CustomVerticalScrollBar}" TargetType="ScrollBar" />
+		</ScrollViewer.Resources>
+
+		<Grid>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*" />
+				<ColumnDefinition Width="auto" />
+				<ColumnDefinition Width="*" />
+			</Grid.ColumnDefinitions>
 			<Grid.RowDefinitions>
-				<RowDefinition Height="auto" />
+				<RowDefinition Height="*" />
 				<RowDefinition Height="auto" />
 			</Grid.RowDefinitions>
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="auto" />
-				<ColumnDefinition Width="auto" />
-				<ColumnDefinition Width="auto" />
-			</Grid.ColumnDefinitions>
-			<Button
-				Grid.Row="0"
-				Grid.Column="0"
-				local:clsPortalButtonExtender.MainIcon="{StaticResource Smoelenboek}"
-				Click="btnOpenTab_Click"
-				Content="Smoelenboek"
-				Style="{StaticResource MijnPortalButtonStyle}"
-				Tag="Smoelenboek" />
-			<Button
-				Grid.Row="0"
-				Grid.Column="1"
-				local:clsPortalButtonExtender.MainIcon="{StaticResource Engineer}"
-				local:clsPortalButtonExtender.SmallIcon="{StaticResource Vision2}"
-				Click="btnOpenTab_Click"
-				Content="Helpdesk TD"
-				Style="{StaticResource MijnPortalButtonStyle}"
-				Tag="Helpdesk TD" />
-			<Button
-				Grid.Row="0"
-				Grid.Column="2"
-				local:clsPortalButtonExtender.MainIcon="{StaticResource Hotline}"
-				local:clsPortalButtonExtender.SmallIcon="{StaticResource Vision2}"
-				Click="btnOpenTab_Click"
-				Content="Helpdesk ICT"
-				Style="{StaticResource MijnPortalButtonStyle}"
-				Tag="Helpdesk ICT" />
-			<Button
-				Grid.Row="1"
-				Grid.Column="0"
-				local:clsPortalButtonExtender.MainIcon="{StaticResource Documents}"
-				local:clsPortalButtonExtender.SmallIcon="{StaticResource Search}"
-				Click="btnOpenTab_Click"
-				Content="Bladeren DMS"
-				Style="{StaticResource MijnPortalButtonStyle}"
-				Tag="Bladeren DMS" />
-			<Button
-				Grid.Row="1"
-				Grid.Column="2"
-				local:clsPortalButtonExtender.MainIcon="{StaticResource ForkAndKnife}"
-				local:clsPortalButtonExtender.SmallIcon="{StaticResource Vision2}"
-				Click="btnOpenTab_Click"
-				Content="Helpdesk keuken"
-				Style="{StaticResource MijnPortalButtonStyle}"
-				Tag="Helpdesk keuken" />
-			<Button
+			<Grid Grid.Row="0" Grid.Column="1">
+				<Image
+					x:Name="PhotoFlipperImage"
+					MaxHeight="350"
+					Margin="30"
+					HorizontalAlignment="Center"
+					VerticalAlignment="Center"
+					RenderTransformOrigin="0.5,0.5"
+					Source="{Binding PhotoFlipper.ActiveImageBytes, Converter={StaticResource ByteArrayToImageConverter}, NotifyOnSourceUpdated=True}">
+					<Image.RenderTransform>
+						<ScaleTransform x:Name="ImageHorizontalScaleTransform" ScaleX="1" />
+					</Image.RenderTransform>
+				</Image>
+			</Grid>
+			<Grid
 				Grid.Row="1"
 				Grid.Column="1"
-				local:clsPortalButtonExtender.MainIcon="{StaticResource Admin}"
-				Click="btnOpenTab_Click"
-				Content="Admin paneel"
-				Style="{StaticResource MijnPortalButtonStyle}"
-				Tag="Admin paneel" />
+				Margin="5"
+				VerticalAlignment="Bottom">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="auto" />
+					<RowDefinition Height="auto" />
+				</Grid.RowDefinitions>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="auto" />
+					<ColumnDefinition Width="auto" />
+					<ColumnDefinition Width="auto" />
+				</Grid.ColumnDefinitions>
+				<Button
+					Grid.Row="0"
+					Grid.Column="0"
+					local:clsPortalButtonExtender.MainIcon="{StaticResource Smoelenboek}"
+					Click="btnOpenTab_Click"
+					Content="Smoelenboek"
+					Style="{StaticResource MijnPortalButtonStyle}"
+					Tag="Smoelenboek" />
+				<Button
+					Grid.Row="0"
+					Grid.Column="1"
+					local:clsPortalButtonExtender.MainIcon="{StaticResource Engineer}"
+					local:clsPortalButtonExtender.SmallIcon="{StaticResource Vision2}"
+					Click="btnOpenTab_Click"
+					Content="Helpdesk TD"
+					Style="{StaticResource MijnPortalButtonStyle}"
+					Tag="Helpdesk TD" />
+				<Button
+					Grid.Row="0"
+					Grid.Column="2"
+					local:clsPortalButtonExtender.MainIcon="{StaticResource Hotline}"
+					local:clsPortalButtonExtender.SmallIcon="{StaticResource Vision2}"
+					Click="btnOpenTab_Click"
+					Content="Helpdesk ICT"
+					Style="{StaticResource MijnPortalButtonStyle}"
+					Tag="Helpdesk ICT" />
+				<Button
+					Grid.Row="1"
+					Grid.Column="0"
+					local:clsPortalButtonExtender.MainIcon="{StaticResource Documents}"
+					local:clsPortalButtonExtender.SmallIcon="{StaticResource Search}"
+					Click="btnOpenTab_Click"
+					Content="Bladeren DMS"
+					Style="{StaticResource MijnPortalButtonStyle}"
+					Tag="Bladeren DMS" />
+				<Button
+					Grid.Row="1"
+					Grid.Column="2"
+					local:clsPortalButtonExtender.MainIcon="{StaticResource ForkAndKnife}"
+					local:clsPortalButtonExtender.SmallIcon="{StaticResource Vision2}"
+					Click="btnOpenTab_Click"
+					Content="Helpdesk keuken"
+					Style="{StaticResource MijnPortalButtonStyle}"
+					Tag="Helpdesk keuken" />
+				<Button
+					Grid.Row="1"
+					Grid.Column="1"
+					local:clsPortalButtonExtender.MainIcon="{StaticResource AdminButtonImage}"
+					Click="btnOpenTab_Click"
+					Style="{StaticResource MijnPortalButtonStyle}"
+					Tag="Admin paneel" />
+			</Grid>
 		</Grid>
-	</Grid>
+	</ScrollViewer>
+
 </UserControl>

@@ -7,9 +7,9 @@ namespace GroepswerkTaak1
 
 	public partial class MainWindow : Window
 	{
-		#region VARIABLES
-		private clsMenuData menuData = new clsMenuData();
+		#region VARIABLES		
 		private string strAuthorisatie = string.Empty;  // deze string zal de authorisatie dragen
+
 		private DispatcherTimer timer = new();
 
 		private Dictionary<string, Type> _ucMapping = new()
@@ -27,7 +27,9 @@ namespace GroepswerkTaak1
 
 		public MainWindow()
 		{
-			InitializeComponent();
+
+			InitializeComponent();	
+
 			//hier lezen we de authorisatie in vanuit het loginscherm
 			// TODO
 			// strAuthorisatie = winLogon.strAuthorisatie;
@@ -51,13 +53,7 @@ namespace GroepswerkTaak1
 			timer.Interval = TimeSpan.FromSeconds(1);
 			timer.Tick += (s, e) => txtDateAndTime.Text = DateTime.Now.ToString();
 			timer.Start();
-		}
-
-		private void CreateMenu()
-		{
-			menuData.ReadDataFromConfigFile();
-			mnuMainMenu.ItemsSource = menuData.CreateMenuItems();
-		}
+		}		
 
 		private void CreateMainUserControl()
 		{
@@ -82,14 +78,11 @@ namespace GroepswerkTaak1
 
 
 		private void Window_Loaded(object sender, RoutedEventArgs e)
-		{
-			CreateMenu();
+		{			
 			StartTimer();
 			CreateStartTab();
 			CreateMainUserControl();
 		}
-
-
 
 		private void btnAfmelden_Click(object sender, RoutedEventArgs e)
 		{
@@ -101,8 +94,6 @@ namespace GroepswerkTaak1
 			uc_Users _uc_Users = new uc_Users();
 			OpenUserControl(_uc_Users);
 		}
-
-
 
 		private void tcMain_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
@@ -125,6 +116,6 @@ namespace GroepswerkTaak1
 		#endregion
 
 		
-    }
+		}
 
 }
