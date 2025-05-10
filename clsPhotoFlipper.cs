@@ -18,7 +18,7 @@ namespace GroepswerkTaak1
 		public Image ImageObject { get; set; }
 		public ScaleTransform ImageObjectScaleTransform { get; set; }
 
-		private DispatcherTimer _timer = new();
+		public DispatcherTimer timer = new();
 
 		private int _currentIndex = 0;
 
@@ -58,12 +58,12 @@ namespace GroepswerkTaak1
 		public void StartTimer()
 		{
 
-			_timer = new DispatcherTimer
+			timer = new DispatcherTimer
 			{
 				Interval = TimeSpan.FromSeconds(5)
 			};
-			_timer.Tick += (s, e) => ShowNextImage();
-			_timer.Start();
+			timer.Tick += (s, e) => ShowNextImage();
+			timer.Start();
 		}
 
 		private void ShowNextImage()
@@ -84,8 +84,8 @@ namespace GroepswerkTaak1
 				ActiveImageBytes = imageFilesBytes[_currentIndex];
 				ImageObjectScaleTransform.BeginAnimation(ScaleTransform.ScaleXProperty, flipIn);
 			};
-
 			ImageObjectScaleTransform.BeginAnimation(ScaleTransform.ScaleXProperty, flipOut);
+			
 		}
 	}
 }

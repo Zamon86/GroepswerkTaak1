@@ -41,7 +41,9 @@ namespace GroepswerkTaak1
 		{
 			if (grdMain.Children.Count > 1)
 			{
+				
 				grdMain.Children.RemoveAt(1);
+				
 			}
 			Grid.SetColumn(myUS, 1);
 			Grid.SetRow(myUS, 0);
