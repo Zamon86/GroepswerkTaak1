@@ -14,22 +14,27 @@ namespace GroepswerkTaak1.Repositories
 	public class clsImagePhotoFlipperRepo
 	{
 		private ObservableCollection<clsImagePhotoFlipper> images = new ObservableCollection<clsImagePhotoFlipper>();
+		bool isDataModified = true;
 		int queryResult = 0;
 
 		private void UpdateCollection()
 		{
-			using (SqlDataReader reader = clsDAL.GetData(Properties.Resources.S_Images))
+			
+			using (SqlDataReader? reader = clsDAL.GetData(Properties.Resources.S_Images))
 			{
-				while (reader.Read())
+				if (reader != null) 
 				{
-					clsImagePhotoFlipper image = new clsImagePhotoFlipper()
+					while (reader.Read())
 					{
-						ImagePhotoFlipperID = (int)reader["ID"],
-						ImageBytes = (byte[])reader["Image"],
-						ControlField = reader["ControlFIeld"]
-					};
-					images.Add(image);
-				}
+						clsImagePhotoFlipper image = new clsImagePhotoFlipper()
+						{
+							ImagePhotoFlipperID = (short)reader["ID"],
+							ImageBytes = (byte[])reader["Image"],
+							ControlField = reader["ControlFIeld"]
+						};
+						images.Add(image);
+					}
+				}				
 			}
 
 			if (images.Count == 0)
@@ -37,10 +42,16 @@ namespace GroepswerkTaak1.Repositories
 				clsImagePhotoFlipper image = GetErrorImage();
 				images.Add(image);
 			}
+			isDataModified = false;
 		}
 		public ObservableCollection<clsImagePhotoFlipper> GetAll()
 		{
-			UpdateCollection();
+			if (isDataModified)
+			{
+				UpdateCollection();
+				isDataModified= false;
+			}
+			
 			if (images.Count == 0)
 			{
 				images.Add(GetErrorImage());
@@ -54,18 +65,30 @@ namespace GroepswerkTaak1.Repositories
 				clsDAL.Parameter("User", Environment.UserName),
 				clsDAL.Parameter("ControlField", entity.ControlField),
 				clsDAL.Parameter("@ReturnValue", 0));
+
+			isDataModified = true;
+
 			return Helpers.SqlReturnValueHandler.HandleSqlReturnValue(queryResult, entity);
 		}
 
-		public clsImagePhotoFlipper GetById(int id)
+		public clsImagePhotoFlipper GetById(short id)
 		{
-			UpdateCollection();
+			if (isDataModified)
+			{
+				UpdateCollection();
+				isDataModified = false;
+			}
 			return images.Where(e => e.ImagePhotoFlipperID == id).FirstOrDefault() ?? GetErrorImage();
 		}
 
 		public clsImagePhotoFlipper GetFirst()
 		{
-			UpdateCollection();
+			if (isDataModified)
+			{
+				UpdateCollection();
+				isDataModified = false;
+			}
+
 			return images.FirstOrDefault() ?? GetErrorImage();
 		}
 
@@ -74,6 +97,9 @@ namespace GroepswerkTaak1.Repositories
 			clsDAL.ExecuteDataTable(Properties.Resources.I_Image, ref queryResult, clsDAL.Parameter("Image", entity.ImageBytes),
 				clsDAL.Parameter("User", Environment.UserName),
 				clsDAL.Parameter("@ReturnValue", 0));
+
+			isDataModified = true;
+
 			return Helpers.SqlReturnValueHandler.HandleSqlReturnValue(queryResult, entity);
 		}
 
@@ -84,6 +110,9 @@ namespace GroepswerkTaak1.Repositories
 				clsDAL.Parameter("User", Environment.UserName),
 				clsDAL.Parameter("ControlField", entity.ControlField),
 				clsDAL.Parameter("@ReturnValue", 0));
+
+			isDataModified = true;
+
 			return Helpers.SqlReturnValueHandler.HandleSqlReturnValue(queryResult, entity);
 		}
 

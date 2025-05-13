@@ -3,8 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Reflection.PortableExecutable;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace GroepswerkTaak1.Repositories
 {
@@ -106,16 +108,27 @@ namespace GroepswerkTaak1.Repositories
 			return DT;
 		}
 
-		public static SqlDataReader GetData(string storeProcedureName)
-		{
+		public static SqlDataReader? GetData(string storeProcedureName)
+		{			
 			SqlConnection CN = new SqlConnection(_ConnectionString);
 			SqlCommand CMD = new SqlCommand();
 			CMD.CommandType = CommandType.StoredProcedure;
 			CMD.Connection = CN;
 			CMD.CommandText = storeProcedureName;
-			CN.Open();
+
+			try
+			{
+				CN.Open();				 
+			}
+			catch (Exception)
+			{
+				MessageBox.Show("Connection Error");
+
+				return null;
+			}
 
 			return CMD.ExecuteReader();
+
 		}
 
 		public static SqlParameter Parameter(string parameterName, object parameterValue)

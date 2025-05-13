@@ -1,5 +1,9 @@
-﻿using System.Windows;
+﻿using GroepswerkTaak1.Models;
+using System;
+using System.Collections.ObjectModel;
+using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Threading;
 
 namespace GroepswerkTaak1
@@ -10,7 +14,9 @@ namespace GroepswerkTaak1
 		#region VARIABLES		
 		private string strAuthorisatie = string.Empty;  // deze string zal de authorisatie dragen
 
-		private DispatcherTimer timer = new();
+		private DispatcherTimer _timer = new();
+
+		private readonly Dictionary<string, UserControl> _ucInstances = new();
 
 		private Dictionary<string, Type> _ucMapping = new()
 				{
@@ -26,8 +32,7 @@ namespace GroepswerkTaak1
 		#endregion
 
 		public MainWindow()
-		{
-
+		{		
 			InitializeComponent();	
 
 			//hier lezen we de authorisatie in vanuit het loginscherm
@@ -38,13 +43,18 @@ namespace GroepswerkTaak1
 
 		#region METHODS
 		private void OpenUserControl(UserControl myUS)
-		{
+		{			
 			if (grdMain.Children.Count > 1)
-			{
-				
+			{				
 				grdMain.Children.RemoveAt(1);
 				
 			}
+
+			if (myUS.Parent is Panel panel)
+			{
+				panel.Children.Remove(myUS);
+			}
+
 			Grid.SetColumn(myUS, 1);
 			Grid.SetRow(myUS, 0);
 			grdMain.Children.Add(myUS);
@@ -52,15 +62,16 @@ namespace GroepswerkTaak1
 
 		private void StartTimer()
 		{
-			timer.Interval = TimeSpan.FromSeconds(1);
-			timer.Tick += (s, e) => txtDateAndTime.Text = DateTime.Now.ToString();
-			timer.Start();
+			_timer.Interval = TimeSpan.FromSeconds(1);
+			_timer.Tick += (s, e) => txtDateAndTime.Text = DateTime.Now.ToString();
+			_timer.Start();
 		}		
 
 		private void CreateMainUserControl()
 		{
 			uc_01_MijnPortal uc_01_MijnPortal = new uc_01_MijnPortal();
 			OpenUserControl(uc_01_MijnPortal);
+			_ucInstances["Mijn portal"] = uc_01_MijnPortal;
 		}
 
 		private void CreateStartTab()
@@ -104,6 +115,12 @@ namespace GroepswerkTaak1
 			string? key = ((clsCustomTabItem)tcMain.SelectedItem).Header.ToString();
 			if (key == null) return;
 
+			if (_ucInstances.TryGetValue(key, out UserControl? cachedUC))
+			{
+				OpenUserControl(cachedUC);
+				return;
+			}
+
 			_ucMapping.TryGetValue(key, out Type? typeUC);
 			if (typeUC == null) return;
 
@@ -111,6 +128,7 @@ namespace GroepswerkTaak1
 
 			if (uc is UserControl)
 			{
+				_ucInstances[key] = (UserControl)uc;
 				OpenUserControl((UserControl)uc);
 			}
 		}

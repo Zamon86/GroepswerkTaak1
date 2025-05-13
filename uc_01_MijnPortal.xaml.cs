@@ -26,19 +26,16 @@ namespace GroepswerkTaak1
 		{
 			InitializeComponent();
 			DataContext = this;
-			PhotoFlipper = new clsPhotoFlipper(PhotoFlipperImage, ImageHorizontalScaleTransform);
-
-			this.Unloaded += Uc_01_MijnPortal_Unloaded;
-
+			Task task = InitalizeAsync();
 		}
 
-		private void Uc_01_MijnPortal_Unloaded(object sender, RoutedEventArgs e)
+		public async Task InitalizeAsync()
 		{
-			if (PhotoFlipper != null)
-			{
-				PhotoFlipper.timer.Stop();
-				PhotoFlipper = null;
-			}
+			PhotoFlipper = new clsPhotoFlipper(PhotoFlipperImage, ImageHorizontalScaleTransform);
+			await PhotoFlipper.InitializeAsync();
+			LoadingAnimation.Visibility = Visibility.Collapsed;
+			PhotoFlipperImage.Visibility = Visibility.Visible;
+			
 		}
 
 		public void btnOpenTab_Click(object sender, RoutedEventArgs e)

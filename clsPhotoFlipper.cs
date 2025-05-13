@@ -1,4 +1,6 @@
-﻿using System;
+﻿using GroepswerkTaak1.Models;
+using GroepswerkTaak1.Repositories;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -15,12 +17,14 @@ namespace GroepswerkTaak1
 {
 	public class clsPhotoFlipper : INotifyPropertyChanged
 	{
-		public Image ImageObject { get; set; }
+		public Image ImageWPFObject { get; set; }
 		public ScaleTransform ImageObjectScaleTransform { get; set; }
 
 		public DispatcherTimer timer = new();
 
-		private int _currentIndex = 0;
+		clsImagePhotoFlipperRepo repo = new clsImagePhotoFlipperRepo();
+
+		private short _currentIndex = 0;
 
 		protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
 		{
@@ -29,19 +33,16 @@ namespace GroepswerkTaak1
 
 		public event PropertyChangedEventHandler? PropertyChanged = delegate { };
 
-		public ObservableCollection<byte[]> imageFilesBytes { get; set; }
-
-
-		private byte[] _ActiveImageBytes;
-		public byte[] ActiveImageBytes
+		private clsImagePhotoFlipper? _ActiveImage;
+		public clsImagePhotoFlipper? ActiveImage
 		{
-			get { return _ActiveImageBytes; }
+			get { return _ActiveImage; }
 			set
 			{
-				if (_ActiveImageBytes != value)
+				if (_ActiveImage != value)
 				{
-					_ActiveImageBytes = value;
-					OnPropertyChanged(nameof(ActiveImageBytes));
+					_ActiveImage = value;
+					OnPropertyChanged(nameof(ActiveImage));
 				}
 			}
 		}
@@ -49,9 +50,12 @@ namespace GroepswerkTaak1
 		public clsPhotoFlipper(Image image, ScaleTransform scaleTransform)
 		{
 			ImageObjectScaleTransform = scaleTransform;
-			ImageObject = image;
-			this.imageFilesBytes = App.StoreDB.GetBytesForImages();
-			_ActiveImageBytes = imageFilesBytes[0];
+			ImageWPFObject = image;					
+		}
+
+		public async Task InitializeAsync()
+		{
+			ActiveImage = await Task.Run(() => repo.GetFirst());
 			StartTimer();
 		}
 
@@ -69,8 +73,9 @@ namespace GroepswerkTaak1
 		private void ShowNextImage()
 		{
 			_currentIndex++;
+			var imageCollection = repo.GetAll();
 
-			if (_currentIndex >= imageFilesBytes.Count)
+			if (_currentIndex >= imageCollection.Count)
 			{
 				_currentIndex = 0;
 			}
@@ -81,7 +86,7 @@ namespace GroepswerkTaak1
 
 			flipOut.Completed += (s, e) =>
 			{
-				ActiveImageBytes = imageFilesBytes[_currentIndex];
+				ActiveImage = imageCollection[_currentIndex];
 				ImageObjectScaleTransform.BeginAnimation(ScaleTransform.ScaleXProperty, flipIn);
 			};
 			ImageObjectScaleTransform.BeginAnimation(ScaleTransform.ScaleXProperty, flipOut);

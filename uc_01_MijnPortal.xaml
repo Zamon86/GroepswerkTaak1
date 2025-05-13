@@ -9,14 +9,10 @@
 	d:DesignWidth="800"
 	Background="{StaticResource MainBackgroundColor}"
 	mc:Ignorable="d">
-	<UserControl.Resources>
-		<local:clsByteArrayToImageConverter x:Key="ByteArrayToImageConverter" />
-	</UserControl.Resources>
 	<ScrollViewer VerticalScrollBarVisibility="auto">
 		<ScrollViewer.Resources>
 			<Style BasedOn="{StaticResource CustomVerticalScrollBar}" TargetType="ScrollBar" />
 		</ScrollViewer.Resources>
-
 		<Grid>
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="*" />
@@ -35,11 +31,47 @@
 					HorizontalAlignment="Center"
 					VerticalAlignment="Center"
 					RenderTransformOrigin="0.5,0.5"
-					Source="{Binding PhotoFlipper.ActiveImageBytes, Converter={StaticResource ByteArrayToImageConverter}, NotifyOnSourceUpdated=True}">
+					Source="{Binding PhotoFlipper.ActiveImage.ImageBytes, NotifyOnSourceUpdated=True}"
+					Visibility="Collapsed">
 					<Image.RenderTransform>
 						<ScaleTransform x:Name="ImageHorizontalScaleTransform" ScaleX="1" />
 					</Image.RenderTransform>
+					<Image.Effect>
+						<DropShadowEffect
+							BlurRadius="10"
+							Direction="-45"
+							Opacity="0.5"
+							ShadowDepth="5"
+							Color="Black" />
+					</Image.Effect>
 				</Image>
+				<Ellipse
+					x:Name="LoadingAnimation"
+					Width="100"
+					Height="100"
+					RenderTransformOrigin="0.5 0.5"
+					Stroke="{StaticResource ThemeColor2}"
+					StrokeDashArray="47 16"
+					StrokeDashCap="Round"
+					StrokeThickness="5"
+					Visibility="Visible">
+					<Ellipse.RenderTransform>
+						<RotateTransform x:Name="Rotation" Angle="0" />
+					</Ellipse.RenderTransform>
+					<Ellipse.Triggers>
+						<EventTrigger RoutedEvent="Loaded">
+							<BeginStoryboard>
+								<Storyboard RepeatBehavior="Forever">
+									<DoubleAnimation
+										Storyboard.TargetName="Rotation"
+										Storyboard.TargetProperty="Angle"
+										From="0"
+										To="360" />
+								</Storyboard>
+							</BeginStoryboard>
+						</EventTrigger>
+					</Ellipse.Triggers>
+				</Ellipse>
 			</Grid>
 			<Grid
 				Grid.Row="1"

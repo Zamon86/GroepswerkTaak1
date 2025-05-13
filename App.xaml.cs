@@ -4,9 +4,7 @@ using System.Windows.Controls;
 namespace GroepswerkTaak1
 {
 	public partial class App : Application
-	{
-
-		public static clsStoreDB StoreDB { get; } = new clsStoreDB();
+	{		
 		private void btnCloseTab_Click(object sender, RoutedEventArgs e)
 		{
 			Button? button = sender as Button;
