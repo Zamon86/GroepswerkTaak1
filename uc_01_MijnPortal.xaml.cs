@@ -20,13 +20,21 @@ namespace GroepswerkTaak1
 
 	public partial class uc_01_MijnPortal : UserControl
 	{
-		public clsPhotoFlipper PhotoFlipper { get; set; }
+		public clsPhotoFlipper? PhotoFlipper { get; set; }
 		
 		public uc_01_MijnPortal()
 		{
 			InitializeComponent();
 			DataContext = this;
+			Task task = InitalizeAsync();
+		}
+
+		public async Task InitalizeAsync()
+		{
 			PhotoFlipper = new clsPhotoFlipper(PhotoFlipperImage, ImageHorizontalScaleTransform);
+			await PhotoFlipper.InitializeAsync();
+			LoadingAnimation.Visibility = Visibility.Collapsed;
+			PhotoFlipperImage.Visibility = Visibility.Visible;
 			
 		}
 
@@ -63,5 +71,7 @@ namespace GroepswerkTaak1
 			mainTabControl.Items.Add(newTab);
 			mainTabControl.SelectedItem = newTab;
 		}
+
+		
 	}
 }

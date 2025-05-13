@@ -149,7 +149,7 @@
 
 		</StackPanel>
 
-		<Grid Name="grdMain" />
+		<Grid x:Name="grdMain" />
 
 	</DockPanel>
 </Window>

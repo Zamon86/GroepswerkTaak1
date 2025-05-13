@@ -126,9 +126,6 @@
   <data name="S_Images" xml:space="preserve">
     <value>S_Images</value>
   </data>
-  <data name="S_ImageByID" xml:space="preserve">
-    <value>S_ImageByID</value>
-  </data>
   <data name="U_Image" xml:space="preserve">
     <value>U_Image</value>
   </data>

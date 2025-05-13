@@ -30,7 +30,6 @@ namespace GroepswerkTaak1
 		}
 
 
-
 		public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
 		{
 
@@ -49,11 +48,11 @@ namespace GroepswerkTaak1
 				image.BeginInit();
 				image.CacheOption = BitmapCacheOption.OnLoad;
 				image.StreamSource = ms;
+				//image.DecodePixelHeight = 350;
 				image.EndInit();
 			}
 			image.Freeze();
 			return image;
-
 		}
 	}
 }

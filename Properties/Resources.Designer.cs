@@ -79,15 +79,6 @@ namespace GroepswerkTaak1.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to S_ImageByID.
-        /// </summary>
-        internal static string S_ImageByID {
-            get {
-                return ResourceManager.GetString("S_ImageByID", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to S_Images.
         /// </summary>
         internal static string S_Images {
