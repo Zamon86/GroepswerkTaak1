@@ -37,8 +37,8 @@ namespace GroepswerkTaak1.DAL.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Encrypt=False;Integrated Security=SSPI;Password=Test1234;Persist Security Info=Fa" +
-            "lse;User ID=user10;Initial Catalog=db_user10;Data Source=tcp:194.78.40.4,11433")]
+        [global::System.Configuration.DefaultSettingValueAttribute("TrustServerCertificate=True;Persist Security Info=False;Initial Catalog=db_user10" +
+            ";User ID=user10;Password=Test1234;Data Source=tcp:194.78.40.4,11433")]
         public string strCNcloud {
             get {
                 return ((string)(this["strCNcloud"]));
