@@ -7,7 +7,7 @@ namespace GroepswerkTaak1.DAL
 {
 	public class clsDAL
 	{
-		public static string ConnectionString { get; } = Properties.Settings.Default.strCN;
+		public static string ConnectionString { get; } = Properties.Settings.Default.strCNcloud;
 			
 			
 		
