@@ -148,8 +148,118 @@
 				Grid.Row="0"
 				Grid.RowSpan="2"
 				Grid.Column="2">
-				<Expander HorizontalAlignment="Right" VerticalAlignment="Top" />
-			</Grid>
+                <StackPanel Grid.Column="1">
+                    <Expander Margin="0,5,0,5">
+                        <Expander.Header>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock
+                            Margin="0,0,5,0"
+                            HorizontalAlignment="Left"
+                            Text="Ongelezen mails" />
+                                <Image Width="10" Source="jpg.png" />
+                                <Button Width="15">
+                                </Button>
+                            </StackPanel>
+                        </Expander.Header>
+                    </Expander>
+                    <Expander Margin="0,0,0,5">
+                        <Expander.Header>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock
+                            Margin="0,0,5,0"
+                            HorizontalAlignment="Left"
+                            Text="De 10-laatste IC's" />
+                                <Image Width="10" Source="jpg.png" />
+                            </StackPanel>
+                        </Expander.Header>
+                    </Expander>
+                    <Expander Margin="0,0,0,5">
+                        <Expander.Header>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock
+                            Margin="0,0,5,0"
+                            HorizontalAlignment="Left"
+                            Text="Centrale overlegmomenten" />
+                                <Image Width="10" Source="jpg.png" />
+                            </StackPanel>
+                        </Expander.Header>
+                    </Expander>
+                    <Expander Margin="0,0,0,5">
+                        <Expander.Header>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock
+                            Margin="0,0,5,0"
+                            HorizontalAlignment="Left"
+                            Text="" />
+                                <Image Width="10" />
+                            </StackPanel>
+                        </Expander.Header>
+                    </Expander>
+                    <Expander Margin="0,0,0,5">
+                        <Expander.Header>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock
+                            Margin="0,0,5,0"
+                            HorizontalAlignment="Left"
+                            Text="Mijn snelkoppelingen" />
+                                <Image Width="10" Source="jpg.png" />
+                                <Image Width="10" Source="jpg.png" />
+                            </StackPanel>
+                        </Expander.Header>
+                    </Expander>
+                    <Expander Margin="0,0,0,5">
+                        <Expander.Header>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock
+                            Margin="0,0,5,0"
+                            HorizontalAlignment="Left"
+                            Text="" />
+                                <Image Width="10" />
+                            </StackPanel>
+                        </Expander.Header>
+                    </Expander>
+                    <Expander Margin="0,0,0,5">
+                        <Expander.Header>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock
+                            Margin="0,0,5,0"
+                            HorizontalAlignment="Left"
+                            Text="Mijn THAK favorieten" />
+                                <Image Width="10" Source="jpg.png" />
+                                <Image Width="10" Source="jpg.png" />
+                            </StackPanel>
+                        </Expander.Header>
+                    </Expander>
+                    <Expander Margin="0,0,0,5">
+                        <Expander.Header>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock
+                            Margin="0,0,5,0"
+                            HorizontalAlignment="Left"
+                            Text="" />
+                                <Image Width="10" />
+                            </StackPanel>
+                        </Expander.Header>
+                    </Expander>
+                    <Expander Margin="0,0,0,5">
+                        <Expander.Header>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock
+                            Margin="0,0,5,0"
+                            HorizontalAlignment="Left"
+                            Text="Mijn internet favorieten" />
+                                <Image Width="10" />
+                            </StackPanel>
+                        </Expander.Header>
+                        <ListBox>
+                            <ListBoxItem>Item 1</ListBoxItem>
+                            <ListBoxItem>Item 1</ListBoxItem>
+                            <ListBoxItem>Item 1</ListBoxItem>
+                            <ListBoxItem>Item 1</ListBoxItem>
+                        </ListBox>
+                    </Expander>
+                </StackPanel>
+            </Grid>
 			<!--  einde ruimte voor expander  -->
 			<!--  knoppen  -->
 			<ScrollViewer

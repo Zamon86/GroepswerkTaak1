@@ -6,9 +6,15 @@
       <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
 &lt;SerializableConnectionString xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&gt;
   &lt;ConnectionString&gt;Integrated Security=SSPI;Persist Security Info=False;Trust Server Certificate=True;Initial Catalog=db_user10;Data Source=C1429&lt;/ConnectionString&gt;
-  &lt;ProviderName /&gt;
 &lt;/SerializableConnectionString&gt;</DesignTimeValue>
       <Value Profile="(Default)">Integrated Security=SSPI;Persist Security Info=False;Trust Server Certificate=True;Initial Catalog=db_user10;Data Source=C1429</Value>
+    </Setting>
+    <Setting Name="strCNcloud" Type="(Connection string)" Scope="Application">
+      <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;SerializableConnectionString xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&gt;
+  &lt;ConnectionString&gt;Encrypt=False;Integrated Security=SSPI;Password=Test1234;Persist Security Info=False;User ID=user10;Initial Catalog=db_user10;Data Source=tcp:194.78.40.4,11433&lt;/ConnectionString&gt;
+&lt;/SerializableConnectionString&gt;</DesignTimeValue>
+      <Value Profile="(Default)">Encrypt=False;Integrated Security=SSPI;Password=Test1234;Persist Security Info=False;User ID=user10;Initial Catalog=db_user10;Data Source=tcp:194.78.40.4,11433</Value>
     </Setting>
   </Settings>
 </SettingsFile>
