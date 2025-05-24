@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GroepswerkTaak1.Models.Base
+namespace GroepswerkTaak1.Model.Base
 {
 	public class clsBaseModel
 	{		public string? ErrorMessage { get; set; }

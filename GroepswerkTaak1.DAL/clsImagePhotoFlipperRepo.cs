@@ -1,4 +1,4 @@
-﻿using GroepswerkTaak1.Models;
+﻿using GroepswerkTaak1.Model;
 using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
@@ -7,9 +7,10 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GroepswerkTaak1.DAL;
 
 
-namespace GroepswerkTaak1.Repositories
+namespace GroepswerkTaak1.DAL
 {
 	public class clsImagePhotoFlipperRepo
 	{
@@ -68,9 +69,9 @@ namespace GroepswerkTaak1.Repositories
 
 			isDataModified = true;
 
-			return Helpers.SqlReturnValueHandler.HandleSqlReturnValue(queryResult, entity);
+			return Helpers.clsSqlReturnValueHandler.HandleSqlReturnValue(queryResult, entity);
 		}
-
+	
 		public clsImagePhotoFlipper GetById(short id)
 		{
 			if (isDataModified)
@@ -100,7 +101,7 @@ namespace GroepswerkTaak1.Repositories
 
 			isDataModified = true;
 
-			return Helpers.SqlReturnValueHandler.HandleSqlReturnValue(queryResult, entity);
+			return Helpers.clsSqlReturnValueHandler.HandleSqlReturnValue(queryResult, entity);
 		}
 
 		public bool Update (clsImagePhotoFlipper entity)
@@ -113,7 +114,7 @@ namespace GroepswerkTaak1.Repositories
 
 			isDataModified = true;
 
-			return Helpers.SqlReturnValueHandler.HandleSqlReturnValue(queryResult, entity);
+			return Helpers.clsSqlReturnValueHandler.HandleSqlReturnValue(queryResult, entity);
 		}
 
 		private clsImagePhotoFlipper GetErrorImage()

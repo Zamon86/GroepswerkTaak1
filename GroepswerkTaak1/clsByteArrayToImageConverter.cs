@@ -15,40 +15,28 @@ namespace GroepswerkTaak1
 	public class clsByteArrayToImageConverter : IValueConverter
 	{
 
-		public object? Convert(object value, Type targetType, object parameter, CultureInfo culture)
+		public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
 		{
-
-			byte[]? bytes = value as byte[];
-
-			if (bytes == null)
-			{
-				return null;
-			}
-
-			return ByteArrayToImageSource(bytes);
-
+			return value is not byte[] bytes ? null : ByteArrayToImageSource(bytes);
 		}
 
 
-		public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+		public object ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
 		{
-
 			MessageBox.Show("Not implemented!");
 			throw new NotImplementedException();
-
 		}
 
 		private ImageSource ByteArrayToImageSource(byte[] bytes)
 		{
 
-			BitmapImage image = new BitmapImage();
+			var image = new BitmapImage();
 
-			using (MemoryStream ms = new MemoryStream(bytes))
+			using (var ms = new MemoryStream(bytes))
 			{
 				image.BeginInit();
 				image.CacheOption = BitmapCacheOption.OnLoad;
 				image.StreamSource = ms;
-				//image.DecodePixelHeight = 350;
 				image.EndInit();
 			}
 			image.Freeze();
