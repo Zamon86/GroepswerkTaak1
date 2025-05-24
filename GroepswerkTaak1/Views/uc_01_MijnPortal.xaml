@@ -30,9 +30,12 @@
 					Margin="30"
 					HorizontalAlignment="Center"
 					VerticalAlignment="Center"
+					Cursor="Hand"
+					MouseLeftButtonDown="PhotoFlipperImage_MouseLeftButtonDown"
 					RenderTransformOrigin="0.5,0.5"
 					Source="{Binding PhotoFlipper.ActiveImage.ImageBytes, NotifyOnSourceUpdated=True}"
 					Visibility="Collapsed">
+
 					<Image.RenderTransform>
 						<ScaleTransform x:Name="ImageHorizontalScaleTransform" ScaleX="1" />
 					</Image.RenderTransform>
@@ -139,7 +142,22 @@
 					Style="{StaticResource MijnPortalButtonStyle}"
 					Tag="Admin paneel" />
 			</Grid>
+			<!--  ruimte voor expander  -->
+			<Grid
+				x:Name="grdExpanders"
+				Grid.Row="0"
+				Grid.RowSpan="2"
+				Grid.Column="2">
+				<Expander HorizontalAlignment="Right" VerticalAlignment="Top" />
+			</Grid>
+			<!--  einde ruimte voor expander  -->
+			<!--  knoppen  -->
+			<ScrollViewer
+				x:Name="scvKnoppen"
+				Grid.Row="0"
+				Grid.RowSpan="2"
+				Grid.Column="0" />
+			<!--  einde knoppen  -->
 		</Grid>
 	</ScrollViewer>
-
 </UserControl>

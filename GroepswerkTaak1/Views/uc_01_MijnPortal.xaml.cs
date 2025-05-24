@@ -72,6 +72,9 @@ namespace GroepswerkTaak1
 			mainTabControl.SelectedItem = newTab;
 		}
 
-		
-	}
+		private void PhotoFlipperImage_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+		{
+
+        }
+    }
 }

@@ -32,25 +32,25 @@
             Margin="0,0,0,20"
             Padding="20"
             Background="Beige"
-            FontFamily="segoe ui light"
+            FontFamily="Segoe ui light"
             FontSize="48"
             Foreground="SteelBlue"
-            Text="beheer knoppen" />
+            Text="Beheer knoppen" />
         <Label
             Name="lblKeuze"
             Grid.Row="1"
             Grid.Column="1"
             Margin="5"
             Content="Keuze"
-            FontFamily="segoe ui light"
+            FontFamily="Segoe ui light"
             Foreground="SteelBlue" />
         <Label
             Name="lblKnopNaam"
             Grid.Row="2"
             Grid.Column="1"
             Margin="5"
-            Content="Naam : "
-            FontFamily="segoe ui light"
+            Content="Naam: "
+            FontFamily="Segoe ui light"
             Foreground="SteelBlue" />
         <Label
             Name="lblBeschrijving"
@@ -58,7 +58,7 @@
             Grid.Column="1"
             Margin="5"
             Content="Beschrijving"
-            FontFamily="segoe ui light"
+            FontFamily="Segoe ui light"
             Foreground="SteelBlue" />
         <Label
             Name="lblPositie"

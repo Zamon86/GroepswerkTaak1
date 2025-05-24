@@ -1,5 +1,4 @@
-﻿using GroepswerkTaak1.Models;
-using GroepswerkTaak1.Repositories;
+﻿
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -12,6 +11,8 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
+using GroepswerkTaak1.DAL;
+using GroepswerkTaak1.Model;
 
 namespace GroepswerkTaak1
 {

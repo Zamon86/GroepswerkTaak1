@@ -1,13 +1,13 @@
-﻿using GroepswerkTaak1.Models.Base;
+﻿using GroepswerkTaak1.Model.Base;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GroepswerkTaak1.Helpers
+namespace GroepswerkTaak1.DAL.Helpers
 {
-	public static class SqlReturnValueHandler
+	public static class clsSqlReturnValueHandler
 	{
 		public static bool HandleSqlReturnValue(int returnValue, clsBaseModel entity)
 		{
