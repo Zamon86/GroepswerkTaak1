@@ -142,6 +142,7 @@
 					Style="{StaticResource MijnPortalButtonStyle}"
 					Tag="Admin paneel" />
 			</Grid>
+			<!--  ruimte voor expander  -->
 			<Grid
 				x:Name="grdExpanders"
 				Grid.Row="0"
@@ -149,6 +150,14 @@
 				Grid.Column="2">
 				<Expander HorizontalAlignment="Right" VerticalAlignment="Top" />
 			</Grid>
+			<!--  einde ruimte voor expander  -->
+			<!--  knoppen  -->
+			<ScrollViewer
+				x:Name="scvKnoppen"
+				Grid.Row="0"
+				Grid.RowSpan="2"
+				Grid.Column="0" />
+			<!--  einde knoppen  -->
 		</Grid>
 	</ScrollViewer>
 </UserControl>
