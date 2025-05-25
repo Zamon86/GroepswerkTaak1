@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace GroepswerkTaak1.Model.Base
+﻿namespace GroepswerkTaak1.Model.Base
 {
 	public class clsBaseModel
+	
+	//We kunnen error handling implementeren, maar het is niet verplicht.
 	{		public string? ErrorMessage { get; set; }
 
 		private List<string> ErrorList = new List<string>();

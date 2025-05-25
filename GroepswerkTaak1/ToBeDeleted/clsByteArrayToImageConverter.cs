@@ -1,17 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
+﻿using System.Globalization;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
-namespace GroepswerkTaak1
+namespace GroepswerkTaak1.ToBeDeleted
 {
+	
+	//Te verwijderen, zo'n converter is niet nodig want Image can gewoon byte array lezen
 	public class clsByteArrayToImageConverter : IValueConverter
 	{
 

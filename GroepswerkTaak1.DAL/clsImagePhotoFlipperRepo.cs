@@ -1,127 +1,120 @@
 ﻿using GroepswerkTaak1.Model;
 using Microsoft.Data.SqlClient;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using GroepswerkTaak1.DAL;
 
 
 namespace GroepswerkTaak1.DAL
 {
 	public class clsImagePhotoFlipperRepo
 	{
-		private ObservableCollection<clsImagePhotoFlipper> images = new ObservableCollection<clsImagePhotoFlipper>();
-		bool isDataModified = true;
-		int queryResult = 0;
+		private readonly ObservableCollection<clsImagePhotoFlipper> _images = [];
+		private bool _isDataModified = true;
+		private int _queryResult = 0;
 
 		private void UpdateCollection()
 		{
+			_images.Clear();
 			
-			using (SqlDataReader? reader = clsDAL.GetData(Properties.Resources.S_Images))
+			using (var reader = clsDAL.GetData(Properties.Resources.S_Images))
 			{
-				if (reader != null) 
+				while (reader.Read())
 				{
-					while (reader.Read())
+					var image = new clsImagePhotoFlipper()
 					{
-						clsImagePhotoFlipper image = new clsImagePhotoFlipper()
-						{
-							ImagePhotoFlipperID = (short)reader["ID"],
-							ImageBytes = (byte[])reader["Image"],
-							ControlField = reader["ControlFIeld"]
-						};
-						images.Add(image);
-					}
-				}				
+						ImagePhotoFlipperID = (short)reader["ID"],
+						ImageBytes = (byte[])reader["Image"],
+						ControlField = reader["ControlFIeld"]
+					};
+					
+					_images.Add(image);
+				}
 			}
 
-			if (images.Count == 0)
+			if (_images.Count == 0)
 			{
-				clsImagePhotoFlipper image = GetErrorImage();
-				images.Add(image);
+				var imagePhotoFlipper = GetErrorImage();
+				_images.Add(imagePhotoFlipper);
 			}
-			isDataModified = false;
+			_isDataModified = false;
 		}
 		public ObservableCollection<clsImagePhotoFlipper> GetAll()
 		{
-			if (isDataModified)
+			if (_isDataModified)
 			{
 				UpdateCollection();
-				isDataModified= false;
+				_isDataModified= false;
 			}
 			
-			if (images.Count == 0)
+			if (_images.Count == 0)
 			{
-				images.Add(GetErrorImage());
+				_images.Add(GetErrorImage());
 			}
-			return images;
+			return _images;
 		}
 
 		public bool Delete(clsImagePhotoFlipper entity)
 		{
-			clsDAL.ExecuteDataTable(Properties.Resources.S_Images, ref queryResult, clsDAL.Parameter("ID", entity.ImagePhotoFlipperID),
+			clsDAL.ExecuteDataTable(Properties.Resources.S_Images, ref _queryResult, clsDAL.Parameter("ID", entity.ImagePhotoFlipperID),
 				clsDAL.Parameter("User", Environment.UserName),
 				clsDAL.Parameter("ControlField", entity.ControlField),
 				clsDAL.Parameter("@ReturnValue", 0));
 
-			isDataModified = true;
+			_isDataModified = true;
 
-			return Helpers.clsSqlReturnValueHandler.HandleSqlReturnValue(queryResult, entity);
+			return Helpers.clsSqlReturnValueHandler.HandleSqlReturnValue(_queryResult, entity);
 		}
 	
 		public clsImagePhotoFlipper GetById(short id)
 		{
-			if (isDataModified)
-			{
-				UpdateCollection();
-				isDataModified = false;
-			}
-			return images.Where(e => e.ImagePhotoFlipperID == id).FirstOrDefault() ?? GetErrorImage();
+			if (!_isDataModified) 
+				return _images.FirstOrDefault(e => e.ImagePhotoFlipperID == id) ?? GetErrorImage();
+			
+			UpdateCollection();
+			_isDataModified = false;
+			
+			return _images.FirstOrDefault(e => e.ImagePhotoFlipperID == id) ?? GetErrorImage();
 		}
 
 		public clsImagePhotoFlipper GetFirst()
 		{
-			if (isDataModified)
-			{
-				UpdateCollection();
-				isDataModified = false;
-			}
+			if (!_isDataModified)
+				return _images.FirstOrDefault() ?? GetErrorImage();
+			
+			UpdateCollection();
+			_isDataModified = false;
 
-			return images.FirstOrDefault() ?? GetErrorImage();
+			return _images.FirstOrDefault() ?? GetErrorImage();
 		}
 
 		public bool Insert(clsImagePhotoFlipper entity)
 		{
-			clsDAL.ExecuteDataTable(Properties.Resources.I_Image, ref queryResult, clsDAL.Parameter("Image", entity.ImageBytes),
+			clsDAL.ExecuteDataTable(Properties.Resources.I_Image, ref _queryResult, clsDAL.Parameter("Image", entity.ImageBytes),
 				clsDAL.Parameter("User", Environment.UserName),
 				clsDAL.Parameter("@ReturnValue", 0));
 
-			isDataModified = true;
+			_isDataModified = true;
 
-			return Helpers.clsSqlReturnValueHandler.HandleSqlReturnValue(queryResult, entity);
+			return Helpers.clsSqlReturnValueHandler.HandleSqlReturnValue(_queryResult, entity);
 		}
 
 		public bool Update (clsImagePhotoFlipper entity)
 		{
-			clsDAL.ExecuteDataTable(Properties.Resources.U_Image, ref queryResult, clsDAL.Parameter("ID", entity.ImagePhotoFlipperID),
+			clsDAL.ExecuteDataTable(Properties.Resources.U_Image, ref _queryResult, clsDAL.Parameter("ID", entity.ImagePhotoFlipperID),
 				clsDAL.Parameter("Image", entity.ImageBytes),
 				clsDAL.Parameter("User", Environment.UserName),
 				clsDAL.Parameter("ControlField", entity.ControlField),
 				clsDAL.Parameter("@ReturnValue", 0));
 
-			isDataModified = true;
+			_isDataModified = true;
 
-			return Helpers.clsSqlReturnValueHandler.HandleSqlReturnValue(queryResult, entity);
+			return Helpers.clsSqlReturnValueHandler.HandleSqlReturnValue(_queryResult, entity);
 		}
 
 		private clsImagePhotoFlipper GetErrorImage()
 		{
-			string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Images", "something-went-wrong.jpg");
+			var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Images", "something-went-wrong.jpg");
 
-			clsImagePhotoFlipper image = new clsImagePhotoFlipper()
+			var image = new clsImagePhotoFlipper()
 			{
 				ImagePhotoFlipperID = 0,
 				ImageBytes = File.ReadAllBytes(path),
