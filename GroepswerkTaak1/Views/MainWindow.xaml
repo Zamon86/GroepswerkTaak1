@@ -2,6 +2,7 @@
 	x:Class="GroepswerkTaak1.MainWindow"
 	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:customControls="clr-namespace:GroepswerkTaak1.CustomControls;assembly=GroepswerkTaak1.CustomControls"
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	xmlns:local="clr-namespace:GroepswerkTaak1"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -92,7 +93,8 @@
 				Padding="0"
 				BorderThickness="0"
 				SelectionChanged="tcMain_SelectionChanged"
-				TabStripPlacement="Top" />
+				TabStripPlacement="Top">
+			</TabControl>
 			<Button
 				Name="btnAfmelden"
 				Grid.Column="1"

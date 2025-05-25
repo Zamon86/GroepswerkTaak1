@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GroepswerkTaak1.Helpers
 {
-	public static class FileLoader
+	public static class clsFileToByteArrayLoader
 	{
 		public static byte[] ReadFileAsBytes(string path)
 		{

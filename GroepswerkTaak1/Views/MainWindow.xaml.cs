@@ -4,7 +4,10 @@ using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Threading;
+using GroepswerkTaak1.CustomControls;
+using GroepswerkTaak1.Views;
 
 namespace GroepswerkTaak1
 {
@@ -76,13 +79,15 @@ namespace GroepswerkTaak1
 
 		private void CreateStartTab()
 		{
-			clsCustomTabItem StartTab = new clsCustomTabItem(false)
+			var startTab = new clsCustomTabItem()
 			{
-				Style = (Style)FindResource("TabItemStyle"),
-				Header = "Mijn portal"
+				Background = (Brush)Application.Current.Resources["ThemeColor1"],
+				BackgroundHighlighted = (Brush)Application.Current.Resources["ThemeColor2"],
+				Header = "Mijn portal",
+				IsCloseable = false
 			};
 
-			tcMain.Items.Add(StartTab);
+			tcMain.Items.Add(startTab);
 			tcMain.SelectedIndex = 0;
 		}
 		#endregion
@@ -99,7 +104,7 @@ namespace GroepswerkTaak1
 
 		private void btnAfmelden_Click(object sender, RoutedEventArgs e)
 		{
-			MessageBox.Show("Not implemeted");
+			MessageBox.Show("Not implemented");
 		}
 
 		private void btnDannyTest_Click(object sender, RoutedEventArgs e)

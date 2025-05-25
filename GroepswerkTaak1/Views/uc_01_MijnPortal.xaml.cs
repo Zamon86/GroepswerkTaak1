@@ -1,41 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.DirectoryServices.ActiveDirectory;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using GroepswerkTaak1.CustomControls;
 
-namespace GroepswerkTaak1
+namespace GroepswerkTaak1.Views
 {
 
 	public partial class uc_01_MijnPortal : UserControl
 	{
 		public clsPhotoFlipper? PhotoFlipper { get; set; }
-		
+
 		public uc_01_MijnPortal()
 		{
 			InitializeComponent();
 			DataContext = this;
-			Task task = InitalizeAsync();
+			Task task = InitializeAsync();
 		}
 
-		public async Task InitalizeAsync()
+		public async Task InitializeAsync()
 		{
 			PhotoFlipper = new clsPhotoFlipper(PhotoFlipperImage, ImageHorizontalScaleTransform);
 			await PhotoFlipper.InitializeAsync();
 			LoadingAnimation.Visibility = Visibility.Collapsed;
 			PhotoFlipperImage.Visibility = Visibility.Visible;
-			
+
 		}
 
 		public void btnOpenTab_Click(object sender, RoutedEventArgs e)
@@ -64,7 +53,8 @@ namespace GroepswerkTaak1
 
 			clsCustomTabItem newTab = new clsCustomTabItem
 			{
-				Style = (Style)FindResource("TabItemStyle"),
+				Background = (Brush)Application.Current.Resources["ThemeColor1"],
+				BackgroundHighlighted = (Brush)Application.Current.Resources["ThemeColor2"],
 				Header = tabName
 			};
 
@@ -75,6 +65,6 @@ namespace GroepswerkTaak1
 		private void PhotoFlipperImage_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
 		{
 
-        }
-    }
+		}
+	}
 }
