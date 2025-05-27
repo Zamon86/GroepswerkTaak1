@@ -18,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\GroepswerkTaak1.CustomControls\GroepswerkTaak1.CustomControls.csproj" />
     <ProjectReference Include="..\GroepswerkTaak1.DAL\GroepswerkTaak1.DAL.csproj" />
     <ProjectReference Include="..\GroepswerkTaak1.Model\GroepswerkTaak1.Model.csproj" />
   </ItemGroup>
@@ -32,11 +33,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Properties\Settings.Designer.cs">
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-      <DependentUpon>Settings.settings</DependentUpon>
-      <AutoGen>True</AutoGen>
-    </Compile>
     <Compile Update="uc_01_MijnPortal - Copy %283%29.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -48,10 +44,6 @@
   <ItemGroup>
     <None Update="Images\something-went-wrong.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Properties\Settings.settings">
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-      <Generator>SettingsSingleFileGenerator</Generator>
     </None>
   </ItemGroup>
 

@@ -1,56 +1,48 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.DirectoryServices.ActiveDirectory;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using GroepswerkTaak1.CustomControls;
 
-namespace GroepswerkTaak1
+namespace GroepswerkTaak1.Views
 {
 
 	public partial class uc_01_MijnPortal : UserControl
 	{
 		public clsPhotoFlipper? PhotoFlipper { get; set; }
-		
+
 		public uc_01_MijnPortal()
 		{
 			InitializeComponent();
 			DataContext = this;
-			Task task = InitalizeAsync();
+			Task task = InitializeAsync();
 		}
 
-		public async Task InitalizeAsync()
+
+		//Deze asynchrone methode initialiseert het clsPhotoFlipper-object,
+		//Na voltooiing wordt de laadanimatie verborgen en de afbeelding weergegeven.
+		public async Task InitializeAsync()
 		{
 			PhotoFlipper = new clsPhotoFlipper(PhotoFlipperImage, ImageHorizontalScaleTransform);
 			await PhotoFlipper.InitializeAsync();
 			LoadingAnimation.Visibility = Visibility.Collapsed;
 			PhotoFlipperImage.Visibility = Visibility.Visible;
-			
+
 		}
 
-		public void btnOpenTab_Click(object sender, RoutedEventArgs e)
+		
+		//Deze code definieert een methode die de Click-gebeurtenis afhandelt
+		//voor 6 knoppen in de UI. Het checkt of bepaalde tab al bestaat.
+		//Als het bestaat, wordt deze geopend. Anders gaat het nieuwe tab maken.
+			public void btnOpenTab_Click(object sender, RoutedEventArgs e)
 		{
-			var mainWindow = Window.GetWindow(this) as MainWindow;
+			if (Window.GetWindow(this) is not MainWindow mainWindow) return;
 
-			if (mainWindow == null) return;
+			var mainTabControl = mainWindow.tcMain;
 
-			TabControl mainTabControl = mainWindow.tcMain;
+			if (sender is not Button button) return;
 
-
-			var button = sender as Button;
-			if (button == null) return;
-
-			string? tabName = button.Tag.ToString();
+			var tabName = button.Tag.ToString();
 			if (tabName == null) return;
 
 			var existingTab = mainTabControl.Items.OfType<TabItem>()
@@ -61,10 +53,12 @@ namespace GroepswerkTaak1
 				mainTabControl.SelectedItem = existingTab;
 				return;
 			}
-
-			clsCustomTabItem newTab = new clsCustomTabItem
+			
+			var newTab = new clsCustomTabItem
 			{
-				Style = (Style)FindResource("TabItemStyle"),
+				
+				Background = Application.Current.Resources["ThemeColor1"] as Brush,
+				BackgroundHighlighted = Application.Current.Resources["ThemeColor2"] as Brush,
 				Header = tabName
 			};
 
@@ -74,7 +68,7 @@ namespace GroepswerkTaak1
 
 		private void PhotoFlipperImage_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
 		{
-
-        }
-    }
+			// te implementeren -> opslaan als een bestand en openen met default app
+		}
+	}
 }

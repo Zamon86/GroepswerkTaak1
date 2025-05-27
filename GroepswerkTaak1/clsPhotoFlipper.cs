@@ -1,12 +1,5 @@
-﻿
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Linq;
+﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
@@ -18,12 +11,12 @@ namespace GroepswerkTaak1
 {
 	public class clsPhotoFlipper : INotifyPropertyChanged
 	{
-		public Image ImageWPFObject { get; set; }
+		public Image ImageWpfObject { get; set; }
 		public ScaleTransform ImageObjectScaleTransform { get; set; }
 
-		public DispatcherTimer timer = new();
+		public DispatcherTimer Timer = new();
 
-		clsImagePhotoFlipperRepo repo = new clsImagePhotoFlipperRepo();
+		private readonly clsImagePhotoFlipperRepo _repo = new clsImagePhotoFlipperRepo();
 
 		private short _currentIndex = 0;
 
@@ -34,47 +27,45 @@ namespace GroepswerkTaak1
 
 		public event PropertyChangedEventHandler? PropertyChanged = delegate { };
 
-		private clsImagePhotoFlipper? _ActiveImage;
+		private clsImagePhotoFlipper? _activeImage;
 		public clsImagePhotoFlipper? ActiveImage
 		{
-			get { return _ActiveImage; }
+			get => _activeImage;
 			set
 			{
-				if (_ActiveImage != value)
-				{
-					_ActiveImage = value;
-					OnPropertyChanged(nameof(ActiveImage));
-				}
+				if (_activeImage == value) return;
+				_activeImage = value;
+				OnPropertyChanged(nameof(ActiveImage));
 			}
 		}
 
 		public clsPhotoFlipper(Image image, ScaleTransform scaleTransform)
 		{
 			ImageObjectScaleTransform = scaleTransform;
-			ImageWPFObject = image;					
+			ImageWpfObject = image;					
 		}
 
 		public async Task InitializeAsync()
 		{
-			ActiveImage = await Task.Run(() => repo.GetFirst());
+			ActiveImage = await Task.Run(() => _repo.GetFirst());
 			StartTimer();
 		}
 
 		public void StartTimer()
 		{
 
-			timer = new DispatcherTimer
+			Timer = new DispatcherTimer
 			{
 				Interval = TimeSpan.FromSeconds(5)
 			};
-			timer.Tick += (s, e) => ShowNextImage();
-			timer.Start();
+			Timer.Tick += (s, e) => ShowNextImage();
+			Timer.Start();
 		}
 
 		private void ShowNextImage()
 		{
 			_currentIndex++;
-			var imageCollection = repo.GetAll();
+			var imageCollection = _repo.GetAll();
 
 			if (_currentIndex >= imageCollection.Count)
 			{

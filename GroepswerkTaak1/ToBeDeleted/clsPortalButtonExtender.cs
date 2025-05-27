@@ -1,19 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Media;
-using System.Windows;
-using System.Windows.Shapes;
-using System.Reflection.Metadata;
+﻿using System.Windows;
 
-namespace GroepswerkTaak1
+namespace GroepswerkTaak1.ToBeDeleted
 {
 	//Ik heb deze class gemaakt om de mogelijkheden van de buttons uit te breiden. Ik gebruik het in de style van de buttons:
 	//Content="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(local:clsPortalButtonExtender.MainIcon)}"
 	//En dankzij dit kan ik dan eenvoudig het juiste pictogram toewijzen: local:clsPortalButtonExtender.MainIcon="{StaticResource Engineer}"
 
+	// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	// Te verwijderen, ik heb custom control gemaakt in apart project
 		public static class clsPortalButtonExtender
 	{
 
