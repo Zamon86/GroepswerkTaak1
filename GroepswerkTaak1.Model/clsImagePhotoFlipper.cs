@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using GroepswerkTaak1.Model.Base;
+﻿using GroepswerkTaak1.Model.Base;
 
 
 namespace GroepswerkTaak1.Model

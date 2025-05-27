@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.IO;
 
 namespace GroepswerkTaak1.Helpers
 {
-	public static class FileLoader
+	public static class clsFileToByteArrayLoader
 	{
 		public static byte[] ReadFileAsBytes(string path)
 		{

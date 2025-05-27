@@ -1,30 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 
-namespace GroepswerkTaak1
+namespace GroepswerkTaak1.ToBeDeleted
 {
-    // Ik heb deze klasse gemaakt om een extra eigenschap te hebben voor de TabItem
-    public class clsCustomTabItem : TabItem
+
+	// Te verwijderen, ik heb een uitgebreide versie geschreven in het CustomControls project
+	// Ik heb deze klasse gemaakt om een extra eigenschap te hebben voor de TabItem
+	public class clsCustomTabItem : TabItem
     {
         // De notatie hieronder registreert eigenschap zodat het kan worden gebruikt in xaml
         public static readonly DependencyProperty IsClosableProperty = DependencyProperty.Register(
-            "IsClosable", typeof(bool), typeof(clsCustomTabItem), new PropertyMetadata(true));
+            nameof(IsClosable), typeof(bool), typeof(clsCustomTabItem), new PropertyMetadata(true));
         public bool IsClosable 
         {
-            get
-            {
-                return (bool)GetValue(IsClosableProperty);
-            }
-            
-            private set
-            { 
-                SetValue(IsClosableProperty, value);
-            }
+            get => (bool)GetValue(IsClosableProperty);
+
+            set => SetValue(IsClosableProperty, value);
         }
         
 
