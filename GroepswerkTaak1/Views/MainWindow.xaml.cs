@@ -3,9 +3,8 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Threading;
 using GroepswerkTaak1.CustomControls;
-using GroepswerkTaak1.Views;
 
-namespace GroepswerkTaak1
+namespace GroepswerkTaak1.Views
 {
 
 	public partial class MainWindow : Window
@@ -13,11 +12,14 @@ namespace GroepswerkTaak1
 		#region VARIABLES		
 		private string strAuthorisatie = string.Empty;  // deze string zal de authorisatie dragen
 
-		private DispatcherTimer _timer = new();
+		
+		private readonly DispatcherTimer _timer = new();
 
+		// Het wordt gebruikt voor het opslaan van instanties van UserControls.
 		private readonly Dictionary<string, UserControl> _ucInstances = new();
 
-		private Dictionary<string, Type> _ucMapping = new()
+		// Het is een mapping van UserControls, waarbij namen (strings) worden gekoppeld aan hun bijbehorende typen.
+		private readonly Dictionary<string, Type> _ucMapping = new()
 				{
 						{"Mijn portal", typeof(uc_01_MijnPortal) },
 						{"Smoelenboek", typeof(uc_02_Smoelenboek) },
@@ -41,7 +43,7 @@ namespace GroepswerkTaak1
 		}
 
 		#region METHODS
-		private void OpenUserControl(UserControl myUS)
+		private void OpenUserControl(UserControl myUserControl)
 		{			
 			if (grdMain.Children.Count > 1)
 			{				
@@ -49,36 +51,41 @@ namespace GroepswerkTaak1
 				
 			}
 
-			if (myUS.Parent is Panel panel)
+			if (myUserControl.Parent is Panel panel)
 			{
-				panel.Children.Remove(myUS);
+				panel.Children.Remove(myUserControl);
 			}
 
-			Grid.SetColumn(myUS, 1);
-			Grid.SetRow(myUS, 0);
-			grdMain.Children.Add(myUS);
+			Grid.SetColumn(myUserControl, 1);
+			Grid.SetRow(myUserControl, 0);
+			grdMain.Children.Add(myUserControl);
 		}
 
+		// Deze methode configureert een timer met een interval van één seconde,
+		// waarbij bij elke tick de huidige datum en tijd wordt bijgewerkt in statusbalk.
 		private void StartTimer()
 		{
 			_timer.Interval = TimeSpan.FromSeconds(1);
 			_timer.Tick += (s, e) => txtDateAndTime.Text = DateTime.Now.ToString();
 			_timer.Start();
-		}		
+		}
 
+		// Deze methode maakt instantie van onze portal
 		private void CreateMainUserControl()
 		{
-			uc_01_MijnPortal uc_01_MijnPortal = new uc_01_MijnPortal();
+			var uc_01_MijnPortal = new uc_01_MijnPortal();
 			OpenUserControl(uc_01_MijnPortal);
 			_ucInstances["Mijn portal"] = uc_01_MijnPortal;
 		}
 
+
+		// Deze methode maakt eerste tab
 		private void CreateStartTab()
 		{
 			var startTab = new clsCustomTabItem()
 			{
-				Background = (Brush)Application.Current.Resources["ThemeColor1"],
-				BackgroundHighlighted = (Brush)Application.Current.Resources["ThemeColor2"],
+				Background = Application.Current.Resources["ThemeColor1"] as Brush,
+				BackgroundHighlighted = Application.Current.Resources["ThemeColor2"] as Brush,
 				Header = "Mijn portal",
 				IsCloseable = false
 			};
@@ -91,6 +98,7 @@ namespace GroepswerkTaak1
 		#region EVENTS
 
 
+		
 		private void Window_Loaded(object sender, RoutedEventArgs e)
 		{			
 			StartTimer();
@@ -105,33 +113,43 @@ namespace GroepswerkTaak1
 
 		private void btnDannyTest_Click(object sender, RoutedEventArgs e)
 		{
-			uc_Users _uc_Users = new uc_Users();
+			var _uc_Users = new uc_Users();
 			OpenUserControl(_uc_Users);
+			
 		}
 
+
+		//Deze code behandelt de gebeurtenis SelectionChanged van een TabControl.
+		//Wanneer een tabblad wordt geselecteerd,
+		//controleert de methode of er een bijbehorende UserControl-instantie
+		//in de _ucInstances-cache aanwezig is.
+		//Als dat zo is, wordt deze geopend. Als de instantie niet in de cache staat,
+		//wordt het type van de UserControl opgehaald uit _ucMapping. Vervolgens wordt een nieuwe instantie
+		//van dat type gemaakt en toegevoegd aan de cache.
+		//Daarna wordt de nieuwe UserControl geopend.
 		private void tcMain_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
 			if (tcMain.SelectedIndex == -1) return;
 
-			string? key = ((clsCustomTabItem)tcMain.SelectedItem).Header.ToString();
+			var key = ((clsCustomTabItem)tcMain.SelectedItem).Header.ToString();
 			if (key == null) return;
 
-			if (_ucInstances.TryGetValue(key, out UserControl? cachedUC))
+			if (_ucInstances.TryGetValue(key, out var cashedUserControl))
 			{
-				OpenUserControl(cachedUC);
+				OpenUserControl(cashedUserControl);
 				return;
 			}
 
-			_ucMapping.TryGetValue(key, out Type? typeUC);
-			if (typeUC == null) return;
+			_ucMapping.TryGetValue(key, out var typeUserControl);
+			if (typeUserControl == null) return;
 
-			var uc = Activator.CreateInstance(typeUC);
+			var uc = Activator.CreateInstance(typeUserControl);
 
-			if (uc is UserControl)
-			{
-				_ucInstances[key] = (UserControl)uc;
-				OpenUserControl((UserControl)uc);
-			}
+			if (uc is not UserControl control) return;
+			
+			_ucInstances[key] = control;
+			
+			OpenUserControl(control);
 		}
 
 		#endregion

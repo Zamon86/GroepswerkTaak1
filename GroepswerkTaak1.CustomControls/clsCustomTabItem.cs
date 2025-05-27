@@ -19,7 +19,7 @@ public class clsCustomTabItem : TabItem
 	public static readonly DependencyProperty BackgroundHighlightedProperty = DependencyProperty.Register(
 		nameof(BackgroundHighlighted), typeof(Brush), typeof(clsCustomTabItem), new PropertyMetadata(Brushes.Cyan));
 
-	public Brush BackgroundHighlighted
+	public Brush? BackgroundHighlighted
 	{
 		get => (Brush)GetValue(BackgroundHighlightedProperty);
 		set => SetValue(BackgroundHighlightedProperty, value);

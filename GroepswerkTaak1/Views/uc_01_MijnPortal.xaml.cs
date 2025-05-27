@@ -18,6 +18,9 @@ namespace GroepswerkTaak1.Views
 			Task task = InitializeAsync();
 		}
 
+
+		//Deze asynchrone methode initialiseert het clsPhotoFlipper-object,
+		//Na voltooiing wordt de laadanimatie verborgen en de afbeelding weergegeven.
 		public async Task InitializeAsync()
 		{
 			PhotoFlipper = new clsPhotoFlipper(PhotoFlipperImage, ImageHorizontalScaleTransform);
@@ -27,19 +30,19 @@ namespace GroepswerkTaak1.Views
 
 		}
 
-		public void btnOpenTab_Click(object sender, RoutedEventArgs e)
+		
+		//Deze code definieert een methode die de Click-gebeurtenis afhandelt
+		//voor 6 knoppen in de UI. Het checkt of bepaalde tab al bestaat.
+		//Als het bestaat, wordt deze geopend. Anders gaat het nieuwe tab maken.
+			public void btnOpenTab_Click(object sender, RoutedEventArgs e)
 		{
-			var mainWindow = Window.GetWindow(this) as MainWindow;
+			if (Window.GetWindow(this) is not MainWindow mainWindow) return;
 
-			if (mainWindow == null) return;
+			var mainTabControl = mainWindow.tcMain;
 
-			TabControl mainTabControl = mainWindow.tcMain;
+			if (sender is not Button button) return;
 
-
-			var button = sender as Button;
-			if (button == null) return;
-
-			string? tabName = button.Tag.ToString();
+			var tabName = button.Tag.ToString();
 			if (tabName == null) return;
 
 			var existingTab = mainTabControl.Items.OfType<TabItem>()
@@ -50,11 +53,12 @@ namespace GroepswerkTaak1.Views
 				mainTabControl.SelectedItem = existingTab;
 				return;
 			}
-
-			clsCustomTabItem newTab = new clsCustomTabItem
+			
+			var newTab = new clsCustomTabItem
 			{
-				Background = (Brush)Application.Current.Resources["ThemeColor1"],
-				BackgroundHighlighted = (Brush)Application.Current.Resources["ThemeColor2"],
+				
+				Background = Application.Current.Resources["ThemeColor1"] as Brush,
+				BackgroundHighlighted = Application.Current.Resources["ThemeColor2"] as Brush,
 				Header = tabName
 			};
 
@@ -64,7 +68,7 @@ namespace GroepswerkTaak1.Views
 
 		private void PhotoFlipperImage_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
 		{
-
+			// te implementeren -> opslaan als een bestand en openen met default app
 		}
 	}
 }

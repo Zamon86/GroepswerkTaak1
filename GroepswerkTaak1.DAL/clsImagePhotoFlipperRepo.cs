@@ -1,5 +1,4 @@
 ﻿using GroepswerkTaak1.Model;
-using Microsoft.Data.SqlClient;
 using System.Collections.ObjectModel;
 
 
