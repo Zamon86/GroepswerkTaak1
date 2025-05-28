@@ -117,12 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="S_Users" xml:space="preserve">
-    <value>S_Users</value>
-  </data>
-  <data name="S_Rollen" xml:space="preserve">
-    <value>S_Rollen</value>
-  </data>
   <data name="S_Images" xml:space="preserve">
     <value>S_Images</value>
   </data>
@@ -134,5 +128,44 @@
   </data>
   <data name="D_Image" xml:space="preserve">
     <value>D_Image</value>
+  </data>
+  <data name="D_Knop" xml:space="preserve">
+    <value>D_Knop</value>
+  </data>
+  <data name="D_Rol" xml:space="preserve">
+    <value>D_Rol</value>
+  </data>
+  <data name="D_User" xml:space="preserve">
+    <value>D_User</value>
+  </data>
+  <data name="I_Knop" xml:space="preserve">
+    <value>I_Knop</value>
+  </data>
+  <data name="I_Logging" xml:space="preserve">
+    <value>I_Logging</value>
+  </data>
+  <data name="I_Rol" xml:space="preserve">
+    <value>I_Rol</value>
+  </data>
+  <data name="I_User" xml:space="preserve">
+    <value>I_User</value>
+  </data>
+  <data name="S_Knop" xml:space="preserve">
+    <value>S_Knop</value>
+  </data>
+  <data name="S_Rol" xml:space="preserve">
+    <value>S_Rol</value>
+  </data>
+  <data name="S_User" xml:space="preserve">
+    <value>S_Users</value>
+  </data>
+  <data name="U_Knop" xml:space="preserve">
+    <value>U_Knop</value>
+  </data>
+  <data name="U_Rol" xml:space="preserve">
+    <value>U_Rol</value>
+  </data>
+  <data name="U_User" xml:space="preserve">
+    <value>U_User</value>
   </data>
 </root>

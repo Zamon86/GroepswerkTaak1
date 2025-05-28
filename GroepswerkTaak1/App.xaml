@@ -5,7 +5,8 @@
     xmlns:helpers="clr-namespace:GroepswerkTaak1.Helpers"
     xmlns:local="clr-namespace:GroepswerkTaak1"
     StartupUri="Views/MainWindow.xaml">
-    <!--  StartupUri="winLogon.xaml"  -->
+    <!--  StartupUri="Views/winLogon.xaml"    StartupUri="Views/MainWindow.xaml"  -->
+
 
     <Application.Resources>
 
