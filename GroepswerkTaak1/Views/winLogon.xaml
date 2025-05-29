@@ -1,91 +1,91 @@
 ﻿<Window
-    x:Class="GroepswerkTaak1.winLogon"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="clr-namespace:GroepswerkTaak1.Views"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Title="login scherm v1.0"
-    Width="400"
-    Height="275"
-    WindowStyle="None"
-    mc:Ignorable="d">
-    <Grid Background="Beige">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="auto" />
-            <ColumnDefinition Width="auto" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="4*" />
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        <TextBlock
-            Grid.Row="0"
-            Grid.Column="0"
-            Grid.ColumnSpan="4"
-            Width="400"
-            Margin="0,5,5,5"
-            Padding="5"
-            VerticalAlignment="Top"
-            FontSize="32"
-            Foreground="SteelBlue"
-            Text="Aanmelden"
-            TextAlignment="Center" />
-        <TextBox
-            Name="txtLoginNaam"
-            Grid.Row="2"
-            Grid.Column="3"
-            Width="165"
-            Height="30"
-            Margin="5"
-            VerticalAlignment="Center"
-            FontSize="16"
-            Foreground="SteelBlue" />
-        <PasswordBox
-            Name="txtLoginPwd"
-            Grid.Row="3"
-            Grid.Column="3"
-            Width="165"
-            Height="30"
-            Margin="5"
-            VerticalAlignment="Center"
-            FontSize="16"
-            Foreground="SteelBlue" />
-        <StackPanel
-            Grid.Row="4"
-            Grid.Column="3"
-            HorizontalAlignment="Center"
-            Orientation="Horizontal">
-            <Button
-                Name="btnLogin"
-                Width="80"
-                Margin="5"
-                Click="btnLogin_Click"
-                Content="Login"
-                FontSize="16"
-                Foreground="SteelBlue" />
-            <Button
-                Name="btnAnnuleer"
-                Width="80"
-                Margin="5"
-                Click="btnAnnuleer_Click"
-                Content="Annuleer"
-                FontSize="16"
-                Foreground="SteelBlue" />
-        </StackPanel>
-        <Image
-            Grid.Row="1"
-            Grid.RowSpan="4"
-            Grid.Column="0"
-            Width="160"
-            Source="/images/logo-guy.webp" />
+	x:Class="GroepswerkTaak1.winLogon"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:local="clr-namespace:GroepswerkTaak1.Views"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	Title="login scherm v1.0"
+	Width="400"
+	Height="275"
+	WindowStyle="None"
+	mc:Ignorable="d">
+	<Grid Background="Beige">
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*" />
+			<ColumnDefinition Width="auto" />
+			<ColumnDefinition Width="auto" />
+			<ColumnDefinition Width="*" />
+		</Grid.ColumnDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="4*" />
+			<RowDefinition Height="auto" />
+			<RowDefinition Height="auto" />
+			<RowDefinition Height="auto" />
+			<RowDefinition Height="auto" />
+			<RowDefinition Height="*" />
+		</Grid.RowDefinitions>
+		<TextBlock
+			Grid.Row="0"
+			Grid.Column="0"
+			Grid.ColumnSpan="4"
+			Width="400"
+			Margin="0,5,5,5"
+			Padding="5"
+			VerticalAlignment="Top"
+			FontSize="32"
+			Foreground="SteelBlue"
+			Text="Aanmelden"
+			TextAlignment="Center" />
+		<TextBox
+			Name="txtLoginNaam"
+			Grid.Row="2"
+			Grid.Column="3"
+			Width="165"
+			Height="30"
+			Margin="5"
+			VerticalAlignment="Center"
+			FontSize="16"
+			Foreground="SteelBlue" />
+		<PasswordBox
+			Name="txtLoginPwd"
+			Grid.Row="3"
+			Grid.Column="3"
+			Width="165"
+			Height="30"
+			Margin="5"
+			VerticalAlignment="Center"
+			FontSize="16"
+			Foreground="SteelBlue" />
+		<StackPanel
+			Grid.Row="4"
+			Grid.Column="3"
+			HorizontalAlignment="Center"
+			Orientation="Horizontal">
+			<Button
+				Name="btnLogin"
+				Width="80"
+				Margin="5"
+				Click="btnLogin_Click"
+				Content="Login"
+				FontSize="16"
+				Foreground="SteelBlue" />
+			<Button
+				Name="btnAnnuleer"
+				Width="80"
+				Margin="5"
+				Click="btnAnnuleer_Click"
+				Content="Annuleer"
+				FontSize="16"
+				Foreground="SteelBlue" />
+		</StackPanel>
+		<Image
+			Grid.Row="1"
+			Grid.RowSpan="4"
+			Grid.Column="0"
+			Width="160"
+			Source="/images/logo-guy.webp" />
 
 
-    </Grid>
+	</Grid>
 </Window>

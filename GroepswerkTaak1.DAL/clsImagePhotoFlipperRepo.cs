@@ -1,5 +1,6 @@
 ﻿using GroepswerkTaak1.Model;
 using System.Collections.ObjectModel;
+using System.Runtime.ConstrainedExecution;
 
 
 namespace GroepswerkTaak1.DAL
@@ -9,6 +10,7 @@ namespace GroepswerkTaak1.DAL
 		private readonly ObservableCollection<clsImagePhotoFlipper> _images = [];
 		private bool _isDataModified = true;
 		private int _queryResult = 0;
+		
 
 		private void UpdateCollection()
 		{

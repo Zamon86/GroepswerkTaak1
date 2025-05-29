@@ -15,7 +15,6 @@
 	<Window.Resources>
 		<Style BasedOn="{StaticResource CustomMenuItemStyle}" TargetType="MenuItem" />
 	</Window.Resources>
-
 	<DockPanel LastChildFill="True">
 		<Menu
 			Name="mnuMainMenu"
@@ -93,8 +92,7 @@
 				Padding="0"
 				BorderThickness="0"
 				SelectionChanged="tcMain_SelectionChanged"
-				TabStripPlacement="Top">
-			</TabControl>
+				TabStripPlacement="Top" />
 			<Button
 				Name="btnAfmelden"
 				Grid.Column="1"
