@@ -168,4 +168,7 @@
   <data name="U_User" xml:space="preserve">
     <value>U_User</value>
   </data>
+  <data name="S_ImagesPaged" xml:space="preserve">
+    <value>S_ImagesPaged</value>
+  </data>
 </root>

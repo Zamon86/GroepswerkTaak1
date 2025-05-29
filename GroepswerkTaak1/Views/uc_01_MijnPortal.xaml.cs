@@ -1,8 +1,11 @@
-﻿using System.Windows;
+﻿using System.IO;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using GroepswerkTaak1.CustomControls;
+using GroepswerkTaak1.Helpers;
 
 namespace GroepswerkTaak1.Views
 {
@@ -10,9 +13,11 @@ namespace GroepswerkTaak1.Views
 	public partial class uc_01_MijnPortal : UserControl
 	{
 		public clsPhotoFlipper? PhotoFlipper { get; set; }
+		public int UserRoleId { get; }
 
-		public uc_01_MijnPortal()
+		public uc_01_MijnPortal(int userRoleId)
 		{
+			UserRoleId = userRoleId;
 			InitializeComponent();
 			DataContext = this;
 			Task task = InitializeAsync();
@@ -68,7 +73,11 @@ namespace GroepswerkTaak1.Views
 
 		private void PhotoFlipperImage_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
 		{
-			// te implementeren -> opslaan als een bestand en openen met default app
+			if (sender is not Image image) return;
+			var source = PhotoFlipper?.ActiveImage?.ImageBytes;
+			if (source == null) return;
+			
+			clsFileHelper.OpenBytesAsTempFile(source);
 		}
 	}
 }

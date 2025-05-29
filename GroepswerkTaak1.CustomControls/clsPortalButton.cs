@@ -16,9 +16,6 @@ namespace GroepswerkTaak1.CustomControls
 		public static readonly DependencyProperty SmallIconProperty =
 			DependencyProperty.Register(nameof(SmallIcon), typeof(UIElement), typeof(clsPortalButton), new PropertyMetadata(null));
 
-		public static readonly DependencyProperty IsAdminButtonProperty =
-			DependencyProperty.Register(nameof(IsAdminButton), typeof(bool), typeof(clsPortalButton), new PropertyMetadata(false));
-
 		public UIElement MainIcon
 		{
 			get => (UIElement)GetValue(MainIconProperty);
@@ -29,12 +26,6 @@ namespace GroepswerkTaak1.CustomControls
 		{
 			get => (UIElement)GetValue(SmallIconProperty);
 			set => SetValue(SmallIconProperty, value);
-		}
-
-		public bool IsAdminButton
-		{
-			get => (bool)GetValue(IsAdminButtonProperty);
-			set => SetValue(IsAdminButtonProperty, value);
 		}
 	}
 }
