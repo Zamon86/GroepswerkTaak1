@@ -70,11 +70,74 @@ namespace GroepswerkTaak1.DAL.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to D_Knop.
+        /// </summary>
+        internal static string D_Knop {
+            get {
+                return ResourceManager.GetString("D_Knop", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to D_Rol.
+        /// </summary>
+        internal static string D_Rol {
+            get {
+                return ResourceManager.GetString("D_Rol", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to D_User.
+        /// </summary>
+        internal static string D_User {
+            get {
+                return ResourceManager.GetString("D_User", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to I_Image.
         /// </summary>
         internal static string I_Image {
             get {
                 return ResourceManager.GetString("I_Image", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to I_Knop.
+        /// </summary>
+        internal static string I_Knop {
+            get {
+                return ResourceManager.GetString("I_Knop", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to I_Logging.
+        /// </summary>
+        internal static string I_Logging {
+            get {
+                return ResourceManager.GetString("I_Logging", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to I_Rol.
+        /// </summary>
+        internal static string I_Rol {
+            get {
+                return ResourceManager.GetString("I_Rol", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to I_User.
+        /// </summary>
+        internal static string I_User {
+            get {
+                return ResourceManager.GetString("I_User", resourceCulture);
             }
         }
         
@@ -88,20 +151,29 @@ namespace GroepswerkTaak1.DAL.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to S_Rollen.
+        ///   Looks up a localized string similar to S_Knop.
         /// </summary>
-        internal static string S_Rollen {
+        internal static string S_Knop {
             get {
-                return ResourceManager.GetString("S_Rollen", resourceCulture);
+                return ResourceManager.GetString("S_Knop", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to S_Rol.
+        /// </summary>
+        internal static string S_Rol {
+            get {
+                return ResourceManager.GetString("S_Rol", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to S_Users.
         /// </summary>
-        internal static string S_Users {
+        internal static string S_User {
             get {
-                return ResourceManager.GetString("S_Users", resourceCulture);
+                return ResourceManager.GetString("S_User", resourceCulture);
             }
         }
         
@@ -111,6 +183,33 @@ namespace GroepswerkTaak1.DAL.Properties {
         internal static string U_Image {
             get {
                 return ResourceManager.GetString("U_Image", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to U_Knop.
+        /// </summary>
+        internal static string U_Knop {
+            get {
+                return ResourceManager.GetString("U_Knop", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to U_Rol.
+        /// </summary>
+        internal static string U_Rol {
+            get {
+                return ResourceManager.GetString("U_Rol", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to U_User.
+        /// </summary>
+        internal static string U_User {
+            get {
+                return ResourceManager.GetString("U_User", resourceCulture);
             }
         }
     }

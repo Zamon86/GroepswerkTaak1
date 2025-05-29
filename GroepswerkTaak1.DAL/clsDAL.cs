@@ -96,7 +96,72 @@ namespace GroepswerkTaak1.DAL
 			return dataTable;
 		}
 
-		public static SqlDataReader GetData(string storeProcedureName)
+        public static (DataTable dt, bool ok, string boodschap) ExecuteDataTable(string storeProcedureName, params SqlParameter[] arrrParam)
+        {
+            DataTable DT;
+            bool IHaveAReturnValue = false;
+            int nr = 1;
+            using (SqlConnection CN = new SqlConnection(ConnectionString))
+            {
+                using (SqlCommand CMD = new SqlCommand(storeProcedureName, CN))
+                {
+                    CMD.CommandType = CommandType.StoredProcedure;
+                    using (SqlDataAdapter DA = new SqlDataAdapter(CMD))
+                    {
+                        if (arrrParam != null)
+                        {
+                            foreach (SqlParameter param in arrrParam)
+                            {
+                                CMD.Parameters.Add(param);
+                                if (param.ParameterName == "@ReturnValue")
+                                {
+                                    IHaveAReturnValue = true;
+                                    CMD.Parameters["@ReturnValue"].Direction = ParameterDirection.Output;
+                                }
+                            }
+                        }
+                        try
+                        {
+                            DT = new DataTable();
+                            DA.Fill(DT);
+                            if (IHaveAReturnValue)
+                            {
+                                nr = (int)CMD.Parameters["@ReturnValue"].Value;
+                                switch (nr)
+                                {
+                                    case 1:
+                                        return (DT, true, "De bewerking is gelukt.");
+                                    case 0:
+                                        return (null, false, "Concurrency Probleem.");
+                                    default:
+                                        return (null, false, "Er is een onbekende fout opgetreden.");
+                                }
+                            }
+                            return (DT, true, "De bewerking is gelukt.");
+                        }
+                        catch (SqlException ex)
+                        {
+                            return (null, false, "Er is een onbekende fout opgetreden.");
+                            throw new Exception(ex.Message);
+                        }
+                        catch (Exception ex)
+                        {
+                            return (null, false, "Er is een onbekende fout opgetreden.");
+                            throw new Exception(ex.Message);
+                        }
+                        finally
+                        {
+                            if (CN.State == ConnectionState.Open)
+                            {
+                                CN.Close();
+                            }
+                        }
+                    }
+                }
+            }
+
+        }
+        public static SqlDataReader GetData(string storeProcedureName)
 		{			
 			var cn = new SqlConnection(ConnectionString);
 			var cmd = new SqlCommand();
