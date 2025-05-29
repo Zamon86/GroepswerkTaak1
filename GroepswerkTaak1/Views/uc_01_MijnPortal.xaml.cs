@@ -3,6 +3,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using GroepswerkTaak1.CustomControls;
+using GroepswerkTaak1.ViewModels;
 
 namespace GroepswerkTaak1.Views
 {
@@ -10,12 +11,14 @@ namespace GroepswerkTaak1.Views
 	public partial class uc_01_MijnPortal : UserControl
 	{
 		public clsPhotoFlipper? PhotoFlipper { get; set; }
-
+		clsKnoppenVM KnoppenVM;
 		public uc_01_MijnPortal()
 		{
 			InitializeComponent();
 			DataContext = this;
-			Task task = InitializeAsync();
+			KnoppenVM = new clsKnoppenVM();
+            ButtonItemsControl.ItemsSource = KnoppenVM.repo.GetAll();
+            Task task = InitializeAsync();
 		}
 
 

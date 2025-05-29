@@ -3,6 +3,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:helpers="clr-namespace:GroepswerkTaak1.Helpers"
+    xmlns:c="clr-namespace:GroepswerkTaak1.ToBeDeleted"
     xmlns:local="clr-namespace:GroepswerkTaak1"
     StartupUri="Views/MainWindow.xaml">
     <!--  StartupUri="Views/winLogon.xaml"    StartupUri="Views/MainWindow.xaml"  -->
@@ -52,6 +53,36 @@
                                 <Setter Property="Background" Value="{StaticResource ThemeColor2}" />
                             </Trigger>
                         </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <!--StyleKnoppengrid-->
+        <Style x:Key="GridButton" TargetType="Button">
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush StartPoint="0,0"
+                                         EndPoint="0,1">
+                        <GradientStop Color="#60c8ca"
+                                      Offset="0.0" />
+                        <GradientStop Color="#0aabad"
+                                      Offset="1.0" />
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                CornerRadius="5"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}">
+
+                            <!-- This enables binding to Button.Content or ContentTemplate -->
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"
+                                              RecognizesAccessKey="True" />
+                        </Border>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
@@ -351,5 +382,7 @@
                 </Path>
             </Canvas>
         </Canvas>
+
+        <c:clsByteArrayToImageConverter x:Key="ByteArrayToImageConverter" />
     </Application.Resources>
 </Application>

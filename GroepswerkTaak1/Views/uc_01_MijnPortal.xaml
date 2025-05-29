@@ -266,11 +266,45 @@
 			</Grid>
 			<!--  einde ruimte voor expander  -->
 			<!--  knoppen  -->
-			<ScrollViewer
+            <ScrollViewer Grid.Row="0"
+                          Grid.RowSpan="2"
+                          Grid.Column="0"
+                          FlowDirection="RightToLeft"
+                          >
+            <ItemsControl x:Name="ButtonItemsControl">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <UniformGrid Columns="3"
+                                     Margin="10"
+                                     HorizontalAlignment="Stretch"
+                                     VerticalAlignment="Top" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Button Width="90"
+                                Height="90"
+                                Margin="10"
+                                    Style="{StaticResource GridButton}">
+                            
+                            <StackPanel>
+                                <Image Source="{Binding KnopImage, Converter={StaticResource ByteArrayToImageConverter}}"
+                                       Width="50"
+                                       Height="50" />
+                                    <TextBlock Text="{Binding KnopTekst}"
+                                           HorizontalAlignment="Center"
+                                           Foreground="White" />
+                            </StackPanel>
+                        </Button>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+            </ScrollViewer>
+            <!--<ScrollViewer
 				x:Name="scvKnoppen"
 				Grid.Row="0"
 				Grid.RowSpan="2"
-				Grid.Column="0" />
+				Grid.Column="0" />-->
 			<!--  einde knoppen  -->
 		</Grid>
 	</ScrollViewer>
