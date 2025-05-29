@@ -50,8 +50,8 @@ namespace GroepswerkTaak1.DAL
                     KnopId = (int)MijnDataReader["ID"],
                     KnopNaam = MijnDataReader["Naam"].ToString(),
                     KnopTekst = MijnDataReader["Tekst"].ToString(),
-                    KnopPositie = (int) MijnDataReader["Positie"],
-                    KnopImage = (byte[])MijnDataReader["Image"],
+                    KnopPositie = (short) MijnDataReader["Positie"],
+                    // KnopImage = (byte[])MijnDataReader["knopImage"],
                     ControlField = MijnDataReader["ControlField"]
                 };
                 MijnCollectie.Add(Knop);
@@ -74,7 +74,7 @@ namespace GroepswerkTaak1.DAL
                     clsDAL.Parameter("Naam", entity.KnopNaam),
                     clsDAL.Parameter("Tekst", entity.KnopTekst),
                     clsDAL.Parameter("Positie", entity.KnopPositie),
-                    clsDAL.Parameter("Image", entity.KnopImage),
+                    clsDAL.Parameter("knopImage", entity.KnopImage),
                     clsDAL.Parameter("@ReturnValue", 0));
             if (!OK)
             {
@@ -90,7 +90,7 @@ namespace GroepswerkTaak1.DAL
                     clsDAL.Parameter("Naam", entity.KnopNaam),
                     clsDAL.Parameter("Tekst", entity.KnopTekst),
                     clsDAL.Parameter("Positie", entity.KnopPositie),
-                    clsDAL.Parameter("Image", entity.KnopImage),
+                    clsDAL.Parameter("knopImage", entity.KnopImage),
                     clsDAL.Parameter("ControlField", entity.ControlField),
                     clsDAL.Parameter("@ReturnValue", 0));
             if (!OK)

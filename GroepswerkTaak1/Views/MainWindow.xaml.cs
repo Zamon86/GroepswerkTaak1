@@ -113,10 +113,13 @@ namespace GroepswerkTaak1.Views
 
 		private void btnDannyTest_Click(object sender, RoutedEventArgs e)
 		{
-			var _uc_Users = new uc_Users();
-			OpenUserControl(_uc_Users);
-			
-		}
+			// var _uc_Users = new uc_Users();
+			// OpenUserControl(_uc_Users);
+			var _uc_Knoppen = new uc_Knoppen();
+            OpenUserControl(_uc_Knoppen);
+
+
+        }
 
 
 		//Deze code behandelt de gebeurtenis SelectionChanged van een TabControl.

@@ -1,6 +1,7 @@
 ﻿using Common;
 using GroepswerkTaak1.DAL;
 using GroepswerkTaak1.Model;
+using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -36,6 +37,14 @@ namespace GroepswerkTaak1.ViewModels
                     _MijnSelectedItem = value;
                     OnPropertyChanged();
                 }
+        }
+
+
+        public clsKnoppenVM()
+        {
+            LoadData();
+            // als test forceer ik het een item
+            _MijnSelectedItem = Repo.GetByID(10); // haal een item op met ID 1
         }
 
         private void LoadData()
