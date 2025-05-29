@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GroepswerkTaak1.DAL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +9,10 @@ namespace GroepswerkTaak1.ViewModels
 {
     internal class clsKnoppenVM
     {
+        public clsKnoppenRepo repo = new clsKnoppenRepo();
+        public clsKnoppenVM()
+        {
+           
+        }
     }
 }
