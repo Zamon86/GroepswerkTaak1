@@ -5,7 +5,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using GroepswerkTaak1.CustomControls;
+using GroepswerkTaak1.ViewModels;
 using GroepswerkTaak1.Helpers;
+
 
 namespace GroepswerkTaak1.Views
 {
@@ -20,7 +22,9 @@ namespace GroepswerkTaak1.Views
 			UserRoleId = userRoleId;
 			InitializeComponent();
 			DataContext = this;
-			Task task = InitializeAsync();
+			KnoppenVM = new clsKnoppenVM();
+            ButtonItemsControl.ItemsSource = KnoppenVM.repo.GetAll();
+            Task task = InitializeAsync();
 		}
 
 
