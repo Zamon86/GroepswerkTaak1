@@ -2,6 +2,7 @@
 	x:Class="GroepswerkTaak1.Views.uc_01_MijnPortal"
 	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:converters="clr-namespace:GroepswerkTaak1.Converters"
 	xmlns:customControls="clr-namespace:GroepswerkTaak1.CustomControls;assembly=GroepswerkTaak1.CustomControls"
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	xmlns:helpers="clr-namespace:GroepswerkTaak1.Helpers"
@@ -11,9 +12,13 @@
 	d:DesignWidth="800"
 	Background="{StaticResource MainBackgroundColor}"
 	mc:Ignorable="d">
+	<UserControl.Resources>
+		<converters:clsRoleToVisibilityConverter x:Key="RoleToVisibilityConverter" />
+	</UserControl.Resources>
 	<ScrollViewer VerticalScrollBarVisibility="auto">
 		<ScrollViewer.Resources>
 			<Style BasedOn="{StaticResource CustomVerticalScrollBar}" TargetType="ScrollBar" />
+
 		</ScrollViewer.Resources>
 		<Grid>
 			<Grid.ColumnDefinitions>
@@ -139,12 +144,13 @@
 					Tag="Helpdesk keuken" />
 
 				<customControls:clsPortalButton
+					x:Name="AdminButton"
 					Grid.Row="1"
 					Grid.Column="1"
 					Click="btnOpenTab_Click"
-					IsAdminButton="True"
 					MainIcon="{StaticResource AdminButtonImage}"
-					Tag="Admin paneel" />
+					Tag="Admin paneel"
+					Visibility="{Binding UserRoleId, Converter={StaticResource RoleToVisibilityConverter}}" />
 
 			</Grid>
 			<!--  ruimte voor expander  -->
@@ -270,7 +276,8 @@
 				x:Name="scvKnoppen"
 				Grid.Row="0"
 				Grid.RowSpan="2"
-				Grid.Column="0" />
+				Grid.Column="0"
+				VerticalScrollBarVisibility="auto" />
 			<!--  einde knoppen  -->
 		</Grid>
 	</ScrollViewer>
