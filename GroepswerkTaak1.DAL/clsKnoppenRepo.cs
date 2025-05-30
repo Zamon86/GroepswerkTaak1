@@ -51,7 +51,7 @@ namespace GroepswerkTaak1.DAL
                     KnopNaam = MijnDataReader["Naam"].ToString(),
                     KnopTekst = MijnDataReader["Tekst"].ToString(),
                     KnopPositie = (short) MijnDataReader["Positie"],
-                    // KnopImage = (byte[])MijnDataReader["knopImage"],
+                    KnopImage = (byte[])MijnDataReader["knopImage"],
                     ControlField = MijnDataReader["ControlField"]
                 };
                 MijnCollectie.Add(Knop);

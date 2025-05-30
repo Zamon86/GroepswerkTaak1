@@ -251,15 +251,15 @@
 								<TextBlock
 									Margin="0,0,5,0"
 									HorizontalAlignment="Left"
-									Text="Mijn internet favorieten" />
+									Text="Beheer vensters" />
 								<Image Width="10" />
 							</StackPanel>
 						</Expander.Header>
 						<ListBox>
-							<ListBoxItem>Item 1</ListBoxItem>
-							<ListBoxItem>Item 1</ListBoxItem>
-							<ListBoxItem>Item 1</ListBoxItem>
-							<ListBoxItem>Item 1</ListBoxItem>
+                            <ListBoxItem Content="Beheer Knoppen" Tag="1" Selected="ListBox_Selected"/>
+                            <ListBoxItem Content="Beheer Rollen" Tag="2" Selected="ListBox_Selected"/>
+                            <ListBoxItem Content="Beheer Users" Tag="3" Selected="ListBox_Selected"/>
+                            <ListBoxItem Content="Beheer Logging" Tag="9" Selected="ListBox_Selected"/>
 						</ListBox>
 					</Expander>
 				</StackPanel>
