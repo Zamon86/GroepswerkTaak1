@@ -178,7 +178,7 @@ namespace GroepswerkTaak1.DAL.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to S_Users.
+        ///   Looks up a localized string similar to S_User.
         /// </summary>
         internal static string S_User {
             get {
