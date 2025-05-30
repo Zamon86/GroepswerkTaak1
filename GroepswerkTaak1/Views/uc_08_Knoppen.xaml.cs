@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 
+
 namespace GroepswerkTaak1
 {
     /// <summary>
@@ -40,7 +41,8 @@ namespace GroepswerkTaak1
 
         private void btnSluiten_Click(object sender, RoutedEventArgs e)
         {
-
+            // this.Visibility = Visibility.Collapsed;
+           // this.Parent.Controls.Remove(this);
         }
 
         private void btnLaadIcon_Click(object sender, RoutedEventArgs e)

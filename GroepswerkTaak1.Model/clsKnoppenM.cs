@@ -4,10 +4,11 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Common;
 
 namespace GroepswerkTaak1.Model
 {
-    public class clsKnoppenM : INotifyPropertyChanged
+    public class clsKnoppenM : clsCommonModelPropertiesBase   // later toevoegen , IDataErrorInfo
     {  /// <summary>
        /// TODO  Error Handling
        /// </summary>

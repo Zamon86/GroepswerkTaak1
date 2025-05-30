@@ -127,14 +127,7 @@ namespace GroepswerkTaak1.Views
 			MessageBox.Show("Not implemented");
 		}
 
-		private void btnDannyTest_Click(object sender, RoutedEventArgs e)
-		{
-			var _uc_Users = new uc_Users();
-			OpenUserControl(_uc_Users);
-			
-		}
-
-
+		
 		//Deze code behandelt de gebeurtenis SelectionChanged van een TabControl.
 		//Wanneer een tabblad wordt geselecteerd,
 		//controleert de methode of er een bijbehorende UserControl-instantie
