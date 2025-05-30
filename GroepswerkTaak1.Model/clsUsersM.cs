@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Common;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace GroepswerkTaak1.Model
 {
-    public class clsUsersM : INotifyPropertyChanged
+    public class clsUsersM : clsCommonModelPropertiesBase  // later toevoegen , IDataErrorInfo
     {
         public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -21,7 +22,8 @@ namespace GroepswerkTaak1.Model
         {
         }
 
-        public clsUsersM(int MyID, string MyLoginNaam, string MyNaam, string MyVoorNaam, string MyEmail, string MyTelefoon, int MyRolId, bool MyUserActief)
+        public clsUsersM(int MyID, string MyLoginNaam, string MyNaam, string MyVoorNaam, 
+                                   string MyEmail, string MyTelefoon, int MyRolId, bool MyUserActief , string MyWachtwoord)
         {
             _ID = MyID;
             _LoginNaam = MyLoginNaam;
@@ -31,6 +33,7 @@ namespace GroepswerkTaak1.Model
             _Telefoon = MyTelefoon;
             _RolId = MyRolId;
             _UserActief = MyUserActief;
+            _Wachtwoord = MyWachtwoord;
         }
 
         private int _ID;
@@ -51,6 +54,13 @@ namespace GroepswerkTaak1.Model
             set { _LoginNaam = value; OnPropertyChanged(nameof(LoginNaam)); }
         }
 
+        private string _Wachtwoord;
+
+        public string Wachtwoord
+        {
+            get { return _Wachtwoord; }
+            set { _Wachtwoord = value; }
+        }
 
 
         private string _Naam;
