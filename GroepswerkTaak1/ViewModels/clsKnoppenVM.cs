@@ -1,4 +1,4 @@
-﻿using Common;
+using Common;
 using GroepswerkTaak1.DAL;
 using GroepswerkTaak1.Model;
 using Microsoft.Data.SqlClient;
@@ -13,6 +13,7 @@ namespace GroepswerkTaak1.ViewModels
 {
     public class clsKnoppenVM : clsCommonModelPropertiesBase
     {
+
         private bool _NewStatus = false;
         clsKnoppenRepo Repo = new clsKnoppenRepo();
 
@@ -40,12 +41,12 @@ namespace GroepswerkTaak1.ViewModels
         }
 
 
-        public clsKnoppenVM()
-        {
-            LoadData();
-            // als test forceer ik het een item
-            _MijnSelectedItem = Repo.GetByID(10); // haal een item op met ID 1
-        }
+//         public clsKnoppenVM()
+//         {
+//             LoadData();
+//             // als test forceer ik het een item
+//             _MijnSelectedItem = Repo.GetByID(10); // haal een item op met ID 1
+//         }
 
         private void LoadData()
         {
@@ -89,6 +90,13 @@ namespace GroepswerkTaak1.ViewModels
                     }
                 }
             }
+        }
+
+
+        public clsKnoppenRepo repo = new clsKnoppenRepo();
+        public clsKnoppenVM()
+        {
+           
         }
 
     }

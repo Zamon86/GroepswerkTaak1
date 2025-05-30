@@ -1,15 +1,30 @@
-﻿using System.Windows;
+﻿using System.Security.Cryptography;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Threading;
 using GroepswerkTaak1.CustomControls;
+using GroepswerkTaak1.Model;
 
 namespace GroepswerkTaak1.Views
 {
 
 	public partial class MainWindow : Window
 	{
-		#region VARIABLES		
+		#region VARIABLES
+
+		private clsUsersM _currentUser = new()
+		{ 
+			ID = 0,
+			LoginNaam = "DummyAdmin",
+			Naam = "Admin",
+			VoorNaam = "Dummy",
+			Email = "DummyAdmin@gmail.com",
+			Telefoon = "070072772",
+			RolId = 1,
+			UserActief = true
+		};
+
 		private string strAuthorisatie = string.Empty;  // deze string zal de authorisatie dragen
 
 		
@@ -73,7 +88,7 @@ namespace GroepswerkTaak1.Views
 		// Deze methode maakt instantie van onze portal
 		private void CreateMainUserControl()
 		{
-			var uc_01_MijnPortal = new uc_01_MijnPortal();
+			var uc_01_MijnPortal = new uc_01_MijnPortal(_currentUser.RolId);
 			OpenUserControl(uc_01_MijnPortal);
 			_ucInstances["Mijn portal"] = uc_01_MijnPortal;
 		}
@@ -100,10 +115,11 @@ namespace GroepswerkTaak1.Views
 
 		
 		private void Window_Loaded(object sender, RoutedEventArgs e)
-		{			
+		{
 			StartTimer();
-			CreateStartTab();
 			CreateMainUserControl();
+			CreateStartTab();
+			
 		}
 
 		private void btnAfmelden_Click(object sender, RoutedEventArgs e)

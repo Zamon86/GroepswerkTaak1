@@ -151,6 +151,15 @@ namespace GroepswerkTaak1.DAL.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to S_ImagesPaged.
+        /// </summary>
+        internal static string S_ImagesPaged {
+            get {
+                return ResourceManager.GetString("S_ImagesPaged", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to S_Knop.
         /// </summary>
         internal static string S_Knop {
