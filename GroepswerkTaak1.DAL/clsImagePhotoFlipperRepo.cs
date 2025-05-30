@@ -24,6 +24,7 @@ namespace GroepswerkTaak1.DAL
 					{
 						ImagePhotoFlipperID = (short)reader["ID"],
 						ImageBytes = (byte[])reader["Image"],
+						FullImageId = (short)reader["FullImageId"],
 						ControlField = reader["ControlFIeld"]
 					};
 					
@@ -89,7 +90,7 @@ namespace GroepswerkTaak1.DAL
 
 		public bool Insert(clsImagePhotoFlipper entity)
 		{
-			clsDAL.ExecuteDataTable(Properties.Resources.I_Image, ref _queryResult, clsDAL.Parameter("Image", entity.ImageBytes),
+			clsDAL.ExecuteDataTable(Properties.Resources.I_Image, ref _queryResult, clsDAL.Parameter("Thumbnail", entity.ImageBytes),
 				clsDAL.Parameter("User", Environment.UserName),
 				clsDAL.Parameter("@ReturnValue", 0));
 
@@ -119,6 +120,7 @@ namespace GroepswerkTaak1.DAL
 			{
 				ImagePhotoFlipperID = 0,
 				ImageBytes = File.ReadAllBytes(path),
+				FullImageId = 0,
 				ControlField = new object()
 			};
 

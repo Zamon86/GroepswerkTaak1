@@ -22,9 +22,9 @@ namespace GroepswerkTaak1.Views
 			UserRoleId = userRoleId;
 			InitializeComponent();
 			DataContext = this;
-			KnoppenVM = new clsKnoppenVM();
-            ButtonItemsControl.ItemsSource = KnoppenVM.repo.GetAll();
-            Task task = InitializeAsync();
+			var KnoppenVM = new clsKnoppenVM();
+			ButtonItemsControl.ItemsSource = KnoppenVM.repo.GetAll();
+			Task task = InitializeAsync();
 		}
 
 
