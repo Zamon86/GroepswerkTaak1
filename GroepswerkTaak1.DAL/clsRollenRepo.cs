@@ -19,14 +19,14 @@ namespace GroepswerkTaak1.DAL
         {
         }
 
-        public bool Delete(clsRollenM entity)
+        public bool Delete(clsRollenM entity, string LoginNaam)
         {
             (DataTable DT, bool OK, string Boodschap) =
                     clsDAL.ExecuteDataTable(Properties.Resources.D_User,
                     clsDAL.Parameter("ID", entity.RolId),
                     ///TODO: vervangen door de loginnaam
                     ///
-                    clsDAL.Parameter("User", Environment.UserName),
+                    clsDAL.Parameter("User", LoginNaam),
                     clsDAL.Parameter("ControlField", entity.ControlField),
                     clsDAL.Parameter("@ReturnValue", 0));
             if (!OK)
