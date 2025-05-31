@@ -13,8 +13,8 @@ namespace GroepswerkTaak1
     public partial class winLogon : Window
     {
         int LoginId;
-        clsUsersM Gebruiker = new clsUsersM();
-        clsRollenM Rol = new clsRollenM();
+        //clsUsersM Gebruiker = new clsUsersM();
+        //clsRollenM Rol = new clsRollenM();
         clsLoginRepo LoginRepo = new clsLoginRepo();
         clsUsersRepo UsersRepo = new clsUsersRepo();
         clsRollenRepo RollenRepo = new clsRollenRepo();
@@ -30,13 +30,13 @@ namespace GroepswerkTaak1
             if (LoginId > 0)
             {
                 MessageBox.Show("Login gelukt"); // nadien verwijderen, alleen voor test doeleinden
-                Gebruiker = UsersRepo.GetByID(LoginId);
-                MessageBox.Show(Gebruiker.Email);
+                App.Gebruiker = UsersRepo.GetByID(LoginId);
+                MessageBox.Show(App.Gebruiker.Email); // nadien verwijderen, alleen voor test doeleinden
 
 
-                //MainWindow _MainWindow = new MainWindow();
-                //_MainWindow.Show();
-                //this.Close();
+                MainWindow _MainWindow = new MainWindow();
+                _MainWindow.Show();
+                this.Close();
 
             }
             else

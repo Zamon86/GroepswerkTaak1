@@ -49,13 +49,14 @@ namespace GroepswerkTaak1.Views
 
 		public MainWindow()
 		{		
-			InitializeComponent();	
+			InitializeComponent();
 
-			//hier lezen we de authorisatie in vanuit het loginscherm
-			// TODO
-			// strAuthorisatie = winLogon.strAuthorisatie;
-			// display de machtiging op het scherm dmv  een label of textblock
-		}
+            //hier lezen we de authorisatie in vanuit het loginscherm
+            // TODO
+            // strAuthorisatie = winLogon.strAuthorisatie;
+            // display de machtiging op het scherm dmv  een label of textblock
+            lblUser.Content = App.Gebruiker.VoorNaam + " " +App.Gebruiker.Naam;
+        }
 
 		#region METHODS
 		private void OpenUserControl(UserControl myUserControl)
