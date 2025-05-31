@@ -1,34 +1,33 @@
 <Application
+	x:Class="GroepswerkTaak1.App"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:c="clr-namespace:GroepswerkTaak1.ToBeDeleted"
+	xmlns:helpers="clr-namespace:GroepswerkTaak1.Helpers"
+	xmlns:local="clr-namespace:GroepswerkTaak1"
+	StartupUri="Views/winLogon.xaml">
+	<!--  StartupUri="Views/MainWindow.xaml" StartupUri="Views/winLogon.xaml"  -->
 
-    x:Class="GroepswerkTaak1.App"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:c="clr-namespace:GroepswerkTaak1.ToBeDeleted"
-    xmlns:helpers="clr-namespace:GroepswerkTaak1.Helpers"
-    xmlns:local="clr-namespace:GroepswerkTaak1"
-    StartupUri="Views/winLogon.xaml">
-    <!--  StartupUri="Views/MainWindow.xaml" StartupUri="Views/winLogon.xaml"  -->
+	<Application.Resources>
+		<!--  Kleuren  -->
+		<SolidColorBrush x:Key="MainBackgroundColor" Color="#FFCDDDDD" />
 
-    <Application.Resources>
-        <!--  Kleuren  -->
-        <SolidColorBrush x:Key="MainBackgroundColor" Color="#FFCDDDDD" />
+		<SolidColorBrush x:Key="ThemeColor1" Color="#FF3BBCBD" />
 
-        <SolidColorBrush x:Key="ThemeColor1" Color="#FF3BBCBD" />
+		<SolidColorBrush x:Key="ThemeColor2" Color="#FFD75563" />
 
-        <SolidColorBrush x:Key="ThemeColor2" Color="#FFD75563" />
+		<SolidColorBrush x:Key="ThemeColor3" Color="#FFE84848" />
 
-        <SolidColorBrush x:Key="ThemeColor3" Color="#FFE84848" />
+		<SolidColorBrush x:Key="ThemeColor4" Color="#FFdb5265" />
 
-        <SolidColorBrush x:Key="ThemeColor4" Color="#FFdb5265" />
+		<SolidColorBrush x:Key="ThemeColor5" Color="#88D7D8" />
 
-        <SolidColorBrush x:Key="ThemeColor5" Color="#88D7D8" />
-
-        <!--  Menu-item stijl  -->
-        <Style x:Key="CustomMenuItemStyle" TargetType="MenuItem">
-            <Setter Property="HorizontalContentAlignment" Value="Center" />
-            <Setter Property="VerticalContentAlignment" Value="Center" />
-            <Setter Property="FontSize" Value="14" />
-        </Style>
+		<!--  Menu-item stijl  -->
+		<Style x:Key="CustomMenuItemStyle" TargetType="MenuItem">
+			<Setter Property="HorizontalContentAlignment" Value="Center" />
+			<Setter Property="VerticalContentAlignment" Value="Center" />
+			<Setter Property="FontSize" Value="14" />
+		</Style>
 
 		<!--  Afmelden knop stijl  -->
 		<Style x:Key="AfmeldenButtonStyle" TargetType="Button">

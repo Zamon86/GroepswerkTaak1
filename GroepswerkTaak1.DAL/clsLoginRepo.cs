@@ -29,6 +29,7 @@ namespace GroepswerkTaak1.DAL
                 clsDAL.Parameter("LoginNaam", username),
                 clsDAL.Parameter("PassWord", password),
                 clsDAL.Parameter("@ReturnValue", 0));
+            
             return nr; // Retourneer een waarde die aangeeft of de login succesvol was.  >0 => = ID <0 => login mislukt
         }
     }
