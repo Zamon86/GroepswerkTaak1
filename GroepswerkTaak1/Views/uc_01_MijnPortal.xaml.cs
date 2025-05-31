@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Collections.ObjectModel;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -7,6 +8,7 @@ using System.Windows.Media.Imaging;
 using GroepswerkTaak1.CustomControls;
 using GroepswerkTaak1.ViewModels;
 using GroepswerkTaak1.Helpers;
+using GroepswerkTaak1.Model;
 
 
 namespace GroepswerkTaak1.Views
@@ -122,7 +124,7 @@ namespace GroepswerkTaak1.Views
 
         private void ButtonSettings_OnClick(object sender, RoutedEventArgs e)
         {
-	        var window = new winPhotoFlipperBeheerPaneel();
+	        var window = new winPhotoFlipperBeheerPaneel(new ObservableCollection<clsImagePhotoFlipper>());
 					window.Show();
         }
 	}
