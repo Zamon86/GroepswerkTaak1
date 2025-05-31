@@ -140,13 +140,15 @@
                     Grid.Column="1"
                     Grid.ColumnSpan="2"
                     HorizontalAlignment="Right"
-                    Orientation="Horizontal">
+                    Orientation="Horizontal"
+                            DataContext="{StaticResource VMKnoppen}">
                     <Button
                         Name="btnNieuw"
                         Margin="5"
                         Padding="5"
                         Background="Beige"
                         Click="btnNieuw_Click"
+                        Command="{Binding cmdNew}"
                         Content="Nieuw"
                         FontFamily="segoe ui light"
                         Foreground="SteelBlue" />
@@ -173,10 +175,12 @@
                         Margin="5"
                         Padding="5"
                         Background="Beige"
-                        Click="btnAnnuleren_Click"
+                        
                         Content="Annuleren"
+                            Command="{Binding cmdCancel}"
                         FontFamily="segoe ui light"
                         Foreground="SteelBlue" />
+                    <!--Click="btnAnnuleren_Click"-->
                     <Button
                         Name="btnSluiten"
                         Margin="5"

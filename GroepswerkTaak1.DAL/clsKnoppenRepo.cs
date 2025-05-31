@@ -96,7 +96,7 @@ namespace GroepswerkTaak1.DAL
 			clsKnoppenM image = new clsKnoppenM()
 			{
 				KnopId = 0,
-			//	KnopImage = File.ReadAllBytes(path),
+				//	KnopImage = File.ReadAllBytes(path),
 				ControlField = new object()
 			};
 
@@ -169,22 +169,25 @@ namespace GroepswerkTaak1.DAL
 			}
 			return OK;
 		}
-		//public bool Update(clsKnoppenM entity)
-		//{
-		//	(DataTable DT, bool OK, string Boodschap) =
-		//					clsDAL.ExecuteDataTable(Properties.Resources.I_Knop,
-		//					clsDAL.Parameter("ID", entity.KnopId),
-		//					clsDAL.Parameter("Naam", entity.KnopNaam),
-		//					clsDAL.Parameter("Tekst", entity.KnopTekst),
-		//					clsDAL.Parameter("Positie", entity.KnopPositie),
-		//					clsDAL.Parameter("knopImage", entity.KnopImage),
-		//					clsDAL.Parameter("ControlField", entity.ControlField),
-		//					clsDAL.Parameter("@ReturnValue", 0));
-		//	if (!OK)
-		//	{
-		//		entity.ErrorBoodschap = Boodschap;
+		public bool Update(clsKnoppenM entity)
+		{
+			(DataTable DT, bool OK, string Boodschap) =
+							clsDAL.ExecuteDataTable(Properties.Resources.I_Knop,
+							clsDAL.Parameter("ID", entity.KnopId),
+							clsDAL.Parameter("Naam", entity.KnopNaam),
+							clsDAL.Parameter("Tekst", entity.KnopTekst),
+							clsDAL.Parameter("Positie", entity.KnopPositie),
+							clsDAL.Parameter("knopImage", entity.KnopImage),
+							clsDAL.Parameter("ControlField", entity.ControlField),
+							clsDAL.Parameter("@ReturnValue", 0));
+			if (!OK)
+			{
+				entity.ErrorBoodschap = Boodschap;
 
-		#endregion
+				#endregion
 
+			}
+			return OK;
+		}
 	}
 }
