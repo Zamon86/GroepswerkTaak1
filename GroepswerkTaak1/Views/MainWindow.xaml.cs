@@ -9,13 +9,13 @@ using GroepswerkTaak1.Helpers;
 using GroepswerkTaak1.Model;
 
 namespace GroepswerkTaak1.Views
-{
-
+{ 
 	public partial class MainWindow : Window
 	{
-		#region VARIABLES
+        #region VARIABLES
 
-		private clsUsersM _currentUser = new()
+        clsLoginRepo LoginRepo = new clsLoginRepo();
+        private clsUsersM _currentUser = new()
 		{ 
 			ID = 0,
 			LoginNaam = "DummyAdmin",
@@ -27,7 +27,7 @@ namespace GroepswerkTaak1.Views
 			UserActief = true
 		};
 
-		private string strAuthorisatie = string.Empty;  // deze string zal de authorisatie dragen
+		// dit mag weg private string strAuthorisatie = string.Empty;  // deze string zal de authorisatie dragen
 
 		
 		private readonly DispatcherTimer _timer = new();
@@ -51,13 +51,17 @@ namespace GroepswerkTaak1.Views
 
 		public MainWindow()
 		{		
+
+
 			InitializeComponent();
-
-
+            // eventueel de  hide  + x-button uitzetten, zodat de gebruiker niet kan afsluiten zonder af te melden
+          
             //hier lezen we de authorisatie in vanuit het loginscherm
             // TODO
             // strAuthorisatie = winLogon.strAuthorisatie;
             // display de machtiging op het scherm dmv  een label of textblock
+            LoginRepo.Logging("Starten", "Program", "Form", "MainWindow", "Windows"); // Log de actie van het openen van het login venster
+
             lblUser.Content = App.Gebruiker.VoorNaam + " " +App.Gebruiker.Naam;
      }
 
@@ -129,7 +133,8 @@ namespace GroepswerkTaak1.Views
 
 		private void btnAfmelden_Click(object sender, RoutedEventArgs e)
 		{
-            // MessageBox.Show("Not implemented");
+          
+            LoginRepo.Logging("Sluiten", "Program", "Form", "MainWindow", "Windows"); // Log de actie van het sluiten van het login venster
             winLogon _winLogon = new winLogon();
             _winLogon.Show();
             this.Close();
