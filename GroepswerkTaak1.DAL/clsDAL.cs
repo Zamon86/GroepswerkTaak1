@@ -7,9 +7,6 @@ namespace GroepswerkTaak1.DAL
 	public class clsDAL
 	{
 		public static string ConnectionString { get; } = Properties.Settings.Default.strCNcloud;
-			
-			
-		
 
 		//In de code hieronder werken de using-statements als geneste blokken,
 		//zelfs als ze niet expliciet genest zijn.
@@ -161,8 +158,8 @@ namespace GroepswerkTaak1.DAL
             }
 
         }
-        public static SqlDataReader GetData(string storeProcedureName)
-		{			
+		public static SqlDataReader GetData(string storeProcedureName)
+			{			
 			var cn = new SqlConnection(ConnectionString);
 			var cmd = new SqlCommand();
 			cmd.CommandType = CommandType.StoredProcedure;

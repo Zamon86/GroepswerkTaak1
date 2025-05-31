@@ -31,8 +31,20 @@
 				<RowDefinition Height="auto" />
 			</Grid.RowDefinitions>
 			<Grid Grid.Row="0" Grid.Column="1">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="*" />
+					<ColumnDefinition Width="Auto" />
+					<ColumnDefinition Width="*" />
+				</Grid.ColumnDefinitions>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="35" />
+					<RowDefinition Height="Auto" />
+					<RowDefinition Height="50" />
+				</Grid.RowDefinitions>
 				<Image
 					x:Name="PhotoFlipperImage"
+					Grid.Row="1"
+					Grid.Column="1"
 					MaxWidth="250"
 					MaxHeight="350"
 					HorizontalAlignment="Center"
@@ -42,7 +54,6 @@
 					RenderTransformOrigin="0.5,0.5"
 					Source="{Binding PhotoFlipper.ActiveImage.ImageBytes, NotifyOnSourceUpdated=True}"
 					Visibility="Collapsed">
-
 					<Image.RenderTransform>
 						<ScaleTransform x:Name="ImageHorizontalScaleTransform" ScaleX="1" />
 					</Image.RenderTransform>
@@ -57,6 +68,8 @@
 				</Image>
 				<Ellipse
 					x:Name="LoadingAnimation"
+					Grid.Row="1"
+					Grid.Column="1"
 					Width="100"
 					Height="100"
 					Margin="120,60,120,60"
@@ -83,6 +96,15 @@
 						</EventTrigger>
 					</Ellipse.Triggers>
 				</Ellipse>
+				<Button
+					Grid.Row="2"
+					Grid.Column="1"
+					Width="36"
+					Height="36"
+					Margin="2"
+					Click="ButtonSettings_OnClick"
+					Content="{StaticResource SettingsIcon}"
+					Style="{StaticResource TransparentButton}" />
 			</Grid>
 			<Grid
 				Grid.Row="1"
@@ -262,51 +284,67 @@
 							</StackPanel>
 						</Expander.Header>
 						<ListBox>
-                            <ListBoxItem Content="Beheer Knoppen" Tag="1" Selected="ListBox_Selected"/>
-                            <ListBoxItem Content="Beheer Rollen" Tag="2" Selected="ListBox_Selected"/>
-                            <ListBoxItem Content="Beheer Users" Tag="3" Selected="ListBox_Selected"/>
-                            <ListBoxItem Content="Beheer Logging" Tag="9" Selected="ListBox_Selected"/>
+							<ListBoxItem
+								Content="Beheer Knoppen"
+								Selected="ListBox_Selected"
+								Tag="1" />
+							<ListBoxItem
+								Content="Beheer Rollen"
+								Selected="ListBox_Selected"
+								Tag="2" />
+							<ListBoxItem
+								Content="Beheer Users"
+								Selected="ListBox_Selected"
+								Tag="3" />
+							<ListBoxItem
+								Content="Beheer Logging"
+								Selected="ListBox_Selected"
+								Tag="9" />
 						</ListBox>
 					</Expander>
 				</StackPanel>
 			</Grid>
 			<!--  einde ruimte voor expander  -->
 			<!--  knoppen  -->
-            <ScrollViewer Grid.Row="0"
-                          Grid.RowSpan="2"
-                          Grid.Column="0"
-                          FlowDirection="RightToLeft"
-                          >
-            <ItemsControl x:Name="ButtonItemsControl">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <UniformGrid Columns="3"
-                                     Margin="10"
-                                     HorizontalAlignment="Stretch"
-                                     VerticalAlignment="Top" />
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <Button Width="90"
-                                Height="90"
-                                Margin="10"
-                                    Style="{StaticResource GridButton}">
-                            
-                            <StackPanel>
-                                <Image Source="{Binding KnopImage, Converter={StaticResource ByteArrayToImageConverter}}"
-                                       Width="50"
-                                       Height="50" />
-                                    <TextBlock Text="{Binding KnopTekst}"
-                                           HorizontalAlignment="Center"
-                                           Foreground="White" />
-                            </StackPanel>
-                        </Button>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-            </ScrollViewer>
-            <!--<ScrollViewer
+			<ScrollViewer
+				Grid.Row="0"
+				Grid.RowSpan="2"
+				Grid.Column="0"
+				FlowDirection="RightToLeft">
+				<ItemsControl x:Name="ButtonItemsControl">
+					<ItemsControl.ItemsPanel>
+						<ItemsPanelTemplate>
+							<UniformGrid
+								Margin="10"
+								HorizontalAlignment="Stretch"
+								VerticalAlignment="Top"
+								Columns="3" />
+						</ItemsPanelTemplate>
+					</ItemsControl.ItemsPanel>
+					<ItemsControl.ItemTemplate>
+						<DataTemplate>
+							<Button
+								Width="90"
+								Height="90"
+								Margin="10"
+								Style="{StaticResource GridButton}">
+
+								<StackPanel>
+									<Image
+										Width="50"
+										Height="50"
+										Source="{Binding KnopImage, Converter={StaticResource ByteArrayToImageConverter}}" />
+									<TextBlock
+										HorizontalAlignment="Center"
+										Foreground="White"
+										Text="{Binding KnopTekst}" />
+								</StackPanel>
+							</Button>
+						</DataTemplate>
+					</ItemsControl.ItemTemplate>
+				</ItemsControl>
+			</ScrollViewer>
+			<!--<ScrollViewer
 				x:Name="scvKnoppen"
 				Grid.Row="0"
 				Grid.RowSpan="2"

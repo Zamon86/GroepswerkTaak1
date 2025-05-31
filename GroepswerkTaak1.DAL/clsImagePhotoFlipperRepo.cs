@@ -90,7 +90,10 @@ namespace GroepswerkTaak1.DAL
 
 		public bool Insert(clsImagePhotoFlipper entity)
 		{
-			clsDAL.ExecuteDataTable(Properties.Resources.I_Image, ref _queryResult, clsDAL.Parameter("Thumbnail", entity.ImageBytes),
+			if (entity.FullImageBytes == null) return false;
+			
+			clsDAL.ExecuteDataTable(Properties.Resources.I_Image, ref _queryResult, clsDAL.Parameter("Image", entity.FullImageBytes),
+				clsDAL.Parameter("Thumbnail", entity.ImageBytes),
 				clsDAL.Parameter("User", Environment.UserName),
 				clsDAL.Parameter("@ReturnValue", 0));
 
@@ -99,18 +102,18 @@ namespace GroepswerkTaak1.DAL
 			return Helpers.clsSqlReturnValueHandler.HandleSqlReturnValue(_queryResult, entity);
 		}
 
-		public bool Update (clsImagePhotoFlipper entity)
-		{
-			clsDAL.ExecuteDataTable(Properties.Resources.U_Image, ref _queryResult, clsDAL.Parameter("ID", entity.ImagePhotoFlipperID),
-				clsDAL.Parameter("Image", entity.ImageBytes),
-				clsDAL.Parameter("User", Environment.UserName),
-				clsDAL.Parameter("ControlField", entity.ControlField),
-				clsDAL.Parameter("@ReturnValue", 0));
+		//public bool Update (clsImagePhotoFlipper entity)
+		//{
+		//	clsDAL.ExecuteDataTable(Properties.Resources.U_Image, ref _queryResult, clsDAL.Parameter("ID", entity.ImagePhotoFlipperID),
+		//		clsDAL.Parameter("Image", entity.ImageBytes),
+		//		clsDAL.Parameter("User", Environment.UserName),
+		//		clsDAL.Parameter("ControlField", entity.ControlField),
+		//		clsDAL.Parameter("@ReturnValue", 0));
 
-			_isDataModified = true;
+		//	_isDataModified = true;
 
-			return Helpers.clsSqlReturnValueHandler.HandleSqlReturnValue(_queryResult, entity);
-		}
+		//	return Helpers.clsSqlReturnValueHandler.HandleSqlReturnValue(_queryResult, entity);
+		//}
 
 		private clsImagePhotoFlipper GetErrorImage()
 		{
