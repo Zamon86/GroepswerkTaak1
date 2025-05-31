@@ -32,5 +32,15 @@ namespace GroepswerkTaak1.DAL
             
             return nr; // Retourneer een waarde die aangeeft of de login succesvol was.  >0 => = ID <0 => login mislukt
         }
+
+        public void Logging(string Aktie , string tbl_col , string preValue , string PostValue ,string LogNaam)
+        {
+                clsDAL.ExecuteDataTable(Properties.Resources.I_Logging, ref nr,
+                clsDAL.Parameter("Aktie", Aktie),
+                clsDAL.Parameter("TabelKolom", tbl_col),
+                clsDAL.Parameter("PreValue", preValue),
+                clsDAL.Parameter("PostValue", PostValue),
+                clsDAL.Parameter("Usernaam", LogNaam));
+        }
     }
 }
