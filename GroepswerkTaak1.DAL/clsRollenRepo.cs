@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GroepswerkTaak1.DAL
 {
-    internal class clsRollenRepo
+    public class clsRollenRepo
     {
     }
 }
