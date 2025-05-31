@@ -4,6 +4,8 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Threading;
 using GroepswerkTaak1.CustomControls;
+using GroepswerkTaak1.DAL;
+using GroepswerkTaak1.Helpers;
 using GroepswerkTaak1.Model;
 
 namespace GroepswerkTaak1.Views
@@ -21,7 +23,7 @@ namespace GroepswerkTaak1.Views
 			VoorNaam = "Dummy",
 			Email = "DummyAdmin@gmail.com",
 			Telefoon = "070072772",
-			RolId = 1,
+			RolId = 2,
 			UserActief = true
 		};
 
@@ -51,12 +53,14 @@ namespace GroepswerkTaak1.Views
 		{		
 			InitializeComponent();
 
+
             //hier lezen we de authorisatie in vanuit het loginscherm
             // TODO
             // strAuthorisatie = winLogon.strAuthorisatie;
             // display de machtiging op het scherm dmv  een label of textblock
             lblUser.Content = App.Gebruiker.VoorNaam + " " +App.Gebruiker.Naam;
-        }
+     }
+
 
 		#region METHODS
 		private void OpenUserControl(UserControl myUserControl)

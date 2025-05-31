@@ -35,7 +35,7 @@ namespace GroepswerkTaak1
 			{
 				if (_activeImage == value) return;
 				_activeImage = value;
-				OnPropertyChanged(nameof(ActiveImage));
+				OnPropertyChanged();
 			}
 		}
 
