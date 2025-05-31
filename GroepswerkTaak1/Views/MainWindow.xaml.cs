@@ -1,4 +1,5 @@
-﻿using System.Security.Cryptography;
+﻿using System.ComponentModel;
+using System.Security.Cryptography;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -13,7 +14,6 @@ namespace GroepswerkTaak1.Views
 	public partial class MainWindow : Window
 	{
         #region VARIABLES
-
         clsLoginRepo LoginRepo = new clsLoginRepo();
         private clsUsersM _currentUser = new()
 		{ 
@@ -133,8 +133,7 @@ namespace GroepswerkTaak1.Views
 
 		private void btnAfmelden_Click(object sender, RoutedEventArgs e)
 		{
-          
-            LoginRepo.Logging("Sluiten", "Program", "Form", "MainWindow", "Windows"); // Log de actie van het sluiten van het login venster
+            LoginRepo.Logging("LOGIN", "User_naam", "afgemeld", App.Gebruiker.LoginNaam, "WinForm"); // Log de actie van het sluiten van het login venster
             winLogon _winLogon = new winLogon();
             _winLogon.Show();
             this.Close();
@@ -174,9 +173,14 @@ namespace GroepswerkTaak1.Views
 			OpenUserControl(control);
 		}
 
-		#endregion
 
-		
-		}
+        void DataWindow_Closing(object sender, CancelEventArgs e)
+        {
+            LoginRepo.Logging("Sluiten", "Program", "Form", "MainWindow", "Windows"); // Log de actie van het sluiten van het login venster
+        }
+        #endregion
+
+
+    }
 
 }

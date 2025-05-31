@@ -11,6 +11,7 @@
     Height="750"
     MinWidth="550"
     Loaded="Window_Loaded"
+    Closing="DataWindow_Closing"
     mc:Ignorable="d">
     <Window.Resources>
         <Style BasedOn="{StaticResource CustomMenuItemStyle}" TargetType="MenuItem" />

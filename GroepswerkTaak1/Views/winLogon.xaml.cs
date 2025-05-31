@@ -1,6 +1,7 @@
 ﻿using GroepswerkTaak1.DAL;
 using GroepswerkTaak1.Model;
 using GroepswerkTaak1.Views;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
 
@@ -49,8 +50,6 @@ namespace GroepswerkTaak1
 
         private void btnAnnuleer_Click(object sender, RoutedEventArgs e)
         {
-            LoginRepo.Logging("Sluiten", "Program", "Form", "WinLogon", "Windows"); // Log de actie van het sluiten van het login venster
-
             this.Close();
         }
 
@@ -58,6 +57,11 @@ namespace GroepswerkTaak1
         {
             if (e.ChangedButton == MouseButton.Left)
                 this.DragMove();
+        }
+
+        void DataWindow_Closing(object sender, CancelEventArgs e)
+        {
+            LoginRepo.Logging("Sluiten", "Program", "Form", "WinLogon", "Windows"); // Log de actie van het sluiten van het login venster
         }
     }
 }
