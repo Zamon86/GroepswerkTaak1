@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using GroepswerkTaak1.Views;
+using System.Windows;
 
 namespace GroepswerkTaak1
 {
@@ -14,6 +15,9 @@ namespace GroepswerkTaak1
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
+            MainWindow _MainWindow = new MainWindow();
+            _MainWindow.Show();
+            this.Close();
 
         }
 

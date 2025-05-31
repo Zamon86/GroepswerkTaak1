@@ -124,8 +124,11 @@ namespace GroepswerkTaak1.Views
 
 		private void btnAfmelden_Click(object sender, RoutedEventArgs e)
 		{
-			MessageBox.Show("Not implemented");
-		}
+            // MessageBox.Show("Not implemented");
+            winLogon _winLogon = new winLogon();
+            _winLogon.Show();
+            this.Close();
+        }
 
 		
 		//Deze code behandelt de gebeurtenis SelectionChanged van een TabControl.

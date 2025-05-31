@@ -5,7 +5,9 @@
     xmlns:helpers="clr-namespace:GroepswerkTaak1.Helpers"
     xmlns:c="clr-namespace:GroepswerkTaak1.ToBeDeleted"
     xmlns:local="clr-namespace:GroepswerkTaak1"
-    StartupUri="Views/MainWindow.xaml"> 
+    StartupUri="Views/winLogon.xaml">
+
+	<!--StartupUri="Views/MainWindow.xaml" StartupUri="Views/winLogon.xaml"-->
 
 	<Application.Resources>
 		<!--  Kleuren  -->
