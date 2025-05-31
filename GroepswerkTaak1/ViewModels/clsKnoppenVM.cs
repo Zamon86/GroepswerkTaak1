@@ -15,10 +15,10 @@ namespace GroepswerkTaak1.ViewModels
     {
 
         public clsKnoppenRepo repo = new clsKnoppenRepo();
-        public clsKnoppenVM()
-        {
+        //public clsKnoppenVM()
+        //{
            
-        }
+        //}
 
 
 		#region CodeVanDanny
@@ -26,42 +26,42 @@ namespace GroepswerkTaak1.ViewModels
 		//private bool _NewStatus = false;
 		//clsKnoppenRepo Repo = new clsKnoppenRepo();
 
-		//private ObservableCollection<clsKnoppenM>? _MijnCollectie;
-		//public ObservableCollection<clsKnoppenM> MijnCollectie
-		//{
-		//	get { return _MijnCollectie; }
-		//	set { _MijnCollectie = value; OnPropertyChanged(); }
-		//}
+		private ObservableCollection<clsKnoppenM>? _MijnCollectie;
+		public ObservableCollection<clsKnoppenM> MijnCollectie
+		{
+			get { return _MijnCollectie; }
+			set { _MijnCollectie = value; OnPropertyChanged(); }
+		}
 
-		//private clsKnoppenM? _MijnSelectedItem;
+		private clsKnoppenM? _MijnSelectedItem;
 
-		//public clsKnoppenM MijnSelectedItem
-		//{
-		//	get { return _MijnSelectedItem; }
-		//	set
-		//	{  // Validatie schrijven wanneer een ander item in ComboBx wordt geselecteerd
-		//		if (value != null)
-		//		{
-		//			OpslaanCommando();
-		//			LoadData();
-		//		}
-		//		_MijnSelectedItem = value;
-		//		OnPropertyChanged();
-		//	}
-		//}
+		public clsKnoppenM MijnSelectedItem
+		{
+			get { return _MijnSelectedItem; }
+			set
+			{  // Validatie schrijven wanneer een ander item in ComboBx wordt geselecteerd
+				if (value != null)
+				{
+					//OpslaanCommando();
+					LoadData();
+				}
+				_MijnSelectedItem = value;
+				OnPropertyChanged();
+			}
+		}
 
 
-		////         public clsKnoppenVM()
-		////         {
-		////             LoadData();
-		////             // als test forceer ik het een item
-		////             _MijnSelectedItem = Repo.GetByID(10); // haal een item op met ID 1
-		////         }
+		public clsKnoppenVM()
+		{
+			LoadData();
+			// als test forceer ik het een item
+			_MijnSelectedItem = repo.GetByID((short)1); // haal een item op met ID 1
+		}
 
-		//private void LoadData()
-		//{
-		//	MijnCollectie = Repo.GetAll();
-		//}
+		private void LoadData()
+		{
+			MijnCollectie = repo.GetAll();
+		}
 
 		//private void OpslaanCommando()
 		//{

@@ -192,7 +192,8 @@
                     Grid.Column="2"
                     Width="150"
                     Height="150"
-                    Margin="20,0,0,10" />
+                    Margin="20,0,0,10"
+                       Source="{Binding KnopImage}"/>
                 <!--  Source="{Binding Path=KnopTekst, Mode=TwoWay}"  -->
                 <Button
                     Name="btnLaadIcon"

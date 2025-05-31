@@ -283,7 +283,8 @@
                         <UniformGrid Columns="3"
                                      Margin="10"
                                      HorizontalAlignment="Stretch"
-                                     VerticalAlignment="Top" />
+                                     VerticalAlignment="Top"
+                                     FlowDirection="LeftToRight"/>
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
@@ -294,7 +295,7 @@
                                     Style="{StaticResource GridButton}">
                             
                             <StackPanel>
-                                <Image Source="{Binding KnopImage, Converter={StaticResource ByteArrayToImageConverter}}"
+                                <Image Source="{Binding KnopImage}"
                                        Width="50"
                                        Height="50" />
                                     <TextBlock Text="{Binding KnopTekst}"
