@@ -33,7 +33,9 @@ namespace GroepswerkTaak1
             {
                 //MessageBox.Show("Login gelukt"); // nadien verwijderen, alleen voor test doeleinden
                 App.Gebruiker = UsersRepo.GetByID(LoginId);
+                App.Rol = RollenRepo.GetByID(App.Gebruiker.RolId);
                 //MessageBox.Show(App.Gebruiker.Email); // nadien verwijderen, alleen voor test doeleinden
+                //MessageBox.Show(App.Rol.RolNaam); // nadien verwijderen, alleen voor test doeleinden
                 MainWindow _MainWindow = new MainWindow();
                 _MainWindow.Show();
                 this.Close();

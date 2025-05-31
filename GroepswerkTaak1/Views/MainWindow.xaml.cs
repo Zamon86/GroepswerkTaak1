@@ -27,7 +27,7 @@ namespace GroepswerkTaak1.Views
 			UserActief = true
 		};
 
-		private string strAuthorisatie = string.Empty;  // deze string zal de authorisatie dragen
+		// dit mag weg private string strAuthorisatie = string.Empty;  // deze string zal de authorisatie dragen
 
 		
 		private readonly DispatcherTimer _timer = new();
