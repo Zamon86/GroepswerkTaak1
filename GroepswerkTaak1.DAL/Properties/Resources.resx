@@ -171,4 +171,7 @@
   <data name="S_ImagesPaged" xml:space="preserve">
     <value>S_ImagesPaged</value>
   </data>
+  <data name="SV_Login" xml:space="preserve">
+    <value>SV_Login</value>
+  </data>
 </root>

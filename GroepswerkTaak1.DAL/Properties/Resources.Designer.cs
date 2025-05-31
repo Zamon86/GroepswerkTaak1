@@ -187,6 +187,15 @@ namespace GroepswerkTaak1.DAL.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to SV_Login.
+        /// </summary>
+        internal static string SV_Login {
+            get {
+                return ResourceManager.GetString("SV_Login", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to U_Image.
         /// </summary>
         internal static string U_Image {

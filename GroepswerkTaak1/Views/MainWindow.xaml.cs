@@ -53,12 +53,14 @@ namespace GroepswerkTaak1.Views
 		{		
 			InitializeComponent();
 
-			//hier lezen we de authorisatie in vanuit het loginscherm
-			// TODO
-			// strAuthorisatie = winLogon.strAuthorisatie;
-			// display de machtiging op het scherm dmv  een label of textblock
-			
-		}
+
+            //hier lezen we de authorisatie in vanuit het loginscherm
+            // TODO
+            // strAuthorisatie = winLogon.strAuthorisatie;
+            // display de machtiging op het scherm dmv  een label of textblock
+            lblUser.Content = App.Gebruiker.VoorNaam + " " +App.Gebruiker.Naam;
+     }
+
 
 		#region METHODS
 		private void OpenUserControl(UserControl myUserControl)
@@ -127,8 +129,11 @@ namespace GroepswerkTaak1.Views
 
 		private void btnAfmelden_Click(object sender, RoutedEventArgs e)
 		{
-			MessageBox.Show("Not implemented");
-		}
+            // MessageBox.Show("Not implemented");
+            winLogon _winLogon = new winLogon();
+            _winLogon.Show();
+            this.Close();
+        }
 
 		
 		//Deze code behandelt de gebeurtenis SelectionChanged van een TabControl.
