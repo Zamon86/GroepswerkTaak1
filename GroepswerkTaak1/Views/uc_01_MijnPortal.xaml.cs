@@ -89,8 +89,6 @@ namespace GroepswerkTaak1.Views
             {
                 grdExpanders.Children.RemoveAt(1);
             }
-          //  Grid.SetColumn(myUserControl, 1);
-          //  Grid.SetRow(myUserControl, 0);
             grdExpanders.Children.Add(myUserControl);
         }
         private void ListBox_Selected(object sender, RoutedEventArgs e)
@@ -121,5 +119,11 @@ namespace GroepswerkTaak1.Views
             }
 
         }
-    }
+
+        private void ButtonSettings_OnClick(object sender, RoutedEventArgs e)
+        {
+	        var window = new winPhotoFlipperBeheerPaneel();
+					window.Show();
+        }
+	}
 }
