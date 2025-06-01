@@ -1,0 +1,80 @@
+﻿<Window
+    x:Class="GroepswerkTaak1.Views.winLoggingFilter"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:VM="clr-namespace:GroepswerkTaak1.ViewModels"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:GroepswerkTaak1.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="Logging Filter"
+    Width="800"
+    Height="450"
+    mc:Ignorable="d">
+    <Window.DataContext>
+        <VM:clsLoggingVM />
+    </Window.DataContext>
+    <Grid Background="{StaticResource MainBackgroundColor}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="10" />
+        </Grid.RowDefinitions>
+        <Label
+            Grid.Row="1"
+            Grid.ColumnSpan="6"
+            HorizontalAlignment="Center"
+            Content="Logging Filter"
+            FontSize="20"
+            FontWeight="Bold" />
+
+        <DataGrid
+            Name="gridLogging"
+            Grid.Row="4"
+            Grid.RowSpan="2"
+            Grid.ColumnSpan="6"
+            Height="350"
+            Margin="0,5,0,5"
+            AutoGenerateColumns="False"
+            ItemsSource="{Binding Loggings}">
+
+            <DataGrid.Columns>
+                <DataGridTextColumn
+                    Width="100"
+                    Binding="{Binding Aktie}"
+                    Header="Aktie" />
+                <DataGridTextColumn
+                    Width="100"
+                    Binding="{Binding TabelColumn}"
+                    Header="Oorsprong" />
+                <DataGridTextColumn
+                    Width="155"
+                    Binding="{Binding PreValue}"
+                    Header="PreValue" />
+                <DataGridTextColumn
+                    Width="155"
+                    Binding="{Binding PostValue}"
+                    Header="PostValue" />
+                <DataGridTextColumn
+                    Width="100"
+                    Binding="{Binding Gebruiker}"
+                    Header="Uitvoerder" />
+                <DataGridTextColumn
+                    Width="150"
+                    Binding="{Binding Registratie}"
+                    Header="Datum Tijd" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+    </Grid>
+</Window>

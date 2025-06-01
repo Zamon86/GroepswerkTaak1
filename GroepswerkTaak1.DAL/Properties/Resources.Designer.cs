@@ -169,6 +169,15 @@ namespace GroepswerkTaak1.DAL.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to S_Logging.
+        /// </summary>
+        internal static string S_Logging {
+            get {
+                return ResourceManager.GetString("S_Logging", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to S_Rol.
         /// </summary>
         internal static string S_Rol {
