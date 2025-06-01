@@ -8,12 +8,15 @@
 	xmlns:helpers="clr-namespace:GroepswerkTaak1.Helpers"
 	xmlns:local="clr-namespace:GroepswerkTaak1"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-	d:DesignHeight="450"
+           
+             d:DesignHeight="450"
 	d:DesignWidth="800"
 	Background="{StaticResource MainBackgroundColor}"
 	mc:Ignorable="d">
-	<UserControl.Resources>
+    <!--xmlns:VM="clr-namespace:GroepswerkTaak1.ViewModels"-->
+    <UserControl.Resources>
 		<converters:clsRoleToVisibilityConverter x:Key="RoleToVisibilityConverter" />
+        <!--<VM:clsKnoppenVM x:Key="VMKnoppen" />-->
 	</UserControl.Resources>
 	<ScrollViewer VerticalScrollBarVisibility="auto">
 		<ScrollViewer.Resources>
@@ -272,25 +275,36 @@
 			</Grid>
 			<!--  einde ruimte voor expander  -->
 			<!--  knoppen  -->
-            <ScrollViewer Grid.Row="0"
-                          Grid.RowSpan="2"
-                          Grid.Column="0"
+            <Viewbox Grid.Row="0"
+                     Grid.RowSpan="2"
+                     Grid.Column="0"
+                     VerticalAlignment="Stretch">
+            <ScrollViewer
+                     
+                          HorizontalAlignment="Stretch"
+                          VerticalAlignment="Stretch"
                           FlowDirection="RightToLeft"
-                          >
-            <ItemsControl x:Name="ButtonItemsControl">
+                          DataContext="{StaticResource VMKnoppen}">
+            <ItemsControl 
+                x:Name="ButtonItemsControl"
+                              ItemsSource="{Binding Path=MijnCollectie}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <UniformGrid Columns="3"
                                      Margin="10"
                                      HorizontalAlignment="Stretch"
-                                     VerticalAlignment="Top"
+                                         VerticalAlignment="Stretch"
                                      FlowDirection="LeftToRight"/>
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Button Width="90"
-                                Height="90"
+                            <Button MinWidth="90"
+                                    MinHeight="90"
+                            HorizontalAlignment="Stretch"
+                                    VerticalAlignment="Stretch"
+                            Width="10"
+                                Height="10"
                                 Margin="10"
                                     Style="{StaticResource GridButton}">
                             
@@ -307,6 +321,7 @@
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
             </ScrollViewer>
+            </Viewbox>
             <!--<ScrollViewer
 				x:Name="scvKnoppen"
 				Grid.Row="0"

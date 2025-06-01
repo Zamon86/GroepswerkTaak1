@@ -11,7 +11,7 @@
              d:DesignWidth="400     "
              mc:Ignorable="d">
     <UserControl.Resources>
-        <VM:clsKnoppenVM x:Key="VMKnoppen" />
+        <!--<VM:clsKnoppenVM x:Key="VMKnoppen" />-->
         <Converters:clsIntVisibilityConverter x:Key="VisibilityConverter" />
     </UserControl.Resources>
     <Border BorderBrush="Black"

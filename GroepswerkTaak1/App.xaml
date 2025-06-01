@@ -5,7 +5,8 @@
     xmlns:helpers="clr-namespace:GroepswerkTaak1.Helpers"
     xmlns:c="clr-namespace:GroepswerkTaak1.ToBeDeleted"
     xmlns:local="clr-namespace:GroepswerkTaak1"
-    StartupUri="Views/MainWindow.xaml"> 
+             xmlns:VM="clr-namespace:GroepswerkTaak1.ViewModels"
+             StartupUri="Views/MainWindow.xaml"> 
 
 	<Application.Resources>
 		<!--  Kleuren  -->
@@ -382,5 +383,6 @@
         </Canvas>
 
         <c:clsByteArrayToImageConverter x:Key="ByteArrayToImageConverter" />
+        <VM:clsKnoppenVM x:Key="VMKnoppen" />
     </Application.Resources>
 </Application>
