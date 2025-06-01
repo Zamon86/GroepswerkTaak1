@@ -251,6 +251,8 @@
 				</Setter.Value>
 			</Setter>
 		</Style>
+        
+        
 		<Style x:Key="ExpanderDownHeaderStyle" TargetType="{x:Type ToggleButton}">
 			<Setter Property="Template">
 				<Setter.Value>
@@ -326,6 +328,8 @@
 				</Setter.Value>
 			</Setter>
 		</Style>
+        
+        
 		<Style x:Key="ExpanderTemplate" TargetType="{x:Type Expander}">
 			<Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
 			<Setter Property="Background" Value="LightGray" />
