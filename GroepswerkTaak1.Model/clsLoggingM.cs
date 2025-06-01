@@ -82,6 +82,15 @@ namespace GroepswerkTaak1.Model
         }
 
 
+        private DateTime _Registratie;
+
+        public DateTime Registratie
+        {
+            get { return _Registratie; }
+            set { _Registratie = value; }
+        }
+
+
         private Object _ControlField;
         public Object ControlField
         {

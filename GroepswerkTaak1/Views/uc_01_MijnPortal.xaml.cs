@@ -113,8 +113,10 @@ namespace GroepswerkTaak1.Views
                 break;
              case "5":
                 break;
-             case "6":
-                break;
+             case "9":
+                    winLoggingFilter _winLoggingFilter = new winLoggingFilter();
+                    _winLoggingFilter.ShowDialog();
+                    break;
 			 default:
                 MessageBox.Show("Onbekende keuze gemaakt.");
                 break;
