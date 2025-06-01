@@ -297,7 +297,7 @@
 								Selected="ListBox_Selected"
 								Tag="3" />
 							<ListBoxItem
-								Content="Beheer Logging"
+								Content="Overzicht Logging"
 								Selected="ListBox_Selected"
 								Tag="9" />
 						</ListBox>
