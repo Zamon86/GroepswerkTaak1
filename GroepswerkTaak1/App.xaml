@@ -136,7 +136,7 @@
 			</Setter>
 		</Style>
 
-		<!--  Stijl van ScrollBar  -->
+		<!--  Stijl van ScrollBar Vertical  -->
 		<Style x:Key="CustomVerticalScrollBar" TargetType="ScrollBar">
 			<Setter Property="Orientation" Value="Vertical" />
 			<Setter Property="Width" Value="14" />
@@ -202,6 +202,102 @@
 									Stretch="Uniform" />
 							</RepeatButton>
 						</Grid>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
+
+		<!--  Stijl van ScrollBar Horizontal  -->
+		<Style x:Key="CustomHorizontalScrollBar" TargetType="ScrollBar">
+			<Setter Property="Orientation" Value="Horizontal" />
+			<Setter Property="Height" Value="14" />
+			<Setter Property="Background" Value="{StaticResource ThemeColor1}" />
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="ScrollBar">
+						<Grid Background="{StaticResource ThemeColor1}">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="Auto" />
+								<ColumnDefinition Width="*" />
+								<ColumnDefinition Width="Auto" />
+							</Grid.ColumnDefinitions>
+							<RepeatButton
+								Grid.Column="0"
+								Width="14"
+								Background="Transparent"
+								BorderBrush="Transparent"
+								Command="ScrollBar.LineLeftCommand"
+								CommandTarget="{Binding RelativeSource={RelativeSource TemplatedParent}}">
+								<Path
+									Data="M 10 4 L 4 7 L 10 10 Z"
+									Fill="{StaticResource ThemeColor5}"
+									Stretch="Uniform" />
+							</RepeatButton>
+							<Track
+								x:Name="PART_Track"
+								Grid.Column="1"
+								IsDirectionReversed="False"
+								Orientation="Horizontal">
+								<Track.DecreaseRepeatButton>
+									<RepeatButton IsEnabled="False" Style="{StaticResource ScrollBarRepeatButtonStyle}" />
+								</Track.DecreaseRepeatButton>
+								<Track.Thumb>
+									<Thumb
+										Height="10"
+										Margin="0"
+										Background="{StaticResource ThemeColor5}"
+										BorderThickness="0">
+										<Thumb.Template>
+											<ControlTemplate TargetType="Thumb">
+												<Border
+													Background="{TemplateBinding Background}"
+													BorderThickness="{TemplateBinding BorderThickness}"
+													CornerRadius="4" />
+											</ControlTemplate>
+										</Thumb.Template>
+									</Thumb>
+								</Track.Thumb>
+								<Track.IncreaseRepeatButton>
+									<RepeatButton IsEnabled="False" Style="{StaticResource ScrollBarRepeatButtonStyle}" />
+								</Track.IncreaseRepeatButton>
+							</Track>
+							<RepeatButton
+								Grid.Column="2"
+								Width="14"
+								Background="Transparent"
+								BorderBrush="Transparent"
+								Command="ScrollBar.LineRightCommand"
+								CommandTarget="{Binding RelativeSource={RelativeSource TemplatedParent}}">
+								<Path
+									Data="M 4 4 L 10 7 L 4 10 Z"
+									Fill="{StaticResource ThemeColor5}"
+									Stretch="Uniform" />
+							</RepeatButton>
+						</Grid>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
+
+		<!--  Stijl Tooltip  -->
+
+		<Style x:Key="ToolTipStyle" TargetType="ToolTip">
+			<Setter Property="Background" Value="{StaticResource ThemeColor5}" />
+			<Setter Property="Foreground" Value="{StaticResource ThemeColor2}" />
+			<Setter Property="BorderBrush" Value="{StaticResource ThemeColor4}" />
+			<Setter Property="BorderThickness" Value="1" />
+			<Setter Property="Padding" Value="5" />
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="ToolTip">
+						<Border
+							Padding="{TemplateBinding Padding}"
+							Background="{TemplateBinding Background}"
+							BorderBrush="{TemplateBinding BorderBrush}"
+							BorderThickness="{TemplateBinding BorderThickness}"
+							CornerRadius="5">
+							<ContentPresenter Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" />
+						</Border>
 					</ControlTemplate>
 				</Setter.Value>
 			</Setter>
@@ -446,6 +542,26 @@
 				</Path>
 			</Canvas>
 		</Canvas>
+
+		<Path
+			x:Key="ReplaceIcon"
+			Width="32"
+			Height="32"
+			Margin="0,0,0,0"
+			Data="M10.982002,15.449005L10.982002,21.852997 30.194,21.852997 30.194,25.596985 10.982002,25.596985 10.982002,32 2.7089996,23.723999z M19.210007,0L27.481003,8.276001 19.210007,16.549988 19.210007,10.147003 0,10.147003 0,6.4029846 19.210007,6.4029846z"
+			Fill="{StaticResource ThemeColor4}"
+			RenderTransformOrigin="0.5,0.5"
+			Stretch="Uniform" />
+
+		<Path
+			x:Key="AddIcon"
+			Width="32"
+			Height="32"
+			Margin="0,0,0,0"
+			Data="M12.126984,0L19.872009,0 19.872009,12.128 32,12.128 32,19.872999 19.872009,19.872999 19.872009,31.999 12.126984,31.999 12.126984,19.872999 0,19.872999 0,12.128 12.126984,12.128z"
+			Fill="{StaticResource ThemeColor4}"
+			RenderTransformOrigin="0.5,0.5"
+			Stretch="Uniform" />
 
 		<Path
 			x:Key="DeleteIcon"

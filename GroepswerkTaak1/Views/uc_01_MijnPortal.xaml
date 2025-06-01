@@ -18,7 +18,6 @@
 	<ScrollViewer VerticalScrollBarVisibility="auto">
 		<ScrollViewer.Resources>
 			<Style BasedOn="{StaticResource CustomVerticalScrollBar}" TargetType="ScrollBar" />
-
 		</ScrollViewer.Resources>
 		<Grid>
 			<Grid.ColumnDefinitions>
@@ -97,6 +96,7 @@
 					</Ellipse.Triggers>
 				</Ellipse>
 				<Button
+					x:Name="btnPhotoFlipperSettings"
 					Grid.Row="2"
 					Grid.Column="1"
 					Width="36"
@@ -104,7 +104,8 @@
 					Margin="2"
 					Click="ButtonSettings_OnClick"
 					Content="{StaticResource SettingsIcon}"
-					Style="{StaticResource TransparentButton}" />
+					Style="{StaticResource TransparentButton}" 
+					IsEnabled="False"/>
 			</Grid>
 			<Grid
 				Grid.Row="1"

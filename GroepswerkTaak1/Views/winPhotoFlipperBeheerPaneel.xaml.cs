@@ -25,44 +25,78 @@ namespace GroepswerkTaak1.Views
 	{
 
 		public ObservableCollection<clsImagePhotoFlipper> Collection { get; private set; }
-		private clsImagePhotoFlipperRepo _repo = new();
-		public winPhotoFlipperBeheerPaneel(ObservableCollection<clsImagePhotoFlipper> collection)
+		private clsImagePhotoFlipperRepo _repo;
+		public winPhotoFlipperBeheerPaneel(clsPhotoFlipper photoFlipper)
 		{
-			Collection = collection;
+			_repo = photoFlipper.Repo;
+			Collection = photoFlipper.Repo.GetAll();
 			InitializeComponent();
 			DataContext = this;
+			ThumbnailList.SelectedIndex = 0;
+		}
 
+		private void ThumbnailList_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+		{
+			btnLeft.IsEnabled = ThumbnailList.SelectedIndex != 0;
+			btnRight.IsEnabled = ThumbnailList.SelectedIndex != Collection.Count - 1;
+		}
 
+		private void BtnLeft_OnClick(object sender, RoutedEventArgs e)
+		{
+			ThumbnailList.SelectedIndex -= 1;
+		}
 
+		private void BtnRight_OnClick(object sender, RoutedEventArgs e)
+		{
+			ThumbnailList.SelectedIndex += 1;
+		}
 
-			//var repo = new clsImagePhotoFlipperRepo();
-			//string[] names =
-			//[
-			//	"Codewars",
-			//	"Dotnet",
-			//	"Csharp",
-			//	"Bild",
-			//	"WallStreetJournal",
-			//	"Forbes",
-			//	"Syntra",
-			//	"Guardian",
-			//	"NYTimes"
-			//];
+		private void BtnDelete_OnClick(object sender, RoutedEventArgs e)
+		{
+			if (ThumbnailList.Items.Count == 1)
+			{
+				MessageBox.Show("The last item cannot be removed!");
+				return;
+			}
 
-			//foreach (string name in names)
-			//{
-			//	byte[] fullImage =
-			//		Helpers.clsFileToByteArrayLoader.ReadFileAsBytes($"C:\\Users\\PiotrZambrzycki\\Downloads\\{name}.png");
-			//	clsImagePhotoFlipper im = new()
-			//	{
-			//		ControlField = DBNull.Value,
-			//		FullImageBytes = fullImage,
-			//		ImageBytes = clsByteArrayToThumbnail.CreateThumbnail(fullImage, 250, 350),
-			//		FullImageId = -1
-			//	};
-			//	repo.Insert(im);
-			//}
+			var tobeDeletedIndex = ThumbnailList.SelectedIndex;
+			var afterDeletionIndex = tobeDeletedIndex == 0 ? 0 : tobeDeletedIndex - 1;
 
+			Collection.RemoveAt(ThumbnailList.SelectedIndex);
+			ThumbnailList.SelectedIndex = afterDeletionIndex;
 		}
 	}
 }
+
+
+
+
+
+
+//var repo = new clsImagePhotoFlipperRepo();
+//string[] names =
+//[
+//	"Codewars",
+//	"Dotnet",
+//	"Csharp",
+//	"Bild",
+//	"WallStreetJournal",
+//	"Forbes",
+//	"Syntra",
+//	"Guardian",
+//	"NYTimes"
+//];
+
+//foreach (string name in names)
+//{
+//	byte[] fullImage =
+//		Helpers.clsFileToByteArrayLoader.ReadFileAsBytes($"C:\\Users\\PiotrZambrzycki\\Downloads\\{name}.png");
+//	clsImagePhotoFlipper im = new()
+//	{
+//		ControlField = DBNull.Value,
+//		FullImageBytes = fullImage,
+//		ImageBytes = clsByteArrayToThumbnail.CreateThumbnail(fullImage, 250, 350),
+//		FullImageId = -1
+//	};
+//	repo.Insert(im);
+//}
