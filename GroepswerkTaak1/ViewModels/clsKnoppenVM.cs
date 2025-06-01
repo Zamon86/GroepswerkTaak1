@@ -5,12 +5,14 @@ using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media.Imaging;
 
 namespace GroepswerkTaak1.ViewModels
 {
@@ -24,7 +26,7 @@ namespace GroepswerkTaak1.ViewModels
 		//}
 
 
-
+		public ICommand cmdLoadPicture { get; set; }
 		public ICommand cmdSave {  get; set; }
 
         public ICommand cmdClose { get; set; }
@@ -55,7 +57,7 @@ namespace GroepswerkTaak1.ViewModels
 			{  // Validatie schrijven wanneer een ander item in ComboBx wordt geselecteerd
 				if (value != null)
 				{
-					//OpslaanCommando();
+					OpslaanCommando(null);
 					LoadData();
 				}
 				_MijnSelectedItem = value;
@@ -66,19 +68,100 @@ namespace GroepswerkTaak1.ViewModels
 
 		public clsKnoppenVM()
 		{
-			LoadData();
+			
 			// als test forceer ik het een item
 
 			cmdNew=new clsCustomCommand(NewCommando, canExecuteNew);
             cmdClose = new clsCustomCommand(CloseCommando, canExecuteClose);
 			cmdCancel = new clsCustomCommand(CancelCommando, canExecuteCancel);
-
+			cmdSave = new clsCustomCommand(OpslaanCommando,canExecuteSave);
+            cmdLoadPicture = new clsCustomCommand(LoadImageCommando, CanExecuteLoadImage);
+			cmdDelete = new clsCustomCommand(DeleteCommando, CanExecuteDelete);
+            LoadData();
             _MijnSelectedItem = repo.GetByID((short)1); // haal een item op met ID 1
 		}
 
+        private bool CanExecuteDelete(object obj)
+        {
+          return true;
+        }
+
+        private void DeleteCommando(object obj)
+        {
+            if (MijnSelectedItem != null)
+            {
+                
+                    if (repo.Delete(MijnSelectedItem))
+                    {
+                        _NewStatus = false; // reset de status na opslaan
+                        MijnSelectedItem.IsDirty = false; // reset dirty status
+                        MijnSelectedItem.ErrorBoodschap = string.Empty; // reset error boodschap
+                        MijnSelectedItem.MijnSelectedIndex = 0; // reset de index van de combobox
+                        MijnSelectedItem.MyVisibility = (int)Visibility.Visible;                                        // eventueel knoppen aan of uitzetten
+                        LoadData(); // herlaad de collectie om de nieuwe item te tonen
+                    }
+                    else
+                    {
+                        MijnSelectedItem.ErrorBoodschap = "Nieuwe knop kan niet worden Verwijdert";
+                    }
+                }
+            
+            
+        }
+
+        private bool CanExecuteLoadImage(object obj)
+        {
+            return MijnSelectedItem != null;
+        }
+
+        private void LoadImageCommando(object obj)
+        {
+            var openFileDialog = new Microsoft.Win32.OpenFileDialog
+            {
+                Filter = "Image files (*.png;*.jpg;*.jpeg;*.bmp)|*.png;*.jpg;*.jpeg;*.bmp"
+            };
+
+            if (openFileDialog.ShowDialog() == true)
+            {
+                string filePath = openFileDialog.FileName;
+
+                // Read image bytes
+                byte[] bytes = File.ReadAllBytes(filePath);
+                MijnSelectedItem.KnopImage = bytes;
+
+                // Optional: convert to ImageSource for preview
+                var bitmap = new BitmapImage();
+                using (var stream = new MemoryStream(bytes))
+                {
+                    bitmap.BeginInit();
+                    bitmap.CacheOption = BitmapCacheOption.OnLoad;
+                    bitmap.StreamSource = stream;
+                    bitmap.EndInit();
+                    bitmap.Freeze(); // Important for cross-thread use
+                }
+
+              //  MijnSelectedItem.KnopImage = File.ReadAllBytes(bitmap);
+            }
+        }
+
+        private bool canExecuteSave(object obj)
+        {
+			return true;
+   //        if (MijnSelectedItem != null  && MijnSelectedItem.IsDirty == true)//&& MijnSelectedItem.Error==null
+   //         {
+			//	return true;
+
+			//}
+   //         else
+   //         {
+   //             return false;
+   //         }
+        }
+
         private bool canExecuteCancel(object obj)
         {
-            return !_NewStatus;
+			return true;
+         //   return _NewStatus;
         }
 
         private void CancelCommando(object obj)
@@ -115,7 +198,7 @@ namespace GroepswerkTaak1.ViewModels
 			MijnCollectie = repo.GetAll();
 		}
 
-		private void OpslaanCommando()
+		private void OpslaanCommando(object obj)
 		{
 			if (MijnSelectedItem != null)
 			{
@@ -127,7 +210,7 @@ namespace GroepswerkTaak1.ViewModels
 						MijnSelectedItem.IsDirty = false; // reset dirty status
 						MijnSelectedItem.ErrorBoodschap = string.Empty; // reset error boodschap
 						MijnSelectedItem.MijnSelectedIndex = 0; // reset de index van de combobox
-																// eventueel knoppen aan of uitzetten
+						MijnSelectedItem.MyVisibility = (int)Visibility.Visible;										// eventueel knoppen aan of uitzetten
 						LoadData(); // herlaad de collectie om de nieuwe item te tonen
 					}
 					else
@@ -164,7 +247,7 @@ namespace GroepswerkTaak1.ViewModels
 
 			};
 			MijnSelectedItem = ItemToInsert;
-		MijnSelectedItem.MyVisibility=(int)Visibility.Hidden;
+		    MijnSelectedItem.MyVisibility=(int)Visibility.Hidden;
             _NewStatus=true;
 
 

@@ -1,8 +1,10 @@
 ﻿using GroepswerkTaak1.Model;
 using GroepswerkTaak1.ViewModels;
 using System.Collections.Generic;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media.Imaging;
 
 
 namespace GroepswerkTaak1
@@ -16,8 +18,8 @@ namespace GroepswerkTaak1
         {
             InitializeComponent();
         }
-        bool IsNew = false;
-        clsKnoppenVM clsKnoppenVM = new clsKnoppenVM();
+        //bool IsNew = false;
+        //clsKnoppenVM clsKnoppenVM = new clsKnoppenVM();
         private void cboKeuze_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
@@ -40,24 +42,24 @@ namespace GroepswerkTaak1
 
         private void btnOpslaan_Click(object sender, RoutedEventArgs e)
         {
-            clsKnoppenM MyLocalObject = DataContext as clsKnoppenM;
-            if (MyLocalObject is not null)
-            {
-                if (IsNew)
-                {
-                    clsKnoppenVM.repo.Insert(MyLocalObject);
-                }
-                else
-                {
-                    clsKnoppenVM.repo.Update(MyLocalObject);
-                }
-            }
-           // CboKeuzeOpvullen();
-           // cboKeuze.SelectedIndex = MijnSelectedIndex;
-            IsNew = false;
+           // clsKnoppenM MyLocalObject = DataContext as clsKnoppenM;
+           // if (MyLocalObject is not null)
+           // {
+           //     if (IsNew)
+           //     {
+           //         clsKnoppenVM.repo.Insert(MyLocalObject);
+           //     }
+           //     else
+           //     {
+           //         clsKnoppenVM.repo.Update(MyLocalObject);
+           //     }
+           // }
+           //// CboKeuzeOpvullen();
+           //// cboKeuze.SelectedIndex = MijnSelectedIndex;
+           // IsNew = false;
 
-            lblKeuze.Visibility = Visibility.Visible;
-            cboKeuze.Visibility = Visibility.Visible;
+           // lblKeuze.Visibility = Visibility.Visible;
+           // cboKeuze.Visibility = Visibility.Visible;
         }
 
         private void btnVerwijderen_Click(object sender, RoutedEventArgs e)
@@ -84,7 +86,8 @@ namespace GroepswerkTaak1
 
         private void btnLaadIcon_Click(object sender, RoutedEventArgs e)
         {
-
+            var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Images", "jpg.png");
+            Imagefield.Source = new BitmapImage(new Uri("D:\\programming\\C#\\groepstaak\\GroepswerkTaak1\\Images\\jpg.png"));
         }
     }
 }

@@ -26,6 +26,7 @@ namespace GroepswerkTaak1.DAL
 			{
 				if (reader != null)
 				{
+					MijnCollectie.Clear();
 					while (reader.Read())
 					{
 						clsKnoppenM image = new clsKnoppenM()
@@ -105,20 +106,25 @@ namespace GroepswerkTaak1.DAL
 
 		#region CodeVanDanny
 
-		//public bool Delete(clsKnoppenM entity)
-		//{
-		//	(DataTable DT, bool OK, string Boodschap) =
-		//					clsDAL.ExecuteDataTable(Properties.Resources.D_Knop,
-		//					clsDAL.Parameter("ID", entity.KnopId),
-		//					clsDAL.Parameter("User", Environment.UserName),
-		//					clsDAL.Parameter("ControlField", entity.ControlField),
-		//					clsDAL.Parameter("@ReturnValue", 0));
-		//	if (!OK)
-		//	{
-		//		entity.ErrorBoodschap = Boodschap;
-		//	}
-		//	return OK;
-		//}
+		public bool Delete(clsKnoppenM entity)
+		{
+			(DataTable DT, bool OK, string Boodschap) =
+							clsDAL.ExecuteDataTable(Properties.Resources.D_Knop,
+							clsDAL.Parameter("KnopID", entity.KnopId),
+							clsDAL.Parameter("UserNaam", Environment.UserName),
+							clsDAL.Parameter("ControlField", entity.ControlField),
+							clsDAL.Parameter("@ReturnValue", 0));
+			if (!OK)
+			{
+				entity.ErrorBoodschap = Boodschap;
+			}
+            else
+            {
+                isDataModified = true;
+            }
+
+            return OK;
+		}
 
 		//// public clsKnoppenM Find() { throw new NotImplementedException(); }  // not implemented
 
@@ -156,30 +162,37 @@ namespace GroepswerkTaak1.DAL
 
 		public bool Insert(clsKnoppenM entity)
 		{
-			(DataTable DT, bool OK, string Boodschap) =
+			bool OK = false;
+			(DataTable DT,  OK, string Boodschap) =
 							clsDAL.ExecuteDataTable(Properties.Resources.I_Knop,
-							clsDAL.Parameter("Naam", entity.KnopNaam),
+							clsDAL.Parameter("KnopNaam", entity.KnopNaam),
 							clsDAL.Parameter("Tekst", entity.KnopTekst),
 							clsDAL.Parameter("Positie", entity.KnopPositie),
-							clsDAL.Parameter("knopImage", entity.KnopImage),
+							clsDAL.Parameter("Image", entity.KnopImage),
+							clsDAL.Parameter("UserNaam", Environment.UserName),
 							clsDAL.Parameter("@ReturnValue", 0));
 			if (!OK)
 			{
 				entity.ErrorBoodschap = Boodschap;
-			}
-			return OK;
+            }
+            else
+            {
+                isDataModified = true;
+            }
+            return OK;
 		}
 		public bool Update(clsKnoppenM entity)
 		{
 			(DataTable DT, bool OK, string Boodschap) =
-							clsDAL.ExecuteDataTable(Properties.Resources.I_Knop,
-							clsDAL.Parameter("ID", entity.KnopId),
+							clsDAL.ExecuteDataTable(Properties.Resources.U_Knop,
+							clsDAL.Parameter("KnopID", entity.KnopId),
 							clsDAL.Parameter("Naam", entity.KnopNaam),
 							clsDAL.Parameter("Tekst", entity.KnopTekst),
 							clsDAL.Parameter("Positie", entity.KnopPositie),
-							clsDAL.Parameter("knopImage", entity.KnopImage),
-							clsDAL.Parameter("ControlField", entity.ControlField),
-							clsDAL.Parameter("@ReturnValue", 0));
+							clsDAL.Parameter("Image", entity.KnopImage),
+                            clsDAL.Parameter("UserNaam", Environment.UserName),
+                            clsDAL.Parameter("ControlField", entity.ControlField),
+                            clsDAL.Parameter("@ReturnValue", 0));
 			if (!OK)
 			{
 				entity.ErrorBoodschap = Boodschap;
@@ -187,7 +200,8 @@ namespace GroepswerkTaak1.DAL
 				#endregion
 
 			}
-			return OK;
+         
+            return OK;
 		}
 	}
 }
