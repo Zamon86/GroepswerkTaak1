@@ -12,7 +12,7 @@ namespace GroepswerkTaak1.DAL
 		private int _queryResult = 0;
 		
 
-		private void UpdateCollection()
+		public void UpdateCollection()
 		{
 			_images.Clear();
 			
@@ -56,7 +56,7 @@ namespace GroepswerkTaak1.DAL
 
 		public bool Delete(clsImagePhotoFlipper entity)
 		{
-			clsDAL.ExecuteDataTable(Properties.Resources.S_Images, ref _queryResult, clsDAL.Parameter("ID", entity.ImagePhotoFlipperID),
+			clsDAL.ExecuteDataTable(Properties.Resources.D_Image, ref _queryResult, clsDAL.Parameter("ID", entity.ImagePhotoFlipperID),
 				clsDAL.Parameter("User", Environment.UserName),
 				clsDAL.Parameter("ControlField", entity.ControlField),
 				clsDAL.Parameter("@ReturnValue", 0));

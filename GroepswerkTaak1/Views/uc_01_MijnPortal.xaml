@@ -8,7 +8,7 @@
 	xmlns:helpers="clr-namespace:GroepswerkTaak1.Helpers"
 	xmlns:local="clr-namespace:GroepswerkTaak1"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-	d:DesignHeight="450"
+	d:DesignHeight="600"
 	d:DesignWidth="800"
 	Background="{StaticResource MainBackgroundColor}"
 	mc:Ignorable="d">
@@ -18,7 +18,6 @@
 	<ScrollViewer VerticalScrollBarVisibility="auto">
 		<ScrollViewer.Resources>
 			<Style BasedOn="{StaticResource CustomVerticalScrollBar}" TargetType="ScrollBar" />
-
 		</ScrollViewer.Resources>
 		<Grid>
 			<Grid.ColumnDefinitions>
@@ -39,7 +38,7 @@
 				<Grid.RowDefinitions>
 					<RowDefinition Height="35" />
 					<RowDefinition Height="Auto" />
-					<RowDefinition Height="50" />
+					<RowDefinition Height="65" />
 				</Grid.RowDefinitions>
 				<Image
 					x:Name="PhotoFlipperImage"
@@ -70,40 +69,18 @@
 					x:Name="LoadingAnimation"
 					Grid.Row="1"
 					Grid.Column="1"
-					Width="100"
-					Height="100"
-					Margin="120,60,120,60"
-					RenderTransformOrigin="0.5 0.5"
-					Stroke="{StaticResource ThemeColor2}"
-					StrokeDashArray="47 16"
-					StrokeDashCap="Round"
-					StrokeThickness="5"
-					Visibility="Visible">
-					<Ellipse.RenderTransform>
-						<RotateTransform x:Name="Rotation" Angle="0" />
-					</Ellipse.RenderTransform>
-					<Ellipse.Triggers>
-						<EventTrigger RoutedEvent="Loaded">
-							<BeginStoryboard>
-								<Storyboard RepeatBehavior="Forever">
-									<DoubleAnimation
-										Storyboard.TargetName="Rotation"
-										Storyboard.TargetProperty="Angle"
-										From="0"
-										To="360" />
-								</Storyboard>
-							</BeginStoryboard>
-						</EventTrigger>
-					</Ellipse.Triggers>
-				</Ellipse>
+					Style="{StaticResource LoadingSpinnerStyle}" />
+
 				<Button
+					x:Name="btnPhotoFlipperSettings"
 					Grid.Row="2"
 					Grid.Column="1"
-					Width="36"
-					Height="36"
+					Width="50"
+					Height="50"
 					Margin="2"
 					Click="ButtonSettings_OnClick"
 					Content="{StaticResource SettingsIcon}"
+					IsEnabled="False"
 					Style="{StaticResource TransparentButton}" />
 			</Grid>
 			<Grid

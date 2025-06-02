@@ -8,7 +8,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="Groepswerk Taak 1"
     Width="1200"
-    Height="750"
+    Height="800"
     MinWidth="550"
     Loaded="Window_Loaded"
     Closing="DataWindow_Closing"

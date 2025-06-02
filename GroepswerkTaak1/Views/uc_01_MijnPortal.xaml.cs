@@ -38,14 +38,15 @@ namespace GroepswerkTaak1.Views
 			await PhotoFlipper.InitializeAsync();
 			LoadingAnimation.Visibility = Visibility.Collapsed;
 			PhotoFlipperImage.Visibility = Visibility.Visible;
+			btnPhotoFlipperSettings.IsEnabled = true;
 
 		}
 
-		
+
 		//Deze code definieert een methode die de Click-gebeurtenis afhandelt
 		//voor 6 knoppen in de UI. Het checkt of bepaalde tab al bestaat.
 		//Als het bestaat, wordt deze geopend. Anders gaat het nieuwe tab maken.
-			public void btnOpenTab_Click(object sender, RoutedEventArgs e)
+		public void btnOpenTab_Click(object sender, RoutedEventArgs e)
 		{
 			if (Window.GetWindow(this) is not MainWindow mainWindow) return;
 
@@ -64,10 +65,10 @@ namespace GroepswerkTaak1.Views
 				mainTabControl.SelectedItem = existingTab;
 				return;
 			}
-			
+
 			var newTab = new clsCustomTabItem
 			{
-				
+
 				Background = Application.Current.Resources["ThemeColor1"] as Brush,
 				BackgroundHighlighted = Application.Current.Resources["ThemeColor2"] as Brush,
 				Header = tabName
@@ -77,23 +78,26 @@ namespace GroepswerkTaak1.Views
 			mainTabControl.SelectedItem = newTab;
 		}
 
+		//Deze code ondersteunt klikken op fotoflipper
 		private void PhotoFlipperImage_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
 		{
 			if (sender is not Image image) return;
 			var source = PhotoFlipper?.ActiveImage?.ImageBytes;
 			if (source == null) return;
-			
+
 			clsFileHelper.OpenBytesAsTempFile(source);
 		}
-        private void OpenUserControl(UserControl myUserControl)
-        {
-            if (grdExpanders.Children.Count > 1)
-            {
-                grdExpanders.Children.RemoveAt(1);
-            }
-            grdExpanders.Children.Add(myUserControl);
-        }
-        private void ListBox_Selected(object sender, RoutedEventArgs e)
+
+		private void OpenUserControl(UserControl myUserControl)
+		{
+			if (grdExpanders.Children.Count > 1)
+			{
+				grdExpanders.Children.RemoveAt(1);
+			}
+			grdExpanders.Children.Add(myUserControl);
+		}
+    
+		private void ListBox_Selected(object sender, RoutedEventArgs e)
         {
             String keuze = ((ListBoxItem)sender).Tag.ToString();
             switch (keuze)
@@ -124,10 +128,29 @@ namespace GroepswerkTaak1.Views
 
         }
 
-        private void ButtonSettings_OnClick(object sender, RoutedEventArgs e)
-        {
-	        var window = new winPhotoFlipperBeheerPaneel(new ObservableCollection<clsImagePhotoFlipper>());
-					window.Show();
-        }
+		private void ButtonSettings_OnClick(object sender, RoutedEventArgs e)
+		{
+			if (PhotoFlipper != null)
+			{
+				var window = new winPhotoFlipperBeheerPaneel(PhotoFlipper);
+
+				// luisteren om te zien of een venster gesloten is
+				window.Closed += (s, args) =>
+				{
+					btnPhotoFlipperSettings.IsEnabled = true;
+					PhotoFlipper.Timer.Start();
+					PhotoFlipperImage.Opacity = 1;
+					PhotoFlipperImage.IsEnabled = true;
+				};
+
+				PhotoFlipper.Timer.Stop();
+				PhotoFlipperImage.IsEnabled = false;
+				PhotoFlipperImage.Opacity = 0.6;
+				window.Show();
+			}
+
+			btnPhotoFlipperSettings.IsEnabled = false;
+		}
+
 	}
 }
