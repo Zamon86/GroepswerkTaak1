@@ -210,7 +210,64 @@
         </Style>
 
 
+        <!--#region ButtonStyle4Expander-->
+        <LinearGradientBrush x:Key="btnPas" StartPoint="1,0" EndPoint="1,1">
+            <GradientStop Color="#88D7D8" Offset="0.0" />
+            <GradientStop Color="#88D7D8" Offset="0.5" />
+            <GradientStop Color="#FF3BBCBD" Offset="0.5" />
+            <GradientStop Color="#FF3BBCBD" Offset="1.0" />
+        </LinearGradientBrush>
+        <LinearGradientBrush x:Key="btnAct" StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Color="Yellow" Offset="0.0" />
+            <GradientStop Color="YellowGreen" Offset="1.1" />
+        </LinearGradientBrush>
+        <Style x:Key="ExpanderExtraButton" TargetType="Button">
+            <Setter Property="Width" Value="15" />
+            <Setter Property="Height" Value="15" />
+            <Setter Property="Background" Value="{StaticResource btnPas}" />
+            <Setter Property="BorderBrush" Value="#FF707070" />
+            <Setter Property="BorderThickness" Value="0.5" />
+            <Setter Property="Padding" Value="2,0,2,0" />
+            <Setter Property="Margin" Value="0,0,5,0" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="myBorder" 
+                                CornerRadius="2"
+                                Background="{TemplateBinding Background}" 
+                                BorderBrush="{TemplateBinding BorderBrush}" 
+                                BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" TargetName="myBorder" Value="{StaticResource btnAct}" />
+                                <Setter Property="BorderBrush" TargetName="myBorder" Value="#FF434343" />
+                            </Trigger>
+                            <Trigger Property="IsFocused" Value="True">
+                                <Setter Property="Background" TargetName="myBorder" Value="{StaticResource btnAct}" />
+                                <Setter Property="BorderBrush" TargetName="myBorder" Value="#FFFFFFFF" />
+                                <Setter Property="BorderThickness" TargetName="myBorder" Value="3" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <!--#endregion-->
+        
+        <!--#region TextBlockStyle4Expander-->
+        <Style x:Key="ExpanderExtraTextBlock" TargetType="TextBlock">
+            <Setter Property="Height" Value="15" />
+            <Setter Property="Margin" Value="10,10,0,0"/>
+            <Setter Property="FontSize" Value="10"/>
+            <Setter Property="Foreground" Value="Blue"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="Text" Value="Hier kan je snelkoppelingen toevoegen ."/>
+        </Style>
+        <!--#endregion-->
 
+        <!--#region ExpanderStyle-->
         <!--  Stijl voor de Expander  -->
 
         <!--  BEGIN kleuren aan te passen volgens de kleuren van Pjotr  -->
@@ -396,7 +453,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
-
+<!--#endregion-->
 
         <!--  Vraagteken icon uit Metro Studio 5 gehaald  -->
         <Path
