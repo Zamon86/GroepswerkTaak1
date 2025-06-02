@@ -87,6 +87,7 @@ namespace GroepswerkTaak1.Views
 
 			clsFileHelper.OpenBytesAsTempFile(source);
 		}
+
 		private void OpenUserControl(UserControl myUserControl)
 		{
 			if (grdExpanders.Children.Count > 1)
@@ -95,34 +96,37 @@ namespace GroepswerkTaak1.Views
 			}
 			grdExpanders.Children.Add(myUserControl);
 		}
+    
 		private void ListBox_Selected(object sender, RoutedEventArgs e)
-		{
-			String keuze = ((ListBoxItem)sender).Tag.ToString();
-			switch (keuze)
-			{
-				case "1":
-					var _uc_Knoppen = new uc_Knoppen();
-					OpenUserControl(_uc_Knoppen);
-					break;
-				case "2":
-					break;
-				case "3":
-					var _uc_Users = new uc_Users();
-					OpenUserControl(_uc_Users);
+        {
+            String keuze = ((ListBoxItem)sender).Tag.ToString();
+            switch (keuze)
+            {
+             case "1":
+                    var _uc_Knoppen = new uc_Knoppen();
+                    OpenUserControl(_uc_Knoppen);
+                    break;
+             case "2":
+                break;
+             case "3":
+                    var _uc_Users = new uc_Users();
+                    OpenUserControl(_uc_Users);
+                   
+                break;
+             case "4":
+                break;
+             case "5":
+                break;
+             case "9":
+                    winLoggingFilter _winLoggingFilter = new winLoggingFilter();
+                    _winLoggingFilter.ShowDialog();
+                    break;
+			 default:
+                MessageBox.Show("Onbekende keuze gemaakt.");
+                break;
+            }
 
-					break;
-				case "4":
-					break;
-				case "5":
-					break;
-				case "6":
-					break;
-				default:
-					MessageBox.Show("Onbekende keuze gemaakt.");
-					break;
-			}
-
-		}
+        }
 
 		private void ButtonSettings_OnClick(object sender, RoutedEventArgs e)
 		{
@@ -147,5 +151,6 @@ namespace GroepswerkTaak1.Views
 
 			btnPhotoFlipperSettings.IsEnabled = false;
 		}
+
 	}
 }
