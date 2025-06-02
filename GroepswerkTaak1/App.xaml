@@ -85,6 +85,36 @@
 			</Setter>
 		</Style>
 
+		<!--  Style loading spinner  -->
+		<Style x:Key="LoadingSpinnerStyle" TargetType="Ellipse">
+			<Setter Property="Width" Value="100" />
+			<Setter Property="Height" Value="100" />
+			<Setter Property="Margin" Value="120,60,120,60" />
+			<Setter Property="RenderTransformOrigin" Value="0.5,0.5" />
+			<Setter Property="Stroke" Value="{StaticResource ThemeColor2}" />
+			<Setter Property="StrokeDashArray" Value="47 16" />
+			<Setter Property="StrokeDashCap" Value="Round" />
+			<Setter Property="StrokeThickness" Value="5" />
+			<Setter Property="RenderTransform">
+				<Setter.Value>
+					<RotateTransform x:Name="Rotation" Angle="0" />
+				</Setter.Value>
+			</Setter>
+			<Style.Triggers>
+				<EventTrigger RoutedEvent="FrameworkElement.Loaded">
+					<BeginStoryboard>
+						<Storyboard RepeatBehavior="Forever">
+							<DoubleAnimation
+								Storyboard.TargetProperty="(UIElement.RenderTransform).(RotateTransform.Angle)"
+								From="0"
+								To="360"
+								Duration="0:0:1" />
+						</Storyboard>
+					</BeginStoryboard>
+				</EventTrigger>
+			</Style.Triggers>
+		</Style>
+
 		<!--  Style Transparant button  -->
 		<Style x:Key="TransparentButton" TargetType="Button">
 			<Setter Property="Background" Value="Transparent" />

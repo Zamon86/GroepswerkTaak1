@@ -134,8 +134,14 @@ namespace GroepswerkTaak1.Views
 				window.Closed += (s, args) =>
 				{
 					btnPhotoFlipperSettings.IsEnabled = true;
+					PhotoFlipper.Timer.Start();
+					PhotoFlipperImage.Opacity = 1;
+					PhotoFlipperImage.IsEnabled = true;
 				};
-				
+
+				PhotoFlipper.Timer.Stop();
+				PhotoFlipperImage.IsEnabled = false;
+				PhotoFlipperImage.Opacity = 0.6;
 				window.Show();
 			}
 

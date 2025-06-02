@@ -40,6 +40,7 @@
 			FontSize="20"
 			FontWeight="Bold" />
 		<Image
+			x:Name="SelectedImage"
 			Grid.Row="2"
 			Grid.Column="1"
 			MaxWidth="250"
@@ -56,6 +57,12 @@
 					Color="Black" />
 			</Image.Effect>
 		</Image>
+		<Ellipse
+			x:Name="LoadingAnimation"
+			Grid.Row="2"
+			Grid.Column="1"
+			Style="{StaticResource LoadingSpinnerStyle}"
+			Visibility="Collapsed" />
 		<Button
 			x:Name="btnLeft"
 			Grid.Row="2"
@@ -73,19 +80,21 @@
 			<Button
 				x:Name="btnNew"
 				Margin="10,5"
+				Click="BtnNew_OnClick"
 				Content="{StaticResource AddIcon}"
-				ToolTip="Add new Image" />
+				ToolTip="Add new Image/Images" />
 			<Button
 				x:Name="btnReplace"
 				Margin="10,5"
+				Click="BtnReplace_OnClick"
 				Content="{StaticResource ReplaceIcon}"
 				ToolTip="Replace Image" />
 			<Button
 				x:Name="btnDelete"
 				Margin="10,5"
+				Click="BtnDelete_OnClick"
 				Content="{StaticResource DeleteIcon}"
-				ToolTip="Delete Image"
-				Click="BtnDelete_OnClick"/>
+				ToolTip="Delete Image" />
 		</StackPanel>
 
 		<Button
