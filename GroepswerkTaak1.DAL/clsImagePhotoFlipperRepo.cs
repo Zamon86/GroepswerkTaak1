@@ -1,6 +1,5 @@
 ﻿using GroepswerkTaak1.Model;
 using System.Collections.ObjectModel;
-using System.Runtime.ConstrainedExecution;
 
 
 namespace GroepswerkTaak1.DAL
@@ -102,18 +101,18 @@ namespace GroepswerkTaak1.DAL
 			return Helpers.clsSqlReturnValueHandler.HandleSqlReturnValue(_queryResult, entity);
 		}
 
-		//public bool Update (clsImagePhotoFlipper entity)
-		//{
-		//	clsDAL.ExecuteDataTable(Properties.Resources.U_Image, ref _queryResult, clsDAL.Parameter("ID", entity.ImagePhotoFlipperID),
-		//		clsDAL.Parameter("Image", entity.ImageBytes),
-		//		clsDAL.Parameter("User", Environment.UserName),
-		//		clsDAL.Parameter("ControlField", entity.ControlField),
-		//		clsDAL.Parameter("@ReturnValue", 0));
+		public bool Update(clsImagePhotoFlipper entity)
+		{
+			clsDAL.ExecuteDataTable(Properties.Resources.U_Image, ref _queryResult, clsDAL.Parameter("ID", entity.ImagePhotoFlipperID),
+				clsDAL.Parameter("Image", entity.ImageBytes),
+				clsDAL.Parameter("User", Environment.UserName),
+				clsDAL.Parameter("ControlField", entity.ControlField),
+				clsDAL.Parameter("@ReturnValue", 0));
 
-		//	_isDataModified = true;
+			_isDataModified = true;
 
-		//	return Helpers.clsSqlReturnValueHandler.HandleSqlReturnValue(_queryResult, entity);
-		//}
+			return Helpers.clsSqlReturnValueHandler.HandleSqlReturnValue(_queryResult, entity);
+		}
 
 		private clsImagePhotoFlipper GetErrorImage()
 		{
@@ -128,6 +127,21 @@ namespace GroepswerkTaak1.DAL
 			};
 
 			return image;
+		}
+
+		public bool LoadImageFull(clsImagePhotoFlipper entity)
+		{
+			var dt = clsDAL.ExecuteDataTable(Properties.Resources.S_ImageFull, ref _queryResult, clsDAL.Parameter("ImageId", entity.FullImageId),
+				clsDAL.Parameter("@ReturnValue", 0));
+			
+			var result= Helpers.clsSqlReturnValueHandler.HandleSqlReturnValue(_queryResult, entity);
+
+			if (result && dt.Rows.Count > 0)
+			{
+				entity.FullImageBytes = (byte[])dt.Rows[0]["Image"];
+			}
+			
+			return result;
 		}
 	}
 }

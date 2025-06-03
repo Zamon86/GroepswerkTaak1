@@ -149,10 +149,9 @@
 					Click="btnOpenTab_Click"
 					MainIcon="{StaticResource AdminButtonImage}"
 					Tag="Admin paneel"
-					Visibility="{Binding UserRoleId, Converter={StaticResource RoleToVisibilityConverter}}" />
+					Visibility="{Binding Rol, Source={x:Static local:App.Current}, Converter={StaticResource RoleToVisibilityConverter}}" />
 
 			</Grid>
-			<!--  ruimte voor expander  -->
 			<Grid
 				x:Name="grdExpanders"
 				Grid.Row="0"
@@ -321,12 +320,6 @@
 					</ItemsControl.ItemTemplate>
 				</ItemsControl>
 			</ScrollViewer>
-			<!--<ScrollViewer
-				x:Name="scvKnoppen"
-				Grid.Row="0"
-				Grid.RowSpan="2"
-				Grid.Column="0" />-->
-			<!--  einde knoppen  -->
 		</Grid>
 	</ScrollViewer>
 </UserControl>

@@ -84,5 +84,10 @@ namespace GroepswerkTaak1
 			ImageObjectScaleTransform.BeginAnimation(ScaleTransform.ScaleXProperty, flipOut);
 			
 		}
+
+		public bool SetImageFull(clsImagePhotoFlipper imagePhotoFlipper)
+		{
+			return Repo.LoadImageFull(imagePhotoFlipper);
+		}
 	}
 }

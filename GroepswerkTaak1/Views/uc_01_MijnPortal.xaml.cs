@@ -82,10 +82,22 @@ namespace GroepswerkTaak1.Views
 		private void PhotoFlipperImage_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
 		{
 			if (sender is not Image image) return;
-			var source = PhotoFlipper?.ActiveImage?.ImageBytes;
-			if (source == null) return;
-
-			clsFileHelper.OpenBytesAsTempFile(source);
+			if (PhotoFlipper?.ActiveImage is clsImagePhotoFlipper activeImage)
+			{
+				if (activeImage.FullImageBytes == null)
+				{
+					if (PhotoFlipper.Repo.LoadImageFull(activeImage))
+					{
+						clsFileHelper.OpenBytesAsTempFile(activeImage.FullImageBytes!);
+					}
+				}
+				else
+				{
+					var source = activeImage.FullImageBytes;
+					if (source == null) return;
+					clsFileHelper.OpenBytesAsTempFile(source);
+				}
+			}
 		}
 
 		private void OpenUserControl(UserControl myUserControl)
