@@ -2,12 +2,13 @@
 	x:Class="GroepswerkTaak1.Views.winPhotoFlipperBeheerPaneel"
 	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:converters="clr-namespace:GroepswerkTaak1.Converters"
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-	xmlns:local="clr-namespace:GroepswerkTaak1.Views"
+	xmlns:local="clr-namespace:GroepswerkTaak1"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	Title="Photo Flipper Beheerpaneel"
 	Width="800"
-	Height="700"
+	Height="730"
 	mc:Ignorable="d">
 	<Window.Resources>
 		<Style BasedOn="{StaticResource ToolTipStyle}" TargetType="ToolTip" />
@@ -16,169 +17,206 @@
 			<Setter Property="Width" Value="50" />
 			<Setter Property="Height" Value="50" />
 		</Style>
+		<converters:clsMultiStringConverter x:Key="MultiStringConverter" />
 	</Window.Resources>
-	<Grid Background="{StaticResource MainBackgroundColor}">
-		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="*" />
-			<ColumnDefinition Width="auto" />
-			<ColumnDefinition Width="*" />
-		</Grid.ColumnDefinitions>
-		<Grid.RowDefinitions>
-			<RowDefinition Height="10" />
-			<RowDefinition Height="50" />
-			<RowDefinition Height="370" />
-			<RowDefinition Height="Auto" />
-			<RowDefinition Height="*" />
-			<RowDefinition Height="Auto" />
-			<RowDefinition Height="10" />
-		</Grid.RowDefinitions>
+	<DockPanel LastChildFill="True">
 		<Label
-			Grid.Row="1"
-			Grid.ColumnSpan="3"
-			HorizontalAlignment="Center"
+			HorizontalAlignment="Stretch"
+			HorizontalContentAlignment="Center"
+			Background="{StaticResource MainBackgroundColor}"
 			Content="Photo Flipper Beheerpaneel"
+			DockPanel.Dock="Top"
 			FontSize="20"
 			FontWeight="Bold" />
-		<Image
-			x:Name="SelectedImage"
-			Grid.Row="2"
-			Grid.Column="1"
-			MaxWidth="250"
-			MaxHeight="350"
-			Margin="10"
-			Cursor="Hand"
-			Source="{Binding SelectedItem.ImageBytes, ElementName=ThumbnailList}">
-			<Image.Effect>
-				<DropShadowEffect
-					BlurRadius="10"
-					Direction="-45"
-					Opacity="0.5"
-					ShadowDepth="5"
-					Color="Black" />
-			</Image.Effect>
-		</Image>
-		<Ellipse
-			x:Name="LoadingAnimation"
-			Grid.Row="2"
-			Grid.Column="1"
-			Style="{StaticResource LoadingSpinnerStyle}"
-			Visibility="Collapsed" />
-		<Button
-			x:Name="btnLeft"
-			Grid.Row="2"
-			Grid.Column="0"
-			HorizontalAlignment="Left"
-			Click="BtnLeft_OnClick"
-			Content="{StaticResource ArrowLeftPhotoGallery}" />
+		<Grid
+			Name="grdFooter"
+			Height="20"
+			Margin="3"
+			Background="{StaticResource MainBackgroundColor}"
+			DockPanel.Dock="Bottom">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*" />
+				<ColumnDefinition Width="auto" />
+			</Grid.ColumnDefinitions>
+			<Label
+				Name="lblUser"
+				Grid.Column="1"
+				Margin="0,0,10,0"
+				Padding="2"
+				HorizontalAlignment="Right"
+				VerticalAlignment="Center"
+				FontSize="12"
+				FontWeight="Bold">
+				<Label.Content>
+					<MultiBinding Converter="{StaticResource MultiStringConverter}">
+						<Binding Path="VoorNaam" Source="{x:Static local:App.Gebruiker}" />
+						<Binding Path="Naam" Source="{x:Static local:App.Gebruiker}" />
+						<Binding Path="RolNaam" Source="{x:Static local:App.Rol}" />
+					</MultiBinding>
+				</Label.Content>
+			</Label>
+		</Grid>
+		<Grid>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*" />
+				<ColumnDefinition Width="auto" />
+				<ColumnDefinition Width="*" />
+			</Grid.ColumnDefinitions>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="10" />
+				<RowDefinition Height="50" />
+				<RowDefinition Height="370" />
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="*" />
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="10" />
+			</Grid.RowDefinitions>
 
-		<StackPanel
-			Grid.Row="3"
-			Grid.Column="1"
-			Margin="10"
-			HorizontalAlignment="Center"
-			Orientation="Horizontal">
+			<Image
+				x:Name="SelectedImage"
+				Grid.Row="2"
+				Grid.Column="1"
+				MaxWidth="250"
+				MaxHeight="350"
+				Margin="10"
+				Cursor="Hand"
+				Source="{Binding SelectedItem.ImageBytes, ElementName=ThumbnailList}">
+				<Image.Effect>
+					<DropShadowEffect
+						BlurRadius="10"
+						Direction="-45"
+						Opacity="0.5"
+						ShadowDepth="5"
+						Color="Black" />
+				</Image.Effect>
+			</Image>
+			<Ellipse
+				x:Name="LoadingAnimation"
+				Grid.Row="2"
+				Grid.Column="1"
+				Style="{StaticResource LoadingSpinnerStyle}"
+				Visibility="Collapsed" />
 			<Button
-				x:Name="btnNew"
-				Margin="10,5"
-				Click="BtnNew_OnClick"
-				Content="{StaticResource AddIcon}"
-				ToolTip="Add new Image/Images" />
-			<Button
-				x:Name="btnReplace"
-				Margin="10,5"
-				Click="BtnReplace_OnClick"
-				Content="{StaticResource ReplaceIcon}"
-				ToolTip="Replace Image" />
-			<Button
-				x:Name="btnDelete"
-				Margin="10,5"
-				Click="BtnDelete_OnClick"
-				Content="{StaticResource DeleteIcon}"
-				ToolTip="Delete Image" />
-		</StackPanel>
+				x:Name="btnLeft"
+				Grid.Row="2"
+				Grid.Column="0"
+				HorizontalAlignment="Left"
+				Click="BtnLeft_OnClick"
+				Content="{StaticResource ArrowLeftPhotoGallery}" />
 
-		<Button
-			x:Name="btnRight"
-			Grid.Row="2"
-			Grid.Column="2"
-			HorizontalAlignment="Right"
-			Click="BtnRight_OnClick"
-			Content="{StaticResource ArrowRightPhotoGallery}" />
+			<StackPanel
+				Grid.Row="3"
+				Grid.Column="1"
+				Margin="10"
+				HorizontalAlignment="Center"
+				Orientation="Horizontal">
+				<Button
+					x:Name="btnNew"
+					Margin="10,5"
+					Click="BtnNew_OnClick"
+					Content="{StaticResource AddIcon}"
+					ToolTip="Add new Image/Images" />
+				<Button
+					x:Name="btnReplace"
+					Margin="10,5"
+					Click="BtnReplace_OnClick"
+					Content="{StaticResource ReplaceIcon}"
+					ToolTip="Replace Image" />
+				<Button
+					x:Name="btnDelete"
+					Margin="10,5"
+					Click="BtnDelete_OnClick"
+					Content="{StaticResource DeleteIcon}"
+					ToolTip="Delete Image" />
+			</StackPanel>
 
-		<ListBox
-			x:Name="ThumbnailList"
-			Grid.Row="5"
-			Grid.Column="0"
-			Grid.ColumnSpan="3"
-			Height="100"
-			VerticalAlignment="Bottom"
-			Background="Transparent"
-			BorderThickness="0"
-			ItemsSource="{Binding Collection}"
-			ScrollViewer.CanContentScroll="False"
-			ScrollViewer.HorizontalScrollBarVisibility="Auto"
-			ScrollViewer.VerticalScrollBarVisibility="Disabled"
-			SelectionChanged="ThumbnailList_OnSelectionChanged"
-			SelectionMode="Single">
-			<ListBox.ItemsPanel>
-				<ItemsPanelTemplate>
-					<StackPanel VerticalAlignment="Bottom" Orientation="Horizontal" />
-				</ItemsPanelTemplate>
-			</ListBox.ItemsPanel>
-			<ListBox.ItemTemplate>
-				<DataTemplate>
-					<Border
-						x:Name="ThumbnailBorder"
-						Margin="5"
-						BorderBrush="Transparent"
-						BorderThickness="4"
-						ClipToBounds="True"
-						CornerRadius="5">
-						<Image
-							x:Name="ThumbnailImage"
-							Width="90"
-							Height="90"
-							Source="{Binding ImageBytes}"
-							Stretch="UniformToFill">
-							<Image.Clip>
-								<RectangleGeometry
-									RadiusX="4"
-									RadiusY="4"
-									Rect="0,0,90,90" />
-							</Image.Clip>
-						</Image>
-					</Border>
-					<DataTemplate.Triggers>
-						<Trigger Property="IsEnabled" Value="True">
-							<Setter TargetName="ThumbnailImage" Property="Opacity" Value="0.6" />
-						</Trigger>
-						<DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=ListBoxItem}, Path=IsMouseOver}" Value="True">
-							<Setter TargetName="ThumbnailImage" Property="Opacity" Value="0.8" />
-						</DataTrigger>
-						<DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=ListBoxItem}, Path=IsSelected}" Value="True">
-							<Setter TargetName="ThumbnailImage" Property="Opacity" Value="1" />
-							<Setter TargetName="ThumbnailBorder" Property="BorderBrush" Value="{StaticResource ThemeColor2}" />
-						</DataTrigger>
-					</DataTemplate.Triggers>
-				</DataTemplate>
-			</ListBox.ItemTemplate>
-			<ListBox.ItemContainerStyle>
-				<Style TargetType="ListBoxItem">
-					<Setter Property="Background" Value="Transparent" />
-					<Setter Property="BorderBrush" Value="Transparent" />
-					<Setter Property="BorderThickness" Value="0" />
-					<Setter Property="Padding" Value="0" />
-					<Setter Property="Margin" Value="0" />
-					<Setter Property="FocusVisualStyle" Value="{x:Null}" />
-					<Setter Property="Template">
-						<Setter.Value>
-							<ControlTemplate TargetType="ListBoxItem">
-								<ContentPresenter />
-							</ControlTemplate>
-						</Setter.Value>
-					</Setter>
-				</Style>
-			</ListBox.ItemContainerStyle>
-		</ListBox>
-	</Grid>
+			<Button
+				x:Name="btnRight"
+				Grid.Row="2"
+				Grid.Column="2"
+				HorizontalAlignment="Right"
+				Click="BtnRight_OnClick"
+				Content="{StaticResource ArrowRightPhotoGallery}" />
+
+			<ListBox
+				x:Name="ThumbnailList"
+				Grid.Row="5"
+				Grid.Column="0"
+				Grid.ColumnSpan="3"
+				Height="100"
+				VerticalAlignment="Bottom"
+				Background="Transparent"
+				BorderThickness="0"
+				ItemsSource="{Binding Collection}"
+				ScrollViewer.CanContentScroll="False"
+				ScrollViewer.HorizontalScrollBarVisibility="Auto"
+				ScrollViewer.VerticalScrollBarVisibility="Disabled"
+				SelectionChanged="ThumbnailList_OnSelectionChanged"
+				SelectionMode="Single"
+				SizeChanged="ThumbnailList_OnSizeChanged">
+				<ListBox.ItemsPanel>
+					<ItemsPanelTemplate>
+						<StackPanel VerticalAlignment="Bottom" Orientation="Horizontal" />
+					</ItemsPanelTemplate>
+				</ListBox.ItemsPanel>
+				<ListBox.ItemTemplate>
+					<DataTemplate>
+						<Border
+							x:Name="ThumbnailBorder"
+							Margin="5"
+							BorderBrush="Transparent"
+							BorderThickness="4"
+							ClipToBounds="True"
+							CornerRadius="5">
+							<Image
+								x:Name="ThumbnailImage"
+								Width="90"
+								Height="90"
+								Source="{Binding ImageBytes}"
+								Stretch="UniformToFill">
+								<Image.Clip>
+									<RectangleGeometry
+										RadiusX="4"
+										RadiusY="4"
+										Rect="0,0,90,90" />
+								</Image.Clip>
+							</Image>
+						</Border>
+						<DataTemplate.Triggers>
+							<Trigger Property="IsEnabled" Value="True">
+								<Setter TargetName="ThumbnailImage" Property="Opacity" Value="0.6" />
+							</Trigger>
+							<DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=ListBoxItem}, Path=IsMouseOver}" Value="True">
+								<Setter TargetName="ThumbnailImage" Property="Opacity" Value="0.8" />
+							</DataTrigger>
+							<DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=ListBoxItem}, Path=IsSelected}" Value="True">
+								<Setter TargetName="ThumbnailImage" Property="Opacity" Value="1" />
+								<Setter TargetName="ThumbnailBorder" Property="BorderBrush" Value="{StaticResource ThemeColor2}" />
+							</DataTrigger>
+						</DataTemplate.Triggers>
+					</DataTemplate>
+				</ListBox.ItemTemplate>
+				<ListBox.ItemContainerStyle>
+					<Style TargetType="ListBoxItem">
+						<Setter Property="Background" Value="Transparent" />
+						<Setter Property="BorderBrush" Value="Transparent" />
+						<Setter Property="BorderThickness" Value="0" />
+						<Setter Property="Padding" Value="0" />
+						<Setter Property="Margin" Value="0" />
+						<Setter Property="FocusVisualStyle" Value="{x:Null}" />
+						<Setter Property="Template">
+							<Setter.Value>
+								<ControlTemplate TargetType="ListBoxItem">
+									<ContentPresenter />
+								</ControlTemplate>
+							</Setter.Value>
+						</Setter>
+					</Style>
+				</ListBox.ItemContainerStyle>
+			</ListBox>
+		</Grid>
+	</DockPanel>
+
+
+
 </Window>

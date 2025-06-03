@@ -61,8 +61,7 @@ namespace GroepswerkTaak1.Views
             // strAuthorisatie = winLogon.strAuthorisatie;
             // display de machtiging op het scherm dmv  een label of textblock
             LoginRepo.Logging("Starten", "Program", "Form", "MainWindow", "Windows"); // Log de actie van het openen van het login venster
-
-            lblUser.Content = App.Gebruiker.VoorNaam + " " +App.Gebruiker.Naam;
+            
      }
 
 

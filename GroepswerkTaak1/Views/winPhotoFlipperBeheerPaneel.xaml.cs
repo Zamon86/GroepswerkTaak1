@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
 using Microsoft.Win32;
+using System.Windows.Threading;
 
 namespace GroepswerkTaak1.Views
 {
@@ -29,6 +30,7 @@ namespace GroepswerkTaak1.Views
 		{
 			btnLeft.IsEnabled = ThumbnailList.SelectedIndex != 0;
 			btnRight.IsEnabled = ThumbnailList.SelectedIndex != Collection.Count - 1;
+			ScrollSelectionIntoView(ThumbnailList);
 		}
 
 		private void BtnLeft_OnClick(object sender, RoutedEventArgs e)
@@ -118,17 +120,34 @@ namespace GroepswerkTaak1.Views
 					throw new Exception(ex.Message);
 				}
 			});
-			
+
 			_repo.UpdateCollection();
-			
+
 			LoadingAnimation.Visibility = Visibility.Collapsed;
 			SelectedImage.Visibility = Visibility.Visible;
 			ThumbnailList.SelectedIndex = ThumbnailList.Items.Count - 3;
 		}
 
+
 		private void BtnReplace_OnClick(object sender, RoutedEventArgs e)
 		{
 			throw new NotImplementedException();
+		}
+
+
+
+		private static void ScrollSelectionIntoView(ListBox? listBox)
+		{
+			if (listBox?.SelectedItem == null) return;
+
+			listBox.UpdateLayout();
+			listBox.ScrollIntoView(listBox.SelectedItem);
+
+		}
+
+		private void ThumbnailList_OnSizeChanged(object sender, SizeChangedEventArgs e)
+		{
+			ScrollSelectionIntoView(sender as ListBox);
 		}
 	}
 }

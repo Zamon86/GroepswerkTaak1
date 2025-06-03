@@ -1,5 +1,6 @@
 ﻿using GroepswerkTaak1.Model;
 using System.Collections.ObjectModel;
+using System.Data;
 using System.Runtime.ConstrainedExecution;
 
 
@@ -128,6 +129,21 @@ namespace GroepswerkTaak1.DAL
 			};
 
 			return image;
+		}
+
+		public bool LoadImageFull(clsImagePhotoFlipper entity)
+		{
+			var dt = clsDAL.ExecuteDataTable(Properties.Resources.S_ImageFull, ref _queryResult, clsDAL.Parameter("ImageId", entity.FullImageId),
+				clsDAL.Parameter("@ReturnValue", 0));
+			
+			var result= Helpers.clsSqlReturnValueHandler.HandleSqlReturnValue(_queryResult, entity);
+
+			if (result && dt.Rows.Count > 0)
+			{
+				entity.FullImageBytes = (byte[])dt.Rows[0]["Image"];
+			}
+			
+			return result;
 		}
 	}
 }
