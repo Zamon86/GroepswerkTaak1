@@ -152,7 +152,6 @@
 					Visibility="{Binding Rol, Source={x:Static local:App.Current}, Converter={StaticResource RoleToVisibilityConverter}}" />
 
 			</Grid>
-			<!--  ruimte voor expander  -->
 			<Grid
 				x:Name="grdExpanders"
 				Grid.Row="0"
