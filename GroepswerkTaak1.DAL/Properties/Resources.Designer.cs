@@ -142,20 +142,20 @@ namespace GroepswerkTaak1.DAL.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to S_ImageFull.
+        /// </summary>
+        internal static string S_ImageFull {
+            get {
+                return ResourceManager.GetString("S_ImageFull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to S_Images.
         /// </summary>
         internal static string S_Images {
             get {
                 return ResourceManager.GetString("S_Images", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to S_ImagesPaged.
-        /// </summary>
-        internal static string S_ImagesPaged {
-            get {
-                return ResourceManager.GetString("S_ImagesPaged", resourceCulture);
             }
         }
         

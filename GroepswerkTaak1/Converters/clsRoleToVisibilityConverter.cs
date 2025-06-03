@@ -1,18 +1,19 @@
 ﻿using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
+using GroepswerkTaak1.Model;
 
 namespace GroepswerkTaak1.Converters;
 
 public class clsRoleToVisibilityConverter: IValueConverter
 {
-	private const int RoleIdRequired = 2;
+	private const string Admin = "Admin";
 
 	public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
 	{
-		if (value is not int roleID) return Visibility.Hidden;
-		return roleID == RoleIdRequired ?  Visibility.Visible : Visibility.Hidden;
+		if (value is not clsRollenM userRole) return Visibility.Hidden;
 		
+		return userRole.RolNaam.Trim() == Admin ? Visibility.Visible : Visibility.Hidden;
 	}
 
 	public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)

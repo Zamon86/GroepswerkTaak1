@@ -168,13 +168,13 @@
   <data name="U_User" xml:space="preserve">
     <value>U_User</value>
   </data>
-  <data name="S_ImagesPaged" xml:space="preserve">
-    <value>S_ImagesPaged</value>
-  </data>
   <data name="SV_Login" xml:space="preserve">
     <value>SV_Login</value>
   </data>
   <data name="S_Logging" xml:space="preserve">
     <value>S_Logging</value>
+  </data>
+  <data name="S_ImageFull" xml:space="preserve">
+    <value>S_ImageFull</value>
   </data>
 </root>

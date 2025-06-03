@@ -5,7 +5,7 @@ namespace GroepswerkTaak1
 {
 	public partial class App : Application
 	{
-        public static clsUsersM Gebruiker = new clsUsersM();
-        public static clsRollenM Rol = new clsRollenM();
-    }
+		public static clsUsersM? Gebruiker { get; set; }
+		public static clsRollenM? Rol { get; set; }
+	}
 }

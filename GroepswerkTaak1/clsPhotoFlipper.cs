@@ -16,7 +16,7 @@ namespace GroepswerkTaak1
 
 		public DispatcherTimer Timer = new();
 
-		private readonly clsImagePhotoFlipperRepo _repo = new clsImagePhotoFlipperRepo();
+		public clsImagePhotoFlipperRepo Repo = new();
 
 		private short _currentIndex = 0;
 
@@ -47,7 +47,7 @@ namespace GroepswerkTaak1
 
 		public async Task InitializeAsync()
 		{
-			ActiveImage = await Task.Run(() => _repo.GetFirst());
+			ActiveImage = await Task.Run(() => Repo.GetFirst());
 			StartTimer();
 		}
 
@@ -65,7 +65,7 @@ namespace GroepswerkTaak1
 		private void ShowNextImage()
 		{
 			_currentIndex++;
-			var imageCollection = _repo.GetAll();
+			var imageCollection = Repo.GetAll();
 
 			if (_currentIndex >= imageCollection.Count)
 			{
@@ -83,6 +83,11 @@ namespace GroepswerkTaak1
 			};
 			ImageObjectScaleTransform.BeginAnimation(ScaleTransform.ScaleXProperty, flipOut);
 			
+		}
+
+		public bool SetImageFull(clsImagePhotoFlipper imagePhotoFlipper)
+		{
+			return Repo.LoadImageFull(imagePhotoFlipper);
 		}
 	}
 }
