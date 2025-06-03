@@ -189,9 +189,10 @@
                                     Margin="0,0,5,0"
                                     HorizontalAlignment="Left"
                                     Text="Ongelezen mails" />
-                                <Button Style="{StaticResource ExpanderExtraButton}">
-                                    <Image Width="10" Source="../Images/jpg.png" />
-                                </Button>
+                                <Button
+                                    x:Name="btn1"
+                                    Content="{StaticResource IconDocument}"
+                                    Style="{StaticResource ExpanderExtraButton}" />
                             </StackPanel>
                         </Expander.Header>
                         <TextBlock Style="{StaticResource ExpanderExtraTextBlock}" />
@@ -203,9 +204,10 @@
                                     Margin="0,0,5,0"
                                     HorizontalAlignment="Left"
                                     Text="De 10-laatste IC's" />
-                                <Button Style="{StaticResource ExpanderExtraButton}">
-                                    <Image Width="10" Source="../Images/jpg.png" />
-                                </Button>
+                                <Button
+                                    x:Name="btn2"
+                                    Content="{StaticResource IconDocument}"
+                                    Style="{StaticResource ExpanderExtraButton}" />
                             </StackPanel>
                         </Expander.Header>
                         <TextBlock Style="{StaticResource ExpanderExtraTextBlock}" />
@@ -217,9 +219,10 @@
                                     Margin="0,0,5,0"
                                     HorizontalAlignment="Left"
                                     Text="Centrale overlegmomenten" />
-                                <Button Style="{StaticResource ExpanderExtraButton}">
-                                    <Image Width="10" Source="../Images/jpg.png" />
-                                </Button>
+                                <Button
+                                    x:Name="btn3"
+                                    Content="{StaticResource IconDocument}"
+                                    Style="{StaticResource ExpanderExtraButton}" />
                             </StackPanel>
                         </Expander.Header>
                         <TextBlock Style="{StaticResource ExpanderExtraTextBlock}" />
@@ -242,12 +245,14 @@
                                     Margin="0,0,5,0"
                                     HorizontalAlignment="Left"
                                     Text="Mijn snelkoppelingen" />
-                                <Button Style="{StaticResource ExpanderExtraButton}">
-                                    <Image Width="10" Source="../Images/jpg.png" />
-                                </Button>
-                                <Button Style="{StaticResource ExpanderExtraButton}">
-                                    <Image Width="10" Source="../Images/jpg.png" />
-                                </Button>
+                                <Button
+                                    x:Name="btn4"
+                                    Content="{StaticResource IconPotlood}"
+                                    Style="{StaticResource ExpanderExtraButton}" />
+                                <Button
+                                    x:Name="btn5"
+                                    Content="{StaticResource IconDocument}"
+                                    Style="{StaticResource ExpanderExtraButton}" />
                             </StackPanel>
                         </Expander.Header>
                         <TextBlock Style="{StaticResource ExpanderExtraTextBlock}" />
@@ -270,12 +275,14 @@
                                     Margin="0,0,5,0"
                                     HorizontalAlignment="Left"
                                     Text="Mijn THAK favorieten" />
-                                <Button Style="{StaticResource ExpanderExtraButton}">
-                                    <Image Width="10" Source="../Images/jpg.png" />
-                                </Button>
-                                <Button Style="{StaticResource ExpanderExtraButton}">
-                                    <Image Width="10" Source="../Images/jpg.png" />
-                                </Button>
+                                <Button
+                                    x:Name="btn6"
+                                    Content="{StaticResource IconPotlood}"
+                                    Style="{StaticResource ExpanderExtraButton}" />
+                                <Button
+                                    x:Name="btn7"
+                                    Content="{StaticResource IconDocument}"
+                                    Style="{StaticResource ExpanderExtraButton}" />
                             </StackPanel>
                         </Expander.Header>
                         <TextBlock Style="{StaticResource ExpanderExtraTextBlock}" />

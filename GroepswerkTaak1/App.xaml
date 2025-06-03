@@ -211,15 +211,36 @@
 
 
         <!--#region ButtonStyle4Expander-->
+
+        <Path
+            x:Key="IconPotlood"
+            Width="10"
+            Height="10"
+            Margin="0,0,0,0"
+            Data="M0,25.899994L6.1000219,29.399994 0.60000751,32z M9.10003,6.2999878L19.100056,12 11.400024,25.399994 10.800016,                     23.700012 7.9000145,23.399994 7.4000131,21.600006 4.5000115,21.5 3.7000218,19.5 1.3999972,19.700012z M13.90003,                     0C14.200049,0,14.400031,0.1000061,14.70005,0.20001221L21.800045,4.2999878C22.700071,4.7999878,22.900053,6.1000061,                     22.20007,7.2000122L21.400049,8.7000122 11.100035,2.7000122 12.000032,1.2999878C12.400026,0.5,13.200047,0,13.90003,0z"
+            Fill="#FFD85761"
+            RenderTransformOrigin="0.5,0.5"
+            Stretch="Uniform" />
+        <Path
+            x:Key="IconDocument"
+            Width="10"
+            Height="10"
+            Margin="0,0,0,0"
+            Data="M16.573013,19.56604L19.008015,19.56604C18.978016,20.593018 19.008015,21.538025 19.008015,                     21.538025 18.576006,25.065002 14.943007,24.921021 14.943007,24.921021L10.048014,24.994019 10.048014,                     27.080017 5.9449829,23.768005 10.048014,20.531006 10.048014,22.473999C10.048014,22.473999 13.737013,                     22.684021 14.943007,22.473999 16.826006,22.14502 16.573013,20.674988 16.573013,20.674988z M14.957015,                     11.031982L19.060016,14.343994 14.957015,17.580994 14.957015,15.638C14.957015,15.638 11.267986,                     15.42804 10.061991,15.638 8.1789931,15.967041 8.4319847,17.437012 8.4319847,17.437012L8.4319847,                     18.546021 5.9969848,18.546021C6.0269836,17.518982 5.9969848,16.574036 5.9969848,16.574036 6.4289916,                     13.046021 10.061991,13.19104 10.061991,13.19104L14.957015,13.117981z M2.2809778,2.4169922L2.2809778,                     29.582031 22.125021,29.582031 22.125021,8.4990234 15.832992,8.4990234 15.832992,2.4169922z M0,0L15.832992,                     0 17.127001,0 22.683006,5.434021 24.405998,7.1229858 24.405998,32 0,32z"
+            Fill="#FFD85761"
+            RenderTransformOrigin="0.5,0.5"
+            Stretch="Uniform" />
+
+
         <LinearGradientBrush x:Key="btnPas" StartPoint="1,0" EndPoint="1,1">
-            <GradientStop Color="#88D7D8" Offset="0.0" />
-            <GradientStop Color="#88D7D8" Offset="0.5" />
-            <GradientStop Color="#FF3BBCBD" Offset="0.5" />
-            <GradientStop Color="#FF3BBCBD" Offset="1.0" />
+            <GradientStop Offset="0.0" Color="#88D7D8" />
+            <GradientStop Offset="0.5" Color="#88D7D8" />
+            <GradientStop Offset="0.5" Color="#FF3BBCBD" />
+            <GradientStop Offset="1.0" Color="#FF3BBCBD" />
         </LinearGradientBrush>
         <LinearGradientBrush x:Key="btnAct" StartPoint="0,0" EndPoint="0,1">
-            <GradientStop Color="Yellow" Offset="0.0" />
-            <GradientStop Color="YellowGreen" Offset="1.1" />
+            <GradientStop Offset="0.0" Color="Yellow" />
+            <GradientStop Offset="1.1" Color="YellowGreen" />
         </LinearGradientBrush>
         <Style x:Key="ExpanderExtraButton" TargetType="Button">
             <Setter Property="Width" Value="15" />
@@ -232,38 +253,40 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Border x:Name="myBorder" 
-                                CornerRadius="2"
-                                Background="{TemplateBinding Background}" 
-                                BorderBrush="{TemplateBinding BorderBrush}" 
-                                BorderThickness="{TemplateBinding BorderThickness}">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <Border
+                            x:Name="myBorder"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="2">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" TargetName="myBorder" Value="{StaticResource btnAct}" />
-                                <Setter Property="BorderBrush" TargetName="myBorder" Value="#FF434343" />
+                                <Setter TargetName="myBorder" Property="Background" Value="{StaticResource btnAct}" />
+                                <Setter TargetName="myBorder" Property="BorderBrush" Value="#FF434343" />
                             </Trigger>
                             <Trigger Property="IsFocused" Value="True">
-                                <Setter Property="Background" TargetName="myBorder" Value="{StaticResource btnAct}" />
-                                <Setter Property="BorderBrush" TargetName="myBorder" Value="#FFFFFFFF" />
-                                <Setter Property="BorderThickness" TargetName="myBorder" Value="3" />
+                                <Setter TargetName="myBorder" Property="Background" Value="{StaticResource btnAct}" />
+                                <Setter TargetName="myBorder" Property="BorderBrush" Value="#FFFFFFFF" />
+                                <Setter TargetName="myBorder" Property="BorderThickness" Value="3" />
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
+
         <!--#endregion-->
-        
+
         <!--#region TextBlockStyle4Expander-->
         <Style x:Key="ExpanderExtraTextBlock" TargetType="TextBlock">
             <Setter Property="Height" Value="15" />
-            <Setter Property="Margin" Value="10,10,0,0"/>
-            <Setter Property="FontSize" Value="10"/>
-            <Setter Property="Foreground" Value="Blue"/>
-            <Setter Property="TextWrapping" Value="Wrap"/>
-            <Setter Property="Text" Value="Hier kan je snelkoppelingen toevoegen ."/>
+            <Setter Property="Margin" Value="10,10,0,0" />
+            <Setter Property="FontSize" Value="10" />
+            <Setter Property="Foreground" Value="Blue" />
+            <Setter Property="TextWrapping" Value="Wrap" />
+            <Setter Property="Text" Value="Hier kan je snelkoppelingen toevoegen ." />
         </Style>
         <!--#endregion-->
 
@@ -453,7 +476,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
-<!--#endregion-->
+        <!--#endregion-->
 
         <!--  Vraagteken icon uit Metro Studio 5 gehaald  -->
         <Path
