@@ -7,6 +7,7 @@
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	xmlns:local="clr-namespace:GroepswerkTaak1"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:repo="clr-namespace:GroepswerkTaak1.DAL;assembly=GroepswerkTaak1.DAL"
 	Title="Groepswerk Taak 1"
 	Width="1200"
 	Height="800"
@@ -87,11 +88,13 @@
 			Background="White"
 			DockPanel.Dock="Top">
 			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="*" />
+				<ColumnDefinition Width="375*" />
+				<ColumnDefinition Width="172*" />
 				<ColumnDefinition Width="auto" />
 			</Grid.ColumnDefinitions>
 			<TabControl
 				x:Name="tcMain"
+				Grid.ColumnSpan="2"
 				MinWidth="400"
 				Padding="0"
 				BorderThickness="0"
@@ -99,8 +102,9 @@
 				TabStripPlacement="Top" />
 			<Button
 				Name="btnAfmelden"
-				Grid.Column="1"
+				Grid.Column="2"
 				Height="23"
+				Margin="10,0,10,0"
 				VerticalAlignment="Center"
 				Click="btnAfmelden_Click"
 				Content="Afmelden"
@@ -136,9 +140,9 @@
 				FontWeight="Bold">
 				<Label.Content>
 					<MultiBinding Converter="{StaticResource MultiStringConverter}">
-						<Binding Path="VoorNaam" Source="{x:Static local:App.Gebruiker}" />
-						<Binding Path="Naam" Source="{x:Static local:App.Gebruiker}" />
-						<Binding Path="RolNaam" Source="{x:Static local:App.Rol}" />
+						<Binding Path="VoorNaam" Source="{x:Static repo:clsActiveUserData.ActiveUser}" />
+						<Binding Path="Naam" Source="{x:Static repo:clsActiveUserData.ActiveUser}" />
+						<Binding Path="RolNaam" Source="{x:Static repo:clsActiveUserData.ActiveUserRole}" />
 					</MultiBinding>
 				</Label.Content>
 			</Label>

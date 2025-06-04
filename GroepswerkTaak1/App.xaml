@@ -6,7 +6,7 @@
 	xmlns:helpers="clr-namespace:GroepswerkTaak1.Helpers"
 	xmlns:local="clr-namespace:GroepswerkTaak1"
 	StartupUri="Views/winLogon.xaml">
-	<!--  StartupUri="Views/MainWindow.xaml" StartupUri="Views/winLogon.xaml"  -->
+	<!--  StartupUri="Views/MainWindow.xaml" StartupUri="Views/winLogon.xaml"  StartupUri="Views/winLoggingFilter.xaml"  -->
 
 	<Application.Resources>
 		<!--  Kleuren  -->
@@ -21,6 +21,8 @@
 		<SolidColorBrush x:Key="ThemeColor4" Color="#FFdb5265" />
 
 		<SolidColorBrush x:Key="ThemeColor5" Color="#88D7D8" />
+
+		<SolidColorBrush x:Key="ThemeColor6" Color="White" />
 
 		<!--  Menu-item stijl  -->
 		<Style x:Key="CustomMenuItemStyle" TargetType="MenuItem">
@@ -55,35 +57,6 @@
 				</Setter.Value>
 			</Setter>
 		</Style>
-		<!--  StyleKnoppengrid  -->
-		<Style x:Key="GridButton" TargetType="Button">
-			<Setter Property="Background">
-				<Setter.Value>
-					<LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-						<GradientStop Offset="0.0" Color="#60c8ca" />
-						<GradientStop Offset="1.0" Color="#0aabad" />
-					</LinearGradientBrush>
-				</Setter.Value>
-			</Setter>
-			<Setter Property="Template">
-				<Setter.Value>
-					<ControlTemplate TargetType="Button">
-						<Border
-							Background="{TemplateBinding Background}"
-							BorderBrush="{TemplateBinding BorderBrush}"
-							BorderThickness="{TemplateBinding BorderThickness}"
-							CornerRadius="5">
-
-							<!--  This enables binding to Button.Content or ContentTemplate  -->
-							<ContentPresenter
-								HorizontalAlignment="Center"
-								VerticalAlignment="Center"
-								RecognizesAccessKey="True" />
-						</Border>
-					</ControlTemplate>
-				</Setter.Value>
-			</Setter>
-		</Style>
 
 		<!--  Style loading spinner  -->
 		<Style x:Key="LoadingSpinnerStyle" TargetType="Ellipse">
@@ -113,6 +86,36 @@
 					</BeginStoryboard>
 				</EventTrigger>
 			</Style.Triggers>
+		</Style>
+
+		<!--  StyleKnoppengrid  -->
+		<Style x:Key="GridButton" TargetType="Button">
+			<Setter Property="Background">
+				<Setter.Value>
+					<LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+						<GradientStop Offset="0.0" Color="#60c8ca" />
+						<GradientStop Offset="1.0" Color="#0aabad" />
+					</LinearGradientBrush>
+				</Setter.Value>
+			</Setter>
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="Button">
+						<Border
+							Background="{TemplateBinding Background}"
+							BorderBrush="{TemplateBinding BorderBrush}"
+							BorderThickness="{TemplateBinding BorderThickness}"
+							CornerRadius="5">
+
+							<!--  This enables binding to Button.Content or ContentTemplate  -->
+							<ContentPresenter
+								HorizontalAlignment="Center"
+								VerticalAlignment="Center"
+								RecognizesAccessKey="True" />
+						</Border>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
 		</Style>
 
 		<!--  Style Transparant button  -->
@@ -332,6 +335,283 @@
 				</Setter.Value>
 			</Setter>
 		</Style>
+
+
+		<!--#region ButtonStyle4Expander-->
+
+		<Path
+			x:Key="IconPotlood"
+			Width="10"
+			Height="10"
+			Margin="0,0,0,0"
+			x:Shared="false"
+			Data="M0,25.899994L6.1000219,29.399994 0.60000751,32z M9.10003,6.2999878L19.100056,12 11.400024,25.399994 10.800016,                     23.700012 7.9000145,23.399994 7.4000131,21.600006 4.5000115,21.5 3.7000218,19.5 1.3999972,19.700012z M13.90003,                     0C14.200049,0,14.400031,0.1000061,14.70005,0.20001221L21.800045,4.2999878C22.700071,4.7999878,22.900053,6.1000061,                     22.20007,7.2000122L21.400049,8.7000122 11.100035,2.7000122 12.000032,1.2999878C12.400026,0.5,13.200047,0,13.90003,0z"
+			Fill="#FFD85761"
+			RenderTransformOrigin="0.5,0.5"
+			Stretch="Uniform" />
+		<!--  x:Shared ="false" is noodzakelijk , anders worden de iconen niet goed weergegeven in de expander.  -->
+
+		<Path
+			x:Key="IconDocument"
+			Width="10"
+			Height="10"
+			Margin="0,0,0,0"
+			x:Shared="false"
+			Data="M16.573013,19.56604L19.008015,19.56604C18.978016,20.593018 19.008015,21.538025 19.008015,                     21.538025 18.576006,25.065002 14.943007,24.921021 14.943007,24.921021L10.048014,24.994019 10.048014,                     27.080017 5.9449829,23.768005 10.048014,20.531006 10.048014,22.473999C10.048014,22.473999 13.737013,                     22.684021 14.943007,22.473999 16.826006,22.14502 16.573013,20.674988 16.573013,20.674988z M14.957015,                     11.031982L19.060016,14.343994 14.957015,17.580994 14.957015,15.638C14.957015,15.638 11.267986,                     15.42804 10.061991,15.638 8.1789931,15.967041 8.4319847,17.437012 8.4319847,17.437012L8.4319847,                     18.546021 5.9969848,18.546021C6.0269836,17.518982 5.9969848,16.574036 5.9969848,16.574036 6.4289916,                     13.046021 10.061991,13.19104 10.061991,13.19104L14.957015,13.117981z M2.2809778,2.4169922L2.2809778,                     29.582031 22.125021,29.582031 22.125021,8.4990234 15.832992,8.4990234 15.832992,2.4169922z M0,0L15.832992,                     0 17.127001,0 22.683006,5.434021 24.405998,7.1229858 24.405998,32 0,32z"
+			Fill="#FFD85761"
+			RenderTransformOrigin="0.5,0.5"
+			Stretch="Uniform" />
+		<!--  x:Shared ="false" is noodzakelijk , anders worden de iconen niet goed weergegeven in de expander.  -->
+
+		<LinearGradientBrush x:Key="btnPas" StartPoint="1,0" EndPoint="1,1">
+			<GradientStop Offset="0.0" Color="#88D7D8" />
+			<GradientStop Offset="0.5" Color="#88D7D8" />
+			<GradientStop Offset="0.5" Color="#FF3BBCBD" />
+			<GradientStop Offset="1.0" Color="#FF3BBCBD" />
+		</LinearGradientBrush>
+		<LinearGradientBrush x:Key="btnAct" StartPoint="0,0" EndPoint="0,1">
+			<GradientStop Offset="0.0" Color="Yellow" />
+			<GradientStop Offset="1.1" Color="YellowGreen" />
+		</LinearGradientBrush>
+		<Style x:Key="ExpanderExtraButton" TargetType="Button">
+			<Setter Property="Width" Value="15" />
+			<Setter Property="Height" Value="15" />
+			<Setter Property="Background" Value="{StaticResource btnPas}" />
+			<Setter Property="BorderBrush" Value="#FF707070" />
+			<Setter Property="BorderThickness" Value="0.5" />
+			<Setter Property="Padding" Value="2,0,2,0" />
+			<Setter Property="Margin" Value="0,0,5,0" />
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="Button">
+						<Border
+							x:Name="myBorder"
+							Background="{TemplateBinding Background}"
+							BorderBrush="{TemplateBinding BorderBrush}"
+							BorderThickness="{TemplateBinding BorderThickness}"
+							CornerRadius="2">
+							<ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+						</Border>
+						<ControlTemplate.Triggers>
+							<Trigger Property="IsMouseOver" Value="True">
+								<Setter TargetName="myBorder" Property="Background" Value="{StaticResource btnAct}" />
+								<Setter TargetName="myBorder" Property="BorderBrush" Value="#FF434343" />
+							</Trigger>
+							<Trigger Property="IsFocused" Value="True">
+								<Setter TargetName="myBorder" Property="Background" Value="{StaticResource btnAct}" />
+								<Setter TargetName="myBorder" Property="BorderBrush" Value="#FFFFFFFF" />
+								<Setter TargetName="myBorder" Property="BorderThickness" Value="3" />
+							</Trigger>
+						</ControlTemplate.Triggers>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
+
+		<!--#endregion-->
+
+		<!--#region TextBlockStyle4Expander-->
+		<Style x:Key="ExpanderExtraTextBlock" TargetType="TextBlock">
+			<Setter Property="Height" Value="15" />
+			<Setter Property="Margin" Value="10,10,0,0" />
+			<Setter Property="FontSize" Value="10" />
+			<Setter Property="Foreground" Value="Blue" />
+			<Setter Property="TextWrapping" Value="Wrap" />
+			<Setter Property="Text" Value="Hier kan je snelkoppelingen toevoegen ." />
+		</Style>
+		<!--#endregion-->
+
+		<!--#region ExpanderStyle-->
+		<!--  Stijl voor de Expander  -->
+
+		<!--  BEGIN kleuren aan te passen volgens de kleuren van Pjotr  -->
+		<SolidColorBrush x:Key="Expander.MouseOver.Circle.Stroke" Color="#FF5593FF" />
+		<SolidColorBrush x:Key="Expander.MouseOver.Circle.Fill" Color="#FFF3F9FF" />
+		<SolidColorBrush x:Key="Expander.MouseOver.Arrow.Stroke" Color="#FF000000" />
+		<SolidColorBrush x:Key="Expander.Pressed.Circle.Stroke" Color="#FF3C77DD" />
+		<SolidColorBrush x:Key="Expander.Pressed.Circle.Fill" Color="#FFD9ECFF" />
+		<SolidColorBrush x:Key="Expander.Pressed.Arrow.Stroke" Color="#FF000000" />
+		<SolidColorBrush x:Key="Expander.Disabled.Circle.Stroke" Color="#FFBCBCBC" />
+		<SolidColorBrush x:Key="Expander.Disabled.Circle.Fill" Color="#FFE6E6E6" />
+		<SolidColorBrush x:Key="Expander.Disabled.Arrow.Stroke" Color="#FF707070" />
+		<SolidColorBrush x:Key="Expander.Static.Circle.Fill" Color="LightBlue" />
+		<SolidColorBrush x:Key="Expander.Static.Circle.Stroke" Color="#FF707070" />
+		<SolidColorBrush x:Key="Expander.Static.Arrow.Stroke" Color="white" />
+		<!--  Einde kleuren aan te passen volgens de kleuren van Pjotr  -->
+
+		<Style x:Key="ExpanderHeaderFocusVisual">
+			<Setter Property="Control.Template">
+				<Setter.Value>
+					<ControlTemplate>
+						<Border>
+							<Rectangle
+								Margin="0"
+								SnapsToDevicePixels="true"
+								Stroke="Black"
+								StrokeDashArray="1 2"
+								StrokeThickness="1" />
+						</Border>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
+
+		<Style x:Key="ExpanderDownHeaderStyle" TargetType="{x:Type ToggleButton}">
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="{x:Type ToggleButton}">
+						<Border BorderThickness="0.5" CornerRadius="10">
+							<Grid Background="Transparent" SnapsToDevicePixels="False">
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="20" />
+									<ColumnDefinition Width="*" />
+								</Grid.ColumnDefinitions>
+
+								<Rectangle
+									x:Name="rect1"
+									Width="20"
+									Height="20"
+									HorizontalAlignment="Center"
+									VerticalAlignment="Center"
+									Fill="{StaticResource ThemeColor1}"
+									RadiusX="2"
+									RadiusY="2"
+									Stroke="{StaticResource Expander.Static.Circle.Stroke}"
+									StrokeThickness="0.75" />
+
+								<Border BorderBrush="Blue" CornerRadius="50">
+									<Rectangle
+										x:Name="rect2"
+										Width="12"
+										Height="14"
+										HorizontalAlignment="Center"
+										VerticalAlignment="Center"
+										RadiusX="1"
+										RadiusY="1"
+										Stroke="{StaticResource Expander.Static.Circle.Stroke}"
+										StrokeThickness="0.75">
+										<Rectangle.Fill>
+											<LinearGradientBrush StartPoint="1,0" EndPoint="1,1">
+												<GradientStop Offset="0" Color="#FFCDDDDD" />
+												<!--<GradientStop Color="#88D7D8" Offset="0.445"/>-->
+												<GradientStop Offset="0.53" Color="#FF3BBCBD" />
+											</LinearGradientBrush>
+										</Rectangle.Fill>
+									</Rectangle>
+								</Border>
+
+								<Path
+									x:Name="arrow"
+									Width="4"
+									Height="4"
+									Margin="0,0,0,0"
+									HorizontalAlignment="Center"
+									VerticalAlignment="Center"
+									Data="M0,0L32,0 16,19.745z"
+									RenderTransformOrigin="0.5,0.5"
+									SnapsToDevicePixels="false"
+									Stretch="Uniform"
+									Stroke="{StaticResource ThemeColor6}"
+									StrokeThickness="2" />
+
+								<ContentPresenter
+									Grid.Column="1"
+									Margin="4,0,0,0"
+									HorizontalAlignment="Left"
+									VerticalAlignment="Center"
+									RecognizesAccessKey="True"
+									SnapsToDevicePixels="True" />
+							</Grid>
+						</Border>
+						<ControlTemplate.Triggers>
+							<Trigger Property="IsChecked" Value="true">
+								<Setter TargetName="arrow" Property="Data" Value="M16,0L32,19.745 0,19.745z" />
+							</Trigger>
+							<Trigger Property="IsMouseOver" Value="true">
+								<Setter TargetName="rect1" Property="Stroke" Value="{StaticResource Expander.MouseOver.Circle.Stroke}" />
+								<Setter TargetName="rect1" Property="Fill" Value="{StaticResource Expander.MouseOver.Circle.Fill}" />
+								<Setter TargetName="arrow" Property="Stroke" Value="{StaticResource Expander.MouseOver.Arrow.Stroke}" />
+							</Trigger>
+							<Trigger Property="IsPressed" Value="true">
+								<Setter TargetName="rect1" Property="Stroke" Value="{StaticResource Expander.Pressed.Circle.Stroke}" />
+								<Setter TargetName="rect1" Property="StrokeThickness" Value="1.5" />
+								<Setter TargetName="rect1" Property="Fill" Value="{StaticResource Expander.Pressed.Circle.Fill}" />
+								<Setter TargetName="arrow" Property="Stroke" Value="{StaticResource Expander.Pressed.Arrow.Stroke}" />
+							</Trigger>
+							<Trigger Property="IsEnabled" Value="false">
+								<Setter TargetName="rect1" Property="Stroke" Value="{StaticResource Expander.Disabled.Circle.Stroke}" />
+								<Setter TargetName="rect1" Property="Fill" Value="{StaticResource Expander.Disabled.Circle.Fill}" />
+								<Setter TargetName="arrow" Property="Stroke" Value="{StaticResource Expander.Disabled.Arrow.Stroke}" />
+							</Trigger>
+						</ControlTemplate.Triggers>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
+
+
+		<Style x:Key="ExpanderTemplate" TargetType="{x:Type Expander}">
+			<Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
+			<Setter Property="Background" Value="LightGray" />
+			<Setter Property="HorizontalContentAlignment" Value="Stretch" />
+			<Setter Property="VerticalContentAlignment" Value="Stretch" />
+			<Setter Property="BorderBrush" Value="Transparent" />
+			<Setter Property="BorderThickness" Value="1" />
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="{x:Type Expander}">
+						<Border
+							Background="{TemplateBinding Background}"
+							BorderBrush="{TemplateBinding BorderBrush}"
+							BorderThickness="{TemplateBinding BorderThickness}"
+							CornerRadius="10"
+							SnapsToDevicePixels="true">
+							<DockPanel>
+								<ToggleButton
+									x:Name="HeaderSite"
+									MinWidth="0"
+									MinHeight="0"
+									Margin="1"
+									Padding="{TemplateBinding Padding}"
+									HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+									VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+									Content="{TemplateBinding Header}"
+									ContentTemplate="{TemplateBinding HeaderTemplate}"
+									ContentTemplateSelector="{TemplateBinding HeaderTemplateSelector}"
+									DockPanel.Dock="Top"
+									FocusVisualStyle="{StaticResource ExpanderHeaderFocusVisual}"
+									FontFamily="{TemplateBinding FontFamily}"
+									FontSize="{TemplateBinding FontSize}"
+									FontStretch="{TemplateBinding FontStretch}"
+									FontStyle="{TemplateBinding FontStyle}"
+									FontWeight="{TemplateBinding FontWeight}"
+									Foreground="{TemplateBinding Foreground}"
+									IsChecked="{Binding IsExpanded, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
+									Style="{StaticResource ExpanderDownHeaderStyle}" />
+								<ContentPresenter
+									x:Name="ExpandSite"
+									Margin="{TemplateBinding Padding}"
+									HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+									VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+									DockPanel.Dock="Bottom"
+									Focusable="false"
+									Visibility="Collapsed" />
+							</DockPanel>
+						</Border>
+						<ControlTemplate.Triggers>
+							<Trigger Property="IsExpanded" Value="true">
+								<Setter TargetName="ExpandSite" Property="Visibility" Value="Visible" />
+							</Trigger>
+
+							<Trigger Property="IsEnabled" Value="false">
+								<Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
+							</Trigger>
+						</ControlTemplate.Triggers>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
+		<!--#endregion-->
 
 		<!--  Vraagteken icon uit Metro Studio 5 gehaald  -->
 		<Path
@@ -605,4 +885,5 @@
 
 		<c:clsByteArrayToImageConverter x:Key="ByteArrayToImageConverter" />
 	</Application.Resources>
+
 </Application>
