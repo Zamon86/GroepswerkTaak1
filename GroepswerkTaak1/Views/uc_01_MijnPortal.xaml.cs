@@ -17,11 +17,10 @@ namespace GroepswerkTaak1.Views
 	public partial class uc_01_MijnPortal : UserControl
 	{
 		public clsPhotoFlipper? PhotoFlipper { get; set; }
-		public int UserRoleId { get; }
+		
 
-		public uc_01_MijnPortal(int userRoleId)
+		public uc_01_MijnPortal()
 		{
-			UserRoleId = userRoleId;
 			InitializeComponent();
 			DataContext = this;
 			var KnoppenVM = new clsKnoppenVM();

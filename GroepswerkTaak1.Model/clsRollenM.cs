@@ -20,6 +20,7 @@ namespace GroepswerkTaak1.Model
         // Constructor
         public clsRollenM()
         {
+	       
         }
 
         public clsRollenM(int MyRolId, string MyRolNaam)

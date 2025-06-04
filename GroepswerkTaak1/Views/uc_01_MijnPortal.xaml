@@ -8,346 +8,356 @@
 	xmlns:helpers="clr-namespace:GroepswerkTaak1.Helpers"
 	xmlns:local="clr-namespace:GroepswerkTaak1"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:repo="clr-namespace:GroepswerkTaak1.DAL;assembly=GroepswerkTaak1.DAL"
 	d:DesignHeight="600"
-	d:DesignWidth="800"
+	d:DesignWidth="1100"
 	Background="{StaticResource MainBackgroundColor}"
 	mc:Ignorable="d">
 	<UserControl.Resources>
 		<converters:clsRoleToVisibilityConverter x:Key="RoleToVisibilityConverter" />
-     <Style BasedOn="{StaticResource ExpanderTemplate}" TargetType="Expander" />
+		<converters:clsSubtractValueConverter x:Key="SubtractValueConverter" />
+		<Style BasedOn="{StaticResource ExpanderTemplate}" TargetType="Expander" />
 	</UserControl.Resources>
-	<ScrollViewer VerticalScrollBarVisibility="auto">
-		<ScrollViewer.Resources>
-			<Style BasedOn="{StaticResource CustomVerticalScrollBar}" TargetType="ScrollBar" />
-		</ScrollViewer.Resources>
-		<Grid>
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="*" />
-				<ColumnDefinition Width="auto" />
-				<ColumnDefinition Width="*" />
-			</Grid.ColumnDefinitions>
-			<Grid.RowDefinitions>
-				<RowDefinition Height="*" />
-				<RowDefinition Height="auto" />
-			</Grid.RowDefinitions>
-			<Grid Grid.Row="0" Grid.Column="1">
+	<Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="370" />
+			<ColumnDefinition Width="*" />
+		</Grid.ColumnDefinitions>
+		<ScrollViewer Grid.Column="1" VerticalScrollBarVisibility="auto">
+			<ScrollViewer.Resources>
+				<Style BasedOn="{StaticResource CustomVerticalScrollBar}" TargetType="ScrollBar" />
+			</ScrollViewer.Resources>
+			<Grid x:Name="grdMain">
 				<Grid.ColumnDefinitions>
-					<ColumnDefinition Width="*" />
-					<ColumnDefinition Width="Auto" />
+					<ColumnDefinition Width="10" />
+					<ColumnDefinition Width="auto" />
 					<ColumnDefinition Width="*" />
 				</Grid.ColumnDefinitions>
 				<Grid.RowDefinitions>
-					<RowDefinition Height="35" />
-					<RowDefinition Height="Auto" />
-					<RowDefinition Height="65" />
-				</Grid.RowDefinitions>
-				<Image
-					x:Name="PhotoFlipperImage"
-					Grid.Row="1"
-					Grid.Column="1"
-					MaxWidth="250"
-					MaxHeight="350"
-					HorizontalAlignment="Center"
-					VerticalAlignment="Center"
-					Cursor="Hand"
-					MouseLeftButtonDown="PhotoFlipperImage_MouseLeftButtonDown"
-					RenderTransformOrigin="0.5,0.5"
-					Source="{Binding PhotoFlipper.ActiveImage.ImageBytes, NotifyOnSourceUpdated=True}"
-					Visibility="Collapsed">
-					<Image.RenderTransform>
-						<ScaleTransform x:Name="ImageHorizontalScaleTransform" ScaleX="1" />
-					</Image.RenderTransform>
-					<Image.Effect>
-						<DropShadowEffect
-							BlurRadius="10"
-							Direction="-45"
-							Opacity="0.5"
-							ShadowDepth="5"
-							Color="Black" />
-					</Image.Effect>
-				</Image>
-				<Ellipse
-					x:Name="LoadingAnimation"
-					Grid.Row="1"
-					Grid.Column="1"
-					Style="{StaticResource LoadingSpinnerStyle}" />
-
-				<Button
-					x:Name="btnPhotoFlipperSettings"
-					Grid.Row="2"
-					Grid.Column="1"
-					Width="50"
-					Height="50"
-					Margin="2"
-					Click="ButtonSettings_OnClick"
-					Content="{StaticResource SettingsIcon}"
-					IsEnabled="False"
-					Style="{StaticResource TransparentButton}" />
-			</Grid>
-			<Grid
-				Grid.Row="1"
-				Grid.Column="1"
-				Margin="5"
-				VerticalAlignment="Bottom">
-				<Grid.RowDefinitions>
-					<RowDefinition Height="auto" />
+					<RowDefinition Height="*" />
 					<RowDefinition Height="auto" />
 				</Grid.RowDefinitions>
-				<Grid.ColumnDefinitions>
-					<ColumnDefinition Width="auto" />
-					<ColumnDefinition Width="auto" />
-					<ColumnDefinition Width="auto" />
-				</Grid.ColumnDefinitions>
+				<Grid Grid.Row="0" Grid.Column="1">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="*" />
+						<ColumnDefinition Width="Auto" />
+						<ColumnDefinition Width="*" />
+					</Grid.ColumnDefinitions>
+					<Grid.RowDefinitions>
+						<RowDefinition Height="35" />
+						<RowDefinition Height="Auto" />
+						<RowDefinition Height="65" />
+					</Grid.RowDefinitions>
+					<Image
+						x:Name="PhotoFlipperImage"
+						Grid.Row="1"
+						Grid.Column="1"
+						MaxWidth="250"
+						MaxHeight="350"
+						HorizontalAlignment="Center"
+						VerticalAlignment="Center"
+						Cursor="Hand"
+						MouseLeftButtonDown="PhotoFlipperImage_MouseLeftButtonDown"
+						RenderTransformOrigin="0.5,0.5"
+						Source="{Binding PhotoFlipper.ActiveImage.ImageBytes, NotifyOnSourceUpdated=True}"
+						Visibility="Collapsed">
+						<Image.RenderTransform>
+							<ScaleTransform x:Name="ImageHorizontalScaleTransform" ScaleX="1" />
+						</Image.RenderTransform>
+						<Image.Effect>
+							<DropShadowEffect
+								BlurRadius="10"
+								Direction="-45"
+								Opacity="0.5"
+								ShadowDepth="5"
+								Color="Black" />
+						</Image.Effect>
+					</Image>
+					<Ellipse
+						x:Name="LoadingAnimation"
+						Grid.Row="1"
+						Grid.Column="1"
+						Style="{StaticResource LoadingSpinnerStyle}" />
 
-                <customControls:clsPortalButton
-                    Grid.Row="0"
-                    Grid.Column="1"
-                    Click="btnOpenTab_Click"
-                    Content="Helpdesk TD"
-                    MainIcon="{StaticResource Engineer}"
-                    SmallIcon="{StaticResource Vision2}"
-                    Tag="Helpdesk TD" />
-
-                <customControls:clsPortalButton
-                    Grid.Row="0"
-                    Grid.Column="2"
-                    Click="btnOpenTab_Click"
-                    Content="Helpdesk ICT"
-                    MainIcon="{StaticResource Hotline}"
-                    SmallIcon="{StaticResource Vision2}"
-                    Tag="Helpdesk ICT" />
-
-                <customControls:clsPortalButton
-                    Grid.Row="1"
-                    Grid.Column="0"
-                    Click="btnOpenTab_Click"
-                    Content="Bladeren DMS"
-                    MainIcon="{StaticResource Documents}"
-                    SmallIcon="{StaticResource Search}"
-                    Tag="Bladeren DMS" />
-
-                <customControls:clsPortalButton
-                    Grid.Row="1"
-                    Grid.Column="2"
-                    Click="btnOpenTab_Click"
-                    Content="Helpdesk keuken"
-                    MainIcon="{StaticResource ForkAndKnife}"
-                    SmallIcon="{StaticResource Vision2}"
-                    Tag="Helpdesk keuken" />
-
-                <customControls:clsPortalButton
-                    x:Name="AdminButton"
-                    Grid.Row="1"
-                    Grid.Column="1"
-                    Click="btnOpenTab_Click"
-                    MainIcon="{StaticResource AdminButtonImage}"
-                    Tag="Admin paneel"
-                    Visibility="{Binding UserRoleId, Converter={StaticResource RoleToVisibilityConverter}}" />
-
-
-				<customControls:clsPortalButton
-					x:Name="AdminButton"
+					<Button
+						x:Name="btnPhotoFlipperSettings"
+						Grid.Row="2"
+						Grid.Column="1"
+						Width="50"
+						Height="50"
+						Margin="2"
+						Click="ButtonSettings_OnClick"
+						Content="{StaticResource SettingsIcon}"
+						IsEnabled="False"
+						Style="{StaticResource TransparentButton}" />
+				</Grid>
+				<Grid
 					Grid.Row="1"
 					Grid.Column="1"
-					Click="btnOpenTab_Click"
-					MainIcon="{StaticResource AdminButtonImage}"
-					Tag="Admin paneel"
-					Visibility="{Binding Rol, Source={x:Static local:App.Current}, Converter={StaticResource RoleToVisibilityConverter}}" />
+					Margin="5"
+					VerticalAlignment="Bottom">
+					<Grid.RowDefinitions>
+						<RowDefinition Height="auto" />
+						<RowDefinition Height="auto" />
+					</Grid.RowDefinitions>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="auto" />
+						<ColumnDefinition Width="auto" />
+						<ColumnDefinition Width="auto" />
+					</Grid.ColumnDefinitions>
 
-			</Grid>
-			 <!--#region ruimte voor Expander-->
-            <Grid
-                x:Name="grdExpanders"
-                Grid.Row="0"
-                Grid.RowSpan="2"
-                Grid.Column="2">
-                <StackPanel Grid.Column="0">
-                    <Expander Margin="0,5,0,5">
-                        <Expander.Header>
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock
-                                    Margin="0,0,5,0"
-                                    HorizontalAlignment="Left"
-                                    Text="Ongelezen mails" />
-                                <Button
-                                    x:Name="btn1"
-                                    Content="{StaticResource IconDocument}"
-                                    Style="{StaticResource ExpanderExtraButton}" />
-                            </StackPanel>
-                        </Expander.Header>
-                        <TextBlock Style="{StaticResource ExpanderExtraTextBlock}" />
-                    </Expander>
-                    <Expander Margin="0,0,0,5">
-                        <Expander.Header>
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock
-                                    Margin="0,0,5,0"
-                                    HorizontalAlignment="Left"
-                                    Text="De 10-laatste IC's" />
-                                <Button
-                                    x:Name="btn2"
-                                    Content="{StaticResource IconDocument}"
-                                    Style="{StaticResource ExpanderExtraButton}" />
-                            </StackPanel>
-                        </Expander.Header>
-                        <TextBlock Style="{StaticResource ExpanderExtraTextBlock}" />
-                    </Expander>
-                    <Expander Margin="0,0,0,5">
-                        <Expander.Header>
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock
-                                    Margin="0,0,5,0"
-                                    HorizontalAlignment="Left"
-                                    Text="Centrale overlegmomenten" />
-                                <Button
-                                    x:Name="btn3"
-                                    Content="{StaticResource IconDocument}"
-                                    Style="{StaticResource ExpanderExtraButton}" />
-                            </StackPanel>
-                        </Expander.Header>
-                        <TextBlock Style="{StaticResource ExpanderExtraTextBlock}" />
-                    </Expander>
-                    <Expander Margin="0,0,0,5">
-                        <Expander.Header>
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock
-                                    Margin="0,0,5,0"
-                                    HorizontalAlignment="Left"
-                                    Text="" />
-                            </StackPanel>
-                        </Expander.Header>
-                        <TextBlock Style="{StaticResource ExpanderExtraTextBlock}" />
-                    </Expander>
-                    <Expander Margin="0,0,0,5">
-                        <Expander.Header>
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock
-                                    Margin="0,0,5,0"
-                                    HorizontalAlignment="Left"
-                                    Text="Mijn snelkoppelingen" />
-                                <Button
-                                    x:Name="btn4"
-                                    Content="{StaticResource IconPotlood}"
-                                    Style="{StaticResource ExpanderExtraButton}" />
-                                <Button
-                                    x:Name="btn5"
-                                    Content="{StaticResource IconDocument}"
-                                    Style="{StaticResource ExpanderExtraButton}" />
-                            </StackPanel>
-                        </Expander.Header>
-                        <TextBlock Style="{StaticResource ExpanderExtraTextBlock}" />
-                    </Expander>
-                    <Expander Margin="0,0,0,5">
-                        <Expander.Header>
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock
-                                    Margin="0,0,5,0"
-                                    HorizontalAlignment="Left"
-                                    Text="" />
-                            </StackPanel>
-                        </Expander.Header>
-                        <TextBlock Style="{StaticResource ExpanderExtraTextBlock}" />
-                    </Expander>
-                    <Expander Margin="0,0,0,5">
-                        <Expander.Header>
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock
-                                    Margin="0,0,5,0"
-                                    HorizontalAlignment="Left"
-                                    Text="Mijn THAK favorieten" />
-                                <Button
-                                    x:Name="btn6"
-                                    Content="{StaticResource IconPotlood}"
-                                    Style="{StaticResource ExpanderExtraButton}" />
-                                <Button
-                                    x:Name="btn7"
-                                    Content="{StaticResource IconDocument}"
-                                    Style="{StaticResource ExpanderExtraButton}" />
-                            </StackPanel>
-                        </Expander.Header>
-                        <TextBlock Style="{StaticResource ExpanderExtraTextBlock}" />
-                    </Expander>
-                    <Expander Margin="0,0,0,5">
-                        <Expander.Header>
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock
-                                    Margin="0,0,5,0"
-                                    HorizontalAlignment="Left"
-                                    Text="" />
-                            </StackPanel>
-                        </Expander.Header>
-                        <TextBlock Style="{StaticResource ExpanderExtraTextBlock}" />
-                    </Expander>
-                    <Expander Margin="0,0,0,5">
-                        <Expander.Header>
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock
-                                    Margin="0,0,5,0"
-                                    HorizontalAlignment="Left"
-                                    Text="Beheer vensters" />
-                            </StackPanel>
-                        </Expander.Header>
-                        <ListBox>
-                            <ListBoxItem
-                                Content="Beheer Knoppen"
-                                Selected="ListBox_Selected"
-                                Tag="1" />
-                            <ListBoxItem
-                                Content="Beheer Rollen"
-                                Selected="ListBox_Selected"
-                                Tag="2" />
-                            <ListBoxItem
-                                Content="Beheer Users"
-                                Selected="ListBox_Selected"
-                                Tag="3" />
-                            <ListBoxItem
-                                Content="Overzicht Logging"
-                                Selected="ListBox_Selected"
-                                Tag="9" />
-                        </ListBox>
-                    </Expander>
-                </StackPanel>
-            </Grid>
-            <!--#endregion-->		
-			<!--  knoppen  -->
-			<ScrollViewer
-				Grid.Row="0"
-				Grid.RowSpan="2"
-				Grid.Column="0"
-				FlowDirection="RightToLeft">
-				<ItemsControl x:Name="ButtonItemsControl">
-					<ItemsControl.ItemsPanel>
-						<ItemsPanelTemplate>
-							<UniformGrid
-								Margin="10"
-								HorizontalAlignment="Stretch"
-								VerticalAlignment="Top"
-								Columns="3" />
-						</ItemsPanelTemplate>
-					</ItemsControl.ItemsPanel>
-					<ItemsControl.ItemTemplate>
-						<DataTemplate>
-							<Button
-								Width="90"
-								Height="90"
-								Margin="10"
-								Style="{StaticResource GridButton}">
+					<customControls:clsPortalButton
+						Grid.Row="0"
+						Grid.Column="0"
+						Click="btnOpenTab_Click"
+						Content="Smoelenboek"
+						MainIcon="{StaticResource Smoelenboek}"
+						Tag="Smoelenboek" />
 
-								<StackPanel>
-									<Image
-										Width="50"
-										Height="50"
-										Source="{Binding KnopImage, Converter={StaticResource ByteArrayToImageConverter}}" />
+					<customControls:clsPortalButton
+						Grid.Row="0"
+						Grid.Column="1"
+						Click="btnOpenTab_Click"
+						Content="Helpdesk TD"
+						MainIcon="{StaticResource Engineer}"
+						SmallIcon="{StaticResource Vision2}"
+						Tag="Helpdesk TD" />
+
+					<customControls:clsPortalButton
+						Grid.Row="0"
+						Grid.Column="2"
+						Click="btnOpenTab_Click"
+						Content="Helpdesk ICT"
+						MainIcon="{StaticResource Hotline}"
+						SmallIcon="{StaticResource Vision2}"
+						Tag="Helpdesk ICT" />
+
+					<customControls:clsPortalButton
+						Grid.Row="1"
+						Grid.Column="0"
+						Click="btnOpenTab_Click"
+						Content="Bladeren DMS"
+						MainIcon="{StaticResource Documents}"
+						SmallIcon="{StaticResource Search}"
+						Tag="Bladeren DMS" />
+
+					<customControls:clsPortalButton
+						Grid.Row="1"
+						Grid.Column="2"
+						Click="btnOpenTab_Click"
+						Content="Helpdesk keuken"
+						MainIcon="{StaticResource ForkAndKnife}"
+						SmallIcon="{StaticResource Vision2}"
+						Tag="Helpdesk keuken" />
+
+					<customControls:clsPortalButton
+						x:Name="AdminButton"
+						Grid.Row="1"
+						Grid.Column="1"
+						Click="btnOpenTab_Click"
+						MainIcon="{StaticResource AdminButtonImage}"
+						Tag="Admin paneel"
+						Visibility="{Binding Source={x:Static repo:clsActiveUserData.ActiveUserRole}, Converter={StaticResource RoleToVisibilityConverter}, TargetNullValue=Collapsed}" />
+				</Grid>
+				<!--#region ruimte voor Expander-->
+				<Grid
+					x:Name="grdExpanders"
+					Grid.Row="0"
+					Grid.RowSpan="2"
+					Grid.Column="2">
+					<StackPanel Grid.Column="0">
+						<Expander Margin="0,5,0,5">
+							<Expander.Header>
+								<StackPanel Orientation="Horizontal">
 									<TextBlock
-										HorizontalAlignment="Center"
-										Foreground="White"
-										Text="{Binding KnopTekst}" />
+										Margin="0,0,5,0"
+										HorizontalAlignment="Left"
+										Text="Ongelezen mails" />
+									<Button
+										x:Name="btn1"
+										Content="{StaticResource IconDocument}"
+										Style="{StaticResource ExpanderExtraButton}" />
 								</StackPanel>
-							</Button>
-						</DataTemplate>
-					</ItemsControl.ItemTemplate>
-				</ItemsControl>
-			</ScrollViewer>
-		</Grid>
-	</ScrollViewer>
+							</Expander.Header>
+							<TextBlock Style="{StaticResource ExpanderExtraTextBlock}" />
+						</Expander>
+						<Expander Margin="0,0,0,5">
+							<Expander.Header>
+								<StackPanel Orientation="Horizontal">
+									<TextBlock
+										Margin="0,0,5,0"
+										HorizontalAlignment="Left"
+										Text="De 10-laatste IC's" />
+									<Button
+										x:Name="btn2"
+										Content="{StaticResource IconDocument}"
+										Style="{StaticResource ExpanderExtraButton}" />
+								</StackPanel>
+							</Expander.Header>
+							<TextBlock Style="{StaticResource ExpanderExtraTextBlock}" />
+						</Expander>
+						<Expander Margin="0,0,0,5">
+							<Expander.Header>
+								<StackPanel Orientation="Horizontal">
+									<TextBlock
+										Margin="0,0,5,0"
+										HorizontalAlignment="Left"
+										Text="Centrale overlegmomenten" />
+									<Button
+										x:Name="btn3"
+										Content="{StaticResource IconDocument}"
+										Style="{StaticResource ExpanderExtraButton}" />
+								</StackPanel>
+							</Expander.Header>
+							<TextBlock Style="{StaticResource ExpanderExtraTextBlock}" />
+						</Expander>
+						<Expander Margin="0,0,0,5">
+							<Expander.Header>
+								<StackPanel Orientation="Horizontal">
+									<TextBlock
+										Margin="0,0,5,0"
+										HorizontalAlignment="Left"
+										Text="" />
+								</StackPanel>
+							</Expander.Header>
+							<TextBlock Style="{StaticResource ExpanderExtraTextBlock}" />
+						</Expander>
+						<Expander Margin="0,0,0,5">
+							<Expander.Header>
+								<StackPanel Orientation="Horizontal">
+									<TextBlock
+										Margin="0,0,5,0"
+										HorizontalAlignment="Left"
+										Text="Mijn snelkoppelingen" />
+									<Button
+										x:Name="btn4"
+										Content="{StaticResource IconPotlood}"
+										Style="{StaticResource ExpanderExtraButton}" />
+									<Button
+										x:Name="btn5"
+										Content="{StaticResource IconDocument}"
+										Style="{StaticResource ExpanderExtraButton}" />
+								</StackPanel>
+							</Expander.Header>
+							<TextBlock Style="{StaticResource ExpanderExtraTextBlock}" />
+						</Expander>
+						<Expander Margin="0,0,0,5">
+							<Expander.Header>
+								<StackPanel Orientation="Horizontal">
+									<TextBlock
+										Margin="0,0,5,0"
+										HorizontalAlignment="Left"
+										Text="" />
+								</StackPanel>
+							</Expander.Header>
+							<TextBlock Style="{StaticResource ExpanderExtraTextBlock}" />
+						</Expander>
+						<Expander Margin="0,0,0,5">
+							<Expander.Header>
+								<StackPanel Orientation="Horizontal">
+									<TextBlock
+										Margin="0,0,5,0"
+										HorizontalAlignment="Left"
+										Text="Mijn THAK favorieten" />
+									<Button
+										x:Name="btn6"
+										Content="{StaticResource IconPotlood}"
+										Style="{StaticResource ExpanderExtraButton}" />
+									<Button
+										x:Name="btn7"
+										Content="{StaticResource IconDocument}"
+										Style="{StaticResource ExpanderExtraButton}" />
+								</StackPanel>
+							</Expander.Header>
+							<TextBlock Style="{StaticResource ExpanderExtraTextBlock}" />
+						</Expander>
+						<Expander Margin="0,0,0,5">
+							<Expander.Header>
+								<StackPanel Orientation="Horizontal">
+									<TextBlock
+										Margin="0,0,5,0"
+										HorizontalAlignment="Left"
+										Text="" />
+								</StackPanel>
+							</Expander.Header>
+							<TextBlock Style="{StaticResource ExpanderExtraTextBlock}" />
+						</Expander>
+						<Expander Margin="0,0,0,5">
+							<Expander.Header>
+								<StackPanel Orientation="Horizontal">
+									<TextBlock
+										Margin="0,0,5,0"
+										HorizontalAlignment="Left"
+										Text="Beheer vensters" />
+								</StackPanel>
+							</Expander.Header>
+							<ListBox>
+								<ListBoxItem
+									Content="Beheer Knoppen"
+									Selected="ListBox_Selected"
+									Tag="1" />
+								<ListBoxItem
+									Content="Beheer Rollen"
+									Selected="ListBox_Selected"
+									Tag="2" />
+								<ListBoxItem
+									Content="Beheer Users"
+									Selected="ListBox_Selected"
+									Tag="3" />
+								<ListBoxItem
+									Content="Overzicht Logging"
+									Selected="ListBox_Selected"
+									Tag="9" />
+							</ListBox>
+						</Expander>
+					</StackPanel>
+				</Grid>
+				<!--#endregion-->
+				<!--  knoppen  -->
+
+			</Grid>
+		</ScrollViewer>
+		<ScrollViewer
+			Grid.Column="0"
+			VerticalAlignment="Top"
+			FlowDirection="RightToLeft"
+			VerticalScrollBarVisibility="Auto">
+			<ScrollViewer.Resources>
+				<Style BasedOn="{StaticResource CustomVerticalScrollBar}" TargetType="ScrollBar" />
+			</ScrollViewer.Resources>
+			<ItemsControl x:Name="ButtonItemsControl">
+				<ItemsControl.ItemsPanel>
+					<ItemsPanelTemplate>
+						<UniformGrid
+							Margin="10"
+							HorizontalAlignment="Stretch"
+							VerticalAlignment="Top"
+							Columns="3" />
+					</ItemsPanelTemplate>
+				</ItemsControl.ItemsPanel>
+				<ItemsControl.ItemTemplate>
+					<DataTemplate>
+						<Button
+							Width="90"
+							Height="90"
+							Margin="10"
+							Style="{StaticResource GridButton}">
+
+							<StackPanel>
+								<Image
+									Width="50"
+									Height="50"
+									Source="{Binding KnopImage, Converter={StaticResource ByteArrayToImageConverter}}" />
+								<TextBlock
+									HorizontalAlignment="Center"
+									Foreground="White"
+									Text="{Binding KnopTekst}" />
+							</StackPanel>
+						</Button>
+					</DataTemplate>
+				</ItemsControl.ItemTemplate>
+			</ItemsControl>
+		</ScrollViewer>
+	</Grid>
+
 </UserControl>

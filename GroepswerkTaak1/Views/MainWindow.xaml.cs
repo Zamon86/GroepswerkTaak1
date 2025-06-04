@@ -15,17 +15,7 @@ namespace GroepswerkTaak1.Views
 	{
         #region VARIABLES
         clsLoginRepo LoginRepo = new clsLoginRepo();
-        private clsUsersM _currentUser = new()
-		{ 
-			ID = 0,
-			LoginNaam = "DummyAdmin",
-			Naam = "Admin",
-			VoorNaam = "Dummy",
-			Email = "DummyAdmin@gmail.com",
-			Telefoon = "070072772",
-			RolId = 2,
-			UserActief = true
-		};
+        
 
 		// dit mag weg private string strAuthorisatie = string.Empty;  // deze string zal de authorisatie dragen
 
@@ -96,7 +86,7 @@ namespace GroepswerkTaak1.Views
 		// Deze methode maakt instantie van onze portal
 		private void CreateMainUserControl()
 		{
-			var uc_01_MijnPortal = new uc_01_MijnPortal(_currentUser.RolId);
+			var uc_01_MijnPortal = new uc_01_MijnPortal();
 			OpenUserControl(uc_01_MijnPortal);
 			_ucInstances["Mijn portal"] = uc_01_MijnPortal;
 		}
@@ -132,7 +122,7 @@ namespace GroepswerkTaak1.Views
 
 		private void btnAfmelden_Click(object sender, RoutedEventArgs e)
 		{
-            LoginRepo.Logging("LOGIN", "User_naam", "afgemeld", App.Gebruiker.LoginNaam, "WinForm"); // Log de actie van het sluiten van het login venster
+            LoginRepo.Logging("LOGIN", "User_naam", "afgemeld", clsActiveUserData.ActiveUser.LoginNaam, "WinForm"); // Log de actie van het sluiten van het login venster
             winLogon _winLogon = new winLogon();
             _winLogon.Show();
             this.Close();
