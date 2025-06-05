@@ -11,7 +11,7 @@
              d:DesignWidth="400     "
              mc:Ignorable="d">
     <UserControl.Resources>
-        <!--<VM:clsKnoppenVM x:Key="VMKnoppen" />-->
+       
         <Converters:clsIntVisibilityConverter x:Key="VisibilityConverter" />
     </UserControl.Resources>
     <Border BorderBrush="Black"
@@ -63,7 +63,8 @@
                           Visibility="{Binding MijnSelectedItem.MyVisibility,Mode=TwoWay,Converter={StaticResource VisibilityConverter}}"/>
             </Grid>
             <Grid Name="MyGrid"
-                  DataContext="{Binding Path=MijnSelectedItem}">
+                  >
+              <!--//  DataContext="{Binding Path=MijnSelectedItem}"-->
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="80" />
@@ -108,7 +109,7 @@
                          FontFamily="segoe ui light"
                          FontSize="16"
                          Foreground="SteelBlue"
-                         Text="{Binding Path=KnopNaam, Mode=TwoWay}" />
+                         Text="{Binding Path=MijnSelectedItem.KnopNaam, Mode=TwoWay}" />
                 <TextBox Name="txtBeschrijving"
                          Grid.Row="3"
                          Grid.Column="2"
@@ -117,7 +118,7 @@
                          FontFamily="segoe ui light"
                          FontSize="16"
                          Foreground="SteelBlue"
-                         Text="{Binding Path=KnopTekst, Mode=TwoWay}"
+                         Text="{Binding Path=MijnSelectedItem.KnopTekst, Mode=TwoWay}"
                          TextWrapping="Wrap" />
                 <TextBox Name="txtPositie"
                          Grid.Row="4"
@@ -126,20 +127,22 @@
                          FontFamily="segoe ui light"
                          FontSize="16"
                          Foreground="SteelBlue"
-                         Text="{Binding Path=KnopPositie, Mode=TwoWay}" />
-                <Image x:Name="Imagefield"
+                         Text="{Binding Path=MijnSelectedItem.KnopPositie, Mode=TwoWay}" />
+                <Image 
                        Grid.Row="1"
                        Grid.Column="2"
                        Width="150"
                        Height="150"
                        Margin="20,0,0,10"
-                       Source="{Binding KnopImage}" />
+                       Source="{Binding Path=MijnSelectedItem.KnopImage}"
+                    
+                    />
                 <StackPanel Grid.Row="6"
                             Grid.Column="1"
                             Grid.ColumnSpan="2"
                             HorizontalAlignment="Right"
                             Orientation="Horizontal"
-                            DataContext="{StaticResource VMKnoppen}">
+                            >
                     <Button Name="btnNieuw"
                             Margin="5"
                             Padding="5"
@@ -158,7 +161,7 @@
                             Content="Opslaan"
                             FontFamily="segoe ui light"
                             Foreground="SteelBlue" />
-                    <!--Click="btnOpslaan_Click"-->
+                   
                     <Button Name="btnVerwijderen"
                             Margin="5"
                             Padding="5"
@@ -167,7 +170,7 @@
                             Content="Verwijderen"
                             FontFamily="segoe ui light"
                             Foreground="SteelBlue" />
-                    <!--Click="btnVerwijderen_Click"-->
+                    
                     <Button Name="btnAnnuleren"
                             Margin="5"
                             Padding="5"
@@ -176,7 +179,7 @@
                             Command="{Binding cmdCancel}"
                             FontFamily="segoe ui light"
                             Foreground="SteelBlue" />
-                    <!--Click="btnAnnuleren_Click"-->
+                   
                     <Button Name="btnSluiten"
                             Margin="5"
                             Padding="5"
@@ -187,7 +190,7 @@
                             Foreground="SteelBlue" />
                   
                 </StackPanel>
-                <Button DataContext="{StaticResource VMKnoppen}"
+                <Button
                     Name="btnLaadIcon"
                         Grid.Row="1"
                         Grid.Column="1"
@@ -195,8 +198,7 @@
                         Height="40"
                         Margin="5"
                         Command="{Binding cmdLoadPicture}">
-                    <!--Click="btnLaadIcon_Click"-->
-                    <!--  Source="{Binding Path=KnopTekst, Mode=TwoWay}"  -->
+            
             
                     <TextBlock Text="Figuur laden"
                                TextWrapping="Wrap"

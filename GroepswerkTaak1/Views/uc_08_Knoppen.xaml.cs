@@ -84,10 +84,6 @@ namespace GroepswerkTaak1
 
         }
 
-        private void btnLaadIcon_Click(object sender, RoutedEventArgs e)
-        {
-            var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Images", "jpg.png");
-            Imagefield.Source = new BitmapImage(new Uri("D:\\programming\\C#\\groepstaak\\GroepswerkTaak1\\Images\\jpg.png"));
-        }
+   
     }
 }

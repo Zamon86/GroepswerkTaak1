@@ -13,6 +13,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
 
 namespace GroepswerkTaak1.ViewModels
 {
@@ -78,8 +79,8 @@ namespace GroepswerkTaak1.ViewModels
             cmdLoadPicture = new clsCustomCommand(LoadImageCommando, CanExecuteLoadImage);
 			cmdDelete = new clsCustomCommand(DeleteCommando, CanExecuteDelete);
             LoadData();
-            _MijnSelectedItem = repo.GetByID((short)1); // haal een item op met ID 1
-		}
+            MijnSelectedItem = repo.GetFirst(); // haal een item op met ID 1
+        }
 
         private bool CanExecuteDelete(object obj)
         {
@@ -116,33 +117,26 @@ namespace GroepswerkTaak1.ViewModels
 
         private void LoadImageCommando(object obj)
         {
-            var openFileDialog = new Microsoft.Win32.OpenFileDialog
+            Application.Current.Dispatcher.Invoke(() =>
             {
-                Filter = "Image files (*.png;*.jpg;*.jpeg;*.bmp)|*.png;*.jpg;*.jpeg;*.bmp"
-            };
-
-            if (openFileDialog.ShowDialog() == true)
-            {
-                string filePath = openFileDialog.FileName;
-
-                // Read image bytes
-                byte[] bytes = File.ReadAllBytes(filePath);
-                MijnSelectedItem.KnopImage = bytes;
-
-                // Optional: convert to ImageSource for preview
-                var bitmap = new BitmapImage();
-                using (var stream = new MemoryStream(bytes))
+                var openFileDialog = new Microsoft.Win32.OpenFileDialog
                 {
-                    bitmap.BeginInit();
-                    bitmap.CacheOption = BitmapCacheOption.OnLoad;
-                    bitmap.StreamSource = stream;
-                    bitmap.EndInit();
-                    bitmap.Freeze(); // Important for cross-thread use
-                }
+                    Filter = "Image files (*.png;*.jpg;*.jpeg;*.bmp)|*.png;*.jpg;*.jpeg;*.bmp"
+                };
 
-              //  MijnSelectedItem.KnopImage = File.ReadAllBytes(bitmap);
-            }
-        }
+                if (openFileDialog.ShowDialog() == true)
+                {
+                    string filePath = openFileDialog.FileName;
+
+                    // Load and assign byte array
+                    MijnSelectedItem.KnopImage = File.ReadAllBytes(filePath);
+                    OnPropertyChanged(nameof(MijnSelectedItem));
+                }
+            });
+          
+		}
+
+	
 
         private bool canExecuteSave(object obj)
         {
@@ -242,10 +236,10 @@ namespace GroepswerkTaak1.ViewModels
 			clsKnoppenM ItemToInsert = new clsKnoppenM()
 			{
 				KnopId = 0
+				
 
 
-
-			};
+            };
 			MijnSelectedItem = ItemToInsert;
 		    MijnSelectedItem.MyVisibility=(int)Visibility.Hidden;
             _NewStatus=true;
@@ -253,7 +247,7 @@ namespace GroepswerkTaak1.ViewModels
 
 
         }
-		#endregion
-
-	}
+        #endregion
+        
+    }
 }
