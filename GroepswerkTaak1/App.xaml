@@ -5,8 +5,10 @@
 	xmlns:c="clr-namespace:GroepswerkTaak1.ToBeDeleted"
 	xmlns:helpers="clr-namespace:GroepswerkTaak1.Helpers"
 	xmlns:local="clr-namespace:GroepswerkTaak1"
+  xmlns:VM="clr-namespace:GroepswerkTaak1.ViewModels"
 	StartupUri="Views/winLogon.xaml">
 	<!--  StartupUri="Views/MainWindow.xaml" StartupUri="Views/winLogon.xaml"  StartupUri="Views/winLoggingFilter.xaml"  -->
+
 
 	<Application.Resources>
 		<!--  Kleuren  -->
@@ -884,6 +886,6 @@
 			Stretch="Uniform" />
 
 		<c:clsByteArrayToImageConverter x:Key="ByteArrayToImageConverter" />
-	</Application.Resources>
-
+    <VM:clsKnoppenVM x:Key="VMKnoppen" />
+	</Application.Resources> 
 </Application>

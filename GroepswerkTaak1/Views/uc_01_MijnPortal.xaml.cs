@@ -23,8 +23,7 @@ namespace GroepswerkTaak1.Views
 		{
 			InitializeComponent();
 			DataContext = this;
-			var KnoppenVM = new clsKnoppenVM();
-			ButtonItemsControl.ItemsSource = KnoppenVM.repo.GetAll();
+
 			Task task = InitializeAsync();
 		}
 
