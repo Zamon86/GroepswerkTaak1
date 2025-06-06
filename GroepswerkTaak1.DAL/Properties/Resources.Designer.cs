@@ -142,6 +142,15 @@ namespace GroepswerkTaak1.DAL.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to S_ImageFull.
+        /// </summary>
+        internal static string S_ImageFull {
+            get {
+                return ResourceManager.GetString("S_ImageFull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to S_Images.
         /// </summary>
         internal static string S_Images {
@@ -151,20 +160,20 @@ namespace GroepswerkTaak1.DAL.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to S_ImagesPaged.
-        /// </summary>
-        internal static string S_ImagesPaged {
-            get {
-                return ResourceManager.GetString("S_ImagesPaged", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to S_Knop.
         /// </summary>
         internal static string S_Knop {
             get {
                 return ResourceManager.GetString("S_Knop", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to S_Logging.
+        /// </summary>
+        internal static string S_Logging {
+            get {
+                return ResourceManager.GetString("S_Logging", resourceCulture);
             }
         }
         
@@ -183,6 +192,15 @@ namespace GroepswerkTaak1.DAL.Properties {
         internal static string S_User {
             get {
                 return ResourceManager.GetString("S_User", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SV_Login.
+        /// </summary>
+        internal static string SV_Login {
+            get {
+                return ResourceManager.GetString("SV_Login", resourceCulture);
             }
         }
         

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Common;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace GroepswerkTaak1.Model
 {
-    public class clsRollenM : INotifyPropertyChanged
+    public class clsRollenM : clsCommonModelPropertiesBase  // later toevoegen , IDataErrorInfo
     {
         public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -19,6 +20,7 @@ namespace GroepswerkTaak1.Model
         // Constructor
         public clsRollenM()
         {
+	       
         }
 
         public clsRollenM(int MyRolId, string MyRolNaam)

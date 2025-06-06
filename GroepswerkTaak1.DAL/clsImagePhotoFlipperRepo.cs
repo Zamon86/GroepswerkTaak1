@@ -1,6 +1,5 @@
 ﻿using GroepswerkTaak1.Model;
 using System.Collections.ObjectModel;
-using System.Runtime.ConstrainedExecution;
 
 
 namespace GroepswerkTaak1.DAL
@@ -12,7 +11,7 @@ namespace GroepswerkTaak1.DAL
 		private int _queryResult = 0;
 		
 
-		private void UpdateCollection()
+		public void UpdateCollection()
 		{
 			_images.Clear();
 			
@@ -56,7 +55,7 @@ namespace GroepswerkTaak1.DAL
 
 		public bool Delete(clsImagePhotoFlipper entity)
 		{
-			clsDAL.ExecuteDataTable(Properties.Resources.S_Images, ref _queryResult, clsDAL.Parameter("ID", entity.ImagePhotoFlipperID),
+			clsDAL.ExecuteDataTable(Properties.Resources.D_Image, ref _queryResult, clsDAL.Parameter("ID", entity.ImagePhotoFlipperID),
 				clsDAL.Parameter("User", Environment.UserName),
 				clsDAL.Parameter("ControlField", entity.ControlField),
 				clsDAL.Parameter("@ReturnValue", 0));
@@ -90,7 +89,10 @@ namespace GroepswerkTaak1.DAL
 
 		public bool Insert(clsImagePhotoFlipper entity)
 		{
-			clsDAL.ExecuteDataTable(Properties.Resources.I_Image, ref _queryResult, clsDAL.Parameter("Thumbnail", entity.ImageBytes),
+			if (entity.FullImageBytes == null) return false;
+			
+			clsDAL.ExecuteDataTable(Properties.Resources.I_Image, ref _queryResult, clsDAL.Parameter("Image", entity.FullImageBytes),
+				clsDAL.Parameter("Thumbnail", entity.ImageBytes),
 				clsDAL.Parameter("User", Environment.UserName),
 				clsDAL.Parameter("@ReturnValue", 0));
 
@@ -99,7 +101,7 @@ namespace GroepswerkTaak1.DAL
 			return Helpers.clsSqlReturnValueHandler.HandleSqlReturnValue(_queryResult, entity);
 		}
 
-		public bool Update (clsImagePhotoFlipper entity)
+		public bool Update(clsImagePhotoFlipper entity)
 		{
 			clsDAL.ExecuteDataTable(Properties.Resources.U_Image, ref _queryResult, clsDAL.Parameter("ID", entity.ImagePhotoFlipperID),
 				clsDAL.Parameter("Image", entity.ImageBytes),
@@ -125,6 +127,21 @@ namespace GroepswerkTaak1.DAL
 			};
 
 			return image;
+		}
+
+		public bool LoadImageFull(clsImagePhotoFlipper entity)
+		{
+			var dt = clsDAL.ExecuteDataTable(Properties.Resources.S_ImageFull, ref _queryResult, clsDAL.Parameter("ImageId", entity.FullImageId),
+				clsDAL.Parameter("@ReturnValue", 0));
+			
+			var result= Helpers.clsSqlReturnValueHandler.HandleSqlReturnValue(_queryResult, entity);
+
+			if (result && dt.Rows.Count > 0)
+			{
+				entity.FullImageBytes = (byte[])dt.Rows[0]["Image"];
+			}
+			
+			return result;
 		}
 	}
 }
