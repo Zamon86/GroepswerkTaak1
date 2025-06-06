@@ -11,14 +11,13 @@
 	xmlns:repo="clr-namespace:GroepswerkTaak1.DAL;assembly=GroepswerkTaak1.DAL"
 	d:DesignHeight="600"
 	d:DesignWidth="1100"
-
 	Background="{StaticResource MainBackgroundColor}"
 	mc:Ignorable="d">
-    <!--xmlns:VM="clr-namespace:GroepswerkTaak1.ViewModels"-->
-    <UserControl.Resources>
+	<!--  xmlns:VM="clr-namespace:GroepswerkTaak1.ViewModels"  -->
+	<UserControl.Resources>
 		<converters:clsRoleToVisibilityConverter x:Key="RoleToVisibilityConverter" />
 
-        <!--<VM:clsKnoppenVM x:Key="VMKnoppen" />-->
+		<!--<VM:clsKnoppenVM x:Key="VMKnoppen" />-->
 
 		<converters:clsSubtractValueConverter x:Key="SubtractValueConverter" />
 		<Style BasedOn="{StaticResource ExpanderTemplate}" TargetType="Expander" />
@@ -26,7 +25,7 @@
 	</UserControl.Resources>
 	<Grid>
 		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="370" />
+			<ColumnDefinition Width="auto" />
 			<ColumnDefinition Width="*" />
 		</Grid.ColumnDefinitions>
 		<ScrollViewer Grid.Column="1" VerticalScrollBarVisibility="auto">
@@ -170,8 +169,12 @@
 					x:Name="grdExpanders"
 					Grid.Row="0"
 					Grid.RowSpan="2"
-					Grid.Column="2">
-					<StackPanel Grid.Column="0">
+					Grid.Column="2"
+					MinWidth="250">
+					<StackPanel
+						Grid.Column="0"
+						MinWidth="250"
+						HorizontalAlignment="Right">
 						<Expander Margin="0,5,0,5">
 							<Expander.Header>
 								<StackPanel Orientation="Horizontal">
@@ -322,51 +325,59 @@
 				<!--  knoppen  -->
 
 			</Grid>
-		 <Viewbox Grid.Column="0"
-                     VerticalAlignment="Stretch">
-            <ScrollViewer
-                     
-                          HorizontalAlignment="Stretch"
-                          VerticalAlignment="Stretch"
-                          FlowDirection="RightToLeft"
-                          DataContext="{StaticResource VMKnoppen}">
-            <ItemsControl 
-                x:Name="ButtonItemsControl"
-                              ItemsSource="{Binding Path=MijnCollectie}">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <UniformGrid Columns="3"
-                                     Margin="10"
-                                     HorizontalAlignment="Stretch"
-                                         VerticalAlignment="Stretch"
-                                     FlowDirection="LeftToRight"/>
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                            <Button MinWidth="90"
-                                    MinHeight="90"
-                            HorizontalAlignment="Stretch"
-                                    VerticalAlignment="Stretch"
-                            Width="10"
-                                Height="10"
-                                Margin="10"
-                                    Style="{StaticResource GridButton}">
-                            
-                            <StackPanel>
-                                <Image Source="{Binding KnopImage}"
-                                       Width="50"
-                                       Height="50" />
-                                    <TextBlock Text="{Binding KnopTekst}"
-                                           HorizontalAlignment="Center"
-                                           Foreground="White" />
-                            </StackPanel>
-                        </Button>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-            </ScrollViewer>
-            </Viewbox>           
-			<!--  einde knoppen  -->
+		</ScrollViewer>
+
+		<ScrollViewer
+			Grid.Column="0"
+			Width="350"
+			HorizontalAlignment="Stretch"
+			VerticalAlignment="Stretch"
+			DataContext="{StaticResource VMKnoppen}"
+			FlowDirection="RightToLeft"
+			VerticalScrollBarVisibility="Auto">
+			<ScrollViewer.Resources>
+				<Style BasedOn="{StaticResource CustomVerticalScrollBar}" TargetType="ScrollBar" />
+			</ScrollViewer.Resources>
+			<ItemsControl
+				x:Name="ButtonItemsControl"
+				HorizontalAlignment="Right"
+				ItemsSource="{Binding Path=MijnCollectie}">
+				<ItemsControl.ItemsPanel>
+					<ItemsPanelTemplate>
+						<UniformGrid
+							Width="250"
+							Margin="10"
+							HorizontalAlignment="Center"
+							VerticalAlignment="Stretch"
+							Columns="3"
+							FlowDirection="LeftToRight" />
+					</ItemsPanelTemplate>
+				</ItemsControl.ItemsPanel>
+				<ItemsControl.ItemTemplate>
+					<DataTemplate>
+						<Button
+							Width="60"
+							Height="60"
+							Margin="10"
+							HorizontalAlignment="Stretch"
+							VerticalAlignment="Stretch"
+							Style="{StaticResource GridButton}">
+							<StackPanel>
+								<Image
+									Width="30"
+									Height="30"
+									Source="{Binding KnopImage}" />
+								<TextBlock
+									HorizontalAlignment="Center"
+									Foreground="White"
+									Text="{Binding KnopTekst}" />
+							</StackPanel>
+						</Button>
+					</DataTemplate>
+				</ItemsControl.ItemTemplate>
+			</ItemsControl>
+		</ScrollViewer>
+
+		<!--  einde knoppen  -->
 	</Grid>
 </UserControl>
