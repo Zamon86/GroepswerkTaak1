@@ -16,10 +16,10 @@ namespace GroepswerkTaak1.ViewModels
     {
 
         public clsRollenRepo repo = new clsRollenRepo();
- 
 
 
-        public ICommand cmdLoadPicture { get; set; }
+        #region Commands
+       
         public ICommand cmdSave { get; set; }
 
         public ICommand cmdClose { get; set; }
@@ -29,7 +29,7 @@ namespace GroepswerkTaak1.ViewModels
         public ICommand cmdCancel { get; set; }
 
         public ICommand cmdNew { get; set; }
-        #region CodeVanDanny
+        #endregion
 
         private bool _NewStatus = false;
         //clsKnoppenRepo Repo = new clsKnoppenRepo();
@@ -218,7 +218,7 @@ namespace GroepswerkTaak1.ViewModels
 
 
         }
-        #endregion
+    
 
     }
 }

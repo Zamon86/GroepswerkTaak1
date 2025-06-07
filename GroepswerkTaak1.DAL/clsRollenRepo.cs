@@ -18,6 +18,7 @@ namespace GroepswerkTaak1.DAL
         int nr = 0;
         public clsRollenRepo()
         {
+            MijnCollectie = new ObservableCollection<clsRollenM>();
         }
 
         public bool Delete(clsRollenM entity, string LoginNaam)
@@ -39,13 +40,20 @@ namespace GroepswerkTaak1.DAL
 
         // public clsRollenM Find() { throw new NotImplementedException(); }  // not implemented
         public ObservableCollection<clsRollenM> GetAll()
-        { GenerateCollection(); return MijnCollectie; }
+        {
+            if (isDataModified)
+            {
+                GenerateCollection();
+                isDataModified=false;
+            }
+            return MijnCollectie;
+        }
 
 
         private void GenerateCollection()
         {
             SqlDataReader MijnDataReader = clsDAL.GetData(Properties.Resources.S_Rol);
-            MijnCollectie = new ObservableCollection<clsRollenM>();
+          
             while (MijnDataReader.Read())
             {
                 clsRollenM Roll = new clsRollenM()

@@ -59,17 +59,23 @@
             Content="CategoryDescription"
             FontFamily="segoe ui light"
             Foreground="SteelBlue" />
-        <ComboBox
-            Name="cboKeuze"
-            Grid.Row="1"
-            Grid.Column="2"
-            Width="325"
-            Margin="5"
-            FontFamily="segoe ui light"
-            FontSize="16"
-            Foreground="SteelBlue"
+        <ComboBox Name="cboKeuze"
+                  Grid.Row="1"
+                  Grid.Column="2"
+                  Width="325"
+                  Margin="5"
+                  FontFamily="segoe ui light"
+                  FontSize="16"
+                  Foreground="SteelBlue"
+                 
                   ItemsSource="{Binding Path=MijnCollectie}"
-                  SelectedItem="{Binding Path=MijnSelectedItem, Mode=TwoWay}" />
+                  SelectedItem="{Binding Path=MijnSelectedItem, Mode=TwoWay}">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding RolNaam}" />
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
         <TextBox
             Name="txtCategoryName"
             Grid.Row="2"
