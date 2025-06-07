@@ -13,14 +13,19 @@
 	d:DesignWidth="1100"
 	Background="{StaticResource MainBackgroundColor}"
 	mc:Ignorable="d">
+	<!--  xmlns:VM="clr-namespace:GroepswerkTaak1.ViewModels"  -->
 	<UserControl.Resources>
 		<converters:clsRoleToVisibilityConverter x:Key="RoleToVisibilityConverter" />
+
+		<!--<VM:clsKnoppenVM x:Key="VMKnoppen" />-->
+
 		<converters:clsSubtractValueConverter x:Key="SubtractValueConverter" />
 		<Style BasedOn="{StaticResource ExpanderTemplate}" TargetType="Expander" />
+
 	</UserControl.Resources>
 	<Grid>
 		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="370" />
+			<ColumnDefinition Width="auto" />
 			<ColumnDefinition Width="*" />
 		</Grid.ColumnDefinitions>
 		<ScrollViewer Grid.Column="1" VerticalScrollBarVisibility="auto">
@@ -164,8 +169,12 @@
 					x:Name="grdExpanders"
 					Grid.Row="0"
 					Grid.RowSpan="2"
-					Grid.Column="2">
-					<StackPanel Grid.Column="0">
+					Grid.Column="2"
+					MinWidth="250">
+					<StackPanel
+						Grid.Column="0"
+						MinWidth="250"
+						HorizontalAlignment="Right">
 						<Expander Margin="0,5,0,5">
 							<Expander.Header>
 								<StackPanel Orientation="Horizontal">
@@ -317,37 +326,47 @@
 
 			</Grid>
 		</ScrollViewer>
+
 		<ScrollViewer
 			Grid.Column="0"
-			VerticalAlignment="Top"
+			Width="350"
+			HorizontalAlignment="Stretch"
+			VerticalAlignment="Stretch"
+			DataContext="{StaticResource VMKnoppen}"
 			FlowDirection="RightToLeft"
 			VerticalScrollBarVisibility="Auto">
 			<ScrollViewer.Resources>
 				<Style BasedOn="{StaticResource CustomVerticalScrollBar}" TargetType="ScrollBar" />
 			</ScrollViewer.Resources>
-			<ItemsControl x:Name="ButtonItemsControl">
+			<ItemsControl
+				x:Name="ButtonItemsControl"
+				HorizontalAlignment="Right"
+				ItemsSource="{Binding Path=MijnCollectie}">
 				<ItemsControl.ItemsPanel>
 					<ItemsPanelTemplate>
 						<UniformGrid
+							Width="250"
 							Margin="10"
-							HorizontalAlignment="Stretch"
-							VerticalAlignment="Top"
-							Columns="3" />
+							HorizontalAlignment="Center"
+							VerticalAlignment="Stretch"
+							Columns="3"
+							FlowDirection="LeftToRight" />
 					</ItemsPanelTemplate>
 				</ItemsControl.ItemsPanel>
 				<ItemsControl.ItemTemplate>
 					<DataTemplate>
 						<Button
-							Width="90"
-							Height="90"
+							Width="60"
+							Height="60"
 							Margin="10"
+							HorizontalAlignment="Stretch"
+							VerticalAlignment="Stretch"
 							Style="{StaticResource GridButton}">
-
 							<StackPanel>
 								<Image
-									Width="50"
-									Height="50"
-									Source="{Binding KnopImage, Converter={StaticResource ByteArrayToImageConverter}}" />
+									Width="30"
+									Height="30"
+									Source="{Binding KnopImage}" />
 								<TextBlock
 									HorizontalAlignment="Center"
 									Foreground="White"
@@ -358,6 +377,7 @@
 				</ItemsControl.ItemTemplate>
 			</ItemsControl>
 		</ScrollViewer>
-	</Grid>
 
+		<!--  einde knoppen  -->
+	</Grid>
 </UserControl>

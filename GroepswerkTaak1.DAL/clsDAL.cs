@@ -130,6 +130,8 @@ namespace GroepswerkTaak1.DAL
                                         return (DT, true, "De bewerking is gelukt.");
                                     case 0:
                                         return (null, false, "Concurrency Probleem.");
+                                    
+
                                     default:
                                         return (null, false, "Er is een onbekende fout opgetreden.");
                                 }
@@ -152,6 +154,7 @@ namespace GroepswerkTaak1.DAL
                             {
                                 CN.Close();
                             }
+
                         }
                     }
                 }

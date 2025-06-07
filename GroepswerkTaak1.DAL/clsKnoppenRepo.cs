@@ -13,7 +13,7 @@ namespace GroepswerkTaak1.DAL
 	public class clsKnoppenRepo
 	{
 		bool isDataModified = true;
-		private ObservableCollection<clsKnoppenM> MijnCollectie;
+		public ObservableCollection<clsKnoppenM> MijnCollectie;
 		int nr = 0;
 		public clsKnoppenRepo()
 		{
@@ -26,6 +26,7 @@ namespace GroepswerkTaak1.DAL
 			{
 				if (reader != null)
 				{
+					MijnCollectie.Clear();
 					while (reader.Read())
 					{
 						clsKnoppenM image = new clsKnoppenM()
@@ -53,7 +54,7 @@ namespace GroepswerkTaak1.DAL
 			isDataModified = false;
 		}
 
-		public clsKnoppenM GetById(short id)
+		public clsKnoppenM GetByID(short id)
 		{
 			if (isDataModified)
 			{
@@ -96,7 +97,7 @@ namespace GroepswerkTaak1.DAL
 			clsKnoppenM image = new clsKnoppenM()
 			{
 				KnopId = 0,
-				KnopImage = File.ReadAllBytes(path),
+				//	KnopImage = File.ReadAllBytes(path),
 				ControlField = new object()
 			};
 
@@ -105,20 +106,25 @@ namespace GroepswerkTaak1.DAL
 
 		#region CodeVanDanny
 
-		//public bool Delete(clsKnoppenM entity)
-		//{
-		//	(DataTable DT, bool OK, string Boodschap) =
-		//					clsDAL.ExecuteDataTable(Properties.Resources.D_Knop,
-		//					clsDAL.Parameter("ID", entity.KnopId),
-		//					clsDAL.Parameter("User", Environment.UserName),
-		//					clsDAL.Parameter("ControlField", entity.ControlField),
-		//					clsDAL.Parameter("@ReturnValue", 0));
-		//	if (!OK)
-		//	{
-		//		entity.ErrorBoodschap = Boodschap;
-		//	}
-		//	return OK;
-		//}
+		public bool Delete(clsKnoppenM entity)
+		{
+			(DataTable DT, bool OK, string Boodschap) =
+							clsDAL.ExecuteDataTable(Properties.Resources.D_Knop,
+							clsDAL.Parameter("KnopID", entity.KnopId),
+							clsDAL.Parameter("UserNaam", Environment.UserName),
+							clsDAL.Parameter("ControlField", entity.ControlField),
+							clsDAL.Parameter("@ReturnValue", 0));
+			if (!OK)
+			{
+				entity.ErrorBoodschap = Boodschap;
+			}
+            else
+            {
+                isDataModified = true;
+            }
+
+            return OK;
+		}
 
 		//// public clsKnoppenM Find() { throw new NotImplementedException(); }  // not implemented
 
@@ -154,37 +160,48 @@ namespace GroepswerkTaak1.DAL
 		//	return MijnCollectie.Where(x => x.KnopId == id).FirstOrDefault();
 		//}
 
-		//public bool Insert(clsKnoppenM entity)
-		//{
-		//	(DataTable DT, bool OK, string Boodschap) =
-		//					clsDAL.ExecuteDataTable(Properties.Resources.I_Knop,
-		//					clsDAL.Parameter("Naam", entity.KnopNaam),
-		//					clsDAL.Parameter("Tekst", entity.KnopTekst),
-		//					clsDAL.Parameter("Positie", entity.KnopPositie),
-		//					clsDAL.Parameter("knopImage", entity.KnopImage),
-		//					clsDAL.Parameter("@ReturnValue", 0));
-		//	if (!OK)
-		//	{
-		//		entity.ErrorBoodschap = Boodschap;
-		//	}
-		//	return OK;
-		//}
-		//public bool Update(clsKnoppenM entity)
-		//{
-		//	(DataTable DT, bool OK, string Boodschap) =
-		//					clsDAL.ExecuteDataTable(Properties.Resources.I_Knop,
-		//					clsDAL.Parameter("ID", entity.KnopId),
-		//					clsDAL.Parameter("Naam", entity.KnopNaam),
-		//					clsDAL.Parameter("Tekst", entity.KnopTekst),
-		//					clsDAL.Parameter("Positie", entity.KnopPositie),
-		//					clsDAL.Parameter("knopImage", entity.KnopImage),
-		//					clsDAL.Parameter("ControlField", entity.ControlField),
-		//					clsDAL.Parameter("@ReturnValue", 0));
-		//	if (!OK)
-		//	{
-		//		entity.ErrorBoodschap = Boodschap;
+		public bool Insert(clsKnoppenM entity)
+		{
+			bool OK = false;
+			(DataTable DT,  OK, string Boodschap) =
+							clsDAL.ExecuteDataTable(Properties.Resources.I_Knop,
+							clsDAL.Parameter("KnopNaam", entity.KnopNaam),
+							clsDAL.Parameter("Tekst", entity.KnopTekst),
+							clsDAL.Parameter("Positie", entity.KnopPositie),
+							clsDAL.Parameter("Image", entity.KnopImage),
+							clsDAL.Parameter("UserNaam", Environment.UserName),
+							clsDAL.Parameter("@ReturnValue", 0));
+			if (!OK)
+			{
+				entity.ErrorBoodschap = Boodschap;
+            }
+            else
+            {
+                isDataModified = true;
+            }
+            return OK;
+		}
+		public bool Update(clsKnoppenM entity)
+		{
+			(DataTable DT, bool OK, string Boodschap) =
+							clsDAL.ExecuteDataTable(Properties.Resources.U_Knop,
+							clsDAL.Parameter("KnopID", entity.KnopId),
+							clsDAL.Parameter("Naam", entity.KnopNaam),
+							clsDAL.Parameter("Tekst", entity.KnopTekst),
+							clsDAL.Parameter("Positie", entity.KnopPositie),
+							clsDAL.Parameter("Image", entity.KnopImage),
+                            clsDAL.Parameter("UserNaam", Environment.UserName),
+                            clsDAL.Parameter("ControlField", entity.ControlField),
+                            clsDAL.Parameter("@ReturnValue", 0));
+			if (!OK)
+			{
+				entity.ErrorBoodschap = Boodschap;
 
 				#endregion
 
 			}
+         
+            return OK;
+		}
+	}
 }
