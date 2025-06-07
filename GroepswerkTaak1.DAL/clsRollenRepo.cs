@@ -13,6 +13,7 @@ namespace GroepswerkTaak1.DAL
 {
     public class clsRollenRepo
     {
+        bool isDataModified = true;
         private ObservableCollection<clsRollenM> MijnCollectie;
         int nr = 0;
         public clsRollenRepo()
@@ -47,13 +48,13 @@ namespace GroepswerkTaak1.DAL
             MijnCollectie = new ObservableCollection<clsRollenM>();
             while (MijnDataReader.Read())
             {
-                clsRollenM Knop = new clsRollenM()
+                clsRollenM Roll = new clsRollenM()
                 {
                     RolId = (int)MijnDataReader["ID"],
                     RolNaam = MijnDataReader["rol"].ToString(),
                     ControlField = MijnDataReader["ControlField"]
                 };
-                MijnCollectie.Add(Knop);
+                MijnCollectie.Add(Roll);
             }
         }
 
@@ -66,7 +67,16 @@ namespace GroepswerkTaak1.DAL
             return MijnCollectie.Where(x => x.RolId == id).FirstOrDefault();
         }
 
+        public clsRollenM GetFirst()
+        {
+            if (isDataModified)
+            {
+                GenerateCollection();
+                isDataModified = false;
+            }
 
+            return MijnCollectie.FirstOrDefault();
+        }
 
         public bool Insert(clsRollenM entity,string LoginNaam)
         {
@@ -81,7 +91,19 @@ namespace GroepswerkTaak1.DAL
             }
             return OK;
         }
-
+        public bool Insert(clsRollenM entity)
+        {
+            (DataTable DT, bool OK, string Boodschap) =
+                    clsDAL.ExecuteDataTable(Properties.Resources.I_Rol,
+                    clsDAL.Parameter("RolNaam", entity.RolNaam),
+                    clsDAL.Parameter("UserNaam", Environment.UserName),
+                    clsDAL.Parameter("@ReturnValue", 0));
+            if (!OK)
+            {
+                entity.ErrorBoodschap = Boodschap;
+            }
+            return OK;
+        }
 
         public bool Update(clsRollenM entity, string LoginNaam)
         {
@@ -90,6 +112,22 @@ namespace GroepswerkTaak1.DAL
                     clsDAL.Parameter("ID", entity.RolId),
                     clsDAL.Parameter("RolNaam", entity.RolNaam),
                     clsDAL.Parameter("UserNaam",LoginNaam),
+                    clsDAL.Parameter("ControlField", entity.ControlField),
+                    clsDAL.Parameter("@ReturnValue", 0));
+            if (!OK)
+            {
+                entity.ErrorBoodschap = Boodschap;
+            }
+            return OK;
+
+        }
+        public bool Update(clsRollenM entity)
+        {
+            (DataTable DT, bool OK, string Boodschap) =
+                    clsDAL.ExecuteDataTable(Properties.Resources.U_Rol,
+                    clsDAL.Parameter("ID", entity.RolId),
+                    clsDAL.Parameter("RolNaam", entity.RolNaam),
+                    clsDAL.Parameter("UserNaam", Environment.UserName),
                     clsDAL.Parameter("ControlField", entity.ControlField),
                     clsDAL.Parameter("@ReturnValue", 0));
             if (!OK)

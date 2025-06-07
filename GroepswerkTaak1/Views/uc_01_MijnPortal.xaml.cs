@@ -117,7 +117,10 @@ namespace GroepswerkTaak1.Views
                     OpenUserControl(_uc_Knoppen);
                     break;
              case "2":
-                break;
+                    var _uc_Rollen = new uc_Rollen();
+                    OpenUserControl(_uc_Rollen);
+                    
+                    break;
              case "3":
                     var _uc_Users = new uc_Users();
                     OpenUserControl(_uc_Users);

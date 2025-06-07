@@ -887,5 +887,6 @@
 
 		<c:clsByteArrayToImageConverter x:Key="ByteArrayToImageConverter" />
     <VM:clsKnoppenVM x:Key="VMKnoppen" />
+        <VM:clsRollenVM x:Key="VMRollen" />
 	</Application.Resources> 
 </Application>
