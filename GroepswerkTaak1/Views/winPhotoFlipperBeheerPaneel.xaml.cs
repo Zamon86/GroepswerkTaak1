@@ -2,8 +2,10 @@
 using GroepswerkTaak1.Helpers;
 using GroepswerkTaak1.Model;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using Microsoft.Win32;
 using System.Windows.Threading;
 
@@ -15,11 +17,13 @@ namespace GroepswerkTaak1.Views
 	public partial class winPhotoFlipperBeheerPaneel : Window
 	{
 
-		public ObservableCollection<clsImagePhotoFlipper> Collection { get; private set; }
+		public ObservableCollection<clsImagePhotoFlipper> Collection { get; }
 		private readonly clsImagePhotoFlipperRepo _repo;
+		
 		public winPhotoFlipperBeheerPaneel(clsPhotoFlipper photoFlipper)
 		{
-			_repo = photoFlipper.Repo;
+			
+			_repo =  photoFlipper.Repo;
 			Collection = photoFlipper.Repo.GetAll();
 			InitializeComponent();
 			DataContext = this;
@@ -88,7 +92,7 @@ namespace GroepswerkTaak1.Views
 			}
 			catch (Exception ex)
 			{
-				throw new Exception(ex.Message);
+				MessageBox.Show(ex.Message);
 			}
 		}
 
@@ -109,10 +113,10 @@ namespace GroepswerkTaak1.Views
 						{
 							ControlField = DBNull.Value,
 							FullImageBytes = fullImage,
-							ImageBytes = clsByteArrayToThumbnail.CreateThumbnail(fullImage, 250, 350),
+							ThumbnailBytes = clsByteArrayToThumbnail.CreateThumbnail(fullImage, 250, 350),
 							FullImageId = -1
 						};
-						_repo.Insert(im);
+						if (!_repo.Insert(im)) MessageBox.Show("Insert failed!");
 					}
 				}
 				catch (Exception ex)
@@ -125,16 +129,42 @@ namespace GroepswerkTaak1.Views
 
 			LoadingAnimation.Visibility = Visibility.Collapsed;
 			SelectedImage.Visibility = Visibility.Visible;
-			ThumbnailList.SelectedIndex = ThumbnailList.Items.Count - 3;
+			ThumbnailList.SelectedIndex = Math.Max(0, ThumbnailList.Items.Count - 3);
 		}
 
 
 		private void BtnReplace_OnClick(object sender, RoutedEventArgs e)
 		{
-			throw new NotImplementedException();
+			var image = (clsImagePhotoFlipper)ThumbnailList.SelectedItem;
+			var index = ThumbnailList.SelectedIndex;
+
+
+			var openFileDialog = new OpenFileDialog
+			{
+				Filter = "Image (*.jpg;*.jpeg;*.bmp;*.png)|*.jpg;*.jpeg;*.bmp;*.png",
+				Title = "Select a replacement image",
+				Multiselect = false
+			};
+
+			if (openFileDialog.ShowDialog() != true) return;
+
+			var filePath = openFileDialog.FileName;
+			
+			try
+			{
+				image.FullImageBytes = File.ReadAllBytes(filePath);
+				image.ThumbnailBytes = clsByteArrayToThumbnail.CreateThumbnail(image.FullImageBytes, 250, 350);
+				
+				if (!_repo.Update(image)) MessageBox.Show("Failed to replace the image.");
+			}
+			catch (Exception ex)
+			{
+				throw new Exception(ex.Message);
+			}
+
+			_repo.UpdateCollection();
+			ThumbnailList.SelectedIndex = index;
 		}
-
-
 
 		private static void ScrollSelectionIntoView(ListBox? listBox)
 		{
@@ -142,33 +172,32 @@ namespace GroepswerkTaak1.Views
 
 			listBox.UpdateLayout();
 			listBox.ScrollIntoView(listBox.SelectedItem);
-
 		}
 
 		private void ThumbnailList_OnSizeChanged(object sender, SizeChangedEventArgs e)
 		{
 			ScrollSelectionIntoView(sender as ListBox);
 		}
+
+		private void SelectedImage_OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+		{
+			if (sender is not Image image) return;
+			if (ThumbnailList.SelectedItem is clsImagePhotoFlipper activeImage)
+			{
+				if (activeImage.FullImageBytes == null)
+				{
+					if (_repo.LoadImageFull(activeImage))
+					{
+						clsFileHelper.OpenBytesAsTempFile(activeImage.FullImageBytes!);
+					}
+				}
+				else
+				{
+					var source = activeImage.FullImageBytes;
+					if (source == null) return;
+					clsFileHelper.OpenBytesAsTempFile(source);
+				}
+			}
+		}
 	}
 }
-
-
-
-
-
-
-//var repo = new clsImagePhotoFlipperRepo();
-//string[] names =
-//[
-//	"Codewars",
-//	"Dotnet",
-//	"Csharp",
-//	"Bild",
-//	"WallStreetJournal",
-//	"Forbes",
-//	"Syntra",
-//	"Guardian",
-//	"NYTimes"
-//];
-
-

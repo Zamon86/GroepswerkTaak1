@@ -11,6 +11,8 @@ using GroepswerkTaak1.Helpers;
 using GroepswerkTaak1.Model;
 
 
+
+
 namespace GroepswerkTaak1.Views
 {
 
@@ -24,7 +26,7 @@ namespace GroepswerkTaak1.Views
 			InitializeComponent();
 			DataContext = this;
 
-			Task task = InitializeAsync();
+			var task = InitializeAsync();
 		}
 
 
@@ -106,37 +108,37 @@ namespace GroepswerkTaak1.Views
 			}
 			grdExpanders.Children.Add(myUserControl);
 		}
-    
+		
 		private void ListBox_Selected(object sender, RoutedEventArgs e)
-        {
-            String keuze = ((ListBoxItem)sender).Tag.ToString();
-            switch (keuze)
-            {
-             case "1":
-                    var _uc_Knoppen = new uc_Knoppen();
-                    OpenUserControl(_uc_Knoppen);
-                    break;
-             case "2":
-                break;
-             case "3":
-                    var _uc_Users = new uc_Users();
-                    OpenUserControl(_uc_Users);
-                   
-                break;
-             case "4":
-                break;
-             case "5":
-                break;
-             case "9":
-                    winLoggingFilter _winLoggingFilter = new winLoggingFilter();
-                    _winLoggingFilter.ShowDialog();
-                    break;
+				{
+						String keuze = ((ListBoxItem)sender).Tag.ToString();
+						switch (keuze)
+						{
+						 case "1":
+										var _uc_Knoppen = new uc_Knoppen();
+										OpenUserControl(_uc_Knoppen);
+										break;
+						 case "2":
+								break;
+						 case "3":
+										var _uc_Users = new uc_Users();
+										OpenUserControl(_uc_Users);
+									 
+								break;
+						 case "4":
+								break;
+						 case "5":
+								break;
+						 case "9":
+										winLoggingFilter _winLoggingFilter = new winLoggingFilter();
+										_winLoggingFilter.ShowDialog();
+										break;
 			 default:
-                MessageBox.Show("Onbekende keuze gemaakt.");
-                break;
-            }
+								MessageBox.Show("Onbekende keuze gemaakt.");
+								break;
+						}
 
-        }
+				}
 
 		private void ButtonSettings_OnClick(object sender, RoutedEventArgs e)
 		{
@@ -161,6 +163,5 @@ namespace GroepswerkTaak1.Views
 
 			btnPhotoFlipperSettings.IsEnabled = false;
 		}
-
 	}
 }
