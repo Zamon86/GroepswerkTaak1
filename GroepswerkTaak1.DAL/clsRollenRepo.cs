@@ -23,19 +23,24 @@ namespace GroepswerkTaak1.DAL
 
         public bool Delete(clsRollenM entity, string LoginNaam)
         {
+            
             (DataTable DT, bool OK, string Boodschap) =
-                    clsDAL.ExecuteDataTable(Properties.Resources.D_User,
-                    clsDAL.Parameter("ID", entity.RolId),
+                    clsDAL.ExecuteDataTable(Properties.Resources.D_Rol,
+                    clsDAL.Parameter("RolID", entity.RolId),
                     ///TODO: vervangen door de loginnaam
                     ///
-                    clsDAL.Parameter("User", LoginNaam),
+                    clsDAL.Parameter("UserNaam", LoginNaam),
                     clsDAL.Parameter("ControlField", entity.ControlField),
                     clsDAL.Parameter("@ReturnValue", 0));
             if (!OK)
             {
                 entity.ErrorBoodschap = Boodschap;
             }
-            return OK;
+            else
+            {
+                isDataModified = true;
+            }
+                return OK;
         }
 
         // public clsRollenM Find() { throw new NotImplementedException(); }  // not implemented
@@ -117,7 +122,7 @@ namespace GroepswerkTaak1.DAL
         {
             (DataTable DT, bool OK, string Boodschap) =
                     clsDAL.ExecuteDataTable(Properties.Resources.U_Rol,
-                    clsDAL.Parameter("ID", entity.RolId),
+                    clsDAL.Parameter("RolID", entity.RolId),
                     clsDAL.Parameter("RolNaam", entity.RolNaam),
                     clsDAL.Parameter("UserNaam",LoginNaam),
                     clsDAL.Parameter("ControlField", entity.ControlField),
@@ -133,7 +138,7 @@ namespace GroepswerkTaak1.DAL
         {
             (DataTable DT, bool OK, string Boodschap) =
                     clsDAL.ExecuteDataTable(Properties.Resources.U_Rol,
-                    clsDAL.Parameter("ID", entity.RolId),
+                    clsDAL.Parameter("RolID", entity.RolId),
                     clsDAL.Parameter("RolNaam", entity.RolNaam),
                     clsDAL.Parameter("UserNaam", Environment.UserName),
                     clsDAL.Parameter("ControlField", entity.ControlField),

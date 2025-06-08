@@ -6,9 +6,14 @@
     xmlns:local="clr-namespace:GroepswerkTaak1.Views"
              xmlns:VM="clr-namespace:GroepswerkTaak1.ViewModels"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    d:DesignHeight="450"
+             xmlns:Converters="clr-namespace:GroepswerkTaak1.Converters"
+             d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
+    <UserControl.Resources>
+
+        <Converters:clsIntVisibilityConverter x:Key="VisibilityConverter" />
+    </UserControl.Resources>
     <Grid DataContext="{StaticResource VMRollen}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
@@ -34,7 +39,7 @@
             FontFamily="segoe ui light"
             FontSize="48"
             Foreground="SteelBlue"
-            Text="Categories" />
+            Text="Rollen" />
         <Label
             Name="lblKeuze"
             Grid.Row="1"
@@ -48,18 +53,11 @@
             Grid.Row="2"
             Grid.Column="1"
             Margin="5"
-            Content="CategoryName"
+            Content="Rol naam"
             FontFamily="segoe ui light"
             Foreground="SteelBlue" />
-        <Label
-            Name="lblCategoryDescription"
-            Grid.Row="3"
-            Grid.Column="1"
-            Margin="5"
-            Content="CategoryDescription"
-            FontFamily="segoe ui light"
-            Foreground="SteelBlue" />
-        <ComboBox Name="cboKeuze"
+       
+        <!--<ComboBox Name="cboKeuze"
                   Grid.Row="1"
                   Grid.Column="2"
                   Width="325"
@@ -67,15 +65,27 @@
                   FontFamily="segoe ui light"
                   FontSize="16"
                   Foreground="SteelBlue"
-                 
-                  ItemsSource="{Binding Path=MijnCollectie}"
-                  SelectedItem="{Binding Path=MijnSelectedItem, Mode=TwoWay}">
+                  Visibility="{Binding MijnCollectie.MyVisibility,Mode=TwoWay,Converter={StaticResource VisibilityConverter}}" 
+        ItemsSource="{Binding Path=MijnCollectie}"
+                  SelectedItem="{Binding Path=MijnSelectedItem, Mode=TwoWay}"
+>
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding RolNaam}" />
                 </DataTemplate>
             </ComboBox.ItemTemplate>
-        </ComboBox>
+        </ComboBox>-->
+        <ComboBox Name="cboKeuze"
+                  Grid.Row="1"
+                  Grid.Column="2"
+                  Margin="5,5,0,5"
+                  DisplayMemberPath="RolNaam"
+                  FontFamily="segoe ui light"
+                  FontSize="16"
+                  Foreground="SteelBlue"
+                  ItemsSource="{Binding Path=MijnCollectie}"
+                  SelectedItem="{Binding Path=MijnSelectedItem, Mode=TwoWay}"
+                  Visibility="{Binding MijnSelectedItem.MyVisibility,Mode=TwoWay,Converter={StaticResource VisibilityConverter}}" />
         <TextBox
             Name="txtCategoryName"
             Grid.Row="2"
@@ -86,14 +96,7 @@
             Foreground="SteelBlue"
                  Text="{Binding Path=MijnSelectedItem.RolNaam}"
             />
-        <TextBox
-            Name="txtCategoryDescription"
-            Grid.Row="3"
-            Grid.Column="2"
-            Margin="5"
-            FontFamily="segoe ui light"
-            FontSize="16"
-            Foreground="SteelBlue" />
+      
         <StackPanel
             Grid.Row="4"
             Grid.Column="1"
@@ -105,7 +108,7 @@
                 Margin="5"
                 Padding="5"
                 Background="Beige"
-                Click="btnNieuw_Click"
+                Command="{Binding Path=cmdNew}"
                 Content="Nieuw"
                 FontFamily="segoe ui light"
                 Foreground="SteelBlue" />
@@ -114,8 +117,8 @@
                 Margin="5"
                 Padding="5"
                 Background="Beige"
-                Click="btnOpslaan_Click"
-                Content="Opslaan"
+                    Command="{Binding Path=cmdSave}"
+                    Content="Opslaan"
                 FontFamily="segoe ui light"
                 Foreground="SteelBlue" />
             <Button
@@ -123,8 +126,8 @@
                 Margin="5"
                 Padding="5"
                 Background="Beige"
-                Click="btnVerwijderen_Click"
-                Content="Verwijderen"
+                    Command="{Binding Path=cmdDelete}"
+                    Content="Verwijderen"
                 FontFamily="segoe ui light"
                 Foreground="SteelBlue" />
             <Button
@@ -132,8 +135,8 @@
                 Margin="5"
                 Padding="5"
                 Background="Beige"
-                Click="btnAnnuleren_Click"
-                Content="Annuleren"
+                    Command="{Binding Path=cmdCancel}"
+                    Content="Annuleren"
                 FontFamily="segoe ui light"
                 Foreground="SteelBlue" />
             <Button
@@ -141,8 +144,8 @@
                 Margin="5"
                 Padding="5"
                 Background="Beige"
-                Click="btnSluiten_Click"
-                Content="Sluiten"
+                    Command="{Binding Path=cmdClose}"
+                    Content="Sluiten"
                 FontFamily="segoe ui light"
                 Foreground="SteelBlue" />
         </StackPanel>

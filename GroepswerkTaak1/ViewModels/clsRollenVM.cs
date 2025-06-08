@@ -69,7 +69,7 @@ namespace GroepswerkTaak1.ViewModels
             cmdCancel = new clsCustomCommand(CancelCommando, canExecuteCancel);
             cmdSave = new clsCustomCommand(OpslaanCommando, canExecuteSave);
            
-        //    cmdDelete = new clsCustomCommand(DeleteCommando, CanExecuteDelete);
+            cmdDelete = new clsCustomCommand(DeleteCommando, CanExecuteDelete);
             LoadData();
             MijnSelectedItem = repo.GetFirst(); // haal een item op met ID 1
         }
@@ -79,32 +79,32 @@ namespace GroepswerkTaak1.ViewModels
             return true;
         }
 
-        //private void DeleteCommando(object obj)
-        //{
-        //    if (MijnSelectedItem != null)
-        //    {
+        private void DeleteCommando(object obj)
+        {
+            if (MijnSelectedItem != null)
+            {
 
-        //        if (repo.Delete(MijnSelectedItem))
-        //        {
-        //            _NewStatus = false; // reset de status na opslaan
-        //            MijnSelectedItem.IsDirty = false; // reset dirty status
-        //            MijnSelectedItem.ErrorBoodschap = string.Empty; // reset error boodschap
-        //            MijnSelectedItem.MijnSelectedIndex = 0; // reset de index van de combobox
-        //            MijnSelectedItem.MyVisibility = (int)Visibility.Visible;                                        // eventueel knoppen aan of uitzetten
-        //            LoadData(); // herlaad de collectie om de nieuwe item te tonen
-        //        }
-        //        else
-        //        {
-        //            MijnSelectedItem.ErrorBoodschap = "Nieuwe knop kan niet worden Verwijdert";
-        //        }
-        //    }
+                if (repo.Delete(MijnSelectedItem, clsActiveUserData.ActiveUser.Naam))
+                {
+                    _NewStatus = false; // reset de status na opslaan
+                    MijnSelectedItem.IsDirty = false; // reset dirty status
+                    MijnSelectedItem.ErrorBoodschap = string.Empty; // reset error boodschap
+                    MijnSelectedItem.MijnSelectedIndex = 0; // reset de index van de combobox
+                    MijnSelectedItem.MyVisibility = (int)Visibility.Visible;                                        // eventueel knoppen aan of uitzetten
+                    LoadData(); // herlaad de collectie om de nieuwe item te tonen
+                }
+                else
+                {
+                    MijnSelectedItem.ErrorBoodschap = "Nieuwe knop kan niet worden Verwijdert";
+                }
+            }
 
 
-        //}
+        }
 
-    
 
-    
+
+
 
 
 
@@ -169,7 +169,7 @@ namespace GroepswerkTaak1.ViewModels
             {
                 if (_NewStatus) // nieuw item
                 {
-                    if (repo.Insert(MijnSelectedItem))
+                    if (repo.Insert(MijnSelectedItem,clsActiveUserData.ActiveUser.Naam))
                     {
                         _NewStatus = false; // reset de status na opslaan
                         MijnSelectedItem.IsDirty = false; // reset dirty status
@@ -185,7 +185,7 @@ namespace GroepswerkTaak1.ViewModels
                 }
                 else
                 {
-                    if (repo.Update(MijnSelectedItem))
+                    if (repo.Update(MijnSelectedItem, clsActiveUserData.ActiveUser.Naam))
                     {
                         _NewStatus = false; // reset de status na opslaan
                         MijnSelectedItem.IsDirty = false; // reset dirty status
