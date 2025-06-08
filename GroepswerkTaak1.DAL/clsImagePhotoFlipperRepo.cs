@@ -8,7 +8,7 @@ namespace GroepswerkTaak1.DAL
 	{
 		private readonly ObservableCollection<clsImagePhotoFlipper> _images = [];
 		private bool _isDataModified = true;
-		private int _queryResult = 0;
+		private int _queryResult;
 		
 
 		public void UpdateCollection()
@@ -22,7 +22,7 @@ namespace GroepswerkTaak1.DAL
 					var image = new clsImagePhotoFlipper()
 					{
 						ImagePhotoFlipperID = (short)reader["ID"],
-						ImageBytes = (byte[])reader["Image"],
+						ThumbnailBytes = (byte[])reader["Image"],
 						FullImageId = (short)reader["FullImageId"],
 						ControlField = reader["ControlFIeld"]
 					};
@@ -56,7 +56,7 @@ namespace GroepswerkTaak1.DAL
 		public bool Delete(clsImagePhotoFlipper entity)
 		{
 			clsDAL.ExecuteDataTable(Properties.Resources.D_Image, ref _queryResult, clsDAL.Parameter("ID", entity.ImagePhotoFlipperID),
-				clsDAL.Parameter("User", Environment.UserName),
+				clsDAL.Parameter("User", $"{clsActiveUserData.ActiveUser.VoorNaam} {clsActiveUserData.ActiveUser.Naam}"),
 				clsDAL.Parameter("ControlField", entity.ControlField),
 				clsDAL.Parameter("@ReturnValue", 0));
 
@@ -92,8 +92,8 @@ namespace GroepswerkTaak1.DAL
 			if (entity.FullImageBytes == null) return false;
 			
 			clsDAL.ExecuteDataTable(Properties.Resources.I_Image, ref _queryResult, clsDAL.Parameter("Image", entity.FullImageBytes),
-				clsDAL.Parameter("Thumbnail", entity.ImageBytes),
-				clsDAL.Parameter("User", Environment.UserName),
+				clsDAL.Parameter("Thumbnail", entity.ThumbnailBytes),
+				clsDAL.Parameter("User", $"{clsActiveUserData.ActiveUser.VoorNaam} {clsActiveUserData.ActiveUser.Naam}"),
 				clsDAL.Parameter("@ReturnValue", 0));
 
 			_isDataModified = true;
@@ -103,9 +103,13 @@ namespace GroepswerkTaak1.DAL
 
 		public bool Update(clsImagePhotoFlipper entity)
 		{
+			if (entity.FullImageBytes == null) return false;
+			
 			clsDAL.ExecuteDataTable(Properties.Resources.U_Image, ref _queryResult, clsDAL.Parameter("ID", entity.ImagePhotoFlipperID),
-				clsDAL.Parameter("Image", entity.ImageBytes),
-				clsDAL.Parameter("User", Environment.UserName),
+				clsDAL.Parameter("Image", entity.FullImageBytes),
+				clsDAL.Parameter("FullImageId", entity.FullImageId),
+				clsDAL.Parameter("Thumbnail", entity.ThumbnailBytes),
+				clsDAL.Parameter("User", $"{clsActiveUserData.ActiveUser.VoorNaam} {clsActiveUserData.ActiveUser.Naam}"),
 				clsDAL.Parameter("ControlField", entity.ControlField),
 				clsDAL.Parameter("@ReturnValue", 0));
 
@@ -121,7 +125,7 @@ namespace GroepswerkTaak1.DAL
 			var image = new clsImagePhotoFlipper()
 			{
 				ImagePhotoFlipperID = 0,
-				ImageBytes = File.ReadAllBytes(path),
+				ThumbnailBytes = File.ReadAllBytes(path),
 				FullImageId = 0,
 				ControlField = new object()
 			};

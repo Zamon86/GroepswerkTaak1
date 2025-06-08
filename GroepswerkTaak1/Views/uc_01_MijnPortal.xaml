@@ -23,7 +23,7 @@
 		<Style BasedOn="{StaticResource ExpanderTemplate}" TargetType="Expander" />
 
 	</UserControl.Resources>
-	<Grid>
+	<Grid x:Name="grdMain" IsSharedSizeScope="True">
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="auto" />
 			<ColumnDefinition Width="*" />
@@ -32,9 +32,8 @@
 			<ScrollViewer.Resources>
 				<Style BasedOn="{StaticResource CustomVerticalScrollBar}" TargetType="ScrollBar" />
 			</ScrollViewer.Resources>
-			<Grid x:Name="grdMain">
+			<Grid>
 				<Grid.ColumnDefinitions>
-					<ColumnDefinition Width="10" />
 					<ColumnDefinition Width="auto" />
 					<ColumnDefinition Width="*" />
 				</Grid.ColumnDefinitions>
@@ -42,7 +41,7 @@
 					<RowDefinition Height="*" />
 					<RowDefinition Height="auto" />
 				</Grid.RowDefinitions>
-				<Grid Grid.Row="0" Grid.Column="1">
+				<Grid Grid.Row="0" Grid.Column="0">
 					<Grid.ColumnDefinitions>
 						<ColumnDefinition Width="*" />
 						<ColumnDefinition Width="Auto" />
@@ -64,7 +63,7 @@
 						Cursor="Hand"
 						MouseLeftButtonDown="PhotoFlipperImage_MouseLeftButtonDown"
 						RenderTransformOrigin="0.5,0.5"
-						Source="{Binding PhotoFlipper.ActiveImage.ImageBytes, NotifyOnSourceUpdated=True}"
+						Source="{Binding PhotoFlipper.ActiveImage.ThumbnailBytes, NotifyOnSourceUpdated=True}"
 						Visibility="Collapsed">
 						<Image.RenderTransform>
 							<ScaleTransform x:Name="ImageHorizontalScaleTransform" ScaleX="1" />
@@ -78,12 +77,14 @@
 								Color="Black" />
 						</Image.Effect>
 					</Image>
-					<Ellipse
+					<customControls:clsLoadingSpinner
 						x:Name="LoadingAnimation"
 						Grid.Row="1"
 						Grid.Column="1"
-						Style="{StaticResource LoadingSpinnerStyle}" />
-
+						Margin="125"
+						Diameter="100"
+						Thickness="5"
+						Color="{StaticResource ThemeColor2}" />
 					<Button
 						x:Name="btnPhotoFlipperSettings"
 						Grid.Row="2"
@@ -98,8 +99,8 @@
 				</Grid>
 				<Grid
 					Grid.Row="1"
-					Grid.Column="1"
-					Margin="5"
+					Grid.Column="0"
+					Margin="50,5"
 					VerticalAlignment="Bottom">
 					<Grid.RowDefinitions>
 						<RowDefinition Height="auto" />
@@ -169,7 +170,7 @@
 					x:Name="grdExpanders"
 					Grid.Row="0"
 					Grid.RowSpan="2"
-					Grid.Column="2"
+					Grid.Column="1"
 					MinWidth="250">
 					<StackPanel
 						Grid.Column="0"
@@ -328,10 +329,11 @@
 		</ScrollViewer>
 
 		<ScrollViewer
+			x:Name="scvKnoppen"
 			Grid.Column="0"
 			Width="350"
 			HorizontalAlignment="Stretch"
-			VerticalAlignment="Stretch"
+			VerticalAlignment="Top"
 			DataContext="{StaticResource VMKnoppen}"
 			FlowDirection="RightToLeft"
 			VerticalScrollBarVisibility="Auto">
@@ -348,7 +350,6 @@
 							Width="250"
 							Margin="10"
 							HorizontalAlignment="Center"
-							VerticalAlignment="Stretch"
 							Columns="3"
 							FlowDirection="LeftToRight" />
 					</ItemsPanelTemplate>

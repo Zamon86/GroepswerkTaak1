@@ -11,6 +11,8 @@ using GroepswerkTaak1.Helpers;
 using GroepswerkTaak1.Model;
 
 
+
+
 namespace GroepswerkTaak1.Views
 {
 
@@ -24,7 +26,7 @@ namespace GroepswerkTaak1.Views
 			InitializeComponent();
 			DataContext = this;
 
-			Task task = InitializeAsync();
+			var task = InitializeAsync();
 		}
 
 
@@ -106,8 +108,9 @@ namespace GroepswerkTaak1.Views
 			}
 			grdExpanders.Children.Add(myUserControl);
 		}
-    
+		
 		private void ListBox_Selected(object sender, RoutedEventArgs e)
+
         {
             String keuze = ((ListBoxItem)sender).Tag.ToString();
             switch (keuze)
@@ -134,12 +137,13 @@ namespace GroepswerkTaak1.Views
                     winLoggingFilter _winLoggingFilter = new winLoggingFilter();
                     _winLoggingFilter.ShowDialog();
                     break;
-			 default:
-                MessageBox.Show("Onbekende keuze gemaakt.");
-                break;
-            }
 
-        }
+			 default:
+								MessageBox.Show("Onbekende keuze gemaakt.");
+								break;
+						}
+
+				}
 
 		private void ButtonSettings_OnClick(object sender, RoutedEventArgs e)
 		{
@@ -164,6 +168,5 @@ namespace GroepswerkTaak1.Views
 
 			btnPhotoFlipperSettings.IsEnabled = false;
 		}
-
 	}
 }
