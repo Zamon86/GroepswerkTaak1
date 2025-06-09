@@ -133,7 +133,7 @@ namespace GroepswerkTaak1.DAL
         {
             (DataTable DT, bool OK, string Boodschap) =
                             clsDAL.ExecuteDataTable(Properties.Resources.U_User,
-                            clsDAL.Parameter("ID", entity.UserId),
+                            clsDAL.Parameter("UserId", entity.UserId),
                     clsDAL.Parameter("LoginNaam", entity.LoginNaam),
                     clsDAL.Parameter("Naam", entity.Naam),
                     clsDAL.Parameter("VoorNaam", entity.VoorNaam),
