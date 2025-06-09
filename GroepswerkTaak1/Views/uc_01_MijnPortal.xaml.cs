@@ -125,8 +125,8 @@ namespace GroepswerkTaak1.Views
                     
                     break;
              case "3":
-                    var _uc_Users = new uc_Users();
-                    OpenUserControl(_uc_Users);
+                    var _uc_10_Users = new uc_10_Users();
+                    OpenUserControl(_uc_10_Users);
                    
                 break;
              case "4":
