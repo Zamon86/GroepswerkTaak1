@@ -6,6 +6,7 @@ namespace GroepswerkTaak1
 {
     /// <summary>
     /// Interaction logic for uc_Users.xaml
+    /// Ik ga deze weg gooien
     /// </summary>
     public partial class uc_Users : UserControl
     {
