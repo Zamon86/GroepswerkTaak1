@@ -54,5 +54,9 @@ namespace GroepswerkTaak1.Model
             set { _ControlField = value; }
         }
 
+        public override string ToString()
+        {
+            return RolNaam;
+        }
     }
 }

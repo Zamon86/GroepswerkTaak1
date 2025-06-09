@@ -18,7 +18,7 @@ namespace GroepswerkTaak1
 		//clsUsersM Gebruiker = new clsUsersM();
 		//clsRollenM Rol = new clsRollenM();
 		clsLoginRepo LoginRepo = new clsLoginRepo();
-		clsUsersRepo UsersRepo = new clsUsersRepo();
+		clsUserRepo UsersRepo = new clsUserRepo();
 		clsRollenRepo RollenRepo = new clsRollenRepo();
 		public winLogon()
 		{
