@@ -14,50 +14,53 @@
 
         <Converters:clsIntVisibilityConverter x:Key="VisibilityConverter" />
     </UserControl.Resources>
-    <Grid DataContext="{StaticResource VMRollen}">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="auto" />
-            <ColumnDefinition Width="auto" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        <TextBlock
-            Grid.Row="0"
-            Grid.Column="0"
-            Grid.ColumnSpan="4"
-            Margin="0,0,0,20"
-            Padding="20"
-            Background="Beige"
-            FontFamily="segoe ui light"
-            FontSize="48"
-            Foreground="SteelBlue"
-            Text="Rollen" />
-        <Label
-            Name="lblKeuze"
-            Grid.Row="1"
-            Grid.Column="1"
-            Margin="5"
-            Content="Keuze"
-            FontFamily="segoe ui light"
-            Foreground="SteelBlue" />
-        <Label
-            Name="lblCategoryName"
-            Grid.Row="2"
-            Grid.Column="1"
-            Margin="5"
-            Content="Rol naam"
-            FontFamily="segoe ui light"
-            Foreground="SteelBlue" />
-       
-        <!--<ComboBox Name="cboKeuze"
+
+    <Border BorderBrush="Black"
+            BorderThickness="5"
+            CornerRadius="30">
+        <StackPanel Background="{StaticResource MainBackgroundColor}"
+                    Orientation="Vertical">
+            <Grid DataContext="{StaticResource VMRollen}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0"
+                           Grid.Column="0"
+                           Grid.ColumnSpan="4"
+                           Margin="0,0,0,20"
+                           Padding="20"
+                           Background="Beige"
+                           FontFamily="segoe ui light"
+                           FontSize="48"
+                           Foreground="SteelBlue"
+                           Text="Rollen" />
+                <Label Name="lblKeuze"
+                       Grid.Row="1"
+                       Grid.Column="1"
+                       Margin="5"
+                       Content="Keuze"
+                       FontFamily="segoe ui light"
+                       Foreground="SteelBlue" />
+                <Label Name="lblCategoryName"
+                       Grid.Row="2"
+                       Grid.Column="1"
+                       Margin="5"
+                       Content="Rol naam"
+                       FontFamily="segoe ui light"
+                       Foreground="SteelBlue" />
+
+                <!--<ComboBox Name="cboKeuze"
                   Grid.Row="1"
                   Grid.Column="2"
                   Width="325"
@@ -75,79 +78,74 @@
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>-->
-        <ComboBox Name="cboKeuze"
-                  Grid.Row="1"
-                  Grid.Column="2"
-                  Margin="5,5,0,5"
-                  DisplayMemberPath="RolNaam"
-                  FontFamily="segoe ui light"
-                  FontSize="16"
-                  Foreground="SteelBlue"
-                  ItemsSource="{Binding Path=MijnCollectie}"
-                  SelectedItem="{Binding Path=MijnSelectedItem, Mode=TwoWay}"
-                  Visibility="{Binding MijnSelectedItem.MyVisibility,Mode=TwoWay,Converter={StaticResource VisibilityConverter}}" />
-        <TextBox
-            Name="txtCategoryName"
-            Grid.Row="2"
-            Grid.Column="2"
-            Margin="5"
-            FontFamily="segoe ui light"
-            FontSize="16"
-            Foreground="SteelBlue"
-                 Text="{Binding Path=MijnSelectedItem.RolNaam}"
-            />
-      
-        <StackPanel
-            Grid.Row="4"
-            Grid.Column="1"
-            Grid.ColumnSpan="2"
-            HorizontalAlignment="Center"
-            Orientation="Horizontal">
-            <Button
-                Name="btnNieuw"
-                Margin="5"
-                Padding="5"
-                Background="Beige"
-                Command="{Binding Path=cmdNew}"
-                Content="Nieuw"
-                FontFamily="segoe ui light"
-                Foreground="SteelBlue" />
-            <Button
-                Name="btnOpslaan"
-                Margin="5"
-                Padding="5"
-                Background="Beige"
-                    Command="{Binding Path=cmdSave}"
-                    Content="Opslaan"
-                FontFamily="segoe ui light"
-                Foreground="SteelBlue" />
-            <Button
-                Name="btnVerwijderen"
-                Margin="5"
-                Padding="5"
-                Background="Beige"
-                    Command="{Binding Path=cmdDelete}"
-                    Content="Verwijderen"
-                FontFamily="segoe ui light"
-                Foreground="SteelBlue" />
-            <Button
-                Name="btnAnnuleren"
-                Margin="5"
-                Padding="5"
-                Background="Beige"
-                    Command="{Binding Path=cmdCancel}"
-                    Content="Annuleren"
-                FontFamily="segoe ui light"
-                Foreground="SteelBlue" />
-            <Button
-                Name="btnSluiten"
-                Margin="5"
-                Padding="5"
-                Background="Beige"
-                    Command="{Binding Path=cmdClose}"
-                    Content="Sluiten"
-                FontFamily="segoe ui light"
-                Foreground="SteelBlue" />
+                <ComboBox Name="cboKeuze"
+                          Grid.Row="1"
+                          Grid.Column="2"
+                          Margin="5,5,0,5"
+                          DisplayMemberPath="RolNaam"
+                          FontFamily="segoe ui light"
+                          FontSize="16"
+                          Foreground="SteelBlue"
+                          ItemsSource="{Binding Path=MijnCollectie}"
+                          SelectedItem="{Binding Path=MijnSelectedItem, Mode=TwoWay}"
+                          Visibility="{Binding MijnSelectedItem.MyVisibility,Mode=TwoWay,Converter={StaticResource VisibilityConverter}}" />
+                <TextBox Name="txtCategoryName"
+                         Grid.Row="2"
+                         Grid.Column="2"
+                         Margin="5"
+                         FontFamily="segoe ui light"
+                         FontSize="16"
+                         Foreground="SteelBlue"
+                         Text="{Binding Path=MijnSelectedItem.RolNaam}" />
+
+                <StackPanel Grid.Row="4"
+                            Grid.Column="1"
+                            Grid.ColumnSpan="2"
+                            HorizontalAlignment="Center"
+                            Orientation="Horizontal">
+                    <Button Name="btnNieuw"
+                            Margin="5"
+                            Padding="5"
+                            Background="Beige"
+                            Command="{Binding Path=cmdNew}"
+                            Content="Nieuw"
+                            FontFamily="segoe ui light"
+                            Foreground="SteelBlue" />
+                    <Button Name="btnOpslaan"
+                            Margin="5"
+                            Padding="5"
+                            Background="Beige"
+                            Command="{Binding Path=cmdSave}"
+                            Content="Opslaan"
+                            FontFamily="segoe ui light"
+                            Foreground="SteelBlue" />
+                    <Button Name="btnVerwijderen"
+                            Margin="5"
+                            Padding="5"
+                            Background="Beige"
+                            Command="{Binding Path=cmdDelete}"
+                            Content="Verwijderen"
+                            FontFamily="segoe ui light"
+                            Foreground="SteelBlue" />
+                    <Button Name="btnAnnuleren"
+                            Margin="5"
+                            Padding="5"
+                            Background="Beige"
+                            Command="{Binding Path=cmdCancel}"
+                            Content="Annuleren"
+                            FontFamily="segoe ui light"
+                            Foreground="SteelBlue" />
+                    <Button Name="btnSluiten"
+                            Margin="5"
+                            Padding="5"
+                            Background="Beige"
+                            Click="btnSluiten_Click"
+                            Content="Sluiten"
+                            FontFamily="segoe ui light"
+                            Foreground="SteelBlue" />
+                </StackPanel>
+            </Grid>
+
         </StackPanel>
-    </Grid>
+    </Border>
 </UserControl>

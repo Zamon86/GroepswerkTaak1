@@ -40,7 +40,12 @@ namespace GroepswerkTaak1
 
         private void btnSluiten_Click(object sender, RoutedEventArgs e)
         {
-
+            if (this.Parent is Panel panel)
+            {
+                panel.Children.Remove(this);
+            }
         }
+
+      
     }
 }
