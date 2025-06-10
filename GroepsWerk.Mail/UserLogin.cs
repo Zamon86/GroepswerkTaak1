@@ -1,6 +1,6 @@
 ﻿namespace GroepsWerk.Mail
 {
-    public interface UserLogin
+    public interface I_UserLogin
     {
         string LoginNaam { get; set; }
         string Wachtwoord { get; set; }

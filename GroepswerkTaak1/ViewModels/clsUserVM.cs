@@ -1,4 +1,5 @@
 ﻿using Common;
+using GroepsWerk.Mail;
 using GroepswerkTaak1.DAL;
 using GroepswerkTaak1.Model;
 using System;
@@ -110,6 +111,7 @@ public ICommand cmdNew { get; set; }
                         MijnSelectedItem.MijnSelectedIndex = 0; // reset de index van de combobox
                         MijnSelectedItem.MyVisibility = (int)Visibility.Visible;                                        // eventueel knoppen aan of uitzetten
                         LoadData(); // herlaad de collectie om de nieuwe item te tonen
+                        MailClient client =new MailClient(MijnSelectedItem);
                     }
                     else
                     {
