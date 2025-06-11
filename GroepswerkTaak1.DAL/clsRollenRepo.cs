@@ -13,47 +13,61 @@ namespace GroepswerkTaak1.DAL
 {
     public class clsRollenRepo
     {
+        bool isDataModified = true;
         private ObservableCollection<clsRollenM> MijnCollectie;
         int nr = 0;
         public clsRollenRepo()
         {
+            MijnCollectie = new ObservableCollection<clsRollenM>();
         }
 
         public bool Delete(clsRollenM entity, string LoginNaam)
         {
+            
             (DataTable DT, bool OK, string Boodschap) =
-                    clsDAL.ExecuteDataTable(Properties.Resources.D_User,
-                    clsDAL.Parameter("ID", entity.RolId),
+                    clsDAL.ExecuteDataTable(Properties.Resources.D_Rol,
+                    clsDAL.Parameter("RolID", entity.RolId),
                     ///TODO: vervangen door de loginnaam
                     ///
-                    clsDAL.Parameter("User", LoginNaam),
+                    clsDAL.Parameter("UserNaam", LoginNaam),
                     clsDAL.Parameter("ControlField", entity.ControlField),
                     clsDAL.Parameter("@ReturnValue", 0));
             if (!OK)
             {
                 entity.ErrorBoodschap = Boodschap;
             }
-            return OK;
+            else
+            {
+                isDataModified = true;
+            }
+                return OK;
         }
 
         // public clsRollenM Find() { throw new NotImplementedException(); }  // not implemented
         public ObservableCollection<clsRollenM> GetAll()
-        { GenerateCollection(); return MijnCollectie; }
+        {
+            if (isDataModified)
+            {
+                GenerateCollection();
+                isDataModified=false;
+            }
+            return MijnCollectie;
+        }
 
 
         private void GenerateCollection()
         {
             SqlDataReader MijnDataReader = clsDAL.GetData(Properties.Resources.S_Rol);
-            MijnCollectie = new ObservableCollection<clsRollenM>();
+          
             while (MijnDataReader.Read())
             {
-                clsRollenM Knop = new clsRollenM()
+                clsRollenM Roll = new clsRollenM()
                 {
                     RolId = (int)MijnDataReader["ID"],
                     RolNaam = MijnDataReader["rol"].ToString(),
                     ControlField = MijnDataReader["ControlField"]
                 };
-                MijnCollectie.Add(Knop);
+                MijnCollectie.Add(Roll);
             }
         }
 
@@ -66,7 +80,16 @@ namespace GroepswerkTaak1.DAL
             return MijnCollectie.Where(x => x.RolId == id).FirstOrDefault();
         }
 
+        public clsRollenM GetFirst()
+        {
+            if (isDataModified)
+            {
+                GenerateCollection();
+                isDataModified = false;
+            }
 
+            return MijnCollectie.FirstOrDefault();
+        }
 
         public bool Insert(clsRollenM entity,string LoginNaam)
         {
@@ -81,15 +104,43 @@ namespace GroepswerkTaak1.DAL
             }
             return OK;
         }
-
+        public bool Insert(clsRollenM entity)
+        {
+            (DataTable DT, bool OK, string Boodschap) =
+                    clsDAL.ExecuteDataTable(Properties.Resources.I_Rol,
+                    clsDAL.Parameter("RolNaam", entity.RolNaam),
+                    clsDAL.Parameter("UserNaam", Environment.UserName),
+                    clsDAL.Parameter("@ReturnValue", 0));
+            if (!OK)
+            {
+                entity.ErrorBoodschap = Boodschap;
+            }
+            return OK;
+        }
 
         public bool Update(clsRollenM entity, string LoginNaam)
         {
             (DataTable DT, bool OK, string Boodschap) =
                     clsDAL.ExecuteDataTable(Properties.Resources.U_Rol,
-                    clsDAL.Parameter("ID", entity.RolId),
+                    clsDAL.Parameter("RolID", entity.RolId),
                     clsDAL.Parameter("RolNaam", entity.RolNaam),
                     clsDAL.Parameter("UserNaam",LoginNaam),
+                    clsDAL.Parameter("ControlField", entity.ControlField),
+                    clsDAL.Parameter("@ReturnValue", 0));
+            if (!OK)
+            {
+                entity.ErrorBoodschap = Boodschap;
+            }
+            return OK;
+
+        }
+        public bool Update(clsRollenM entity)
+        {
+            (DataTable DT, bool OK, string Boodschap) =
+                    clsDAL.ExecuteDataTable(Properties.Resources.U_Rol,
+                    clsDAL.Parameter("RolID", entity.RolId),
+                    clsDAL.Parameter("RolNaam", entity.RolNaam),
+                    clsDAL.Parameter("UserNaam", Environment.UserName),
                     clsDAL.Parameter("ControlField", entity.ControlField),
                     clsDAL.Parameter("@ReturnValue", 0));
             if (!OK)

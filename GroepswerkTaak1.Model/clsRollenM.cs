@@ -45,6 +45,7 @@ namespace GroepswerkTaak1.Model
             set { _RolNaam = value; OnPropertyChanged(nameof(RolNaam)); }
         }
 
+       
 
         private Object _ControlField;
         public Object ControlField
@@ -53,5 +54,9 @@ namespace GroepswerkTaak1.Model
             set { _ControlField = value; }
         }
 
+        public override string ToString()
+        {
+            return RolNaam;
+        }
     }
 }
