@@ -34,16 +34,16 @@ namespace GroepswerkTaak1.ViewModels
         private bool _NewStatus = false;
         //clsKnoppenRepo Repo = new clsKnoppenRepo();
 
-        private ObservableCollection<clsRollenM>? _MijnCollectie;
-        public ObservableCollection<clsRollenM> MijnCollectie
+        private ObservableCollection<clsRolM>? _MijnCollectie;
+        public ObservableCollection<clsRolM> MijnCollectie
         {
             get { return _MijnCollectie; }
             set { _MijnCollectie = value; OnPropertyChanged(); }
         }
 
-        private clsRollenM? _MijnSelectedItem;
+        private clsRolM? _MijnSelectedItem;
 
-        public clsRollenM MijnSelectedItem
+        public clsRolM MijnSelectedItem
         {
             get { return _MijnSelectedItem; }
             set
@@ -204,7 +204,7 @@ namespace GroepswerkTaak1.ViewModels
 
         private void NewCommando(object obj)
         {
-            clsRollenM ItemToInsert = new clsRollenM()
+            clsRolM ItemToInsert = new clsRolM()
             {
                 RolId = 0
 

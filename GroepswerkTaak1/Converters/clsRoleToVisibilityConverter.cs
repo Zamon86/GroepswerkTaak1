@@ -11,7 +11,7 @@ public class clsRoleToVisibilityConverter: IValueConverter
 
 	public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
 	{
-		if (value is not clsRollenM userRole) return Visibility.Hidden;
+		if (value is not clsRolM userRole) return Visibility.Hidden;
 		
 		return userRole.RolNaam.Trim() == Admin ? Visibility.Visible : Visibility.Hidden;
 	}

@@ -103,12 +103,11 @@
 			<Button
 				Name="btnAfmelden"
 				Grid.Column="2"
+				Width="80"
 				Height="23"
-				Margin="10,0,10,0"
-				VerticalAlignment="Center"
 				Click="btnAfmelden_Click"
 				Content="Afmelden"
-				Style="{StaticResource AfmeldenButtonStyle}" />
+				Style="{StaticResource BasicButtonStyle}" />
 		</Grid>
 		<Grid
 			Name="grdFooter"
