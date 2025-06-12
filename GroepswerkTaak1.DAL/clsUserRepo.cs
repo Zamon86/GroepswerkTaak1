@@ -92,13 +92,13 @@ namespace GroepswerkTaak1.DAL
                             clsDAL.Parameter("@ReturnValue", 0));
             if (!OK)
             {
-                entity.ErrorBoodschap = Boodschap;
+                //entity.ErrorBoodschap = Boodschap;
             }
             else
             {
                 isDataModified = true;
             }
-
+            entity.ErrorBoodschap = Boodschap;
             return OK;
         }
 
@@ -121,12 +121,13 @@ namespace GroepswerkTaak1.DAL
                             clsDAL.Parameter("@ReturnValue", 0));
             if (!OK)
             {
-                entity.ErrorBoodschap = Boodschap;
+                //entity.ErrorBoodschap = Boodschap;
             }
             else
             {
                 isDataModified = true;
             }
+            entity.ErrorBoodschap = Boodschap;
             return OK;
         }
         public bool Update(clsUserM entity)
@@ -145,15 +146,13 @@ namespace GroepswerkTaak1.DAL
                             clsDAL.Parameter("UserNaam", loginNaam),
                             clsDAL.Parameter("ControlField", entity.ControlField),
                             clsDAL.Parameter("@ReturnValue", 0));
-            if (!OK)
-            {
-                entity.ErrorBoodschap = Boodschap;
-
-                #endregion
-
-            }
-
+            //if (!OK)
+            //{
+            //    entity.ErrorBoodschap = Boodschap;
+            //}
+            entity.ErrorBoodschap = Boodschap;
             return OK;
         }
+        #endregion
     }
 }
