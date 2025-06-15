@@ -28,7 +28,7 @@ namespace GroepswerkTaak1.Components
     public partial class BindablePasswordBox : UserControl
     {
 
-
+        private bool _isPasswordChanging = false;
 
         public string Password
         {
@@ -39,10 +39,18 @@ namespace GroepswerkTaak1.Components
         // Using a DependencyProperty as the backing store for Password.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty PasswordProperty =
             DependencyProperty.Register("Password", typeof(string), 
-                typeof(BindablePasswordBox), new PropertyMetadata(string.Empty));
+                typeof(BindablePasswordBox), new PropertyMetadata(string.Empty,PasswordPropertyChanged));
 
+        private static void PasswordPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+          if(d is BindablePasswordBox passwordBox)
+            {
+                // Update the PasswordBox when the Password property changes
+                passwordBox.UpdatePassword();
+            }
+        }
 
-
+       
         public BindablePasswordBox()
         {
             InitializeComponent();
@@ -50,8 +58,17 @@ namespace GroepswerkTaak1.Components
 
         private void passwordBox_PasswordChanged(object sender, RoutedEventArgs e)
         {
+            _isPasswordChanging = true;
             //Sync zal werken van box naar property , omgekeerd willen we dat niet
             Password = passwordBox.Password;
+            _isPasswordChanging = false;
         }
+
+        private void UpdatePassword()
+        {  if(!_isPasswordChanging)
+                // Update the PasswordBox only if the change is not initiated by the PasswordBox itself
+                passwordBox.Password = Password ;
+        }
+
     }
 }
