@@ -108,42 +108,6 @@ namespace GroepswerkTaak1.Views
 			}
 			grdExpanders.Children.Add(myUserControl);
 		}
-		
-		private void ListBox_Selected(object sender, RoutedEventArgs e)
-
-        {
-            String keuze = ((ListBoxItem)sender).Tag.ToString();
-            switch (keuze)
-            {
-             case "1":
-                    var _uc_Knoppen = new uc_Knoppen();
-                    OpenUserControl(_uc_Knoppen);
-                    break;
-             case "2":
-                    var _uc_Rollen = new uc_Rollen();
-                    OpenUserControl(_uc_Rollen);
-                    
-                    break;
-             case "3":
-                    var _uc_10_Users = new uc_10_Users();
-                    OpenUserControl(_uc_10_Users);
-                   
-                break;
-             case "4":
-                break;
-             case "5":
-                break;
-             case "9":
-                    winLoggingFilter _winLoggingFilter = new winLoggingFilter();
-                    _winLoggingFilter.ShowDialog();
-                    break;
-
-			 default:
-								MessageBox.Show("Onbekende keuze gemaakt.");
-								break;
-						}
-
-				}
 
 		private void ButtonSettings_OnClick(object sender, RoutedEventArgs e)
 		{
@@ -167,6 +131,37 @@ namespace GroepswerkTaak1.Views
 			}
 
 			btnPhotoFlipperSettings.IsEnabled = false;
+		}
+
+		private void AdminListBox_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+		{
+			if (sender is not ListBox listBox) return;
+			if (listBox.SelectedItem is not ListBoxItem selectedItem) return;
+
+			var keuze = selectedItem.Tag.ToString();
+			if (keuze == null) return;
+
+			switch (keuze)
+			{
+				case "Knoppen":
+					OpenUserControl(new uc_Knoppen());
+					break;
+				case "Rollen":
+					OpenUserControl(new uc_Rollen());
+					break;
+				case "Users":
+					OpenUserControl(new uc_10_Users());
+					break;
+				case "Logging":
+					new winLoggingFilter().ShowDialog();
+					break;
+				default:
+					MessageBox.Show("Onbekende keuze gemaakt.");
+					break;
+			}
+
+			listBox.SelectedItem = null;
+
 		}
 	}
 }

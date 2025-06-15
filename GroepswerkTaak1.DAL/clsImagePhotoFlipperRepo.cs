@@ -43,7 +43,6 @@ namespace GroepswerkTaak1.DAL
 			if (_isDataModified)
 			{
 				UpdateCollection();
-				_isDataModified= false;
 			}
 			
 			if (_images.Count == 0)
@@ -71,7 +70,6 @@ namespace GroepswerkTaak1.DAL
 				return _images.FirstOrDefault(e => e.ImagePhotoFlipperID == id) ?? GetErrorImage();
 			
 			UpdateCollection();
-			_isDataModified = false;
 			
 			return _images.FirstOrDefault(e => e.ImagePhotoFlipperID == id) ?? GetErrorImage();
 		}
@@ -82,7 +80,6 @@ namespace GroepswerkTaak1.DAL
 				return _images.FirstOrDefault() ?? GetErrorImage();
 			
 			UpdateCollection();
-			_isDataModified = false;
 
 			return _images.FirstOrDefault() ?? GetErrorImage();
 		}

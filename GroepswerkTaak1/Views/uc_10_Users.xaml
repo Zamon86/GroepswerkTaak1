@@ -249,7 +249,9 @@
                         Command="{Binding Path=cmdNew}"
                         Content="Nieuw"
                         FontFamily="segoe ui light"
-                        Foreground="SteelBlue" />
+                        Foreground="SteelBlue"
+                        Visibility="{Binding MijnSelectedItem.MyVisibility, Mode=TwoWay, Converter={StaticResource VisibilityConverter}}" />
+
                     <Button
                         Name="btnOpslaan"
                         Margin="5"
@@ -267,7 +269,9 @@
                         Command="{Binding Path=cmdDelete}"
                         Content="Verwijderen"
                         FontFamily="segoe ui light"
-                        Foreground="SteelBlue" />
+                        Foreground="SteelBlue"
+                        Visibility="{Binding MijnSelectedItem.MyVisibility, Mode=TwoWay, Converter={StaticResource VisibilityConverter}}" />
+
                     <Button
                         Name="btnAnnuleren"
                         Margin="5"

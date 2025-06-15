@@ -28,6 +28,8 @@ public ICommand cmdCancel { get; set; }
 
 public ICommand cmdNew { get; set; }
 
+        private string _Boodschap = string.Empty;
+
         private bool _NewStatus = false;
 
         private ObservableCollection<clsUserM>? _MijnCollectie;
@@ -46,7 +48,7 @@ public ICommand cmdNew { get; set; }
             {  // Validatie schrijven wanneer een ander item in ComboBox wordt geselecteerd
                 if (value != null)
                 {
-                    OpslaanCommando(null);
+                   // OpslaanCommando(null);
                     LoadData();
                 }
                 _MijnSelectedItem = value;
@@ -104,6 +106,7 @@ public ICommand cmdNew { get; set; }
                 {
                     if (repo.Insert(MijnSelectedItem))
                     {
+                        _Boodschap = "Nieuwe gebruiker is opgeslagen";
                         _NewStatus = false; // reset de status na opslaan
                         MijnSelectedItem.IsDirty = false; // reset dirty status
                         MijnSelectedItem.ErrorBoodschap = string.Empty; // reset error boodschap
@@ -113,13 +116,15 @@ public ICommand cmdNew { get; set; }
                     }
                     else
                     {
-                        MijnSelectedItem.ErrorBoodschap = "Nieuwe knop kan niet worden opgeslagen";
+                        //MijnSelectedItem.ErrorBoodschap = "Nieuwe gebruiker kan niet worden opgeslagen";
+                        _Boodschap = "Nieuwe gebruiker kan niet worden opgeslagen";
                     }
                 }
                 else
                 {
                     if (repo.Update(MijnSelectedItem))
                     {
+                        _Boodschap = "Gebruiker is aangepast";
                         _NewStatus = false; // reset de status na opslaan
                         MijnSelectedItem.IsDirty = false; // reset dirty status
                         MijnSelectedItem.ErrorBoodschap = string.Empty; // reset error boodschap
@@ -128,9 +133,11 @@ public ICommand cmdNew { get; set; }
                     }
                     else
                     {
-                        MijnSelectedItem.ErrorBoodschap = "update knop is niet gelukt";
+                        // MijnSelectedItem.ErrorBoodschap = "update gebruiker is niet gelukt";
+                        _Boodschap  = "update gebruiker is niet gelukt";
                     }
                 }
+                MessageBox.Show(_Boodschap, "Informatie", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
         #endregion
@@ -147,6 +154,7 @@ public ICommand cmdNew { get; set; }
             {
                 if (repo.Delete(MijnSelectedItem))
                 {
+                    _Boodschap = "gebruiker is verwijderd";
                     _NewStatus = false; // reset de status na opslaan
                     MijnSelectedItem.IsDirty = false; // reset dirty status
                     MijnSelectedItem.ErrorBoodschap = string.Empty; // reset error boodschap
@@ -156,8 +164,11 @@ public ICommand cmdNew { get; set; }
                 }
                 else
                 {
-                    MijnSelectedItem.ErrorBoodschap = "Nieuwe knop kan niet worden verwijderd";
+                   // MijnSelectedItem.ErrorBoodschap = "Nieuwe knop kan niet worden verwijderd";
+                    _Boodschap = "Nieuwe knop kan niet worden verwijderd";
                 }
+                MessageBox.Show(_Boodschap, "Informatie", MessageBoxButton.OK, MessageBoxImage.Information);
+
             }
         }
 
@@ -172,7 +183,9 @@ public ICommand cmdNew { get; set; }
 
         private void CancelCommando(object obj)
         {
-            MijnSelectedItem = repo.GetFirst();
+            MijnSelectedItem.Wachtwoord = string.Empty; // reset wachtwoord van de actuele gebruiker
+            LoadData(); // eigenlijk moet je nakijken of data gewijzigd was en de user bevragen om op te slaan
+            MijnSelectedItem = repo.GetFirst();  // dan pas eerste record terug geven
             if (MijnSelectedItem != null)
             {
                 MijnSelectedItem.MyVisibility = (int)Visibility.Visible;

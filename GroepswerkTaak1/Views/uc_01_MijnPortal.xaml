@@ -292,7 +292,7 @@
 							</Expander.Header>
 							<TextBlock Style="{StaticResource ExpanderExtraTextBlock}" />
 						</Expander>
-						<Expander Margin="0,0,0,5">
+						<Expander Margin="0,0,0,5" Visibility="{Binding Source={x:Static repo:clsActiveUserData.ActiveUserRole}, Converter={StaticResource RoleToVisibilityConverter}, TargetNullValue=Collapsed}">
 							<Expander.Header>
 								<StackPanel Orientation="Horizontal">
 									<TextBlock
@@ -301,23 +301,11 @@
 										Text="Beheer vensters" />
 								</StackPanel>
 							</Expander.Header>
-							<ListBox>
-								<ListBoxItem
-									Content="Beheer Knoppen"
-									Selected="ListBox_Selected"
-									Tag="1" />
-								<ListBoxItem
-									Content="Beheer Rollen"
-									Selected="ListBox_Selected"
-									Tag="2" />
-								<ListBoxItem
-									Content="Beheer Users"
-									Selected="ListBox_Selected"
-									Tag="3" />
-								<ListBoxItem
-									Content="Overzicht Logging"
-									Selected="ListBox_Selected"
-									Tag="9" />
+							<ListBox x:Name="AdminListBox" SelectionChanged="AdminListBox_OnSelectionChanged" Style="{StaticResource AdminListBox}">
+								<ListBoxItem Content="Beheer Knoppen" Tag="Knoppen" />
+								<ListBoxItem Content="Beheer Rollen" Tag="Rollen" />
+								<ListBoxItem Content="Beheer Users" Tag="Users" />
+								<ListBoxItem Content="Overzicht Logging" Tag="Logging" />
 							</ListBox>
 						</Expander>
 					</StackPanel>
