@@ -35,7 +35,8 @@ namespace GroepswerkTaak1.DAL
                     PreValue = MijnDataReader["PreValue"].ToString(),
                     PostValue = MijnDataReader["PostValue"].ToString(),
                     Gebruiker = MijnDataReader["gebruiker"].ToString(), // opgelet , dit is eigenlijk de beheerder die de logging deed
-                    Registratie = (DateTime)MijnDataReader["dt_registratie"],
+                    Registratie = ((DateTime)MijnDataReader["dt_registratie"]),
+                    RegistratieString = ((DateTime)MijnDataReader["dt_registratie"]).ToString("  dd/MM/yyyy   HH : mm : ss.fff"),
                 };
                 MijnCollectie.Add(Logging);
             }

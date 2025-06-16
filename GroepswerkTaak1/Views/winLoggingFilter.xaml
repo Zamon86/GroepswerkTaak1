@@ -7,7 +7,7 @@
     xmlns:local="clr-namespace:GroepswerkTaak1.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="Logging Filter"
-    Width="810"
+    Width="860"
     Height="600"
     MouseDown="Window_MouseDown"
     WindowStyle="None"
@@ -22,7 +22,7 @@
             <ColumnDefinition Width="155" />
             <ColumnDefinition Width="155" />
             <ColumnDefinition Width="115" />
-            <ColumnDefinition Width="155" />
+            <ColumnDefinition Width="200" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="10" />
@@ -101,10 +101,19 @@
         <TextBlock
             Grid.Row="2"
             Grid.Column="5"
+            Width="100"
             Margin="5,0,5,0"
-            HorizontalAlignment="Center"
+            HorizontalAlignment="Left"
             VerticalAlignment="Center"
-            Text="Filter op Datum:" />
+            Text="Start filter op :" />
+        <TextBlock
+            Grid.Row="2"
+            Grid.Column="5"
+            Width="95"
+            Margin="5,0,0,0"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Center"
+            Text="filter datum tot :" />
         <TextBox
             x:Name="txtFilterAktie"
             Grid.Row="3"
@@ -150,14 +159,35 @@
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
             Text="{Binding FilterGebruiker, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-        <TextBox
-            x:Name="txtFilterDatum"
+        <DatePicker
+            x:Name="dpStart"
             Grid.Row="3"
             Grid.Column="5"
-            Width="180"
+            Width="95"
             Margin="5,0,5,0"
-            HorizontalAlignment="Center"
+            HorizontalAlignment="Left"
             VerticalAlignment="Center"
+            HorizontalContentAlignment="Left"
+            VerticalContentAlignment="Center"
+            xml:lang="nl-BE"
+            FontSize="10"
+            FontWeight="Bold"
+            SelectedDate="{Binding FilterStartDatum, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            Text="" />
+        <DatePicker
+            x:Name="dpStop"
+            Grid.Row="3"
+            Grid.Column="5"
+            Width="95"
+            Margin="5,0,0,0"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Center"
+            HorizontalContentAlignment="Left"
+            VerticalContentAlignment="Center"
+            xml:lang="nl-BE"
+            FontSize="10"
+            FontWeight="Bold"
+            SelectedDate="{Binding FilterEindDatum, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
             Text="" />
         <DataGrid
             Name="gridLogging"
@@ -167,8 +197,9 @@
             Height="500"
             Margin="0,5,0,5"
             AutoGenerateColumns="False"
+            HorizontalScrollBarVisibility="Hidden"
             ItemsSource="{Binding LoggingsCV}"
-            VerticalScrollBarVisibility="Hidden">
+            VerticalScrollBarVisibility="Visible">
 
             <DataGrid.Columns>
                 <DataGridTextColumn
@@ -192,8 +223,8 @@
                     Binding="{Binding Gebruiker}"
                     Header="Uitvoerder" />
                 <DataGridTextColumn
-                    Width="150"
-                    Binding="{Binding Registratie}"
+                    Width="180"
+                    Binding="{Binding RegistratieString}"
                     Header="Datum Tijd" />
             </DataGrid.Columns>
         </DataGrid>

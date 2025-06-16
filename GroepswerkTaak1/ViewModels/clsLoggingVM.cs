@@ -83,7 +83,52 @@ namespace GroepswerkTaak1.ViewModels
             }
         }
 
+        private bool wijzigStartDatum = false;
+        private bool wijzigEindDatum = false;
 
+
+        private DateTime _FilterStartDatum = DateTime.Now.AddDays(-7);
+
+        public DateTime FilterStartDatum
+        {
+            get { return _FilterStartDatum; }
+            set {
+                    //wijzigStartDatum = true;
+                    //if (_FilterEindDatum > value)
+                    //{
+                        _FilterStartDatum = value;
+                    //}
+                    //else
+                    //{
+                    //    if (!wijzigEindDatum) _FilterStartDatum = _FilterEindDatum;
+                    //}
+                    OnPropertyChanged(nameof(FilterStartDatum));
+                    LoggingsCV.Refresh();
+                    //wijzigStartDatum = false;
+            }
+        }
+
+
+        private DateTime _FilterEindDatum = DateTime.Now.AddDays(1);
+
+        public DateTime FilterEindDatum
+        {
+            get { return _FilterEindDatum; }
+            set {
+                    //wijzigEindDatum = true;
+                    //if (_FilterEindDatum < _FilterStartDatum)
+                    //    {
+                            _FilterEindDatum = value;
+                    //    }
+                    //else
+                    //    {
+                    //        if(!wijzigStartDatum) _FilterEindDatum = _FilterStartDatum;
+                    //    }
+                    OnPropertyChanged(nameof(FilterEindDatum));
+                    LoggingsCV.Refresh();
+                    //wijzigStartDatum = false;
+            }
+        }
 
 
         public clsLoggingRepo repo = new clsLoggingRepo();
@@ -105,7 +150,8 @@ namespace GroepswerkTaak1.ViewModels
                     logging.TabelColumn.Contains(_FilterTabelColumn, StringComparison.InvariantCultureIgnoreCase) &&
                     logging.PreValue.Contains(_FilterPreValue, StringComparison.InvariantCultureIgnoreCase) &&
                     logging.PostValue.Contains(_FilterPostValue, StringComparison.InvariantCultureIgnoreCase) &&
-                    logging.Gebruiker.Contains(_FilterGebruiker, StringComparison.InvariantCultureIgnoreCase);
+                    logging.Gebruiker.Contains(_FilterGebruiker, StringComparison.InvariantCultureIgnoreCase) &&
+                    logging.Registratie >= _FilterStartDatum && logging.Registratie <= _FilterEindDatum.AddDays(1);
             }
        
             return false; // Als het object geen clsLoggingM is, wordt het niet weergegeven
