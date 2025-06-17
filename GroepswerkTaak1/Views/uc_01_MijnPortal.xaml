@@ -301,7 +301,10 @@
 										Text="Beheer vensters" />
 								</StackPanel>
 							</Expander.Header>
-							<ListBox x:Name="AdminListBox" SelectionChanged="AdminListBox_OnSelectionChanged" Style="{StaticResource AdminListBox}">
+							<ListBox
+								x:Name="AdminListBox"
+								SelectionChanged="AdminListBox_OnSelectionChanged"
+								Style="{StaticResource AdminListBox}">
 								<ListBoxItem Content="Beheer Knoppen" Tag="Knoppen" />
 								<ListBoxItem Content="Beheer Rollen" Tag="Rollen" />
 								<ListBoxItem Content="Beheer Users" Tag="Users" />
