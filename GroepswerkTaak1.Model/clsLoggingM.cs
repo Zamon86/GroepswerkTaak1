@@ -90,6 +90,14 @@ namespace GroepswerkTaak1.Model
 						set { _Registratie = value; }
 				}
 
+        private string _RegistratieString;
+
+        public string RegistratieString
+        {
+            get { return _RegistratieString; }
+            set { _RegistratieString = value; }
+        }
+
 
 				private Object _ControlField;
 				public Object ControlField

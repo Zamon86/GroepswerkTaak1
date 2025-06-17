@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj" />
+    <ProjectReference Include="..\GroepsWerk.Mail\GroepsWerk.Mail.csproj" />
   </ItemGroup>
 
 </Project>
