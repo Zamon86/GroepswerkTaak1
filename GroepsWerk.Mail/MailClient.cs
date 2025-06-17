@@ -2,8 +2,6 @@
 using FluentEmail.Razor;
 using FluentEmail.Smtp;
 using System.Diagnostics;
-using System.Text;
-using System.Xml.Linq;
 
 namespace GroepsWerk.Mail
 {
@@ -36,7 +34,7 @@ namespace GroepsWerk.Mail
                 .Body("Beste " + _login.LoginNaam + "," + Environment.NewLine + Environment.NewLine +
       "Je account is aangemaakt, je wachtwoord is " + _login.Wachtwoord + "." + Environment.NewLine +
       "Vriendelijke groeten," + Environment.NewLine + "Het PDY team")
-           
+
                 .SendAsync();
 
             if (!email.Successful)
@@ -46,10 +44,16 @@ namespace GroepsWerk.Mail
             else
             {
                 Debug.WriteLine("Email sent successfully.");
+                Process.Start(new ProcessStartInfo
+                {
+                    FileName = @"C:\Temp",
+                    UseShellExecute = true,
+                    Verb = "open"
+                });
             }
         }
     }
 
-   
+
 
 }
