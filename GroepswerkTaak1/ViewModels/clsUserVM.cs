@@ -109,12 +109,15 @@ public ICommand cmdNew { get; set; }
                     {
                         _Boodschap = "Nieuwe gebruiker is opgeslagen";
                         _NewStatus = false; // reset de status na opslaan
+                        MailClient client = new MailClient(MijnSelectedItem);
+                        _ = Task.Run(() => client.SendAsync());
                         MijnSelectedItem.IsDirty = false; // reset dirty status
                         MijnSelectedItem.ErrorBoodschap = string.Empty; // reset error boodschap
                         MijnSelectedItem.MijnSelectedIndex = 0; // reset de index van de combobox
                         MijnSelectedItem.MyVisibility = (int)Visibility.Visible;                                        // eventueel knoppen aan of uitzetten
                         LoadData(); // herlaad de collectie om de nieuwe item te tonen
-                        MailClient client =new MailClient(MijnSelectedItem);
+                      
+                      
                     }
                     else
                     {
