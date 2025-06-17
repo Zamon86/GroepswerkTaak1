@@ -170,7 +170,7 @@ public ICommand cmdNew { get; set; }
                 else
                 {
                    // MijnSelectedItem.ErrorBoodschap = "Nieuwe knop kan niet worden verwijderd";
-                    _Boodschap = "Nieuwe knop kan niet worden verwijderd";
+                    _Boodschap = "De user kan niet worden verwijderd";
                 }
                 MessageBox.Show(_Boodschap, "Informatie", MessageBoxButton.OK, MessageBoxImage.Information);
 
