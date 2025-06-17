@@ -74,7 +74,7 @@ namespace GroepswerkTaak1
 
         private void btnSluiten_Click(object sender, RoutedEventArgs e)
         {
-             this.Visibility = Visibility.Collapsed;
+         
           //  this.Parent.Controls.Remove(this);
 
             if (this.Parent is Panel panel)

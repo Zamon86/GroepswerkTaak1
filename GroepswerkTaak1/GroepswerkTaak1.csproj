@@ -19,6 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\GroepsWerk.Mail\GroepsWerk.Mail.csproj" />
     <ProjectReference Include="..\GroepswerkTaak1.CustomControls\GroepswerkTaak1.CustomControls.csproj" />
     <ProjectReference Include="..\GroepswerkTaak1.DAL\GroepswerkTaak1.DAL.csproj" />
     <ProjectReference Include="..\GroepswerkTaak1.Model\GroepswerkTaak1.Model.csproj" />

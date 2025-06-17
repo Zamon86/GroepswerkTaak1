@@ -7,8 +7,8 @@ namespace GroepsWerk.Mail
 {
     public class MailClient
     {
-        UserLogin login;
-        public MailClient(UserLogin userLogin)
+        I_UserLogin login;
+        public MailClient(I_UserLogin userLogin)
         {
             this.login = userLogin;
             Task.Run(() => { SendMail(); });

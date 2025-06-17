@@ -1,4 +1,5 @@
 ﻿using Common;
+using GroepsWerk.Mail;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace GroepswerkTaak1.Model
 {
-    public class clsUserM : clsCommonModelPropertiesBase   // later toevoegen , IDataErrorInfo
+    public class clsUserM : clsCommonModelPropertiesBase, I_UserLogin   // later toevoegen , IDataErrorInfo
     {/// <summary>
      /// TODO  Error Handling
      /// </summary>
