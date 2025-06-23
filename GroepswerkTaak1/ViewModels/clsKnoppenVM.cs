@@ -19,12 +19,9 @@ namespace GroepswerkTaak1.ViewModels
 {
     public class clsKnoppenVM : clsCommonModelPropertiesBase
     {
-
+        private string _Boodschap = string.Empty;
         public clsKnoppenRepo repo = new clsKnoppenRepo();
-		//public clsKnoppenVM()
-		//{
 
-		//}
 
 
 		public ICommand cmdLoadPicture { get; set; }
@@ -95,7 +92,8 @@ namespace GroepswerkTaak1.ViewModels
                     if (repo.Delete(MijnSelectedItem))
                     {
                         _NewStatus = false; // reset de status na opslaan
-                        MijnSelectedItem.IsDirty = false; // reset dirty status
+                    _Boodschap = "gebruiker is verwijderd";
+                    MijnSelectedItem.IsDirty = false; // reset dirty status
                         MijnSelectedItem.ErrorBoodschap = string.Empty; // reset error boodschap
                         MijnSelectedItem.MijnSelectedIndex = 0; // reset de index van de combobox
                         MijnSelectedItem.MyVisibility = (int)Visibility.Visible;                                        // eventueel knoppen aan of uitzetten
@@ -104,8 +102,10 @@ namespace GroepswerkTaak1.ViewModels
                     else
                     {
                         MijnSelectedItem.ErrorBoodschap = "Nieuwe knop kan niet worden Verwijdert";
-                    }
+                    _Boodschap = "Nieuwe knop kan niet worden verwijderd";
                 }
+                MessageBox.Show(_Boodschap, "Informatie", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
             
             
         }
