@@ -11,6 +11,7 @@
 	Title="Photo Flipper Beheerpaneel"
 	Width="800"
 	Height="730"
+	Closing="WinPhotoFlipperBeheerPaneel_OnClosing"
 	mc:Ignorable="d">
 	<Window.Resources>
 		<Style BasedOn="{StaticResource ToolTipStyle}" TargetType="ToolTip" />
@@ -222,7 +223,4 @@
 			</ListBox>
 		</Grid>
 	</DockPanel>
-
-
-
 </Window>

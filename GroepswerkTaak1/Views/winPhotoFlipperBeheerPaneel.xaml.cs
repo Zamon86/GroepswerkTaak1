@@ -2,6 +2,7 @@
 using GroepswerkTaak1.Helpers;
 using GroepswerkTaak1.Model;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
@@ -11,14 +12,12 @@ using System.Windows.Threading;
 
 namespace GroepswerkTaak1.Views
 {
-	/// <summary>
-	/// Interaction logic for winPhotoFlipperBeheerPaneel.xaml
-	/// </summary>
 	public partial class winPhotoFlipperBeheerPaneel : Window
 	{
 
 		public ObservableCollection<clsImagePhotoFlipper> Collection { get; }
 		private readonly clsImagePhotoFlipperRepo _repo;
+		private bool _canClose = true;
 		
 		public winPhotoFlipperBeheerPaneel(clsPhotoFlipper photoFlipper)
 		{
@@ -98,8 +97,14 @@ namespace GroepswerkTaak1.Views
 
 		private async Task AddImagesToRepositoryAndCollection(string[] selectedFilePaths)
 		{
+			_canClose = false;
 			SelectedImage.Visibility = Visibility.Collapsed;
 			LoadingAnimation.Visibility = Visibility.Visible;
+			btnDelete.IsEnabled = false;
+			btnNew.IsEnabled = false;
+			btnReplace.IsEnabled = false;
+			btnLeft.IsEnabled = false;
+			btnRight.IsEnabled = false;
 
 			await Task.Run(() =>
 			{
@@ -116,7 +121,11 @@ namespace GroepswerkTaak1.Views
 							ThumbnailBytes = clsByteArrayToThumbnail.CreateThumbnail(fullImage, 250, 350),
 							FullImageId = -1
 						};
-						if (!_repo.Insert(im)) MessageBox.Show("Insert failed!");
+						if (!_repo.Insert(im))
+						{
+							Application.Current.Dispatcher.Invoke(() =>
+								MessageBox.Show("Insert failed!"));
+						}
 					}
 				}
 				catch (Exception ex)
@@ -129,6 +138,12 @@ namespace GroepswerkTaak1.Views
 
 			LoadingAnimation.Visibility = Visibility.Collapsed;
 			SelectedImage.Visibility = Visibility.Visible;
+			btnDelete.IsEnabled = true;
+			btnNew.IsEnabled = true;
+			btnReplace.IsEnabled = true;
+			btnLeft.IsEnabled = true;
+			btnRight.IsEnabled = true;
+			_canClose = true;
 			ThumbnailList.SelectedIndex = Math.Max(0, ThumbnailList.Items.Count - 3);
 		}
 
@@ -198,6 +213,13 @@ namespace GroepswerkTaak1.Views
 					clsFileHelper.OpenBytesAsTempFile(source);
 				}
 			}
+		}
+
+		private void WinPhotoFlipperBeheerPaneel_OnClosing(object? sender, CancelEventArgs e)
+		{
+			if (_canClose) return;
+			e.Cancel = true;
+			MessageBox.Show("Wait until database operations are complete.");
 		}
 	}
 }
